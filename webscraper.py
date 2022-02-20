@@ -9,12 +9,12 @@ def scrape_website(web_url: str) -> str:
     statuscode = result.status_code
 
     if statuscode == 200:
-        print(result.text)
+        result_table = read_result_table(result.text)
 
     else:
         print(f'Website {url} could not be accessed; status code {statuscode}')
 
-    return 'success'
+    return result_table
 
 
 def read_result_table(html_text: str) -> pd.DataFrame:
@@ -50,8 +50,9 @@ def clean_results_table(raw_table: pd.DataFrame) -> pd.DataFrame:
 
     return results_table
 
+
 if __name__ == '__main__':
     url = 'https://www.procyclingstats.com/race/volta-ao-algarve/2022/stage-2'
     outcome = scrape_website(url)
-    print(results_table.head())
+    print(outcome.head())
 
