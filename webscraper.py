@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from unidecode import unidecode
 
-def scrape_website(web_url: str) -> str:
+def scrape_website(web_url: str) -> pd.DataFrame:
     """Scrape all information from a website, return as a string."""
 
     result = requests.get(web_url)
@@ -51,6 +51,9 @@ def clean_results_table(raw_table: pd.DataFrame) -> pd.DataFrame:
 
 if __name__ == '__main__':
     url = 'https://www.procyclingstats.com/race/volta-ao-algarve/2022/stage-2'
-    outcome = scrape_website(url)
-    print(outcome.head())
+    standings = ['', '-gc', '-points', '-kom', '-youth']
+
+    for url_epi in standings:
+        outcome = scrape_website(url + url_epi)
+        print(outcome.head())
 

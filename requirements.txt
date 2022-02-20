@@ -2,3 +2,5 @@ pandas
 requests
 Unidecode
 lxml
+beautifulsoup4
+html5lib
