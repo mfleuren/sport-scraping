@@ -21,13 +21,8 @@ def read_result_table(html_text: str) -> pd.DataFrame:
     """Read the results from the table found in HTML input"""
     table_list = pd.read_html(html_text)
 
-    if len(table_list) == 0:
-        raw_table = table_list[0]
-
-        results_table = clean_results_table(raw_table)
-    else:
-        print('Found more than one table, add matching pattern.')
-        results_table = pd.DataFrame()
+    print(table_list[0].head())
+    results_table = clean_results_table(table_list[0])
 
     return results_table
 
@@ -37,17 +32,20 @@ def clean_results_table(raw_table: pd.DataFrame) -> pd.DataFrame:
 
     results_table = raw_table.copy()
 
+    # Remove TEAM from rider name
     results_table['RIDER'] = results_table.apply(lambda x: x['Rider'].replace(x['Team'], ''), axis=1)
-    results_table['RIDER'] = results_table.apply(lambda x: unidecode(x['RIDER']))
+
+    # Convert name characters to unicode
+    results_table['RIDER'] = results_table.apply(lambda x: unidecode(x['RIDER']), axis=1)
+
+    # Split ridername in surname and firstname
     results_table['SURNAME'] = (results_table['RIDER']
                                 .str.extract('([A-Z ]*)')[0]
                                 .replace('[A-Z]$', '', regex=True)
                                 .str.strip()
                                 )
     results_table['FIRSTNAME'] = results_table.apply(lambda x: x['RIDER'].replace(x['SURNAME'], ''), axis=1)
-
-    results_table['Rider'] = results_table['Rider'].replace('')
-
+   
     return results_table
 
 
