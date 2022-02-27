@@ -10,11 +10,11 @@ def scrape_website(web_url: str) -> pd.DataFrame:
 
     if statuscode == 200:
         result_table = read_result_table(result.text)
-
+        cleaned_result_table = clean_results_table(result_table)
     else:
         print(f'Website {url} could not be accessed; status code {statuscode}')
 
-    return result_table
+    return cleaned_result_table
 
 
 def read_result_table(html_text: str) -> pd.DataFrame:
