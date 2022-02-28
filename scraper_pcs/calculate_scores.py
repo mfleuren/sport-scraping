@@ -5,7 +5,7 @@ def calculate_match_points(result_df: pd.DataFrame, points_df: pd.DataFrame, tea
 
     join_result_points = result_df.join(points_df.set_index('RNK'), on='RNK', how='left')
     join_result_points['POINTS'] = (join_result_points['MATCH_LEVEL'] * join_result_points['POINTS_RAW']).astype('int')
-    joined_df = join_result_points.join(teams_df.set_index('RIDER'), on='RIDER', how='left')
+    joined_df = teams_df.join(join_result_points.set_index('RIDER'), on='RIDER', how='left')
     joined_df.drop(['ROUND', 'PICK', 'POINTS_RAW'], axis=1, inplace=True)
     return joined_df
 
