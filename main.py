@@ -31,7 +31,7 @@ for row in matches_to_scrape.iterrows():
     match_points = calculate_match_points(stage_results, df_points, df_teams)
     stage_standing = calculate_stage_result(match_points)
 
-    print(stage_standing['POINTS'])
+    print(stage_standing['POINTS'].astype('int'))
 
     all_results = all_results.append(match_points)
 
@@ -39,4 +39,4 @@ for row in matches_to_scrape.iterrows():
     time.sleep(1)
 
 print('Algemeen klassement')
-print(all_results.groupby('COACH')['POINTS'].sum().sort_values(ascending=False))
+print(all_results.groupby('COACH')['POINTS'].sum().sort_values(ascending=False).astype('int'))
