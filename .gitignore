@@ -2,3 +2,4 @@ venv/
 .idea/
 temp/
 __pycache__/
+*/gc.csv
