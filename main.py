@@ -40,3 +40,5 @@ for row in matches_to_scrape.iterrows():
 
 print('Algemeen klassement')
 print(all_results.groupby('COACH')['POINTS'].sum().sort_values(ascending=False).astype('int'))
+# print(all_results[(all_results['COACH'] == 'Rellende Rotscholier') & (all_results['MATCH'] == 'Drome Classic')])
+all_results.to_csv('2022_Voorjaar/gc.csv', index=False)
