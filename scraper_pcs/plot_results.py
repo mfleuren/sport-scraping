@@ -8,8 +8,7 @@ JITTER_THRESHOLD = 0.1
 FONTSIZE = 10
 DPI=200
 
-def create_echelon_plot(gc: pd.DataFrame, match_name: str, file_name:str) -> None:
-    data = pd.read_csv('2022_Voorjaar/gc.csv')
+def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> None:
     gc = pd.DataFrame(data.groupby('COACH')['POINTS'].sum().sort_values(ascending=False))
     gc.reset_index(inplace=True)
     gc['RELATIVE_POSITION'] = (gc['POINTS'] - gc['POINTS'].min())/(gc['POINTS'].max() - gc['POINTS'].min())

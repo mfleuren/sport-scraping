@@ -5,6 +5,7 @@ import pandas as pd
 from scraper_pcs.import_files import load_csv_files
 from scraper_pcs.webscraper import scrape_website
 from scraper_pcs.calculate_scores import calculate_match_points, calculate_stage_result
+from scraper_pcs.plot_results import create_echelon_plot
 
 
 COMPETITION_NAME = 'Voorjaar'
@@ -25,13 +26,13 @@ matches_to_scrape = df_matches[df_matches['MATCH_DATE'] <= CURRENT_DATE]
 
 for row in matches_to_scrape.iterrows():
     match = row[1]
-
     print(match['MATCH'])
+    plot_name = COMPETITION_YEAR + '_' + COMPETITION_NAME + '\\' + match['MATCH'].str.lower() + '_plot.png'
+
     stage_results = scrape_website(match)
     match_points = calculate_match_points(stage_results, df_points, df_teams)
     stage_standing = calculate_stage_result(match_points)
-
-    print(stage_standing['POINTS'].astype('int'))
+    create_echelon_plot(stage_standing, match['MATCH'], plot_name)
 
     all_results = all_results.append(match_points)
 
@@ -41,4 +42,7 @@ for row in matches_to_scrape.iterrows():
 print('Algemeen klassement')
 print(all_results.groupby('COACH')['POINTS'].sum().sort_values(ascending=False).astype('int'))
 # print(all_results[(all_results['COACH'] == 'Rellende Rotscholier') & (all_results['MATCH'] == 'Drome Classic')])
-all_results.to_csv('2022_Voorjaar/gc.csv', index=False)
+# all_results.to_csv('2022_Voorjaar/gc.csv', index=False)
+
+plot_name = COMPETITION_YEAR + '_' + COMPETITION_NAME + '\\' + 'algemeenklassement' + '_plot.png'
+create_echelon_plot(stage_standing, 'Algemeen Klassement', plot_name)
