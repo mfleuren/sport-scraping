@@ -20,7 +20,7 @@ def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> N
 
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
 
-    f = plt.figure(dpi=DPI, edgecolor=None)
+    f = plt.figure(figsize=(512/DPI,720/DPI), dpi=DPI, edgecolor=None)
     sns.scatterplot(
         data=gc, 
         x='XJITTER', 
