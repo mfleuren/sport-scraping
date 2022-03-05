@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-JITTER_THRESHOLD = 0.1
-FONTSIZE = 10
+JITTER_THRESHOLD = 0.08
+FONTSIZE = 8
 DPI=200
 
 def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> None:
@@ -16,7 +16,7 @@ def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> N
     gc['ECHELON_POSITION'] = gc.groupby('ECHELON').cumcount()
     gc['ECHELON_MAXPOINTS'] = gc['ECHELON'].map(gc.groupby('ECHELON')['POINTS'].max())
     gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.1
-    gc['YJITTER'] = gc['ECHELON_MAXPOINTS'] - 0.6*FONTSIZE*gc['ECHELON_POSITION']
+    gc['YJITTER'] = gc['ECHELON_MAXPOINTS'] - FONTSIZE*gc['ECHELON_POSITION']
 
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
 
@@ -53,7 +53,7 @@ def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> N
             linewidth=0.25
         )
 
-    plt.xlim([0.25, 1.75])
+    plt.xlim(left=0.75, right=2)
     plt.title(match_name, fontdict={'size':1.25*FONTSIZE, 'weight':'bold'})
 
     ax = plt.gca()
@@ -64,6 +64,4 @@ def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> N
     ax.spines['right'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
-    plt.show()
-
-    f.savefig(file_name)
+    f.savefig(file_name, bbox_inches='tight', orientation='portrait')
