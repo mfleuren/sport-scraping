@@ -7,15 +7,14 @@ from scraper_pcs.webscraper import scrape_website
 from scraper_pcs.calculate_scores import calculate_match_points, calculate_stage_result
 from scraper_pcs.plot_results import create_echelon_plot
 
+from dotenv import load_dotenv
 
-COMPETITION_NAME = 'Voorjaar'
-COMPETITION_YEAR = 2022
-COMPETITION_YEAR_NAME = str(COMPETITION_YEAR) + '_' + COMPETITION_NAME
+load_dotenv()
 
 CURRENT_DATE = datetime.now()
 
 # Import CSV Files as Pandas DataFrames
-path_csv_files = os.path.join(os.path.dirname(os.path.realpath(__file__)), COMPETITION_YEAR_NAME) 
+path_csv_files = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.getenv('COMPETITION_YEAR_NAME')) 
 df_teams, df_matches, df_points = load_csv_files(path_csv_files)
 
 # Pre-allocate all_results
@@ -27,7 +26,7 @@ matches_to_scrape = df_matches[df_matches['MATCH_DATE'] <= CURRENT_DATE]
 for row in matches_to_scrape.iterrows():
     match = row[1]
     print(match['MATCH'])
-    plot_name = str(COMPETITION_YEAR) + '_' + COMPETITION_NAME + '\\' + match['MATCH'].lower() + '_plot.png'
+    plot_name = os.getenv('COMPETITINO_YEAR_NAME') + '\\' + match['MATCH'].lower() + '_plot.png'
 
     stage_results = scrape_website(match)
     match_points = calculate_match_points(stage_results, df_points, df_teams)
