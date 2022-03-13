@@ -14,7 +14,10 @@ load_dotenv()
 CURRENT_DATE = datetime.now()
 
 # Import CSV Files as Pandas DataFrames
-path_csv_files = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.getenv('COMPETITION_YEAR_NAME')) 
+path_csv_files = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}"
+) 
 df_teams, df_matches, df_points = load_csv_files(path_csv_files)
 
 # Pre-allocate all_results
@@ -26,7 +29,7 @@ matches_to_scrape = df_matches[df_matches['MATCH_DATE'] <= CURRENT_DATE]
 for row in matches_to_scrape.iterrows():
     match = row[1]
     print(match['MATCH'])
-    plot_name = os.getenv('COMPETITINO_YEAR_NAME') + '\\' + match['MATCH'].lower() + '_plot.png'
+    plot_name = f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}\\{match['MATCH'].lower()}_plot.png"
 
     stage_results = scrape_website(match)
     match_points = calculate_match_points(stage_results, df_points, df_teams)
@@ -43,5 +46,5 @@ for row in matches_to_scrape.iterrows():
 # print(all_results[(all_results['COACH'] == 'Rellende Rotscholier') & (all_results['MATCH'] == 'Drome Classic')])
 # all_results.to_csv('2022_Voorjaar/gc.csv', index=False)
 
-plot_name = str(COMPETITION_YEAR) + '_' + COMPETITION_NAME + '\\' + 'algemeenklassement' + '_plot.png'
+plot_name = f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}\\algemeenklassement_plot.png"
 create_echelon_plot(all_results, 'Algemeen Klassement', plot_name)
