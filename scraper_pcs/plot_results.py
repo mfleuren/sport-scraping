@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-JITTER_THRESHOLD = 0.08
+JITTER_THRESHOLD = 0.1
 FONTSIZE = 8
 DPI=200
 
@@ -16,7 +16,7 @@ def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> N
     gc['ECHELON_POSITION'] = gc.groupby('ECHELON').cumcount()
     gc['ECHELON_MAXPOINTS'] = gc['ECHELON'].map(gc.groupby('ECHELON')['POINTS'].max())
     gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.1
-    gc['YJITTER'] = gc['ECHELON_MAXPOINTS'] - FONTSIZE*gc['ECHELON_POSITION']
+    gc['YJITTER'] = gc['ECHELON_MAXPOINTS'] - 1.08*FONTSIZE*gc['ECHELON_POSITION']
 
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
 
@@ -65,3 +65,8 @@ def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> N
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
     f.savefig(file_name, bbox_inches='tight', orientation='portrait')
+
+if __name__ == '__main__':
+    create_echelon_plot(pd.read_csv('E://DataScience//sport-scraping//2022_Voorjaar//gc.csv'), 'test', 'test.png')
+
+
