@@ -4,3 +4,4 @@ Unidecode
 lxml
 beautifulsoup4
 html5lib
+python-dotenv
