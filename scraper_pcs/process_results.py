@@ -18,8 +18,6 @@ def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> N
     gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.1
     gc['YJITTER'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
 
-    print(gc.head())
-
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
 
     f = plt.figure(figsize=(512/DPI,720/DPI), dpi=DPI, edgecolor=None)
