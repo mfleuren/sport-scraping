@@ -16,7 +16,9 @@ def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> N
     gc['ECHELON_POSITION'] = gc.groupby('ECHELON').cumcount()
     gc['ECHELON_MAXPOINTS'] = gc['ECHELON'].map(gc.groupby('ECHELON')['POINTS'].max())
     gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.1
-    gc['YJITTER'] = gc['ECHELON_MAXPOINTS'] - 1.01*FONTSIZE*gc['ECHELON_POSITION']
+    gc['YJITTER'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
+
+    print(gc.head())
 
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
 
@@ -89,6 +91,6 @@ def create_teams_message(data: pd.DataFrame) -> str:
 
 if __name__ == '__main__':
     data_in = pd.read_csv('E://DataScience//sport-scraping//2022_Voorjaar//all_results.csv')
-    # create_echelon_plot(data_in, 'test', 'test.png')
-    create_teams_message(data_in)
+    create_echelon_plot(data_in, 'test', 'test.png')
+    # create_teams_message(data_in)
 
