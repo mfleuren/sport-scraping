@@ -16,7 +16,7 @@ def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> N
     gc['ECHELON_POSITION'] = gc.groupby('ECHELON').cumcount()
     gc['ECHELON_MAXPOINTS'] = gc['ECHELON'].map(gc.groupby('ECHELON')['POINTS'].max())
     gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.1
-    gc['YJITTER'] = gc['ECHELON_MAXPOINTS'] - 1.08*FONTSIZE*gc['ECHELON_POSITION']
+    gc['YJITTER'] = gc['ECHELON_MAXPOINTS'] - 1.01*FONTSIZE*gc['ECHELON_POSITION']
 
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
 
@@ -66,7 +66,29 @@ def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> N
     ax.spines['left'].set_visible(False)
     f.savefig(file_name, bbox_inches='tight', orientation='portrait')
 
-if __name__ == '__main__':
-    create_echelon_plot(pd.read_csv('E://DataScience//sport-scraping//2022_Voorjaar//gc.csv'), 'test', 'test.png')
 
+def create_teams_message(data: pd.DataFrame) -> str:
+
+    data['POINTS_STR'] = data['POINTS'].fillna(0).astype(int).astype(str)
+    dfg = data.groupby(['COACH', 'RIDER'], as_index=False)['POINTS_STR'].apply(lambda x: '-'.join(x))
+
+    message = []
+    message.append('[b]Overzicht teams en punten per renner:[/b][spoiler]')
+
+    for coach in sorted(dfg['COACH'].unique(), key=str.casefold):
+
+        message.append('[b]' + coach + '[/b][spoiler][table]')
+        for row in dfg[dfg['COACH'] == coach].iterrows():
+            message.append(f"[tr][td]{row[1]['RIDER']}[/td][td]({row[1]['POINTS_STR']})[/td][/tr]")
+        message.append('[/spoiler][/table]')
+
+    message.append('[/spoiler]')
+    message = ''.join(message)
+
+    return message
+
+if __name__ == '__main__':
+    data_in = pd.read_csv('E://DataScience//sport-scraping//2022_Voorjaar//all_results.csv')
+    # create_echelon_plot(data_in, 'test', 'test.png')
+    create_teams_message(data_in)
 

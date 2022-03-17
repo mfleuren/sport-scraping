@@ -6,7 +6,7 @@ import pandas as pd
 from scraper_pcs.import_files import load_csv_files
 from scraper_pcs.webscraper import scrape_website
 from scraper_pcs.calculate_scores import calculate_match_points, calculate_stage_result
-from scraper_pcs.plot_results import create_echelon_plot
+from scraper_pcs.process_results import create_echelon_plot, create_teams_message
 from utility import forum_robot, imgur_robot
 
 from dotenv import load_dotenv
@@ -65,6 +65,7 @@ create_echelon_plot(all_results, 'Algemeen Klassement', plot_name)
 if MAKE_POST:
     img_url = imgur_robot.upload_to_imgur(plot_name)
     img_urls.append(img_url)
-    single_message =  ''.join(img_urls)
-    print(single_message)
+    image_message =  ''.join(img_urls)
+    teams_message = create_teams_message(all_results)
+    single_message = image_message + teams_message
     forum_robot.post_results_to_forum(single_message)

@@ -22,7 +22,7 @@ def upload_to_imgur(image_full_path:Union[str, pathlib.Path]) -> str:
             }
         )
        
-    message = f"[img]{j1.json()['data']['link']}[/img]"
+    message = f"[img]{j1.json()['data']['link']}[/img]\n"
     
     return message
     
