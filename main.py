@@ -6,7 +6,7 @@ import pandas as pd
 from scraper_pcs.import_files import load_csv_files
 from scraper_pcs.webscraper import scrape_website
 from scraper_pcs.calculate_scores import calculate_match_points, calculate_stage_result
-from scraper_pcs.process_results import create_echelon_plot, create_teams_message
+from scraper_pcs.process_results import create_echelon_plot, create_mention_list, create_teams_message, list_best_coaches
 from utility import forum_robot, imgur_robot
 
 from dotenv import load_dotenv
@@ -37,6 +37,7 @@ else:
 # Select the matches to scrape
 matches_to_scrape = df_matches[matches_to_scrape_indices] 
 img_urls = []
+coach_mentions = []
 
 for row in matches_to_scrape.iterrows():
     match = row[1]
@@ -45,7 +46,7 @@ for row in matches_to_scrape.iterrows():
 
     stage_results = scrape_website(match)
     match_points = calculate_match_points(stage_results, df_points, df_teams)
-    stage_standing = calculate_stage_result(match_points)
+    stage_standing, coach_mentions = calculate_stage_result(match_points, coach_mentions)
     create_echelon_plot(stage_standing, match['MATCH'], plot_name)
 
     if MAKE_POST and (match['MATCH'] == matches_to_scrape.iloc[-1]['MATCH']):
@@ -54,18 +55,19 @@ for row in matches_to_scrape.iterrows():
 
     all_results = all_results.append(match_points)
 
-
     time.sleep(1)
-
-all_results.to_csv('2022_Voorjaar/all_results.csv', index=False)
 
 plot_name = f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}\\algemeenklassement_plot.png"
 create_echelon_plot(all_results, 'Algemeen Klassement', plot_name)
+coach_mentions.append(list_best_coaches(all_results))
 
 if MAKE_POST:
     img_url = imgur_robot.upload_to_imgur(plot_name)
     img_urls.append(img_url)
-    image_message =  ''.join(img_urls)
+    image_message = ''.join(img_urls)
     teams_message = create_teams_message(all_results)
-    single_message = image_message + teams_message
+    mentions_message = create_mention_list(coach_mentions)
+    single_message = image_message + str(mentions_message) + teams_message
     forum_robot.post_results_to_forum(single_message)
+
+    all_results.to_csv('2022_Voorjaar/all_results.csv', index=False)

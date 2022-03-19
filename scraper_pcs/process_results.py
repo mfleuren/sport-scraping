@@ -87,8 +87,31 @@ def create_teams_message(data: pd.DataFrame) -> str:
 
     return message
 
+
+def list_best_coaches(data: pd.DataFrame) -> list:
+
+    ranked_data = data.groupby('COACH')['POINTS'].sum().sort_values(ascending=False)
+    best_coaches = ranked_data.head(3).index.to_list()
+
+    return best_coaches
+
+
+def create_mention_list(coaches: list) -> str:
+
+    unique_coaches = np.unique(coaches)
+
+    mention_list = ['Mentions voor de beste coaches in de etappe en het algemeen klassement: ']
+    for coach in unique_coaches:
+        mention_list.append(f'@{coach} ')
+    mention_string = ''.join(mention_list) + f'\n'
+
+    return mention_string
+
+
 if __name__ == '__main__':
     data_in = pd.read_csv('E://DataScience//sport-scraping//2022_Voorjaar//all_results.csv')
-    create_echelon_plot(data_in, 'test', 'test.png')
+    create_mention_list(list_best_coaches(data_in))
+
+    # create_echelon_plot(data_in, 'test', 'test.png')
     # create_teams_message(data_in)
 
