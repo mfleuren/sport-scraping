@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 import os
 from datetime import datetime
 import time
-from scraper_pcs.process_files import load_csv_files
 from scraper_pcs.webscraper import scrape_website
 from scraper_pcs.calculate_scores import calculate_match_points, calculate_match_standings
 from scraper_pcs.process_results import create_echelon_plot, create_mention_list, create_teams_message, list_best_coaches
@@ -23,28 +22,29 @@ def spring_classics() -> None:
     results_data = StageResults()
     message_data = Message()
 
-    # Import CSV Files as Pandas DataFrames
-    df_teams, df_matches, df_points, all_results = load_csv_files()
-
     # Select the matches to scrape
-    match_date_is_in_past = (df_matches['MATCH_DATE'] <= CURRENT_DATE)
-    match_not_processed_yet = ~df_matches['MATCH'].isin(all_results['MATCH'].unique())
-    matches_to_scrape = df_matches[match_date_is_in_past & match_not_processed_yet] 
+    match_date_is_in_past = (results_data.matches['MATCH_DATE'] <= CURRENT_DATE)
+    match_not_processed_yet = ~results_data.matches['MATCH'].isin(results_data.all_results['MATCH'].unique())
+    matches_to_scrape = results_data.matches[match_date_is_in_past & match_not_processed_yet] 
 
     for idx, match in matches_to_scrape.iterrows():
         print(f"Processing match {idx+1} of {matches_to_scrape.shape[0]+1}: {match['MATCH']}.")
     
         results_data = scrape_website(results_data, match)
-        results_data = calculate_match_points(results_data, df_points, df_teams)
+        print(results_data.stage_results)
+        results_data = calculate_match_points(results_data)
+        print(results_data.stage_points)
         results_data, message_data = calculate_match_standings(results_data, message_data)
+        print(results_data.stage_standings)
         create_echelon_plot(results_data)
+
 
         # TODO: Convert this into a match not posted checker
         if MAKE_POST:# and (match['MATCH'] == matches_to_scrape.iloc[-1]['MATCH']):
             img_url = imgur_robot.upload_to_imgur(plot_name)
             message_data.img_urls.append(img_url)
 
-        all_results = all_results.append(results_data.stage_points)
+        # results_data.all_results.append(results_data.stage_points)
 
         print(message_data)
 

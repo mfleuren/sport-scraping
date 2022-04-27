@@ -19,7 +19,8 @@ def construct_pcs_url(epithet: str) -> str:
 def scrape_website(results: StageResults, match: pd.Series) -> StageResults:
     """Scrape all information from a website, return as a string."""
 
-    result = requests.get(construct_pcs_url(match['URL_EPITHET']))
+    url = construct_pcs_url(match['URL_EPITHET'])
+    result = requests.get(url)
     statuscode = result.status_code
 
     if statuscode == 200:
