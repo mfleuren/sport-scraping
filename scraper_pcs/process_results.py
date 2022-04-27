@@ -1,14 +1,27 @@
 import pandas as pd
 import numpy as np
+import os 
+
+from utility.dataclasses import StageResults
 
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+
+# Image location information
+PATH_RESULTS = os.path.join(os.getcwd(), 'results', f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}")
+
+# Image formatting
 JITTER_THRESHOLD = 0.1
 FONTSIZE = 8
 DPI=200
 
-def create_echelon_plot(data: pd.DataFrame, match_name: str, file_name:str) -> None:
+def create_echelon_plot(results: StageResults) -> None:
+
+    data = results.stage_points[-1]
+    match_name = data.loc[data['MATCH'].notna(), 'MATCH'].unique()[0]
+    file_name = os.path.join(PATH_RESULTS, f"{match_name.lower()}_plot.png")
+
     gc = pd.DataFrame(data.groupby('COACH')['POINTS'].sum().sort_values(ascending=False))
     gc.reset_index(inplace=True)
     gc['RELATIVE_POSITION'] = (gc['POINTS'] - gc['POINTS'].min())/(gc['POINTS'].max() - gc['POINTS'].min())

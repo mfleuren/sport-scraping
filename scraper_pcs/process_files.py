@@ -1,4 +1,4 @@
-from typing import Union, Tuple
+from typing import Tuple
 import pandas as pd
 import os
 import pathlib
@@ -27,7 +27,7 @@ def import_matches(path: pathlib.Path):
 
 
 def load_csv_files() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    teams = pd.read_csv(PATH_MATCHES, sep=';')
+    teams = pd.read_csv(PATH_TEAMS, sep=';')
     points = pd.read_csv(PATH_POINTS, sep=';')
     matches = import_matches(PATH_MATCHES)    
 
@@ -35,7 +35,7 @@ def load_csv_files() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataF
         all_results = pd.read_csv(PATH_ALL_RESULTS)
         print(f'Loaded all_results file, dataframe shape: {all_results.shape}')
     else:
-        all_results = pd.DataFrame()
+        all_results = pd.DataFrame(columns=['MATCH'])
         print('Previous results not found. Pre-allocated empty dataframe for all_results')
 
     return teams, matches, points, all_results

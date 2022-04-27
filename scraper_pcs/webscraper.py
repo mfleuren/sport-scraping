@@ -1,12 +1,14 @@
-from typing import Tuple
+
 import requests
 import pandas as pd
 from unidecode import unidecode
 from datetime import datetime
+from utility.dataclasses import StageResults
 
 PCS_BASE_URL = 'https://www.procyclingstats.com/race/'
 PCS_YEAR = str(datetime.now().year)
 PCS_BASE_EPITHET = 'result'
+
 
 def construct_pcs_url(epithet: str) -> str:
     """Construct the URL for PCS based on defaults and match-specific epithet."""
@@ -14,7 +16,7 @@ def construct_pcs_url(epithet: str) -> str:
     return url
 
 
-def scrape_website(match: pd.Series) -> pd.DataFrame:
+def scrape_website(results: StageResults, match: pd.Series) -> StageResults:
     """Scrape all information from a website, return as a string."""
 
     result = requests.get(construct_pcs_url(match['URL_EPITHET']))
@@ -25,7 +27,9 @@ def scrape_website(match: pd.Series) -> pd.DataFrame:
     else:
         print(f'Website {url} could not be accessed; status code {statuscode}')
 
-    return result_table #cleaned_result_table
+    results.stage_results.append(result_table)
+
+    return results
 
 
 def read_result_table(html_text: str, match: pd.Series) -> pd.DataFrame:
