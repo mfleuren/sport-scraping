@@ -90,6 +90,8 @@ def create_echelon_plot(
     ax.spines['left'].set_visible(False)
     f.savefig(file_name, bbox_inches='tight', orientation='portrait')
 
+    plt.close(f)
+
     if strtobool(os.getenv('IMGUR_UPLOAD')):
         img_url = imgur_robot.upload_to_imgur(file_name)
         message_data.img_urls.append(img_url)
@@ -103,7 +105,9 @@ def create_echelon_plot(
 def create_teams_message(data: pd.DataFrame) -> str:
 
     data['POINTS_STR'] = data['POINTS'].fillna(0).astype(int).astype(str)
-    dfg = data.groupby(['COACH', 'RIDER'], as_index=False)['POINTS_STR'].apply(lambda x: '-'.join(x))
+    dfg1 = data.groupby(['COACH', 'RIDER'], as_index=False)['POINTS_STR'].apply(lambda x: '-'.join(x))
+    dfg2 = data.groupby(['COACH', 'RIDER'])['POINTS'].sum()
+    dfg = dfg1.join(dfg2, on=['COACH', 'RIDER'])
 
     message = []
     message.append('[b]Overzicht teams en punten per renner:[/b][spoiler]')
@@ -112,7 +116,7 @@ def create_teams_message(data: pd.DataFrame) -> str:
 
         message.append('[b]' + coach + '[/b][spoiler][table]')
         for row in dfg[dfg['COACH'] == coach].iterrows():
-            message.append(f"[tr][td]{row[1]['RIDER']}[/td][td]({row[1]['POINTS_STR']})[/td][/tr]")
+            message.append(f"[tr][td]{row[1]['RIDER']}[/td][td]{row[1]['POINTS']:.0f}:\t({row[1]['POINTS_STR']})[/td][/tr]")
         message.append('[/spoiler][/table]')
 
     message.append('[/spoiler]')

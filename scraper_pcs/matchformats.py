@@ -40,8 +40,9 @@ def spring_classics() -> None:
     message_data.coach_mentions.append(process_results.list_best_coaches(results_data.all_points))
     message_data = process_results.create_echelon_plot(results_data, message_data, gc=True)
 
+    single_message = process_results.create_forum_message(results_data, message_data)
+    print(single_message)
     if MAKE_POST:
-        single_message = process_results.create_forum_message(results_data, message_data)
         forum_robot.post_results_to_forum(single_message)
 
 
