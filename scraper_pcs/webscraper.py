@@ -1,18 +1,19 @@
-
 import requests
 import pandas as pd
 from unidecode import unidecode
-from datetime import datetime
-from utility.dataclasses import StageResults
+import time
+import os
+from dotenv import load_dotenv
 
-PCS_BASE_URL = 'https://www.procyclingstats.com/race/'
-PCS_YEAR = str(datetime.now().year)
-PCS_BASE_EPITHET = 'result'
+from utility.result_objects import StageResults
+
+
+load_dotenv()
 
 
 def construct_pcs_url(epithet: str) -> str:
     """Construct the URL for PCS based on defaults and match-specific epithet."""
-    url = PCS_BASE_URL + epithet + '/' + PCS_YEAR + '/' + PCS_BASE_EPITHET
+    url = f"{os.getenv('SCRAPER_PCS_BASE_URL')}/{epithet}/{os.getenv('COMPETITION_YEAR')}/result"
     return url
 
 
@@ -29,6 +30,8 @@ def scrape_website(results: StageResults, match: pd.Series) -> StageResults:
         print(f'Website {url} could not be accessed; status code {statuscode}')
 
     results.stage_results.append(result_table)
+
+    time.sleep(int(os.getenv('SCRAPER_SLEEP_DELAY_IN_SEC')))
 
     return results
 

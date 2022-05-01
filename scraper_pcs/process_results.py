@@ -1,8 +1,10 @@
 import pandas as pd
 import numpy as np
 import os 
+from distutils.util import strtobool
 
-from utility.dataclasses import StageResults
+from utility.result_objects import StageResults, Message
+from utility import imgur_robot
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -16,11 +18,20 @@ JITTER_THRESHOLD = 0.1
 FONTSIZE = 8
 DPI=200
 
-def create_echelon_plot(results: StageResults) -> None:
+def create_echelon_plot(
+    results: StageResults, 
+    message_data: Message,
+    gc: bool = False
+    ) -> Message:
 
-    data = results.stage_points[-1]
-    match_name = data.loc[data['MATCH'].notna(), 'MATCH'].unique()[0]
-    file_name = os.path.join(PATH_RESULTS, f"{match_name.lower()}_plot.png")
+    if not gc:
+        data = results.stage_points[-1]
+        match_name = data.loc[data['MATCH'].notna(), 'MATCH'].unique()[0]
+        file_name = os.path.join(PATH_RESULTS, f"{match_name.lower()}_plot.png")
+    else: 
+        data = results.all_points
+        match_name = 'Algemeen Klassement'
+        file_name = os.path.join(PATH_RESULTS, f"{match_name.lower()}_plot.png")
 
     gc = pd.DataFrame(data.groupby('COACH')['POINTS'].sum().sort_values(ascending=False))
     gc.reset_index(inplace=True)
@@ -79,6 +90,15 @@ def create_echelon_plot(results: StageResults) -> None:
     ax.spines['left'].set_visible(False)
     f.savefig(file_name, bbox_inches='tight', orientation='portrait')
 
+    if strtobool(os.getenv('IMGUR_UPLOAD')):
+        img_url = imgur_robot.upload_to_imgur(file_name)
+        message_data.img_urls.append(img_url)
+    else:
+        print(f"No image uploaded; IMGUR_UPLOAD set to {os.getenv('IMGUR_UPLOAD')}")
+
+    return message_data
+
+
 
 def create_teams_message(data: pd.DataFrame) -> str:
 
@@ -109,7 +129,7 @@ def list_best_coaches(data: pd.DataFrame) -> list:
     return best_coaches
 
 
-def create_mention_list(coaches: list) -> str:
+def create_mention_string(coaches: list) -> str:
 
     unique_coaches = np.unique(coaches)
 
@@ -121,10 +141,15 @@ def create_mention_list(coaches: list) -> str:
     return mention_string
 
 
-if __name__ == '__main__':
-    data_in = pd.read_csv('E://DataScience//sport-scraping//2022_Voorjaar//all_results.csv')
-    create_mention_list(list_best_coaches(data_in))
+def create_image_string(img_urls: list) -> str:
+    return ''.join(img_urls)
 
-    # create_echelon_plot(data_in, 'test', 'test.png')
-    # create_teams_message(data_in)
+
+def create_forum_message(results_data: StageResults, message_data: Message) -> str:
+
+    teams_message = create_teams_message(results_data.all_points)
+    image_message = create_image_string(message_data.img_urls)
+    mentions_message = create_mention_string(message_data.coach_mentions)
+
+    return image_message + mentions_message + teams_message
 
