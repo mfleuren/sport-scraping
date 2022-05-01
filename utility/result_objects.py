@@ -11,8 +11,9 @@ PATH_RESULTS = os.path.join(os.getcwd(), 'results', f"{os.getenv('COMPETITION_YE
 
 @dataclass
 class Message:
-    img_urls: list[list[str]] = field(default_factory=list)
+    img_urls: list[str] = field(default_factory=list)
     coach_mentions: list[list[str]] = field(default_factory=list)
+    summary_img_urls: list[str] = field(default_factory=list)
 
 
 @dataclass

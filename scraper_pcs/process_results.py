@@ -84,10 +84,7 @@ def create_echelon_plot(
     ax.get_legend().remove()
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_visible(False)
-    ax.spines['left'].set_visible(False)
+    ax.spines[['top', 'bottom', 'left', 'right']].set_visible(False)
     f.savefig(file_name, bbox_inches='tight', orientation='portrait')
 
     plt.close(f)
@@ -157,3 +154,56 @@ def create_forum_message(results_data: StageResults, message_data: Message) -> s
 
     return image_message + mentions_message + teams_message
 
+
+def summary_plot_by_draft_round(results_data: StageResults, message_data: Message) -> Message:
+
+    df_teams = results_data.teams
+    df_results = results_data.all_points
+
+    # Set round as categorical
+    df_teams['ROUND'] = df_teams['ROUND'].astype('category')
+
+    # Get total points by rider and SURNAME into Teams DF
+    df_teams = df_teams.join(df_results
+                         .groupby('RIDER')
+                         .agg({'POINTS':'sum', 'SURNAME':'first'})
+                         , on='RIDER')
+
+    # Calculate outliers
+    df_teams = (df_teams.join(
+        df_teams.groupby('ROUND')['POINTS']
+        .agg([lambda x: x.quantile(0.75) + 1.5*(x.quantile(0.75) - x.quantile(0.25))])
+        .rename({'<lambda>':'OUTLIER_EDGE'}, axis=1)
+        , on='ROUND'
+        ))
+    df_teams['OUTLIER'] = df_teams['POINTS'] > df_teams['OUTLIER_EDGE']
+
+    # Create plot
+    f = plt.figure(figsize=(720/DPI,512/DPI), dpi=DPI)
+    ax = plt.gca()
+    ax.spines[['right', 'top']].set_visible(False)
+    sns.boxplot(data=df_teams, x='ROUND', y='POINTS', ax=ax, fliersize=0, 
+                boxprops={'alpha':0.5}, 
+                whiskerprops={'alpha':0.5},
+                capprops={'alpha':0.5},
+                medianprops={'alpha':0.5}
+            )
+    sns.swarmplot(data=df_teams, x='ROUND', y='POINTS', ax=ax, marker='d', size=10)
+
+    # Plot outlier names
+    for _, row in df_teams[df_teams['OUTLIER']].iterrows():
+        plt.text(row['ROUND']-0.9, row['POINTS'], row['SURNAME'], ha='left', va='bottom', rotation=30)
+
+    # Save figure and upload
+    file_name = os.path.join(PATH_RESULTS, f"summary_draft_{os.getenv('COMPETITION_NAME').lower() + os.getenv('COMPETITION_YEAR')}_plot.png")
+    f.savefig(file_name, bbox_inches='tight', orientation='landscape')
+
+    if strtobool(os.getenv('IMGUR_UPLOAD')):
+        img_url = imgur_robot.upload_to_imgur(file_name)
+        message_data.img_urls.append(img_url)
+    else:
+        print(f"No image uploaded; IMGUR_UPLOAD set to {os.getenv('IMGUR_UPLOAD')}")
+        
+    return message_data
+    
+    

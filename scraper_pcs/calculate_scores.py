@@ -10,6 +10,14 @@ def calculate_match_points(results: StageResults) -> StageResults:
     join_result_points = result_df.join(results.default_points.set_index('RNK'), on='RNK', how='left')
     join_result_points['POINTS'] = (join_result_points['MATCH_LEVEL'] * join_result_points['POINTS_RAW']).astype('int')
     joined_df = results.teams.join(join_result_points.set_index('RIDER'), on='RIDER', how='outer')
+    
+    joined_df.fillna(
+        {
+            'MATCH':result_df['MATCH'][0],
+            'MATCH_LEVEL':result_df['MATCH_LEVEL'][0],
+            'POINTS':0,
+        }, inplace=True)
+
     joined_df.drop(['ROUND', 'PICK', 'POINTS_RAW'], axis=1, inplace=True)
 
     results.stage_points.append(joined_df)
