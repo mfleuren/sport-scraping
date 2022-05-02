@@ -18,7 +18,6 @@ def construct_pcs_url(epithet: str) -> str:
 
 
 def scrape_website(results: StageResults, match: pd.Series) -> StageResults:
-    """Scrape all information from a website, return as a string."""
 
     url = construct_pcs_url(match['URL_EPITHET'])
     result = requests.get(url)
@@ -73,13 +72,3 @@ def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFra
     COLUMNS_TO_KEEP = ['RNK', 'RIDER', 'FIRSTNAME', 'SURNAME', 'TEAM', 'MATCH', 'MATCH_LEVEL']
    
     return results_table[COLUMNS_TO_KEEP]
-
-
-if __name__ == '__main__':
-    url = 'https://www.procyclingstats.com/race/volta-ao-algarve/2022/stage-2'
-    standings = ['', '-gc', '-points', '-kom', '-youth']
-
-    for url_epi in standings:
-        outcome = scrape_website(url + url_epi)
-        print(outcome.head())
-

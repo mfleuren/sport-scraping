@@ -1,6 +1,7 @@
 from distutils.util import strtobool
 from dotenv import load_dotenv
 import os
+import pandas as pd
 from datetime import datetime
 from scraper_pcs.webscraper import scrape_website
 from scraper_pcs.calculate_scores import calculate_match_points, calculate_match_standings
@@ -15,14 +16,20 @@ MAKE_POST = strtobool(os.getenv('IMGUR_UPLOAD')) and strtobool(os.getenv('FORUM_
 print(f"Value for MAKE_POST: {str(MAKE_POST)} (Upload: {os.getenv('IMGUR_UPLOAD')}, Forum: {os.getenv('FORUM_POST')})")
 
 
+def find_matches_to_scrape(results_data: result_objects.StageResults) -> pd.DataFrame:
+
+    match_date_is_in_past = (results_data.matches['MATCH_DATE'] <= datetime.now())
+    match_not_processed_yet = ~results_data.matches['MATCH'].isin(results_data.all_results['MATCH'].unique())
+    matches_to_scrape = results_data.matches[match_date_is_in_past & match_not_processed_yet].reset_index(drop=True)
+
+    return matches_to_scrape
+
 def spring_classics() -> None:
 
     results_data = result_objects.StageResults()
     message_data = result_objects.Message()
 
-    match_date_is_in_past = (results_data.matches['MATCH_DATE'] <= datetime.now())
-    match_not_processed_yet = ~results_data.matches['MATCH'].isin(results_data.all_results['MATCH'].unique())
-    matches_to_scrape = results_data.matches[match_date_is_in_past & match_not_processed_yet].reset_index()
+    matches_to_scrape = find_matches_to_scrape(results_data)
 
     for idx, match in matches_to_scrape.iterrows():
         print(f"Processing match {idx+1} of {matches_to_scrape.shape[0]}: {match['MATCH']}.")
@@ -47,4 +54,8 @@ def spring_classics() -> None:
 
 
 def grand_tour():
-    print('Not implemented yet.')
+
+    results_data = result_objects.StageResults()
+
+    matches_to_scrape = find_matches_to_scrape(results_data)
+    print(results_data.teams.head())

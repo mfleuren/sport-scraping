@@ -32,7 +32,7 @@ class StageResults:
         self.matches = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_MATCHES')), sep=';')
         self.matches['MATCH_DATE'] = pd.to_datetime(self.matches['MATCH_DATE'], format='%d-%m-%Y')
 
-        self.teams = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_TEAMS')), sep=';')
+        self.teams = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_TEAMS')), sep=';', encoding='latin-1')
 
         self.default_points = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_POINTS')), sep=';')
 
