@@ -58,4 +58,12 @@ def grand_tour():
     results_data = result_objects.StageResults()
 
     matches_to_scrape = find_matches_to_scrape(results_data)
-    print(results_data.teams.head())
+
+    for idx, match in matches_to_scrape.iterrows():
+        print(f"Processing stage {idx+1} of {matches_to_scrape.shape[0]}.")
+    
+        results_data = scrape_website(results_data, match, stage_race=True)
+        results_data = calculate_match_points(results_data, stage_race=True)
+
+        print(results_data)
+

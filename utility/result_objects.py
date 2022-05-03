@@ -63,6 +63,13 @@ class StageResults:
             )
 
 
+    def export_teams(self) -> None:
+        self.teams.to_csv(
+            os.path.join(PATH_INPUT, os.getenv('FILENAME_TEAMS')), 
+            index=False
+        )
+        
+
     def append_stages_to_existing_data(self):
         self.all_results = pd.concat([self.all_results, pd.concat(self.stage_results)], ignore_index=True)
         self.all_points = pd.concat([self.all_points, pd.concat(self.stage_points)], ignore_index=True)

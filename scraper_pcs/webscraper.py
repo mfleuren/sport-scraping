@@ -17,13 +17,25 @@ def construct_pcs_url(epithet: str) -> str:
     return url
 
 
-def scrape_website(results: StageResults, match: pd.Series) -> StageResults:
+def construct_pcs_stage_url(epithet: str) -> str:
+    """Construct the URL for PCS based on defaults and match-specific epithet."""
+    url = f"{os.getenv('SCRAPER_PCS_BASE_URL')}/{os.getenv('COMPETITION_NAME').lower()}/{os.getenv('COMPETITION_YEAR')}/{epithet}/result"
+    return url
 
-    url = construct_pcs_url(match['URL_EPITHET'])
+
+def scrape_website(results: StageResults, match: pd.Series, stage_race: bool = False) -> StageResults:
+
+    if stage_race:
+        url = construct_pcs_stage_url(match['URL_EPITHET'])
+    else:
+        url = construct_pcs_url(match['URL_EPITHET'])
+
     result = requests.get(url)
     statuscode = result.status_code
 
-    if statuscode == 200:
+    if statuscode == 200 and stage_race:
+        result_table = read_result_table_stage(result.text, match)
+    elif statuscode == 200 and not stage_race:
         result_table = read_result_table(result.text, match)
     else:
         print(f'Website {url} could not be accessed; status code {statuscode}')
@@ -42,6 +54,28 @@ def read_result_table(html_text: str, match: pd.Series) -> pd.DataFrame:
 
     return results_table
 
+
+def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
+    """Read the different result tables from the HTML input"""
+
+    all_result_tables = pd.DataFrame()
+
+    table_list = pd.read_html(html_text)
+    rankings = ['STAGE', 'GC', 'SPRINT', 'KOM', 'YOUTH']
+    rankings_in_table = match[rankings][match[rankings].values].index
+    for ranking, idx in zip(rankings_in_table, range(len(rankings_in_table))):
+        result_table = clean_results_table(table_list[idx], match)
+
+        if match['MATCH'] != 22:
+            result_table['RANKING'] = 'stage_' + ranking.lower()
+        else:
+            result_table['RANKING'] = 'gc_' + ranking.lower()
+
+        all_result_tables = pd.concat([all_result_tables, result_table], ignore_index=True)
+
+    return all_result_tables
+        
+    
 
 def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFrame:
     """Return a cleaned table with results."""
@@ -62,13 +96,16 @@ def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFra
                                 )
     results_table['FIRSTNAME'] = results_table.apply(lambda x: x['RIDER'].replace(x['SURNAME'], '').strip(), axis=1)
 
-    # Add match information
-    results_table['MATCH'] = match['MATCH']
-    results_table['MATCH_LEVEL'] = match['LEVEL']
-
-    # Drop unnecessary columns
+    # Rename essential columns to ALLCAPS
     results_table.rename({'Team':'TEAM', 'Age':'AGE', 'Rnk':'RNK'}, axis=1, inplace=True)
 
-    COLUMNS_TO_KEEP = ['RNK', 'RIDER', 'FIRSTNAME', 'SURNAME', 'TEAM', 'MATCH', 'MATCH_LEVEL']
-   
-    return results_table[COLUMNS_TO_KEEP]
+    # Add match information
+    results_table['MATCH'] = match['MATCH']
+
+    if 'LEVEL' in match.index:
+        results_table['MATCH_LEVEL'] = match['LEVEL']
+        COLUMNS_TO_KEEP = ['RNK', 'RIDER', 'FIRSTNAME', 'SURNAME', 'TEAM', 'MATCH', 'MATCH_LEVEL']   
+        return results_table[COLUMNS_TO_KEEP]
+    else: 
+        COLUMNS_TO_KEEP = ['RNK', 'RIDER', 'FIRSTNAME', 'SURNAME', 'TEAM', 'MATCH']   
+        return results_table[COLUMNS_TO_KEEP]
