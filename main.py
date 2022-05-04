@@ -1,5 +1,6 @@
 import os
 from scraper_pcs.matchformats import spring_classics, grand_tour
+from utility import result_objects
 
 def main() -> None:
     
@@ -9,6 +10,9 @@ def main() -> None:
         grand_tour()   
 
 
+
+
 if __name__ == '__main__':
-    main()
+    # main()
+    calculate_hundredpercentrule()
 

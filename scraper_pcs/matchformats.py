@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import pandas as pd
 from datetime import datetime
+from scraper_pcs.process_substitutions import process_substitutions
 from scraper_pcs.webscraper import scrape_website
 from scraper_pcs.calculate_scores import calculate_match_points, calculate_match_standings
 from scraper_pcs import process_results
@@ -64,6 +65,12 @@ def grand_tour():
     
         results_data = scrape_website(results_data, match, stage_race=True)
         results_data = calculate_match_points(results_data, stage_race=True)
+        results_data = process_substitutions(results_data)
+
+        #TODO: Calculate points by team, check if rider is in/out team
+        #TODO: Create echelon plots
+        #TODO: Create other aspects of plots
+        #TODO: Create special images for team overview etc
 
         print(results_data)
 

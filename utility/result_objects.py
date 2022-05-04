@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 import pandas as pd
+import numpy as np
 import os
 from dotenv import load_dotenv
 
@@ -33,8 +34,11 @@ class StageResults:
         self.matches['MATCH_DATE'] = pd.to_datetime(self.matches['MATCH_DATE'], format='%d-%m-%Y')
 
         self.teams = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_TEAMS')), sep=';', encoding='latin-1')
+        if not any(['ROUND_IN', 'ROUND_OUT']) in self.teams.columns:
+            self.teams['ROUND_IN'] = np.where(self.teams['POSITION'] == 'In',1, np.nan)
+            self.teams['ROUND_OUT'] = np.nan
 
-        self.default_points = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_POINTS')), sep=';')
+        self.default_points = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_POINTS')), sep=';')      
 
         if os.path.exists(os.path.join(PATH_RESULTS, os.getenv('FILENAME_ALL_RESULTS'))):
             self.all_results = pd.read_csv(os.path.join(PATH_RESULTS, os.getenv('FILENAME_ALL_RESULTS')))
