@@ -2,6 +2,6 @@ venv/
 .idea/
 temp/
 __pycache__/
-*/all_results.csv
+*.csv
 *.png
 .env

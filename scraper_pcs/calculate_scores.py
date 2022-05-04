@@ -1,30 +1,56 @@
+from typing import Tuple
 import pandas as pd
+from scraper_pcs.process_results import list_best_coaches
+from utility.result_objects import StageResults, Message
 
-def calculate_match_points(result_df: pd.DataFrame, points_df: pd.DataFrame, teams_df: pd.DataFrame) -> pd.DataFrame:
+def calculate_match_points(results: StageResults, stage_race: bool = False) -> StageResults:
     """Calculate points per match by joining match results, points and coached teams"""
 
-    join_result_points = result_df.join(points_df.set_index('RNK'), on='RNK', how='left')
-    join_result_points['POINTS'] = (join_result_points['MATCH_LEVEL'] * join_result_points['POINTS_RAW']).astype('int')
-    joined_df = teams_df.join(join_result_points.set_index('RIDER'), on='RIDER', how='left')
-    joined_df.drop(['ROUND', 'PICK', 'POINTS_RAW'], axis=1, inplace=True)
-    return joined_df
+    result_df = results.stage_results[-1]
 
-def calculate_stage_result(match_points: pd.DataFrame) -> pd.DataFrame:
+    if stage_race:
+        points = results.default_points.set_index(['RANKING', 'RNK'])
+        join_result_points = result_df.join(points, on=['RANKING', 'RNK'])
+        join_result_points.fillna({'POINTS':0}, inplace=True) 
+
+        grouped_points_by_rider = (
+            join_result_points
+                .groupby('RIDER', as_index=False)
+                .agg({'MATCH':'first', 'POINTS':'sum'})
+                .sort_values(by='POINTS', ascending=False)
+                .reset_index(drop=True)
+            )
+                
+        results.stage_points.append(grouped_points_by_rider)
+
+    else:
+        join_result_points = result_df.join(results.default_points.set_index('RNK'), on='RNK', how='left')
+        join_result_points['POINTS'] = (join_result_points['MATCH_LEVEL'] * join_result_points['POINTS_RAW']).astype('int')
+        joined_df = results.teams.join(join_result_points.set_index('RIDER'), on='RIDER', how='outer')
+        
+        joined_df.fillna(
+            {
+                'MATCH':result_df['MATCH'][0],
+                'MATCH_LEVEL':result_df['MATCH_LEVEL'][0],
+                'POINTS':0,
+            }, inplace=True)
+
+        joined_df.drop(['ROUND', 'PICK', 'POINTS_RAW'], axis=1, inplace=True)
+
+        results.stage_points.append(joined_df)
+
+    return results
+
+def calculate_match_standings(results: StageResults, message: Message) -> Tuple[StageResults, Message]:
     """Group match result by coach, return ordered dataframe with points by coach"""
 
+    match_points = results.stage_points[-1]
     stage_result = pd.DataFrame(data=match_points.groupby('COACH')['POINTS'].sum().sort_values(ascending=False))
-    stage_result['MATCH'] = match_points.loc[0, 'MATCH']
-    stage_result['MATCH_LEVEL'] = match_points.loc[0, 'MATCH_LEVEL']
+    stage_result['MATCH'] = match_points.loc[match_points['MATCH'].notna(), 'MATCH'].unique()[0]
+    stage_result['MATCH_LEVEL'] = match_points.loc[match_points['MATCH_LEVEL'].notna(), 'MATCH_LEVEL'].unique()[0]
 
-    return stage_result
+    results.stage_standings.append(stage_result)
+    message.coach_mentions.append(list_best_coaches(stage_result))
 
-
-if __name__ == '__main__':
-    result_df = pd.read_csv('./temp/results_example.csv')
-    points_df = pd.read_csv('./2022_Voorjaar/points.csv', sep=';')
-    teams_df = pd.read_csv('./2022_Voorjaar/teams.csv', sep=';')
-    
-    match_points = calculate_match_points(result_df, points_df, teams_df)
-    stage_result = calculate_stage_result(match_points)
-    print(stage_result.head())
+    return results, message
 
