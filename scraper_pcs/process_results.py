@@ -27,11 +27,15 @@ def create_echelon_plot(
     if not gc:
         data = results.stage_points[-1]
         match_name = data.loc[data['MATCH'].notna(), 'MATCH'].unique()[0]
+        match_name = f'Stage_{int(match_name)}' if type(match_name) != 'str' else match_name
         file_name = os.path.join(PATH_RESULTS, f"{match_name.lower()}_plot.png")
     else: 
         data = results.all_points
         match_name = 'Algemeen Klassement'
         file_name = os.path.join(PATH_RESULTS, f"{match_name.lower()}_plot.png")
+
+    if 'POSITION' in data.columns:
+        data = data[data['POSITION'] == 'In']
 
     gc = pd.DataFrame(data.groupby('COACH')['POINTS'].sum().sort_values(ascending=False))
     gc.reset_index(inplace=True)
@@ -44,7 +48,7 @@ def create_echelon_plot(
 
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
 
-    f = plt.figure(figsize=(512/DPI,720/DPI), dpi=DPI, edgecolor=None)
+    f = plt.figure(figsize=(1028/DPI,720/DPI), dpi=DPI, edgecolor=None)
     sns.scatterplot(
         data=gc, 
         x='XJITTER', 
@@ -78,7 +82,7 @@ def create_echelon_plot(
         )
 
     plt.xlim(left=0.75, right=2)
-    plt.title(match_name, fontdict={'size':1.25*FONTSIZE, 'weight':'bold'})
+    plt.title(match_name.replace('_', ' '), fontdict={'size':1.25*FONTSIZE, 'weight':'bold'})
 
     ax = plt.gca()
     ax.get_legend().remove()
@@ -98,10 +102,12 @@ def create_echelon_plot(
     return message_data
 
 
-
 def create_teams_message(data: pd.DataFrame) -> str:
 
     data['POINTS_STR'] = data['POINTS'].fillna(0).astype(int).astype(str)
+    if 'ROUND_OUT' in data.columns:
+        data.loc[data['ROUND_OUT'] <= data['MATCH'], 'POINTS_STR'] = 'X'
+        data.loc[(data['ROUND_IN'] > data['MATCH']) | data['ROUND_IN'].isna(), 'POINTS_STR'] = 'S'
     dfg1 = data.groupby(['COACH', 'RIDER'], as_index=False)['POINTS_STR'].apply(lambda x: '-'.join(x))
     dfg2 = data.groupby(['COACH', 'RIDER'])['POINTS'].sum()
     dfg = dfg1.join(dfg2, on=['COACH', 'RIDER'])
@@ -146,13 +152,18 @@ def create_image_string(img_urls: list) -> str:
     return ''.join(img_urls)
 
 
+def create_subs_message(subs_list: list) -> str:
+    return ''.join(subs_list)
+
+
 def create_forum_message(results_data: StageResults, message_data: Message) -> str:
 
+    substitution_message = create_subs_message(message_data.substitution_list)
     teams_message = create_teams_message(results_data.all_points)
     image_message = create_image_string(message_data.img_urls)
     mentions_message = create_mention_string(message_data.coach_mentions)
 
-    return image_message + mentions_message + teams_message
+    return substitution_message + image_message + mentions_message + teams_message
 
 
 def summary_plot_by_draft_round(results_data: StageResults, message_data: Message) -> Message:

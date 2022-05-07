@@ -15,6 +15,7 @@ class Message:
     img_urls: list[str] = field(default_factory=list)
     coach_mentions: list[list[str]] = field(default_factory=list)
     summary_img_urls: list[str] = field(default_factory=list)
+    substitution_list: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -33,10 +34,14 @@ class StageResults:
         self.matches = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_MATCHES')), sep=';')
         self.matches['MATCH_DATE'] = pd.to_datetime(self.matches['MATCH_DATE'], format='%d-%m-%Y')
 
-        self.teams = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_TEAMS')), sep=';', encoding='latin-1')
-        if not any(['ROUND_IN', 'ROUND_OUT']) in self.teams.columns:
-            self.teams['ROUND_IN'] = np.where(self.teams['POSITION'] == 'In',1, np.nan)
-            self.teams['ROUND_OUT'] = np.nan
+        if os.path.exists(os.path.join(PATH_RESULTS, os.getenv('FILENAME_TEAMS'))):
+            self.teams = pd.read_csv(os.path.join(PATH_RESULTS, os.getenv('FILENAME_TEAMS')), sep=';', encoding='latin-1')
+        else:
+            self.teams = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_TEAMS')), sep=';', encoding='latin-1')        
+            if not any(['ROUND_IN', 'ROUND_OUT']) in self.teams.columns:
+                self.teams['ROUND_IN'] = np.where(self.teams['POSITION'] == 'In',1, np.nan)
+                self.teams['ROUND_OUT'] = np.nan
+        self.teams.dropna(subset=['RIDER', 'COACH'], inplace=True)
 
         self.default_points = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_POINTS')), sep=';')      
 
@@ -69,8 +74,9 @@ class StageResults:
 
     def export_teams(self) -> None:
         self.teams.to_csv(
-            os.path.join(PATH_INPUT, os.getenv('FILENAME_TEAMS')), 
-            index=False
+            os.path.join(PATH_RESULTS, os.getenv('FILENAME_TEAMS')), 
+            index=False,
+            sep=';'
         )
         
 

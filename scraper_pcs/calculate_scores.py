@@ -66,7 +66,7 @@ def mask_scores_inactive_riders(scores: pd.DataFrame) -> pd.DataFrame:
     return scores
 
 
-def calculate_stage_points(results: StageResults) -> StageResults:
+def calculate_stage_points(results: StageResults, message: Message) -> Tuple[StageResults, Message]:
     """Calculate the points by stage, combining rankings by rider before joining with coach teams."""
 
     stage_result = results.stage_results[-1].copy()
@@ -91,7 +91,8 @@ def calculate_stage_points(results: StageResults) -> StageResults:
     stage_points_by_team = mask_scores_inactive_riders(stage_points_by_team)
 
     results.stage_points.append(stage_points_by_team)
+    message.coach_mentions.append(list_best_coaches(stage_points_by_team))
 
-    return results
+    return results, message
 
 
