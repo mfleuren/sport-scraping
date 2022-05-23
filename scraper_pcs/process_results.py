@@ -43,7 +43,7 @@ def create_echelon_plot(
     gc['ECHELON'] = (gc['RELATIVE_POSITION'].shift(1) > (gc['RELATIVE_POSITION'] + JITTER_THRESHOLD)).cumsum()
     gc['ECHELON_POSITION'] = gc.groupby('ECHELON').cumcount()
     gc['ECHELON_MAXPOINTS'] = gc['ECHELON'].map(gc.groupby('ECHELON')['POINTS'].max())
-    gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.1
+    gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.07
     gc['YJITTER'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
 
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
@@ -161,7 +161,7 @@ def create_forum_message(results_data: StageResults, message_data: Message) -> s
     substitution_message = create_subs_message(message_data.substitution_list)
     teams_message = create_teams_message(results_data.all_points)
     image_message = create_image_string(message_data.img_urls)
-    mentions_message = create_mention_string(message_data.coach_mentions)
+    mentions_message = '' #create_mention_string(message_data.coach_mentions)
 
     return substitution_message + image_message + mentions_message + teams_message
 
