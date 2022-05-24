@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 from lxml import html
 from typing import List
+import re
 
 def load_html(from_file: bool = False) -> str:
     if not from_file:
@@ -28,8 +29,15 @@ def extract_txt_by_class(level:str, class_str:str) -> List[str]:
     return list(filter(None, txt_cleaned))
 
 
+def extract_txt_from_string(string:str, regex:str) -> str:
+    result = re.search(regex, string)
+    if result: return result.group(1)
+
+
 club_urls = extract_url_by_class('a', 'team-title')
 match_state = extract_txt_by_class('span', 'match-state')
-html_score = extract_txt_by_class('h3', 'thick scoretime')
+final_score = extract_txt_by_class('h3', 'thick scoretime')[0]
+final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
+final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
 
-print(club_urls, html_score)
+print(final_score, final_score_home, final_score_away)
