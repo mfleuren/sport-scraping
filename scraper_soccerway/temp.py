@@ -1,3 +1,4 @@
+from enum import Enum
 import pandas as pd
 import requests
 from lxml import html
@@ -34,10 +35,24 @@ def extract_txt_from_string(string:str, regex:str) -> str:
     if result: return result.group(1)
 
 
+def determine_winning_team(score_home: int, score_away: int) -> Enum:
+    if score_home > score_away:
+        return 1
+    elif score_away > score_home:
+        return 2
+    elif score_home == score_away:
+        return 3
+    else:
+        pass
+
+
 club_urls = extract_url_by_class('a', 'team-title')
 match_state = extract_txt_by_class('span', 'match-state')
+# Quit process if match state is not FT
+
 final_score = extract_txt_by_class('h3', 'thick scoretime')[0]
 final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
 final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
+final_result = determine_winning_team(final_score_home, final_score_away)
 
-print(final_score, final_score_home, final_score_away)
+
