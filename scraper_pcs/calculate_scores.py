@@ -1,5 +1,6 @@
 from typing import Tuple
 import pandas as pd
+import numpy as np
 from scraper_pcs.process_results import list_best_coaches
 from utility.result_objects import StageResults, Message
 
@@ -53,4 +54,45 @@ def calculate_match_standings(results: StageResults, message: Message) -> Tuple[
     message.coach_mentions.append(list_best_coaches(stage_result))
 
     return results, message
+
+
+def mask_scores_inactive_riders(scores: pd.DataFrame) -> pd.DataFrame:
+    """Replace the scores of inactive riders with 0."""
+
+    mask_in = np.array(scores['MATCH'] < scores['ROUND_IN'])
+    mask_out = np.array(scores['MATCH'] >= scores['ROUND_OUT'])
+    scores.loc[mask_in | mask_out, 'POINTS'] = 0
+
+    return scores
+
+
+def calculate_stage_points(results: StageResults, message: Message) -> Tuple[StageResults, Message]:
+    """Calculate the points by stage, combining rankings by rider before joining with coach teams."""
+
+    stage_result = results.stage_results[-1].copy()
+    stage_result = stage_result[~stage_result['RNK'].isin(['DNS', 'DNF', 'DSQ', 'OTL'])]
+    stage_result['RNK'] = stage_result['RNK'].astype('int')
+    stage_points_by_rider = (
+        stage_result
+        .join(
+            results.default_points.set_index(['RANKING', 'RNK']), 
+            on=['RANKING', 'RNK']
+            )
+        .groupby('RIDER')
+        .agg({
+            'POINTS':'sum',
+            'MATCH':'first'
+        })
+        .sort_values('POINTS', ascending=False)
+    )
+
+    stage_points_by_team = results.teams.join(stage_points_by_rider, on='RIDER')
+    stage_points_by_team.fillna({'POINTS':0, 'MATCH':stage_result['MATCH'][0]}, inplace=True)
+    stage_points_by_team = mask_scores_inactive_riders(stage_points_by_team)
+
+    results.stage_points.append(stage_points_by_team)
+    message.coach_mentions.append(list_best_coaches(stage_points_by_team))
+
+    return results, message
+
 

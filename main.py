@@ -9,10 +9,6 @@ def main() -> None:
     else: 
         grand_tour()   
 
-
-
-
 if __name__ == '__main__':
-    # main()
-    calculate_hundredpercentrule()
+    main()
 

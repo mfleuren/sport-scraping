@@ -3,9 +3,9 @@ from dotenv import load_dotenv
 import os
 import pandas as pd
 from datetime import datetime
-from scraper_pcs.process_substitutions import process_substitutions
+from scraper_pcs.process_substitutions import process_substitutions, create_teams_plot
 from scraper_pcs.webscraper import scrape_website
-from scraper_pcs.calculate_scores import calculate_match_points, calculate_match_standings
+from scraper_pcs.calculate_scores import calculate_match_points, calculate_match_standings, calculate_stage_points
 from scraper_pcs import process_results
 from utility import forum_robot, result_objects
 
@@ -49,7 +49,6 @@ def spring_classics() -> None:
     message_data = process_results.create_echelon_plot(results_data, message_data, gc=True)
 
     single_message = process_results.create_forum_message(results_data, message_data)
-    print(single_message)
     if MAKE_POST:
         forum_robot.post_results_to_forum(single_message)
 
@@ -57,6 +56,7 @@ def spring_classics() -> None:
 def grand_tour():
 
     results_data = result_objects.StageResults()
+    message_data = result_objects.Message()
 
     matches_to_scrape = find_matches_to_scrape(results_data)
 
@@ -65,12 +65,27 @@ def grand_tour():
     
         results_data = scrape_website(results_data, match, stage_race=True)
         results_data = calculate_match_points(results_data, stage_race=True)
-        results_data = process_substitutions(results_data)
+        results_data, message_data = process_substitutions(results_data, message_data)
+        results_data, message_data = calculate_stage_points(results_data, message_data)
+        message_data = process_results.create_echelon_plot(results_data, message_data, gc=False)
+    
+    if len(matches_to_scrape) > 0:
+        print("Processing general classification.")
+        results_data.append_stages_to_existing_data()
 
-        #TODO: Calculate points by team, check if rider is in/out team
-        #TODO: Create echelon plots
-        #TODO: Create other aspects of plots
-        #TODO: Create special images for team overview etc
+    message_data.coach_mentions.append(process_results.list_best_coaches(results_data.all_points))
+    message_data = process_results.create_echelon_plot(results_data, message_data, gc=True)
+    message_data = create_teams_plot(results_data, message_data)
 
-        print(results_data)
+    single_message = process_results.create_forum_message(results_data, message_data)
+    print(single_message)
+    if MAKE_POST:
+        forum_robot.post_results_to_forum(single_message)
+
+    results_data.export_concatenated_data()
+    results_data.export_teams()
+
+
+if __name__ == '__main__':
+    grand_tour()
 
