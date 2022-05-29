@@ -2,12 +2,14 @@ from dataclasses import dataclass, field
 import pandas as pd
 import numpy as np
 import os
+from distutils.util import strtobool
 from dotenv import load_dotenv
 
 
 load_dotenv()
 PATH_INPUT = os.path.join(os.getcwd(), 'inputs', f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}")
 PATH_RESULTS = os.path.join(os.getcwd(), 'results', f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}")
+EXPORT_DATA = strtobool(os.getenv('EXPORT_DATA'))
 
 
 @dataclass
@@ -62,14 +64,16 @@ class StageResults:
 
 
     def export_concatenated_data(self) -> None:
-        self.all_results.to_csv(
-            os.path.join(PATH_RESULTS, os.getenv('FILENAME_ALL_RESULTS')), 
-            index=False
-            )
-        self.all_points.to_csv(
-            os.path.join(PATH_RESULTS, os.getenv('FILENAME_ALL_POINTS')), 
-            index=False
-            )
+
+        if EXPORT_DATA:
+            self.all_results.to_csv(
+                os.path.join(PATH_RESULTS, os.getenv('FILENAME_ALL_RESULTS')), 
+                index=False
+                )
+            self.all_points.to_csv(
+                os.path.join(PATH_RESULTS, os.getenv('FILENAME_ALL_POINTS')), 
+                index=False
+                )
 
 
     def export_teams(self) -> None:

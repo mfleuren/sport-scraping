@@ -161,7 +161,7 @@ def create_forum_message(results_data: StageResults, message_data: Message) -> s
     substitution_message = create_subs_message(message_data.substitution_list)
     teams_message = create_teams_message(results_data.all_points)
     image_message = create_image_string(message_data.img_urls)
-    mentions_message = '' #create_mention_string(message_data.coach_mentions)
+    mentions_message = create_mention_string(message_data.coach_mentions)
 
     return substitution_message + image_message + mentions_message + teams_message
 

@@ -62,16 +62,18 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
 
     table_list = pd.read_html(html_text)
     rankings = ['STAGE', 'GC', 'SPRINT', 'KOM', 'YOUTH']
-    rankings_in_table = match[rankings][match[rankings].values].index
-    for ranking, idx in zip(rankings_in_table, range(len(rankings_in_table))):
-        result_table = clean_results_table(table_list[idx], match)
+    ranking_exists = match[rankings].values
+    for ranking, exists, idx in zip(rankings, ranking_exists, range(len(rankings))):
 
-        if match['MATCH'] != 22:
-            result_table['RANKING'] = 'stage_' + ranking.lower()
-        else:
-            result_table['RANKING'] = 'gc_' + ranking.lower()
+        if exists:
+            result_table = clean_results_table(table_list[idx], match)
 
-        all_result_tables = pd.concat([all_result_tables, result_table], ignore_index=True)
+            if match['MATCH'] != 22:
+                result_table['RANKING'] = 'stage_' + ranking.lower()
+            else:
+                result_table['RANKING'] = 'gc_' + ranking.lower()
+
+            all_result_tables = pd.concat([all_result_tables, result_table], ignore_index=True)
 
     return all_result_tables
         
