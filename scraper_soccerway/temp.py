@@ -3,31 +3,39 @@ import pandas as pd
 import requests
 from lxml import html
 from bs4 import BeautifulSoup
-from typing import List
+from typing import List, Tuple
 import re
-
-def load_html(from_file: bool = False) -> str:
-    if not from_file:
-        URL = 'https://nl.soccerway.com/matches/2022/05/15/netherlands/eredivisie/sbv-vitesse/afc-ajax/3512762/'
-        REQUEST_HEADERS = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:100.0) Gecko/20100101 Firefox/100.0"}
-        result = requests.get(URL, headers=REQUEST_HEADERS)
-        with open('test_html.txt', 'w', encoding='utf-8') as f:
-            f.write(result.text)
-        return result.text
-    else:
-        import codecs
-        f = codecs.open('test_html.txt', 'r', encoding='utf-8')
-        return f.read()
-    
-tree = html.fromstring(load_html(from_file=True))
-soup = BeautifulSoup(load_html(from_file=True), 'html.parser')
+import codecs
 
 
-def extract_url_by_class(level:str, class_str:str) -> List[str]:
+def read_html_from_url(location_to_scrape:str) -> str:
+    REQUEST_HEADERS = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:100.0) Gecko/20100101 Firefox/100.0"}
+    result = requests.get(location_to_scrape, headers=REQUEST_HEADERS)
+    with open('test_html.txt', 'w', encoding='utf-8') as f:
+        f.write(result.text)
+    return result.text
+
+
+def read_html_from_file(location_to_scrape:str) -> str:
+    f = codecs.open(location_to_scrape, 'r', encoding='utf-8')
+    return f.read()
+
+
+def read_html_text(location_to_scrape: str) -> str:
+    if location_to_scrape.startswith('http'):
+        text = read_html_from_url(location_to_scrape)
+    else:            
+        text = read_html_from_file(location_to_scrape)
+    return text
+
+
+def extract_url_by_class(html_string: str, level:str, class_str:str) -> List[str]:
+    tree = html.fromstring(html_string)
     return tree.xpath(f'//{level}[@class="{class_str}"]/@href')
 
 
-def extract_txt_by_class(level:str, class_str:str) -> List[str]:
+def extract_txt_by_class(html_string: str, level:str, class_str:str) -> List[str]:
+    tree = html.fromstring(html_string)
     txt = tree.xpath(f'//{level}[@class="{class_str}"]/text()')
     txt_cleaned = [string.replace(' ', '').replace('\n', '').replace('\r', '') for string in txt]
     return list(filter(None, txt_cleaned))
@@ -49,9 +57,9 @@ def determine_winning_team(score_home: int, score_away: int) -> Enum:
         pass
 
 
-def find_all_links_in_table(html: BeautifulSoup) -> List:
+def find_all_links_in_table(soup: BeautifulSoup) -> List: 
     links = []
-    for tr in html.findAll("tr"):
+    for tr in soup.findAll("tr"):
         trs = tr.findAll("td")
         for each in trs:
             try:
@@ -62,26 +70,80 @@ def find_all_links_in_table(html: BeautifulSoup) -> List:
     return links
 
 
-def extract_team_lineup(html: BeautifulSoup) -> pd.DataFrame:
-    lineup = pd.read_html(str(html), encoding='utf-8')[0]
-    lineup['Link'] = find_all_links_in_table(html)
-    return lineup
+def parse_html_table(soup: BeautifulSoup) -> pd.DataFrame:
+    return pd.read_html(str(soup), encoding='utf-8')[0]
 
 
-club_urls = extract_url_by_class('a', 'team-title')
-match_state = extract_txt_by_class('span', 'match-state')
+def find_replacements(subs_df: pd.DataFrame, base_df: pd.DataFrame) -> pd.DataFrame:
+
+    subs_df_split = (subs_df['Speler'].str.split('([\w\s\.]+) for ([\w\s\.]+) ([0-9]+)\'', expand=True))
+    all_subs = subs_df_split[1].fillna(subs_df_split[0]).rename('Speler')
+    sub_minutes_played = 90-subs_df_split[3].fillna(90).astype('int').rename('Minuten_Gespeeld')
+    subs_df2 = pd.concat([subs_df['#'], all_subs, subs_df[['Kaarten', 'Link']], sub_minutes_played], axis=1)
+
+    players_out = subs_df_split[2].rename('Speler')
+    players_out_minutes_played = subs_df_split[3].fillna(90).astype('int').rename('Minuten_Gespeeld')
+    players_out_df = pd.concat([players_out, players_out_minutes_played], axis=1).dropna()
+
+    print(players_out_df)
+
+    base_df = base_df.join(players_out_df.set_index('Speler'), on='Speler')
+    base_df['Minuten_Gespeeld'].fillna(90, inplace=True)
+    base_df['Minuten_Gespeeld'] = base_df['Minuten_Gespeeld'].astype('int')
+
+    combined_lineup = pd.concat([base_df, subs_df2])
+    return combined_lineup
+
+
+
+
+    
+
+
+def extract_team_lineup(html_string: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    soup = BeautifulSoup(html_string, 'html.parser')
+    soup_lineups = soup.find_all('div', class_='combined-lineups-container')
+    soup_lineup_home = soup_lineups[0].find('div', class_='container left')
+    soup_lineup_away = soup_lineups[0].find('div', class_='container right')
+
+    soup_subs_home = soup_lineups[1].find('div', class_='container left')
+    soup_subs_away = soup_lineups[1].find('div', class_='container right')
+
+    lineups_home = parse_html_table(soup_lineup_home)
+    lineups_home['Link'] = find_all_links_in_table(soup_lineup_home)
+
+    lineups_away = parse_html_table(soup_lineup_away)
+    lineups_away['Link'] = find_all_links_in_table(soup_lineup_away)
+
+    subs_home = parse_html_table(soup_subs_home)
+    subs_home['Link'] = find_all_links_in_table(soup_subs_home)
+    
+    subs_away = parse_html_table(soup_subs_away)
+    subs_away['Link'] = find_all_links_in_table(soup_subs_away)
+
+    full_lineup_home = find_replacements(subs_home, lineups_home)
+    full_lineup_away = find_replacements(subs_away, lineups_away)
+
+    print(full_lineup_home, full_lineup_away)
+
+
+    return full_lineup_home, full_lineup_away
+
+url = 'https://nl.soccerway.com/matches/2022/05/15/netherlands/eredivisie/sbv-vitesse/afc-ajax/3512762/'
+filepath = 'test_html.txt' 
+html_string = read_html_text(filepath)
+
+club_urls = extract_url_by_class(html_string, 'a', 'team-title')
+match_state = extract_txt_by_class(html_string, 'span', 'match-state')
 #TODO: Quit process if match state is not FT
 
-final_score = extract_txt_by_class('h3', 'thick scoretime')[0]
+final_score = extract_txt_by_class(html_string, 'h3', 'thick scoretime')[0]
 final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
 final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
 final_result = determine_winning_team(final_score_home, final_score_away)
 
-lineups_html = soup.find('div', class_='combined-lineups-container')
-lineups_home = extract_team_lineup(lineups_html.find('div', class_='container left'))
-lineups_away = extract_team_lineup(lineups_html.find('div', class_='container right'))
+lineup_home, lineup_away = extract_team_lineup(html_string)
 
-
-print(lineups_home, lineups_away)
+# print(lineup_home)
 
 # TODO: Subs
