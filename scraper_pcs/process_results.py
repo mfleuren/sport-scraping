@@ -1,7 +1,9 @@
 import pandas as pd
 import numpy as np
-import os 
+import os, sys 
 from distutils.util import strtobool
+
+sys.path.append(os.getcwd())
 
 from utility.result_objects import StageResults, Message
 from utility import imgur_robot
@@ -21,10 +23,10 @@ DPI=200
 def create_echelon_plot(
     results: StageResults, 
     message_data: Message,
-    gc: bool = False
+    gc_check: bool = False
     ) -> Message:
 
-    if not gc:
+    if not gc_check:
         data = results.stage_points[-1]
         match_name = data.loc[data['MATCH'].notna(), 'MATCH'].unique()[0]
         match_name = f'Stage_{int(match_name)}' if type(match_name) != 'str' else match_name
@@ -46,9 +48,29 @@ def create_echelon_plot(
     gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.07
     gc['YJITTER'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
 
+    print(gc.head())
+
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
 
     f = plt.figure(figsize=(1028/DPI,720/DPI), dpi=DPI, edgecolor=None)
+
+    ygrid = np.linspace(
+        start=gc['POINTS'].max(), 
+        stop=np.round(gc['POINTS'].min(), -2),
+        num=4)
+
+    plt.hlines(y=ygrid[0], xmin=0.95, xmax=gc['XJITTER'].max()*1.05, colors='k', linestyles='dashed', linewidth=0.5)
+    plt.hlines(y=ygrid[1:], xmin=0.95, xmax=gc['XJITTER'].max()*1.05, colors='k', linestyles=(0, (1, 10)), linewidth=0.5)
+
+    for y in ygrid[1:]:
+        diff = y - gc['POINTS'].max()
+        plt.text(
+            x=gc['XJITTER'].max()*1.05, y=y*.9925, s=f'{diff:.0f}',
+            horizontalalignment='right', verticalalignment='top', size=5.0
+            )
+
+
+    palette = sns.color_palette('colorblind', n_colors=gc.shape[0])
     sns.scatterplot(
         data=gc, 
         x='XJITTER', 
@@ -58,7 +80,8 @@ def create_echelon_plot(
         palette='colorblind',
         ax=plt.gca())
 
-    palette = sns.color_palette('colorblind', n_colors=gc.shape[0])
+
+
     for _, row in gc.iterrows():
 
         text_label = f"{row['COACH']} ({row['POINTS']:.0f} p.)"
@@ -89,9 +112,9 @@ def create_echelon_plot(
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
     ax.spines[['top', 'bottom', 'left', 'right']].set_visible(False)
-    f.savefig(file_name, bbox_inches='tight', orientation='portrait')
-
-    plt.close(f)
+    # f.savefig(file_name, bbox_inches='tight', orientation='portrait')
+    plt.show()
+    # plt.close(f)
 
     if strtobool(os.getenv('IMGUR_UPLOAD')):
         img_url = imgur_robot.upload_to_imgur(file_name)
@@ -218,3 +241,9 @@ def summary_plot_by_draft_round(results_data: StageResults, message_data: Messag
     return message_data
     
     
+if __name__ == '__main__':
+
+    import utility.result_objects as result_objects
+    results_data = result_objects.StageResults()
+    message_data = result_objects.Message()
+    create_echelon_plot(results_data, message_data, gc_check=True)
