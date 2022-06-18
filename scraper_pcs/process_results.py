@@ -69,7 +69,6 @@ def create_echelon_plot(
             horizontalalignment='right', verticalalignment='top', size=5.0
             )
 
-
     palette = sns.color_palette('colorblind', n_colors=gc.shape[0])
     sns.scatterplot(
         data=gc, 
@@ -79,8 +78,6 @@ def create_echelon_plot(
         hue_order=coach_hue_order, 
         palette='colorblind',
         ax=plt.gca())
-
-
 
     for _, row in gc.iterrows():
 
@@ -112,9 +109,9 @@ def create_echelon_plot(
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
     ax.spines[['top', 'bottom', 'left', 'right']].set_visible(False)
-    # f.savefig(file_name, bbox_inches='tight', orientation='portrait')
-    plt.show()
-    # plt.close(f)
+    f.savefig(file_name, bbox_inches='tight', orientation='portrait')
+    # plt.show()
+    plt.close(f)
 
     if strtobool(os.getenv('IMGUR_UPLOAD')):
         img_url = imgur_robot.upload_to_imgur(file_name)
