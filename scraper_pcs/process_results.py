@@ -20,6 +20,113 @@ JITTER_THRESHOLD = 0.1
 FONTSIZE = 8
 DPI=200
 
+
+def create_swarm_plot(
+    results: StageResults,
+    message_data: Message,
+    gc_check: bool = False
+    ):
+
+    if not gc_check:
+        data = results.stage_points[-1]
+        match_name = data.loc[data['MATCH'].notna(), 'MATCH'].unique()[0]
+        match_name = f'Stage_{int(match_name)}' if type(match_name) != 'str' else match_name
+        file_name = os.path.join(PATH_RESULTS, f"{match_name.lower()}_plot.png")
+    else: 
+        data = results.all_points
+        match_name = 'Algemeen Klassement'
+        file_name = os.path.join(PATH_RESULTS, f"{match_name.lower()}_plot.png")
+
+    if 'POSITION' in data.columns:
+        data = data[data['POSITION'] == 'In']
+
+    gc = pd.DataFrame(data.groupby('COACH')['POINTS'].sum().sort_values(ascending=False))
+    gc.reset_index(inplace=True)
+    gc['RELATIVE_POSITION'] = (gc['POINTS'] - gc['POINTS'].min())/(gc['POINTS'].max() - gc['POINTS'].min())
+    gc['ECHELON'] = (gc['RELATIVE_POSITION'].shift(1) > (gc['RELATIVE_POSITION'] + JITTER_THRESHOLD)).cumsum()
+    gc['ECHELON_POSITION'] = gc.groupby('ECHELON').cumcount()
+    gc['ECHELON_MAXPOINTS'] = gc['ECHELON'].map(gc.groupby('ECHELON')['POINTS'].max())
+    gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.07
+    gc['YJITTER'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
+
+    print(gc.head())
+
+    coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
+
+    import itertools
+    mks = itertools.cycle(['o', '^', 'p', 's', 'D', 'P'])
+    markers = [next(mks) for i in gc["COACH"].unique()]
+    print(markers)
+
+    palette = sns.color_palette('colorblind', n_colors=gc.shape[0])
+
+    def jitter(shape, magnitude):
+        return 1+np.random.uniform(magnitude, -magnitude, shape)
+
+    f = plt.figure(figsize=(1028/DPI,720/DPI), dpi=DPI, edgecolor=None)
+
+    ygrid = np.linspace(
+        start=gc['POINTS'].max(), 
+        stop=np.round(gc['POINTS'].min(), -2),
+        num=4)  
+
+    plt.hlines(y=ygrid[0], xmin=0.9, xmax=1.1, colors='k', linestyles='dashed', linewidth=0.5)
+    plt.hlines(y=ygrid[1:], xmin=0.9, xmax=1.1, colors='k', linestyles=(0, (1, 10)), linewidth=0.5)
+    for y in ygrid[1:]:
+        diff = y - gc['POINTS'].max()
+        plt.text(
+            x=1.1, y=y*.9925, s=f'{diff:.0f}',
+            horizontalalignment='right', verticalalignment='top', size=5.0
+            )
+
+    sns.scatterplot(
+        x=jitter(gc['POINTS'].shape, 0.05),
+        y=gc['POINTS'],
+        hue=gc['COACH'],
+        hue_order=coach_hue_order,
+        style=gc['COACH'],
+        markers=markers,
+        style_order=coach_hue_order,
+        palette=palette
+    )
+
+
+    for _, row in gc.iterrows():
+
+        text_label = f"{row['COACH']} ({row['POINTS']:.0f} p.)"
+        idx = np.argmax(row['COACH'] == coach_hue_order)
+        plt.text(
+            x=0.81, 
+            y=row['YJITTER'], 
+            s=text_label, 
+            color=palette[idx], 
+            fontdict={
+                'size':FONTSIZE, 
+                'verticalalignment':'center', 
+                'horizontalalignment':'right'
+                }
+                )
+        plt.scatter(
+            0.825,
+            row['YJITTER'],
+            marker=markers[idx],
+            color=palette[idx],
+            s=20
+        )
+
+    plt.xlim(left=0.6, right=1.15)
+    plt.title(match_name.replace('_', ' '), fontdict={'size':1.25*FONTSIZE, 'weight':'bold'})
+
+    ax = plt.gca()
+    ax.get_legend().remove()
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
+    ax.spines[['top', 'bottom', 'left', 'right']].set_visible(False)
+    # f.savefig(file_name, bbox_inches='tight', orientation='portrait')
+    plt.show()
+    # plt.close(f)
+
+
 def create_echelon_plot(
     results: StageResults, 
     message_data: Message,
@@ -109,9 +216,9 @@ def create_echelon_plot(
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
     ax.spines[['top', 'bottom', 'left', 'right']].set_visible(False)
-    f.savefig(file_name, bbox_inches='tight', orientation='portrait')
-    # plt.show()
-    plt.close(f)
+    # f.savefig(file_name, bbox_inches='tight', orientation='portrait')
+    plt.show()
+    # plt.close(f)
 
     if strtobool(os.getenv('IMGUR_UPLOAD')):
         img_url = imgur_robot.upload_to_imgur(file_name)
@@ -219,7 +326,8 @@ def summary_plot_by_draft_round(results_data: StageResults, message_data: Messag
                 capprops={'alpha':0.5},
                 medianprops={'alpha':0.5}
             )
-    sns.swarmplot(data=df_teams, x='ROUND', y='POINTS', ax=ax, marker='d', size=10)
+    sns.swarmplot(
+        data=df_teams, x='ROUND', y='POINTS', ax=ax, marker='d', size=10)
 
     # Plot outlier names
     for _, row in df_teams[df_teams['OUTLIER']].iterrows():
@@ -243,4 +351,4 @@ if __name__ == '__main__':
     import utility.result_objects as result_objects
     results_data = result_objects.StageResults()
     message_data = result_objects.Message()
-    create_echelon_plot(results_data, message_data, gc_check=True)
+    create_swarm_plot(results_data, message_data, gc_check=True)
