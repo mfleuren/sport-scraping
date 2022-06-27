@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import os, sys 
 from distutils.util import strtobool
+import itertools
 
 sys.path.append(os.getcwd())
 
@@ -19,6 +20,17 @@ PATH_RESULTS = os.path.join(os.getcwd(), 'results', f"{os.getenv('COMPETITION_YE
 JITTER_THRESHOLD = 0.1
 FONTSIZE = 8
 DPI=200
+
+
+def calculate_stage_winners(df: pd.DataFrame) -> pd.Series:
+    """Calculate the number of stage wins by coach."""
+
+    stage_results = df[df['POSITION']=='In'].groupby(['MATCH', 'COACH'])['POINTS'].sum()
+    stage_results_rank = stage_results.groupby('MATCH').rank(method='min', ascending=False).reset_index()
+    wins_by_coach = stage_results_rank[(stage_results_rank['POINTS'] == 1)].groupby('COACH')['MATCH'].count()
+    print(wins_by_coach)
+
+    return wins_by_coach
 
 
 def create_swarm_plot(
@@ -49,15 +61,9 @@ def create_swarm_plot(
     gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.07
     gc['YJITTER'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
 
-    print(gc.head())
-
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
-
-    import itertools
     mks = itertools.cycle(['o', '^', 'p', 's', 'D', 'P'])
     markers = [next(mks) for i in gc["COACH"].unique()]
-    print(markers)
-
     palette = sns.color_palette('colorblind', n_colors=gc.shape[0])
 
     def jitter(shape, magnitude):
@@ -65,11 +71,12 @@ def create_swarm_plot(
 
     f = plt.figure(figsize=(1028/DPI,720/DPI), dpi=DPI, edgecolor=None)
 
+    # Grid and grid labels
     ygrid = np.linspace(
         start=gc['POINTS'].max(), 
         stop=np.round(gc['POINTS'].min(), -2),
         num=4)  
-
+    print(ygrid)
     plt.hlines(y=ygrid[0], xmin=0.9, xmax=1.1, colors='k', linestyles='dashed', linewidth=0.5)
     plt.hlines(y=ygrid[1:], xmin=0.9, xmax=1.1, colors='k', linestyles=(0, (1, 10)), linewidth=0.5)
     for y in ygrid[1:]:
@@ -79,21 +86,18 @@ def create_swarm_plot(
             horizontalalignment='right', verticalalignment='top', size=5.0
             )
 
-    sns.scatterplot(
-        x=jitter(gc['POINTS'].shape, 0.05),
-        y=gc['POINTS'],
-        hue=gc['COACH'],
-        hue_order=coach_hue_order,
-        style=gc['COACH'],
-        markers=markers,
-        style_order=coach_hue_order,
-        palette=palette
-    )
+    # Stage winners
+    if gc_check:
+        stage_winners = calculate_stage_winners(data)
+        gc = gc.join(stage_winners, on='COACH').rename({'MATCH':'WINS'}, axis=1)
+        gc['WINS'].fillna(0, inplace=True)
+        gc['WINS'] = gc['WINS'].astype('int')
+    else:
+        gc['WINS'] = 0
 
-
+    # Coach labels
     for _, row in gc.iterrows():
-
-        text_label = f"{row['COACH']} ({row['POINTS']:.0f} p.)"
+        text_label = f"{'+' * row['WINS']} {row['COACH']} ({row['POINTS']:.0f} p.)"
         idx = np.argmax(row['COACH'] == coach_hue_order)
         plt.text(
             x=0.81, 
@@ -113,6 +117,18 @@ def create_swarm_plot(
             color=palette[idx],
             s=20
         )
+
+    # Actual scatterplot
+    sns.scatterplot(
+        x=jitter(gc['POINTS'].shape, 0.05),
+        y=gc['POINTS'],
+        hue=gc['COACH'],
+        hue_order=coach_hue_order,
+        style=gc['COACH'],
+        markers=markers,
+        style_order=coach_hue_order,
+        palette=palette
+    )
 
     plt.xlim(left=0.6, right=1.15)
     plt.title(match_name.replace('_', ' '), fontdict={'size':1.25*FONTSIZE, 'weight':'bold'})
