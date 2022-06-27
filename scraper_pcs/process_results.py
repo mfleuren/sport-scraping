@@ -72,11 +72,11 @@ def create_swarm_plot(
     f = plt.figure(figsize=(1028/DPI,720/DPI), dpi=DPI, edgecolor=None)
 
     # Grid and grid labels
-    ygrid = np.linspace(
-        start=gc['POINTS'].max(), 
-        stop=np.round(gc['POINTS'].min(), -2),
-        num=4)  
-    print(ygrid)
+    steps_to_choose_from = [200, 150, 100, 75, 50, 40, 30, 25, 20, 10]
+    diffpart = (gc['POINTS'].max() - gc['POINTS'].min()) / 4
+    diffrel = [(diffpart / val) for val in steps_to_choose_from]
+    chosen_step = steps_to_choose_from[next(x[0] for x in enumerate(diffrel) if x[1] > 1)]
+    ygrid = np.arange(gc['POINTS'].max(), gc['POINTS'].min(), step=-chosen_step)
     plt.hlines(y=ygrid[0], xmin=0.9, xmax=1.1, colors='k', linestyles='dashed', linewidth=0.5)
     plt.hlines(y=ygrid[1:], xmin=0.9, xmax=1.1, colors='k', linestyles=(0, (1, 10)), linewidth=0.5)
     for y in ygrid[1:]:
