@@ -137,7 +137,7 @@ def process_substitutions(results_data: StageResults, message: Message) -> Tuple
     (2) Set Position to <In> for first rider on the bench (<Sub> status)
     """
 
-    message.substitution_list.append(f"[b]Wissels etappe {results_data.stage_results[-1]['MATCH'][0]}[/b]")
+    message.substitution_list.append(f"[b]Wissels etappe {results_data.stage_results[-1]['MATCH'][0]:.0f}[/b]")
     message.substitution_list.append('[table][th]Coach[/th][th]Renner IN[/th][th]Renner UIT[/th]')   
 
     results_data = determine_stage_dropouts(results_data)
