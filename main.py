@@ -1,6 +1,5 @@
 import os
 from scraper_pcs.matchformats import spring_classics, grand_tour
-from utility import result_objects
 
 def main() -> None:
     

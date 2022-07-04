@@ -41,6 +41,7 @@ def create_swarm_plot(
 
     if not gc_check:
         data = results.stage_points[-1]
+        print(data)
         match_name = data.loc[data['MATCH'].notna(), 'MATCH'].unique()[0]
         match_name = f'Stage_{int(match_name)}' if type(match_name) != 'str' else match_name
         file_name = os.path.join(PATH_RESULTS, f"{match_name.lower()}_plot.png")
@@ -61,6 +62,7 @@ def create_swarm_plot(
     gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.07
     gc['YJITTER'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
 
+    print(gc.head())
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
     mks = itertools.cycle(['o', '^', 'p', 's', 'D', 'P'])
     markers = [next(mks) for i in gc["COACH"].unique()]
@@ -72,7 +74,7 @@ def create_swarm_plot(
     f = plt.figure(figsize=(1028/DPI,720/DPI), dpi=DPI, edgecolor=None)
 
     # Grid and grid labels
-    steps_to_choose_from = [200, 150, 100, 75, 50, 40, 30, 25, 20, 10]
+    steps_to_choose_from = [200, 150, 100, 75, 50, 40, 30, 25, 20, 10, 8, 6, 4, 2]
     diffpart = (gc['POINTS'].max() - gc['POINTS'].min()) / 4
     diffrel = [(diffpart / val) for val in steps_to_choose_from]
     chosen_step = steps_to_choose_from[next(x[0] for x in enumerate(diffrel) if x[1] > 1)]
@@ -138,9 +140,17 @@ def create_swarm_plot(
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
     ax.spines[['top', 'bottom', 'left', 'right']].set_visible(False)
-    # f.savefig(file_name, bbox_inches='tight', orientation='portrait')
-    plt.show()
-    # plt.close(f)
+    f.savefig(file_name, bbox_inches='tight', orientation='portrait')
+    # plt.show()
+    plt.close(f)
+
+    if strtobool(os.getenv('IMGUR_UPLOAD')):
+        img_url = imgur_robot.upload_to_imgur(file_name)
+        message_data.img_urls.append(img_url)
+    else:
+        print(f"No image uploaded; IMGUR_UPLOAD set to {os.getenv('IMGUR_UPLOAD')}")
+
+    return message_data
 
 
 def create_echelon_plot(
@@ -232,9 +242,9 @@ def create_echelon_plot(
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
     ax.spines[['top', 'bottom', 'left', 'right']].set_visible(False)
-    # f.savefig(file_name, bbox_inches='tight', orientation='portrait')
-    plt.show()
-    # plt.close(f)
+    f.savefig(file_name, bbox_inches='tight', orientation='portrait')
+    # plt.show()
+    plt.close(f)
 
     if strtobool(os.getenv('IMGUR_UPLOAD')):
         img_url = imgur_robot.upload_to_imgur(file_name)
