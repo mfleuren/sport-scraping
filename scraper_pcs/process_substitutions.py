@@ -98,18 +98,19 @@ def make_substitutions(results_data: StageResults, message: Message) -> Tuple[St
             if position_out == 'In':
                 results_data = set_rider_to_position_out(results_data, coach, rider_out) 
 
-                if coach_team_subs is not None:
+                print(coach_team_subs)
+
+                if coach_team_subs.shape[0] > 0:
                     row_in = coach_team_subs.iloc[0]
                     rider_in = row_in['RIDER']
+                    message.substitution_list.append(f'[tr][td]{coach}[/td][td]{rider_out}[/td][td]{rider_in}[/td][/tr]')
+                else:
+                    rider_in = None
+                    message.substitution_list.append(f'[tr][td]{coach}[/td][td]{rider_out}[/td][td]-[/td][/tr]')
 
-                    if rider_in is not None:
-                        message.substitution_list.append(f'[tr][td]{coach}[/td][td]{rider_out}[/td][td]{rider_in}[/td][/tr]')
-                    else:
-                        message.substitution_list.append(f'[tr][td]{coach}[/td][td]{rider_out}[/td][td]-[/td][/tr]')
-
-                    sub_in_mask = (results_data.teams['COACH'] == coach) & (results_data.teams['RIDER'] == rider_in)
-                    results_data.teams.loc[sub_in_mask, 'POSITION'] = 'In'
-                    results_data.teams.loc[sub_in_mask, 'ROUND_IN'] = stage
+                sub_in_mask = (results_data.teams['COACH'] == coach) & (results_data.teams['RIDER'] == rider_in)
+                results_data.teams.loc[sub_in_mask, 'POSITION'] = 'In'
+                results_data.teams.loc[sub_in_mask, 'ROUND_IN'] = stage
 
                 # print(f"Rider {rider_out} in active team; Subsitution: {rider_in}")
 
