@@ -76,7 +76,6 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
 
     return all_result_tables
         
-    
 
 def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFrame:
     """Return a cleaned table with results."""

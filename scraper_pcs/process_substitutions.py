@@ -125,9 +125,6 @@ def make_substitutions(results_data: StageResults, message: Message) -> Tuple[St
                 # Don't perform any action - rider is already out (f.i. due to hundred percent rule).
                 pass
 
-    if len(total_n_substitutions) == 0:
-        message.substitution_list.append('[tr][td]Geen wissels.[/td][td][/td][td][/td][/tr]')
-
     return results_data, message
 
 
@@ -147,13 +144,16 @@ def process_substitutions(results_data: StageResults, message: Message) -> Tuple
     n_coaches = len(results_data.teams['COACH'].unique())
     rider_count = results_data.teams.loc[results_data.teams['POSITION']=='In'].groupby('RIDER')['COACH'].count()
 
-    while any(rider_count == n_coaches):
+    if any(rider_count == n_coaches):
+        while any(rider_count == n_coaches):
 
-        results_data = calculate_hundredpercentrule(results_data)
-        results_data, message = make_substitutions(results_data, message)
+            results_data = calculate_hundredpercentrule(results_data)
+            results_data, message = make_substitutions(results_data, message)
 
-        # Recalculate rider_count
-        rider_count = results_data.teams.loc[results_data.teams['POSITION']=='In'].groupby('RIDER')['COACH'].count()
+            # Recalculate rider_count
+            rider_count = results_data.teams.loc[results_data.teams['POSITION']=='In'].groupby('RIDER')['COACH'].count()
+    else:
+        message.substitution_list.append('[tr][td]Geen wissels.[/td][td][/td][td][/td][/tr]')
 
     message.substitution_list.append('[/table]')
 

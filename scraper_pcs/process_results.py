@@ -262,7 +262,7 @@ def create_teams_message(data: pd.DataFrame) -> str:
         data.loc[data['ROUND_OUT'] <= data['MATCH'], 'POINTS_STR'] = 'X'
         data.loc[(data['ROUND_IN'] > data['MATCH']) | data['ROUND_IN'].isna(), 'POINTS_STR'] = 'S'
     dfg1 = data.groupby(['COACH', 'RIDER'], as_index=False)['POINTS_STR'].apply(lambda x: '-'.join(x))
-    dfg2 = data.groupby(['COACH', 'RIDER'])['POINTS'].sum()
+    dfg2 = data[data['POSITION']=='In'].groupby(['COACH', 'RIDER'])['POINTS'].sum()
     dfg = dfg1.join(dfg2, on=['COACH', 'RIDER'])
 
     message = []
@@ -285,6 +285,7 @@ def list_best_coaches(data: pd.DataFrame) -> list:
 
     ranked_data = data.groupby('COACH')['POINTS'].sum().sort_values(ascending=False)
     best_coaches = ranked_data.head(3).index.to_list()
+    print(f'Best coaches: {best_coaches}')
 
     return best_coaches
 
