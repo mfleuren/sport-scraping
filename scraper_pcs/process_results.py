@@ -181,8 +181,6 @@ def create_echelon_plot(
     gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.07
     gc['YJITTER'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
 
-    print(gc.head())
-
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
 
     f = plt.figure(figsize=(1028/DPI,720/DPI), dpi=DPI, edgecolor=None)

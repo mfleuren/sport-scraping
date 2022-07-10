@@ -98,8 +98,6 @@ def make_substitutions(results_data: StageResults, message: Message) -> Tuple[St
             if position_out == 'In':
                 results_data = set_rider_to_position_out(results_data, coach, rider_out) 
 
-                print(coach_team_subs)
-
                 if coach_team_subs.shape[0] > 0:
                     row_in = coach_team_subs.iloc[0]
                     rider_in = row_in['RIDER']
@@ -152,6 +150,7 @@ def process_substitutions(results_data: StageResults, message: Message) -> Tuple
 
             # Recalculate rider_count
             rider_count = results_data.teams.loc[results_data.teams['POSITION']=='In'].groupby('RIDER')['COACH'].count()
+        pass
     else:
         message.substitution_list.append('[tr][td]Geen wissels.[/td][td][/td][td][/td][/tr]')
 
