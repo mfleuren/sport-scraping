@@ -142,18 +142,19 @@ def process_substitutions(results_data: StageResults, message: Message) -> Tuple
     n_coaches = len(results_data.teams['COACH'].unique())
     rider_count = results_data.teams.loc[results_data.teams['POSITION']=='In'].groupby('RIDER')['COACH'].count()
 
-    if any(rider_count == n_coaches):
-        while any(rider_count == n_coaches):
+    while any(rider_count == n_coaches):
 
-            results_data = calculate_hundredpercentrule(results_data)
-            results_data, message = make_substitutions(results_data, message)
+        results_data = calculate_hundredpercentrule(results_data)
+        results_data, message = make_substitutions(results_data, message)
 
-            # Recalculate rider_count
-            rider_count = results_data.teams.loc[results_data.teams['POSITION']=='In'].groupby('RIDER')['COACH'].count()
-        pass
-    else:
-        message.substitution_list.append('[tr][td]Geen wissels.[/td][td][/td][td][/td][/tr]')
+        # Recalculate rider_count
+        rider_count = results_data.teams.loc[results_data.teams['POSITION']=='In'].groupby('RIDER')['COACH'].count()
 
+    # Add "No Substitutions"-line if there are no substitutions
+    if len(message.substitution_list) == 2:
+        message.substitution_list.append('[tr][td]Geen wissels.[/td][td][/td][td][/td][/tr]')  
+        
+    # Close table
     message.substitution_list.append('[/table]')
 
     return results_data, message
