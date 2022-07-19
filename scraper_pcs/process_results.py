@@ -262,6 +262,7 @@ def create_teams_message(data: pd.DataFrame) -> str:
     dfg1 = data.groupby(['COACH', 'RIDER'], as_index=False)['POINTS_STR'].apply(lambda x: '-'.join(x))
     dfg2 = data[data['POSITION']=='In'].groupby(['COACH', 'RIDER'])['POINTS'].sum()
     dfg = dfg1.join(dfg2, on=['COACH', 'RIDER'])
+    dfg['POINTS_STR'] = dfg['POINTS_STR'].replace('nan', '0')
 
     message = []
     message.append('[b]Overzicht teams en punten per renner:[/b][spoiler]')
