@@ -56,16 +56,12 @@ def create_swarm_plot(
     gc = pd.DataFrame(data.groupby('COACH')['POINTS'].sum().sort_values(ascending=False))
     gc.reset_index(inplace=True)
     gc['RELATIVE_POSITION'] = (gc['POINTS'] - gc['POINTS'].min())/(gc['POINTS'].max() - gc['POINTS'].min())
-    gc['ECHELON'] = (gc['RELATIVE_POSITION'].shift(1) > (gc['RELATIVE_POSITION'] + JITTER_THRESHOLD)).cumsum()
-    gc['ECHELON_POSITION'] = gc.groupby('ECHELON').cumcount()
-    gc['ECHELON_MAXPOINTS'] = gc['ECHELON'].map(gc.groupby('ECHELON')['POINTS'].max())
-    gc['XJITTER'] = 1 + gc['ECHELON_POSITION'] * 0.07
-    gc['YJITTER'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
+    gc['YPOSITION_TEXT'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
 
     print(gc.head())
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
     mks = itertools.cycle(['o', '^', 'p', 's', 'D', 'P'])
-    markers = [next(mks) for i in gc["COACH"].unique()]
+    markers = [next(mks) for _ in gc["COACH"].unique()]
     palette = sns.color_palette('colorblind', n_colors=gc.shape[0])
 
     def jitter(shape, magnitude):
@@ -103,7 +99,7 @@ def create_swarm_plot(
         idx = np.argmax(row['COACH'] == coach_hue_order)
         plt.text(
             x=0.81, 
-            y=row['YJITTER'], 
+            y=row['YPOSITION_TEXT'], 
             s=text_label, 
             color=palette[idx], 
             fontdict={
@@ -114,7 +110,7 @@ def create_swarm_plot(
                 )
         plt.scatter(
             0.825,
-            row['YJITTER'],
+            row['YPOSITION_TEXT'],
             marker=markers[idx],
             color=palette[idx],
             s=20
@@ -122,7 +118,7 @@ def create_swarm_plot(
 
     # Actual scatterplot
     sns.scatterplot(
-        x=jitter(gc['POINTS'].shape, 0.05),
+        x=jitter(gc['POINTS'].shape, 0.033),
         y=gc['POINTS'],
         hue=gc['COACH'],
         hue_order=coach_hue_order,
@@ -262,7 +258,7 @@ def create_teams_message(data: pd.DataFrame) -> str:
     dfg1 = data.groupby(['COACH', 'RIDER'], as_index=False)['POINTS_STR'].apply(lambda x: '-'.join(x))
     dfg2 = data[data['POSITION']=='In'].groupby(['COACH', 'RIDER'])['POINTS'].sum()
     dfg = dfg1.join(dfg2, on=['COACH', 'RIDER'])
-    dfg['POINTS_STR'] = dfg['POINTS_STR'].replace('nan', '0')
+    dfg['POINTS'] = dfg['POINTS'].fillna(0)
 
     message = []
     message.append('[b]Overzicht teams en punten per renner:[/b][spoiler]')
