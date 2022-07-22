@@ -98,18 +98,17 @@ def make_substitutions(results_data: StageResults, message: Message) -> Tuple[St
             if position_out == 'In':
                 results_data = set_rider_to_position_out(results_data, coach, rider_out) 
 
-                if coach_team_subs is not None:
+                if coach_team_subs.shape[0] > 0:
                     row_in = coach_team_subs.iloc[0]
                     rider_in = row_in['RIDER']
+                    message.substitution_list.append(f'[tr][td]{coach}[/td][td]{rider_out}[/td][td]{rider_in}[/td][/tr]')
+                else:
+                    rider_in = None
+                    message.substitution_list.append(f'[tr][td]{coach}[/td][td]{rider_out}[/td][td]-[/td][/tr]')
 
-                    if rider_in is not None:
-                        message.substitution_list.append(f'[tr][td]{coach}[/td][td]{rider_out}[/td][td]{rider_in}[/td][/tr]')
-                    else:
-                        message.substitution_list.append(f'[tr][td]{coach}[/td][td]{rider_out}[/td][td]-[/td][/tr]')
-
-                    sub_in_mask = (results_data.teams['COACH'] == coach) & (results_data.teams['RIDER'] == rider_in)
-                    results_data.teams.loc[sub_in_mask, 'POSITION'] = 'In'
-                    results_data.teams.loc[sub_in_mask, 'ROUND_IN'] = stage
+                sub_in_mask = (results_data.teams['COACH'] == coach) & (results_data.teams['RIDER'] == rider_in)
+                results_data.teams.loc[sub_in_mask, 'POSITION'] = 'In'
+                results_data.teams.loc[sub_in_mask, 'ROUND_IN'] = stage
 
                 # print(f"Rider {rider_out} in active team; Subsitution: {rider_in}")
 
@@ -124,9 +123,6 @@ def make_substitutions(results_data: StageResults, message: Message) -> Tuple[St
                 # Don't perform any action - rider is already out (f.i. due to hundred percent rule).
                 pass
 
-    if len(total_n_substitutions) == 0:
-        message.substitution_list.append('[tr][td]Geen wissels.[/td][td][/td][td][/td][/tr]')
-
     return results_data, message
 
 
@@ -137,7 +133,7 @@ def process_substitutions(results_data: StageResults, message: Message) -> Tuple
     (2) Set Position to <In> for first rider on the bench (<Sub> status)
     """
 
-    message.substitution_list.append(f"[b]Wissels etappe {results_data.stage_results[-1]['MATCH'][0]}[/b]")
+    message.substitution_list.append(f"[b]Wissels etappe {results_data.stage_results[-1]['MATCH'][0]:.0f}[/b]")
     message.substitution_list.append('[table][th]Coach[/th][th]Renner IN[/th][th]Renner UIT[/th]')   
 
     results_data = determine_stage_dropouts(results_data)
@@ -154,6 +150,11 @@ def process_substitutions(results_data: StageResults, message: Message) -> Tuple
         # Recalculate rider_count
         rider_count = results_data.teams.loc[results_data.teams['POSITION']=='In'].groupby('RIDER')['COACH'].count()
 
+    # Add "No Substitutions"-line if there are no substitutions
+    if len(message.substitution_list) == 2:
+        message.substitution_list.append('[tr][td]Geen wissels.[/td][td][/td][td][/td][/tr]')  
+        
+    # Close table
     message.substitution_list.append('[/table]')
 
     return results_data, message

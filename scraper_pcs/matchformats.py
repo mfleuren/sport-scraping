@@ -67,15 +67,16 @@ def grand_tour():
         results_data = calculate_match_points(results_data, stage_race=True)
         results_data, message_data = process_substitutions(results_data, message_data)
         results_data, message_data = calculate_stage_points(results_data, message_data)
-        message_data = process_results.create_echelon_plot(results_data, message_data, gc=False)
+        message_data = process_results.create_swarm_plot(results_data, message_data, gc_check=False)
     
     if len(matches_to_scrape) > 0:
         print("Processing general classification.")
         results_data.append_stages_to_existing_data()
 
-    message_data.coach_mentions.append(process_results.list_best_coaches(results_data.all_points))
-    message_data = process_results.create_echelon_plot(results_data, message_data, gc=True)
+    message_data.coach_mentions.append(process_results.list_best_coaches(results_data.all_points[results_data.all_points['POSITION'] == 'In']))
+    message_data = process_results.create_swarm_plot(results_data, message_data, gc_check=True)
     message_data = create_teams_plot(results_data, message_data)
+    print(message_data)
 
     single_message = process_results.create_forum_message(results_data, message_data)
     print(single_message)
