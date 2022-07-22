@@ -146,4 +146,9 @@ final_result = determine_winning_team(final_score_home, final_score_away)
 
 lineup_home, lineup_away = extract_team_lineup(html_string)
 
+# TODO: Add goals to team lineup
+# TODO: Add cards to team lineup
+# TODO: Add penalties to team lineup
+# TODO: Add win/loss to team lineup
+
 
