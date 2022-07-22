@@ -75,7 +75,11 @@ def parse_html_table(soup: BeautifulSoup) -> pd.DataFrame:
     return pd.read_html(str(soup), encoding='utf-8')[0]
 
 
-def find_replacements(subs_df: pd.DataFrame, base_df: pd.DataFrame) -> pd.DataFrame:
+def find_substitutions(subs_df: pd.DataFrame, base_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Combine DataFrame with substitutions with the DataFrame containing starting 11.
+    Determine minutes played for each player.
+    """
 
     subs_df_split = (subs_df['Speler'].str.split('([\w\s\.]+) for ([\w\s\.]+) ([0-9]+)\'', expand=True))
     all_subs = subs_df_split[1].fillna(subs_df_split[0]).rename('Speler')
@@ -109,13 +113,15 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str) -> pd.DataFr
     subs = parse_html_table(soup_subs)
     subs['Link'] = find_all_links_in_table(soup_subs)
 
-    full_lineup = find_replacements(subs, lineups)
+    full_lineup = find_substitutions(subs, lineups)
 
     return full_lineup
     
 
 def extract_team_lineup(html_string: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """Extract the full team lineups and minutes played for home and away teams."""
+    """
+    Extract the full team lineups and minutes played for home and away teams.
+    """
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_lineups = soup.find_all('div', class_='combined-lineups-container')
 
