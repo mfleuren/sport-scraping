@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 from lxml import html
 from bs4 import BeautifulSoup
+from bs4.element import ResultSet
 from typing import List, Tuple
 import re
 import codecs
@@ -95,39 +96,34 @@ def find_replacements(subs_df: pd.DataFrame, base_df: pd.DataFrame) -> pd.DataFr
     return combined_lineup
 
 
+def extract_lineup_from_html(soup_lineups: ResultSet, position:str) -> pd.DataFrame:
+    """
+    Extract the full team lineup from a BeautifulSoup Resultset. 
+    Position indicates whether to process the left- or right container.
+    """
+    soup_lineup = soup_lineups[0].find('div', class_='container '+position)
+    lineups = parse_html_table(soup_lineup)
+    lineups['Link'] = find_all_links_in_table(soup_lineup)
 
+    soup_subs = soup_lineups[1].find('div', class_='container '+position)
+    subs = parse_html_table(soup_subs)
+    subs['Link'] = find_all_links_in_table(soup_subs)
 
+    full_lineup = find_replacements(subs, lineups)
+
+    return full_lineup
     
-
 
 def extract_team_lineup(html_string: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """Extract the full team lineups and minutes played for home and away teams."""
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_lineups = soup.find_all('div', class_='combined-lineups-container')
-    soup_lineup_home = soup_lineups[0].find('div', class_='container left')
-    soup_lineup_away = soup_lineups[0].find('div', class_='container right')
 
-    soup_subs_home = soup_lineups[1].find('div', class_='container left')
-    soup_subs_away = soup_lineups[1].find('div', class_='container right')
-
-    lineups_home = parse_html_table(soup_lineup_home)
-    lineups_home['Link'] = find_all_links_in_table(soup_lineup_home)
-
-    lineups_away = parse_html_table(soup_lineup_away)
-    lineups_away['Link'] = find_all_links_in_table(soup_lineup_away)
-
-    subs_home = parse_html_table(soup_subs_home)
-    subs_home['Link'] = find_all_links_in_table(soup_subs_home)
-    
-    subs_away = parse_html_table(soup_subs_away)
-    subs_away['Link'] = find_all_links_in_table(soup_subs_away)
-
-    full_lineup_home = find_replacements(subs_home, lineups_home)
-    full_lineup_away = find_replacements(subs_away, lineups_away)
-
-    print(full_lineup_home, full_lineup_away)
-
+    full_lineup_home = extract_lineup_from_html(soup_lineups, 'left')
+    full_lineup_away = extract_lineup_from_html(soup_lineups, 'right')
 
     return full_lineup_home, full_lineup_away
+    
 
 url = 'https://nl.soccerway.com/matches/2022/05/15/netherlands/eredivisie/sbv-vitesse/afc-ajax/3512762/'
 filepath = 'test_html.txt' 
@@ -144,6 +140,4 @@ final_result = determine_winning_team(final_score_home, final_score_away)
 
 lineup_home, lineup_away = extract_team_lineup(html_string)
 
-# print(lineup_home)
 
-# TODO: Subs
