@@ -90,8 +90,6 @@ def find_substitutions(subs_df: pd.DataFrame, base_df: pd.DataFrame) -> pd.DataF
     players_out_minutes_played = subs_df_split[3].fillna(90).astype('int').rename('Minuten_Gespeeld')
     players_out_df = pd.concat([players_out, players_out_minutes_played], axis=1).dropna()
 
-    print(players_out_df)
-
     base_df = base_df.join(players_out_df.set_index('Speler'), on='Speler')
     base_df['Minuten_Gespeeld'].fillna(90, inplace=True)
     base_df['Minuten_Gespeeld'] = base_df['Minuten_Gespeeld'].astype('int')
