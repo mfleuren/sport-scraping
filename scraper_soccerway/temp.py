@@ -3,7 +3,7 @@ import pandas as pd
 import requests
 from lxml import html
 from bs4 import BeautifulSoup
-from bs4.element import ResultSet
+from bs4.element import ResultSet, Tag
 from typing import List, Tuple
 import re
 import codecs
@@ -116,18 +116,57 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str) -> pd.DataFr
     return full_lineup
     
 
-def extract_team_lineup(html_string: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
+def extract_team_lineup(html_string: str) -> pd.DataFrame:
     """
     Extract the full team lineups and minutes played for home and away teams.
+    Return as a single DataFrame with Home_Team as a boolean column to indicate which team played at home.
     """
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_lineups = soup.find_all('div', class_='combined-lineups-container')
 
     full_lineup_home = extract_lineup_from_html(soup_lineups, 'left')
     full_lineup_away = extract_lineup_from_html(soup_lineups, 'right')
+    full_lineup = (pd
+                   .merge(full_lineup_home, full_lineup_away, how='outer', indicator='Home_Team')
+                   .replace({'Home_Team':{'left_only':True, 'right_only':False}})
+                  )
 
-    return full_lineup_home, full_lineup_away
+    return full_lineup
     
+
+def determine_scorers_assisters(html_string: str) -> Tuple[List, List]:
+    """Determine who scored and who assisted goals, return as a Tuple of lists containing the url's of the player pages."""
+
+    soup = BeautifulSoup(html_string, 'html.parser')
+    all_scorers_list = soup.find('ul', {'class':'scorer-info'}).findChildren('span', {'class':'scorer'})
+
+    scorer_urls = []
+    assister_urls = [] 
+
+    for lineitem in all_scorers_list:
+        for item in lineitem.contents:
+            if type(item) == Tag:
+                if 'assist' in str(item):
+                    assister = re.findall('<a href="(.+?)">', str(item))
+                    if assister: assister_urls.append(assister[0])
+                else:
+                    scorer = re.findall('<a href="(.+?)">', str(item))
+                    if scorer: scorer_urls.append(scorer[0])
+                        
+    return scorer_urls, assister_urls
+
+
+def append_scorers_assisters(html_string: str, lineups: pd.DataFrame) -> pd.DataFrame:
+    """Append the lineups with information on who scored and assisted with goals."""
+    
+    # Starting state: no goals/asissts
+    lineups[['Goal', 'Assist']] = 0
+    
+    scorers, assisters = determine_scorers_assisters(html_string)
+    for scorer in scorers: lineups.loc[scorer == lineups['Link'], 'Goal'] += 1 
+    for assister in assisters: lineups.loc[assister == lineups['Link'], 'Assist'] += 1 
+        
+    return lineups
 
 url = 'https://nl.soccerway.com/matches/2022/05/15/netherlands/eredivisie/sbv-vitesse/afc-ajax/3512762/'
 filepath = 'test_html.txt' 
@@ -142,9 +181,12 @@ final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
 final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
 final_result = determine_winning_team(final_score_home, final_score_away)
 
-lineup_home, lineup_away = extract_team_lineup(html_string)
+lineups = extract_team_lineup(html_string)
+lineups = append_scorers_assisters(html_string, lineups)
 
-# TODO: Add goals to team lineup
+print(lineups)
+
+
 # TODO: Add cards to team lineup
 # TODO: Add penalties to team lineup
 # TODO: Add win/loss to team lineup
