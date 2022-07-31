@@ -72,7 +72,13 @@ def find_all_links_in_table(soup: BeautifulSoup) -> List:
 
 
 def parse_html_table(soup: BeautifulSoup) -> pd.DataFrame:
-    return pd.read_html(str(soup), encoding='utf-8')[0]
+    """Parse html table to dataframe. Remove column Kaarten if it exists."""
+    
+    df = pd.read_html(str(soup), encoding='utf-8')[0]
+    if 'Kaarten' in df.columns:
+        df.drop('Kaarten', axis=1, inplace=True)
+    
+    return df
 
 
 def find_substitutions(subs_df: pd.DataFrame, base_df: pd.DataFrame) -> pd.DataFrame:
@@ -84,7 +90,7 @@ def find_substitutions(subs_df: pd.DataFrame, base_df: pd.DataFrame) -> pd.DataF
     subs_df_split = (subs_df['Speler'].str.split('([\w\s\.]+) for ([\w\s\.]+) ([0-9]+)\'', expand=True))
     all_subs = subs_df_split[1].fillna(subs_df_split[0]).rename('Speler')
     sub_minutes_played = 90-subs_df_split[3].fillna(90).astype('int').rename('Minuten_Gespeeld')
-    subs_df2 = pd.concat([subs_df['#'], all_subs, subs_df[['Kaarten', 'Link']], sub_minutes_played], axis=1)
+    subs_df2 = pd.concat([subs_df['#'], all_subs, subs_df['Link'], sub_minutes_played], axis=1)
 
     players_out = subs_df_split[2].rename('Speler')
     players_out_minutes_played = subs_df_split[3].fillna(90).astype('int').rename('Minuten_Gespeeld')
