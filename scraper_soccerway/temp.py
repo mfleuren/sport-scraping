@@ -258,8 +258,8 @@ print(lineups.columns)
 print(lineups)
 
 
-# TODO: Add cards to team lineup
-# TODO: Add penalties to team lineup
 # TODO: Add win/loss to team lineup
+# TODO: Add penalty stopped to goalkeeper
+# TODO: calculate minutes played for subs and players with red cards
 
 
