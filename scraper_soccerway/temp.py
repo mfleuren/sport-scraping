@@ -134,13 +134,12 @@ def extract_team_lineup(html_string: str) -> pd.DataFrame:
     return full_lineup
     
 
-def determine_scorers_assisters(html_string: str) -> Tuple[List, List]:
-    """Determine who scored and who assisted goals, return as a Tuple of lists containing the url's of the player pages."""
+def determine_assisters(html_string: str) -> List[str]:
+    """Determine who assisted goals, return as a list containing the url's of the player pages."""
 
     soup = BeautifulSoup(html_string, 'html.parser')
     all_scorers_list = soup.find('ul', {'class':'scorer-info'}).findChildren('span', {'class':'scorer'})
 
-    scorer_urls = []
     assister_urls = [] 
 
     for lineitem in all_scorers_list:
@@ -149,22 +148,86 @@ def determine_scorers_assisters(html_string: str) -> Tuple[List, List]:
                 if 'assist' in str(item):
                     assister = re.findall('<a href="(.+?)">', str(item))
                     if assister: assister_urls.append(assister[0])
-                else:
-                    scorer = re.findall('<a href="(.+?)">', str(item))
-                    if scorer: scorer_urls.append(scorer[0])
                         
-    return scorer_urls, assister_urls
+    return assister_urls
 
 
-def append_scorers_assisters(html_string: str, lineups: pd.DataFrame) -> pd.DataFrame:
-    """Append the lineups with information on who scored and assisted with goals."""
+def append_assisters(html_string: str, lineups: pd.DataFrame) -> pd.DataFrame:
+    """Append the lineups with information on who assisted with goals."""
     
-    # Starting state: no goals/asissts
-    lineups[['Goal', 'Assist']] = 0
+    # Starting state: no asissts
+    lineups['Assist'] = 0
     
-    scorers, assisters = determine_scorers_assisters(html_string)
-    for scorer in scorers: lineups.loc[scorer == lineups['Link'], 'Goal'] += 1 
+    assisters = determine_assisters(html_string)
     for assister in assisters: lineups.loc[assister == lineups['Link'], 'Assist'] += 1 
+        
+    return lineups
+
+
+def return_href_after_image_search(link_list: List[str], img_name: str, row: Tag, text: Tag):
+    """Appends a list with the respective player href link."""
+    
+    result = re.findall(img_name, str(text))
+    for _ in range(len(result)):
+        link_list.append(row.find('td', {'class':'player large-link'}).a['href'])
+
+
+def return_minute_after_image_search(link_list: list[int], img_name: str, row: Tag, text: Tag):
+    """Append a list with the minute a certain action is performed."""
+    
+    result = re.findall(f'.*{img_name}.+/> ([0-9]+)\'+', str(text))
+    if result:
+        link_list.append(int(result[0]))
+           
+    
+def extract_match_events_from_lineup_container(
+    html_string: str
+    ) -> Tuple[List[str], List[str], List[str], List[str], List[str], List[str], List[int]]:
+    """Extract important match events from the HTML, return as a tuple of lists"""
+
+    soup = BeautifulSoup(html_string, 'html.parser')
+    soup_lineups = soup.find_all('div', class_='combined-lineups-container')
+    
+    # Pre-allocate empty lists
+    cards_red = []
+    cards_yellow = []
+    goals_general = []
+    goals_penalty = []
+    goals_own = []
+    penalty_missed = []
+    minutes_red_card = []
+
+    for result in soup_lineups:
+        rows = result.find_all('tr')
+        for row in rows:
+            for child in row.children:
+                if type(child) == Tag:
+
+                    return_href_after_image_search(cards_yellow, '/YC.png', row, child)
+                    return_href_after_image_search(cards_red, '/Y2C.png', row, child)
+                    return_href_after_image_search(cards_red, '/RC.png', row, child)
+                    return_href_after_image_search(goals_general, '/G.png', row, child)
+                    return_href_after_image_search(goals_penalty, '/PG.png', row, child)
+                    return_href_after_image_search(goals_own, '/OG.png', row, child)
+                    return_href_after_image_search(penalty_missed, '/PM.png', row, child)
+
+                    return_minute_after_image_search(minutes_red_card, '/RC.png', row, child)
+                    
+    return cards_yellow, cards_red, goals_general, goals_penalty, goals_own, penalty_missed, minutes_red_card
+    
+
+def append_match_events(html_string: str, lineups: pd.DataFrame) -> pd.DataFrame:
+    """Append the lineups with information on who took part in match events."""
+    
+    lineups[['KaartGeel', 'KaartRood', 'Goal', 'GoalEigen', 'PenaltyGoal', 'PenaltyGemist']] = 0
+    yc, rc, goals, goals_pen, goals_own, pen_mis, rc_min = extract_match_events_from_lineup_container(html_string)
+    
+    for player_href in yc: lineups.loc[player_href == lineups['Link'], 'KaartGeel'] += 1 
+    for player_href in rc: lineups.loc[player_href == lineups['Link'], 'KaartRood'] += 1 
+    for player_href in goals: lineups.loc[player_href == lineups['Link'], 'Goal'] += 1 
+    for player_href in goals_pen: lineups.loc[player_href == lineups['Link'], 'GoalEigen'] += 1 
+    for player_href in goals_own: lineups.loc[player_href == lineups['Link'], 'PenaltyGoal'] += 1 
+    for player_href in pen_mis: lineups.loc[player_href == lineups['Link'], 'PenaltyGemist'] += 1 
         
     return lineups
 
@@ -182,8 +245,10 @@ final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
 final_result = determine_winning_team(final_score_home, final_score_away)
 
 lineups = extract_team_lineup(html_string)
-lineups = append_scorers_assisters(html_string, lineups)
+linups = append_match_events(html_string, lineups)
+lineups = append_assisters(html_string, lineups)
 
+print(lineups.columns)
 print(lineups)
 
 
