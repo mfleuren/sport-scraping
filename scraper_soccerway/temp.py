@@ -128,6 +128,10 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str) -> pd.DataFr
     subs['Link'] = find_all_links_in_table(soup_subs)
 
     full_lineup = find_substitutions(subs, lineups)
+    full_lineup.reset_index(drop=True, inplace=True)
+
+    # Drop the coach
+    full_lineup = full_lineup[~full_lineup['Speler'].str.contains('Coach:', regex=False)]
 
     return full_lineup
     
@@ -144,11 +148,11 @@ def extract_team_lineup(html_string: str) -> pd.DataFrame:
     full_lineup_home = extract_lineup_from_html(soup_lineups, 'left')
     full_lineup_away = extract_lineup_from_html(soup_lineups, 'right')
     full_lineup = (pd
-                   .merge(full_lineup_home, full_lineup_away, how='outer', indicator='Home_Team')
+                    .merge(full_lineup_home, full_lineup_away, how='outer', indicator='Home_Team')
                    .replace({'Home_Team':{'left_only':True, 'right_only':False}})
                   )
 
-    return full_lineup
+    return full_lineup.reset_index(drop=True)
     
 
 def determine_assisters(html_string: str) -> List[str]:
@@ -261,9 +265,12 @@ final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
 final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
 
 lineups = extract_team_lineup(html_string)
-lineups = determine_winning_team(final_score_home, final_score_away, lineups)
-lineups = append_match_events(html_string, lineups)
-lineups = append_assisters(html_string, lineups)
+lineups = (
+    lineups
+    .pipe((determine_winning_team, 'lineups'), score_home=final_score_home, score_away=final_score_away)
+    .pipe((append_match_events, 'lineups'), html_string=html_string)
+    .pipe((append_assisters, 'lineups'), html_string=html_string)
+)
 
 print(lineups.columns)
 print(lineups)
