@@ -47,15 +47,24 @@ def extract_txt_from_string(string:str, regex:str) -> str:
     if result: return result.group(1)
 
 
-def determine_winning_team(score_home: int, score_away: int) -> Enum:
+def determine_winning_team(score_home: int, score_away: int, lineups: pd.DataFrame) -> pd.DataFrame:
+    """Fill Win/Loss/Draw columns in lineups"""
+
+    # Pre-allocate values for columns Winst, Verlies and Gelijkspel
+    lineups[['Win', 'Loss', 'Draw']] = False
+
     if score_home > score_away:
-        return 1
+        lineups.loc[lineups['Home_Team'], 'Win'] = True
+        lineups.loc[~lineups['Home_Team'], 'Loss'] = True
     elif score_away > score_home:
-        return 2
-    elif score_home == score_away:
-        return 3
+        lineups.loc[lineups['Home_Team'], 'Loss'] = True
+        lineups.loc[~lineups['Home_Team'], 'Win'] = True
     else:
-        pass
+        lineups['Draw'] = True
+    
+    return lineups
+
+
 
 
 def find_all_links_in_table(soup: BeautifulSoup) -> List: 
@@ -109,6 +118,7 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str) -> pd.DataFr
     Extract the full team lineup from a BeautifulSoup Resultset. 
     Position indicates whether to process the left- or right container.
     """
+
     soup_lineup = soup_lineups[0].find('div', class_='container '+position)
     lineups = parse_html_table(soup_lineup)
     lineups['Link'] = find_all_links_in_table(soup_lineup)
@@ -127,6 +137,7 @@ def extract_team_lineup(html_string: str) -> pd.DataFrame:
     Extract the full team lineups and minutes played for home and away teams.
     Return as a single DataFrame with Home_Team as a boolean column to indicate which team played at home.
     """
+
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_lineups = soup.find_all('div', class_='combined-lineups-container')
 
@@ -161,7 +172,7 @@ def determine_assisters(html_string: str) -> List[str]:
 def append_assisters(html_string: str, lineups: pd.DataFrame) -> pd.DataFrame:
     """Append the lineups with information on who assisted with goals."""
     
-    # Starting state: no asissts
+    # Starting state: no assists
     lineups['Assist'] = 0
     
     assisters = determine_assisters(html_string)
@@ -248,17 +259,15 @@ match_state = extract_txt_by_class(html_string, 'span', 'match-state')
 final_score = extract_txt_by_class(html_string, 'h3', 'thick scoretime')[0]
 final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
 final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
-final_result = determine_winning_team(final_score_home, final_score_away)
 
 lineups = extract_team_lineup(html_string)
-linups = append_match_events(html_string, lineups)
+lineups = determine_winning_team(final_score_home, final_score_away, lineups)
+lineups = append_match_events(html_string, lineups)
 lineups = append_assisters(html_string, lineups)
 
 print(lineups.columns)
 print(lineups)
 
-
-# TODO: Add win/loss to team lineup
 # TODO: Add penalty stopped to goalkeeper
 # TODO: calculate minutes played for subs and players with red cards
 
