@@ -2,49 +2,49 @@
 <html lang="nl">
 <head>
   <meta charset="utf-8" />
-  <title>NAC Breda vs. Helmond Sport - 5 augustus 2022 - Soccerway</title>
+  <title>Heracles Almelo vs. ADO Den Haag - 5 augustus 2022 - Soccerway</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="NAC Breda vs. Helmond Sport - 5 augustus 2022 - Soccerway" />
-  <meta name="keywords" content="NAC Breda vs. Helmond Sport - 5 augustus 2022 - Soccerway, soccer, football, soccer results, soccer tables, soccer fixtures, soccer statistics, soccer teams, soccer players, soccer news, football results, football tables, football fixtures, football statistics, football teams, football players, football news" />
+  <meta name="description" content="Heracles Almelo vs. ADO Den Haag - 5 augustus 2022 - Soccerway" />
+  <meta name="keywords" content="Heracles Almelo vs. ADO Den Haag - 5 augustus 2022 - Soccerway, soccer, football, soccer results, soccer tables, soccer fixtures, soccer statistics, soccer teams, soccer players, soccer news, football results, football tables, football fixtures, football statistics, football teams, football players, football news" />
   <meta name="verify-v1" content="YZMe1orngFPI/VHY1nG15dA7JJApmh8u0hkegWp64g8=" />
   <meta name="alexaVerifyID" content="njeQixLcgBgQ9UllN0-IbVYAz1M" />
 
     <meta name="apple-itunes-app" content="app-id=445839722" />
 
-  <link rel="canonical" href="https://nl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" />
+  <link rel="canonical" href="https://nl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" />
 
   
 
-    <link rel="alternate" href="https://id.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="id-ID" />
-  <link rel="alternate" href="https://cn.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="zh-CN" />
-  <link rel="alternate" href="https://de.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="de-DE" />
-  <link rel="alternate" href="https://au.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-AU" />
-  <link rel="alternate" href="https://ca.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-CA" />
-  <link rel="alternate" href="https://gh.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-GH" />
-  <link rel="alternate" href="https://int.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="x-default" />
-  <link rel="alternate" href="https://ie.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-IE" />
-  <link rel="alternate" href="https://ke.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-KE" />
-  <link rel="alternate" href="https://my.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-MY" />
-  <link rel="alternate" href="https://ng.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-NG" />
-  <link rel="alternate" href="https://nr.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-SE" />
-  <link rel="alternate" href="https://sg.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-SG" />
-  <link rel="alternate" href="https://za.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-ZA" />
-  <link rel="alternate" href="https://uk.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-GB" />
-  <link rel="alternate" href="https://us.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="en-US" />
-  <link rel="alternate" href="https://es.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="es-ES" />
-  <link rel="alternate" href="https://el.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="es-MX" />
-  <link rel="alternate" href="https://fr.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="fr-FR" />
-  <link rel="alternate" href="https://gr.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="el-GR" />
-  <link rel="alternate" href="https://it.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="it-IT" />
-  <link rel="alternate" href="https://kr.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="ko-KR" />
-  <link rel="alternate" href="https://pl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="pl-PL" />
-  <link rel="alternate" href="https://pt.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="pt-PT" />
-  <link rel="alternate" href="https://br.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="pt-BR" />
-  <link rel="alternate" href="https://ro.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="ro-RO" />
-  <link rel="alternate" href="https://th.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="th-TH" />
-  <link rel="alternate" href="https://tr.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="tr-TR" />
-  <link rel="alternate" href="https://ru.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="ru-RU" />
-  <link rel="alternate" href="https://ar.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" hreflang="ar-SA" />
+    <link rel="alternate" href="https://id.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="id-ID" />
+  <link rel="alternate" href="https://cn.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="zh-CN" />
+  <link rel="alternate" href="https://de.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="de-DE" />
+  <link rel="alternate" href="https://au.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-AU" />
+  <link rel="alternate" href="https://ca.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-CA" />
+  <link rel="alternate" href="https://gh.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-GH" />
+  <link rel="alternate" href="https://int.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="x-default" />
+  <link rel="alternate" href="https://ie.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-IE" />
+  <link rel="alternate" href="https://ke.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-KE" />
+  <link rel="alternate" href="https://my.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-MY" />
+  <link rel="alternate" href="https://ng.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-NG" />
+  <link rel="alternate" href="https://nr.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-SE" />
+  <link rel="alternate" href="https://sg.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-SG" />
+  <link rel="alternate" href="https://za.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-ZA" />
+  <link rel="alternate" href="https://uk.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-GB" />
+  <link rel="alternate" href="https://us.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="en-US" />
+  <link rel="alternate" href="https://es.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="es-ES" />
+  <link rel="alternate" href="https://el.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="es-MX" />
+  <link rel="alternate" href="https://fr.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="fr-FR" />
+  <link rel="alternate" href="https://gr.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="el-GR" />
+  <link rel="alternate" href="https://it.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="it-IT" />
+  <link rel="alternate" href="https://kr.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="ko-KR" />
+  <link rel="alternate" href="https://pl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="pl-PL" />
+  <link rel="alternate" href="https://pt.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="pt-PT" />
+  <link rel="alternate" href="https://br.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="pt-BR" />
+  <link rel="alternate" href="https://ro.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="ro-RO" />
+  <link rel="alternate" href="https://th.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="th-TH" />
+  <link rel="alternate" href="https://tr.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="tr-TR" />
+  <link rel="alternate" href="https://ru.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="ru-RU" />
+  <link rel="alternate" href="https://ar.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" hreflang="ar-SA" />
 
 
   <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/media/img/touch-icons/apple-touch-icon-152x152-precomposed.png">
@@ -347,7 +347,7 @@ if (this.$ && this.$.fn && this.$.fn.jquery) {
 
   var blueKaiCalls = (function() {
     var page_type = 'match';
-    var page_primary_tag = "NAC Breda vs. Helmond Sport$$$5 augustus 2022$$$Soccerway".split(',')[0];
+    var page_primary_tag = "Heracles Almelo vs. ADO Den Haag$$$5 augustus 2022$$$Soccerway".split(',')[0];
     var user_country_code = 'nl';
     var user_language_code = 'nl';
     var blueKaiCalls = [];
@@ -1016,13 +1016,13 @@ _taboola.push({category:'auto'});
     <option value="/national/netherlands/super-cup-women/c842/">Super Cup Vrouwen</option>
     <option value="/national/netherlands/play-offs-23/c1028/">Women's Play-offs 2/3</option>
     <option value="/national/netherlands/play-offs-34-women/c1029/">Women's Play-offs 3/4</option>
+    <option value="/national/netherlands/u19-play-offs-12/c1743/">U19 Play-offs 1/2</option>
     <option value="/national/netherlands/beloften/c1066/">Beloften</option>
     <option value="/national/netherlands/reserve-league/c1448/">Reservecompetitie</option>
     <option value="/national/netherlands/eerste-divisie-u19/c1742/">Eerste Divisie U19</option>
     <option value="/national/netherlands/reserve-league-cup/c1680/">Reserve League Cup</option>
     <option value="/national/netherlands/youth-cup-u19/c1086/">Jeugdcup</option>
     <option value="/national/netherlands/eredivisie-u18/c1075/">Eredivisie O19</option>
-    <option value="/national/netherlands/u19-play-offs-12/c1743/">U19 Play-offs 1/2</option>
     <option value="/national/netherlands/club-friendlies/">Club vriendschappelijk</option>
     </select>
   </div>
@@ -1112,12 +1112,12 @@ _taboola.push({category:'auto'});
   });
 </script>
 <div id="subheading" style="position: relative;">
-  <h1>NAC Breda vs. Helmond Sport&nbsp;<span class="bidi"> 1 - 0</span></h1>
+  <h1>Heracles Almelo vs. ADO Den Haag&nbsp;<span class="bidi"> 4 - 0</span></h1>
 
   <div id="submenu-container">
     <div class="clearfix" id="submenu" style="background: url(/media/v2.1.1/img/flags/230x70/138.png) top right no-repeat;">
   <ul>
-    <li class="current"><a href="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/">Overzicht</a></li><li class=""><a href="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/head2head/">H2H-vergelijking</a></li><li class=""><a href="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/commentary/">Commentaar</a></li><li class=""><a href="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/venue/">Stadion</a></li>
+    <li class="current"><a href="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/">Overzicht</a></li><li class=""><a href="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/head2head/">H2H-vergelijking</a></li><li class=""><a href="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/commentary/">Commentaar</a></li><li class=""><a href="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/venue/">Stadion</a></li>
   </ul>
 </div>
     <div class="submenu_dropdown">
@@ -1132,11 +1132,11 @@ _taboola.push({category:'auto'});
         FC Dordrecht vs.
         Roda JC Kerkrade
       </option>
-      <option value="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/">
+      <option value="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" selected="selected">
         Heracles Almelo vs.
         ADO Den Haag
       </option>
-      <option value="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" selected="selected">
+      <option value="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/">
         NAC Breda vs.
         Helmond Sport
       </option>
@@ -1293,25 +1293,25 @@ _taboola.push({category:'auto'});
       <a href="/national/netherlands/play-offs-34-women/c1029/" class="" title="Women's Play-offs 3/4">Women's Play-offs 3/4</a>
     </li>
     <li class="  even">
+      <a href="/national/netherlands/u19-play-offs-12/c1743/" class="" title="U19 Play-offs 1/2">U19 Play-offs 1/2</a>
+    </li>
+    <li class="  odd">
       <a href="/national/netherlands/beloften/c1066/" class="" title="Beloften">Beloften</a>
     </li>
-    <li class="  odd">
+    <li class="  even">
       <a href="/national/netherlands/reserve-league/c1448/" class="" title="Reservecompetitie">Reservecompetitie</a>
     </li>
-    <li class="  even">
+    <li class="  odd">
       <a href="/national/netherlands/eerste-divisie-u19/c1742/" class="" title="Eerste Divisie U19">Eerste Divisie U19</a>
     </li>
-    <li class="  odd">
+    <li class="  even">
       <a href="/national/netherlands/reserve-league-cup/c1680/" class="" title="Reserve League Cup">Reserve League Cup</a>
     </li>
-    <li class="  even">
+    <li class="  odd">
       <a href="/national/netherlands/youth-cup-u19/c1086/" class="" title="Jeugdcup">Jeugdcup</a>
     </li>
-    <li class="  odd">
-      <a href="/national/netherlands/eredivisie-u18/c1075/" class="" title="Eredivisie O19">Eredivisie O19</a>
-    </li>
     <li class="  even">
-      <a href="/national/netherlands/u19-play-offs-12/c1743/" class="" title="U19 Play-offs 1/2">U19 Play-offs 1/2</a>
+      <a href="/national/netherlands/eredivisie-u18/c1075/" class="" title="Eredivisie O19">Eredivisie O19</a>
     </li>
     <li class=" odd">
       <a href="/national/netherlands/club-friendlies/" class="">Club vriendschappelijk</a>
@@ -1341,18 +1341,18 @@ _taboola.push({category:'auto'});
       <div class="match-info" qa-date="post-match" style="background-color: #333; background-image: url(/media/v2.1.1/img/match-header.png)">
   <div class="wrapper">
     <div class="container left">
-      <a class="team-logo" href="/teams/netherlands/nac-bv/1524/">
-        <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/1524.png" alt="NAC Breda" />
+      <a class="team-logo" href="/teams/netherlands/stichting-heracles-almelo/1536/">
+        <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/1536.png" alt="Heracles Almelo" />
       </a>
 
-        <a class="team-title" href="/teams/netherlands/nac-bv/1524/">NAC Breda</a>
+        <a class="team-title" href="/teams/netherlands/stichting-heracles-almelo/1536/">Heracles Almelo</a>
 
       <div class="last-five">
-          <a href="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" class="win" title="NAC Breda - Helmond Sport 1 - 0">W</a>
-          <a href="/matches/2022/07/30/world/club-friendlies/nac-bv/royal-rivirton-excelsior/3793134/" class="win" title="NAC Breda - Excelsior Virton 2 - 1">W</a>
-          <a href="/matches/2022/07/27/world/club-friendlies/feyenoord-rotterdam-nv/nac-bv/3804521/" class="loss" title="Feyenoord - NAC Breda 6 - 1">L</a>
-          <a href="/matches/2022/07/23/world/club-friendlies/nac-bv/fc-eindhoven/3793127/" class="win" title="NAC Breda - FC Eindhoven 1 - 0">W</a>
-          <a href="/matches/2022/07/15/world/club-friendlies/nac-bv/fc-volendam/3793126/" class="draw" title="NAC Breda - FC Volendam 0 - 0">D</a>
+          <a href="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" class="win" title="Heracles Almelo - ADO Den Haag 4 - 0">W</a>
+          <a href="/matches/2022/07/30/world/club-friendlies/stichting-heracles-almelo/de-treffers/3900683/" class="win" title="Heracles Almelo - De Treffers 5 - 0">W</a>
+          <a href="/matches/2022/07/29/world/club-friendlies/stichting-heracles-almelo/nijmegen-eendracht-combinatie/3793106/" class="loss" title="Heracles Almelo - N.E.C. 1 - 3">L</a>
+          <a href="/matches/2022/07/22/world/club-friendlies/stichting-heracles-almelo/sbv-excelsior/3793099/" class="win" title="Heracles Almelo - Excelsior 2 - 1">W</a>
+          <a href="/matches/2022/07/15/world/club-friendlies/sparta-rotterdam-bv/stichting-heracles-almelo/3837443/" class="loss" title="Sparta Rotterdam - Heracles Almelo 1 - 0">L</a>
       </div>
     </div>
 
@@ -1363,14 +1363,14 @@ _taboola.push({category:'auto'});
 
               <span class="match-state">FT</span>
               
-              1 - 0
+              4 - 0
               
             
             
 
           <span class="match-state">
 
-                  <span>(HT 0 - 0)&nbsp</span>
+                  <span>(HT 4 - 0)&nbsp</span>
 
           </span>
           </h3>
@@ -1378,18 +1378,18 @@ _taboola.push({category:'auto'});
    </div>
 
     <div class="container right">
-      <a class="team-logo" href="/teams/netherlands/stichting-helmond-sport/1534/">
-        <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/1534.png" alt="Helmond Sport" />
+      <a class="team-logo" href="/teams/netherlands/hfc-ado-den-haag/1514/">
+        <img src="https://secure.cache.images.core.optasports.com/soccer/teams/150x150/1514.png" alt="ADO Den Haag" />
       </a>
 
-        <a class="team-title" href="/teams/netherlands/stichting-helmond-sport/1534/">Helmond Sport</a>
+        <a class="team-title" href="/teams/netherlands/hfc-ado-den-haag/1514/">ADO Den Haag</a>
 
       <div class="last-five">
-          <a href="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" class="loss" title="NAC Breda - Helmond Sport 1 - 0">L</a>
-          <a href="/matches/2022/07/30/world/club-friendlies/kv-red-star-waasland/stichting-helmond-sport/3803659/" class="loss" title="SK Beveren - Helmond Sport 2 - 1">L</a>
-          <a href="/matches/2022/07/23/world/club-friendlies/lierse-kempenzonen/stichting-helmond-sport/3796482/" class="win" title="Lierse K - Helmond Sport 0 - 1">W</a>
-          <a href="/matches/2022/07/16/world/club-friendlies/stichting-helmond-sport/stichting-go-ahead-eagles/3796218/" class="draw" title="Helmond Sport - Go Ahead Eagles 1 - 1">D</a>
-          <a href="/matches/2022/07/12/world/club-friendlies/stichting-helmond-sport/royal-sporting-club-anderlecht/3855355/" class="loss" title="Helmond Sport - Anderlecht 0 - 2">L</a>
+          <a href="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" class="loss" title="Heracles Almelo - ADO Den Haag 4 - 0">L</a>
+          <a href="/matches/2022/07/22/world/club-friendlies/hfc-ado-den-haag/kv-red-star-waasland/3866707/" class="win" title="ADO Den Haag - SK Beveren 2 - 1">W</a>
+          <a href="/matches/2022/05/29/netherlands/nacompetitie/hfc-ado-den-haag/sbv-excelsior/3789693/" class="loss" title="ADO Den Haag - Excelsior 3 - 3">L</a>
+          <a href="/matches/2022/05/24/netherlands/nacompetitie/sbv-excelsior/hfc-ado-den-haag/3789692/" class="draw" title="Excelsior - ADO Den Haag 1 - 1">D</a>
+          <a href="/matches/2022/05/21/netherlands/nacompetitie/fc-eindhoven/hfc-ado-den-haag/3786365/" class="win" title="FC Eindhoven - ADO Den Haag 1 - 2">W</a>
         <div class="clearfix"></div>
       </div>
     </div>
@@ -1415,7 +1415,7 @@ _taboola.push({category:'auto'});
          </span>
       <br>
          <span>Stadion</span>
-         <span><a href="venue/">Rat Verlegh Stadion (Breda)</a></span>
+         <span><a href="venue/">Erve Asito (Almelo)</a></span>
      </div>
   </div>
 </div>
@@ -1432,26 +1432,103 @@ _taboola.push({category:'auto'});
       <ul class="scorer-info">
  <li class="  ">
    <span class="scorer">
-       <a href="/players/odysseus-velanas/452059/">
-         O. Velanas
+       <a href="/players/marko-vejinovic/66278/">
+         M. Vejinović
        </a>
 
        
 
          <span class="minute">
-           53'
+           4'
+         </span>
+
+       
+
+
+   </span>
+
+   <span class="score">1 - 0</span>
+
+   <span class="scorer">
+  </span>
+   <div class="clearfix"></div>
+ </li>
+ <li class="  ">
+   <span class="scorer">
+       <a href="/players/samuel-armenteros/99232/">
+         S. Armenteros
+       </a>
+
+       
+
+         <span class="minute">
+           22'
          </span>
 
        
 
          <span class="assist">
            (Assist door
-           <a href="/players/alex-plat/506885/">A. Plat</a>)
+           <a href="/players/nikolai-laursen/349513/">N. Laursen</a>)
          </span>
 
    </span>
 
-   <span class="score">1 - 0</span>
+   <span class="score">2 - 0</span>
+
+   <span class="scorer">
+  </span>
+   <div class="clearfix"></div>
+ </li>
+ <li class="  ">
+   <span class="scorer">
+       <a href="/players/samuel-armenteros/99232/">
+         S. Armenteros
+       </a>
+
+       
+
+         <span class="minute">
+           34'
+         </span>
+
+       
+
+         <span class="assist">
+           (Assist door
+           <a href="/players/anas-ouahim/359287/">A. Ouahim</a>)
+         </span>
+
+   </span>
+
+   <span class="score">3 - 0</span>
+
+   <span class="scorer">
+  </span>
+   <div class="clearfix"></div>
+ </li>
+ <li class="  ">
+   <span class="scorer">
+       <a href="/players/nikolai-laursen/349513/">
+         N. Laursen
+       </a>
+
+       
+
+         <span class="minute">
+           44'
+         </span>
+
+       
+
+         <span class="assist">
+           (Assist door
+           <a href="/players/anas-ouahim/359287/">A. Ouahim</a>)
+         </span>
+
+   </span>
+
+   <span class="score">4 - 0</span>
 
    <span class="scorer">
   </span>
@@ -1492,7 +1569,7 @@ _taboola.push({category:'auto'});
 <div class="header-wrapper" style="display: none">
     <h2 class="header-label">Excitement Index</h2>
   </div>
-  <opta-widget widget="excitement_index" widget_id="excitement_index" competition="1gwajyt0pk2jm5fx5mu36v114" season="1w03tfpd5nc6woo8j2nc9239w" match="ecrtq4eplbqvsjgptsdrfjzmc" display_type="graph" template="normal" live="true" show_match_header="false" show_attendance="false" show_date="true" date_format="dddd D MMMM YYYY HH:mm" show_crests="true" show_referee="false" show_venue="false" team_link="team" show_competition_name="true" competition_naming="full" show_cards="true" show_goals="true" show_logo="true" show_title="true" show_clock="false" show_subs="true" show_penalties_missed="true" show_shootouts="true" breakpoints="280, 700" sport="football"></opta-widget>
+  <opta-widget widget="excitement_index" widget_id="excitement_index" competition="1gwajyt0pk2jm5fx5mu36v114" season="1w03tfpd5nc6woo8j2nc9239w" match="ecpaoixo1hloenhnfojtv4xlg" display_type="graph" template="normal" live="true" show_match_header="false" show_attendance="false" show_date="true" date_format="dddd D MMMM YYYY HH:mm" show_crests="true" show_referee="false" show_venue="false" team_link="team" show_competition_name="true" competition_naming="full" show_cards="true" show_goals="true" show_logo="true" show_title="true" show_clock="false" show_subs="true" show_penalties_missed="true" show_shootouts="true" breakpoints="280, 700" sport="football"></opta-widget>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -1613,7 +1690,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 
   <opta-widget sport="football" widget="matchday_live" competition="1gwajyt0pk2jm5fx5mu36v114"
-              season="1w03tfpd5nc6woo8j2nc9239w" match="ecrtq4eplbqvsjgptsdrfjzmc" template="normal" live="false"
+              season="1w03tfpd5nc6woo8j2nc9239w" match="ecpaoixo1hloenhnfojtv4xlg" template="normal" live="false"
               orientation="horizontal" side="both" show_match_header="false" show_crests="false" show_pitch_crests="false"
               show_team_formation="true" show_score="false" show_halftime_score="false" show_competition_name="true"
               show_date="true" date_format="dddd D MMMM YYYY" show_referee="false" show_venue="false" show_attendance="false"
@@ -1638,81 +1715,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <tr class="odd">
       <td class="shirtnumber">1</td>
       <td class="player large-link">
-        <a href="/players/roy-kortsmit/200996/" class="flag_16 left_16 netherlands_16_left">R. Kortsmit</a>
-        
-      </td>
-      <td class="bookings">
-      </td>
-    </tr>
-    <tr class="even">
-      <td class="shirtnumber">2</td>
-      <td class="player large-link">
-        <a href="/players/boyd-lucassen/453952/" class="flag_16 left_16 netherlands_16_left">B. Lucassen</a>
-        
-      </td>
-      <td class="bookings">
-      </td>
-    </tr>
-    <tr class="odd">
-      <td class="shirtnumber">24</td>
-      <td class="player large-link">
-        <a href="/players/tijs-velthuis/573315/" class="flag_16 left_16 netherlands_16_left">T. Velthuis</a>
-        
-      </td>
-      <td class="bookings">
-        <span><img src="/media/v2.1.1/img/events/YC.png" width="12" height="13" /> 41'</span>
-      </td>
-    </tr>
-    <tr class="even">
-      <td class="shirtnumber">3</td>
-      <td class="player large-link">
-        <a href="/players/anselmo-garcia-mcnulty/608607/" class="flag_16 left_16 ireland-republic_16_left">A. MacNulty</a>
-        
-      </td>
-      <td class="bookings">
-      </td>
-    </tr>
-    <tr class="odd">
-      <td class="shirtnumber">5</td>
-      <td class="player large-link">
-        <a href="/players/fabio-di-michele-sanchez/613795/" class="flag_16 left_16 germany_16_left">F. Di-Michele-Sanchez</a>
-        
-      </td>
-      <td class="bookings">
-      </td>
-    </tr>
-    <tr class="even">
-      <td class="shirtnumber">10</td>
-      <td class="player large-link">
-        <a href="/players/odysseus-velanas/452059/" class="flag_16 left_16 netherlands_16_left">O. Velanas</a>
-        <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
-      </td>
-      <td class="bookings">
-        <span><img src="/media/v2.1.1/img/events/G.png" width="12" height="13" /> 53'</span>
-      </td>
-    </tr>
-    <tr class="odd">
-      <td class="shirtnumber">6</td>
-      <td class="player large-link">
-        <a href="/players/alex-plat/506885/" class="flag_16 left_16 netherlands_16_left">A. Plat</a>
-        
-      </td>
-      <td class="bookings">
-      </td>
-    </tr>
-    <tr class="even">
-      <td class="shirtnumber">18</td>
-      <td class="player large-link">
-        <a href="/players/sabir-agougil/567732/" class="flag_16 left_16 netherlands_16_left">S. Agougil</a>
-        <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
-      </td>
-      <td class="bookings">
-      </td>
-    </tr>
-    <tr class="odd">
-      <td class="shirtnumber">8</td>
-      <td class="player large-link">
-        <a href="/players/ezechiel-banzuzi/798836/" class="flag_16 left_16 netherlands_16_left">E. Banzuzi</a>
+        <a href="/players/michael-brouwer/250395/" class="flag_16 left_16 netherlands_16_left">M. Brouwer</a>
         
       </td>
       <td class="bookings">
@@ -1721,8 +1724,84 @@ document.addEventListener('DOMContentLoaded', () => {
     <tr class="even">
       <td class="shirtnumber">19</td>
       <td class="player large-link">
-        <a href="/players/charles-jesaja-herrmann/478847/" class="flag_16 left_16 germany_16_left">J. Herrmann</a>
+        <a href="/players/navajo-bakboord/423824/" class="flag_16 left_16 netherlands_16_left">N. Bakboord</a>
+        
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="odd">
+      <td class="shirtnumber">21</td>
+      <td class="player large-link">
+        <a href="/players/justin-hoogma/432697/" class="flag_16 left_16 netherlands_16_left">J. Hoogma</a>
+        
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="shirtnumber">4</td>
+      <td class="player large-link">
+        <a href="/players/sven-sonnenberg/440863/" class="flag_16 left_16 germany_16_left">S. Sonnenberg</a>
         <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="odd">
+      <td class="shirtnumber">12</td>
+      <td class="player large-link">
+        <a href="/players/ruben-roosken/618143/" class="flag_16 left_16 netherlands_16_left">R. Roosken</a>
+        
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="shirtnumber">18</td>
+      <td class="player large-link">
+        <a href="/players/marko-vejinovic/66278/" class="flag_16 left_16 netherlands_16_left">M. Vejinović</a>
+        <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
+      </td>
+      <td class="bookings">
+        <span><img src="/media/v2.1.1/img/events/G.png" width="12" height="13" /> 4'</span>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td class="shirtnumber">15</td>
+      <td class="player large-link">
+        <a href="/players/lucas-schoofs/338263/" class="flag_16 left_16 belgium_16_left">L. Schoofs</a>
+        <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="shirtnumber">10</td>
+      <td class="player large-link">
+        <a href="/players/anas-ouahim/359287/" class="flag_16 left_16 morocco_16_left">A. Ouahim</a>
+        <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="odd">
+      <td class="shirtnumber">33</td>
+      <td class="player large-link">
+        <a href="/players/samuel-armenteros/99232/" class="flag_16 left_16 sweden_16_left">S. Armenteros</a>
+        
+      </td>
+      <td class="bookings">
+        <span><img src="/media/v2.1.1/img/events/G.png" width="12" height="13" /> 22'</span>
+        <span><img src="/media/v2.1.1/img/events/G.png" width="12" height="13" /> 34'</span>
+        <span><img src="/media/v2.1.1/img/events/PM.png" width="12" height="13" /> 62'</span>
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="shirtnumber">29</td>
+      <td class="player large-link">
+        <a href="/players/emil-hansson/339651/" class="flag_16 left_16 sweden_16_left">E. Hansson</a>
+        
       </td>
       <td class="bookings">
       </td>
@@ -1730,18 +1809,17 @@ document.addEventListener('DOMContentLoaded', () => {
     <tr class="odd">
       <td class="shirtnumber">11</td>
       <td class="player large-link">
-        <a href="/players/kaj-de-rooij/539368/" class="flag_16 left_16 netherlands_16_left">K. de Rooij</a>
-        
+        <a href="/players/nikolai-laursen/349513/" class="flag_16 left_16 denmark_16_left">N. Laursen</a>
+        <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
       </td>
       <td class="bookings">
-        <span><img src="/media/v2.1.1/img/events/YC.png" width="12" height="13" /> 8'</span>
-        <span><img src="/media/v2.1.1/img/events/Y2C.png" width="12" height="13" /> 83'</span>
+        <span><img src="/media/v2.1.1/img/events/G.png" width="12" height="13" /> 44'</span>
       </td>
     </tr>
     <tr class="even">
       <td colspan="2" style="padding: 0.5em;">
         <strong>Coach:</strong>
-        <a href="/coaches/robert-molenaar/411143/" class="flag_16 left_16 netherlands_16_left">R. Molenaar</a>
+        <a href="/coaches/john--lammers/192446/" class="flag_16 left_16 netherlands_16_left">J. Lammers</a>
       </td>
     </tr>
     </tbody>
@@ -1761,52 +1839,89 @@ document.addEventListener('DOMContentLoaded', () => {
     <tr class="odd">
       <td class="shirtnumber">1</td>
       <td class="player large-link">
-        <a href="/players/mike-havekotte/215540/" class="flag_16 left_16 netherlands_16_left">M. Havekotte</a>
+        <a href="/players/hugo-wentges/538788/" class="flag_16 left_16 netherlands_16_left">H. Wentges</a>
         
       </td>
       <td class="bookings">
       </td>
     </tr>
     <tr class="even">
-      <td class="shirtnumber">2</td>
+      <td class="shirtnumber">33</td>
       <td class="player large-link">
-        <a href="/players/bram-van-vlerken/215541/" class="flag_16 left_16 netherlands_16_left">B. van Vlerken</a>
+        <a href="/players/daryl-werker/296214/" class="flag_16 left_16 netherlands_16_left">D. Werker</a>
         
       </td>
       <td class="bookings">
       </td>
     </tr>
     <tr class="odd">
-      <td class="shirtnumber">4</td>
-      <td class="player large-link">
-        <a href="/players/robin-van-der-meer/215549/" class="flag_16 left_16 netherlands_16_left">R. van der Meer</a>
-        
-      </td>
-      <td class="bookings">
-      </td>
-    </tr>
-    <tr class="even">
       <td class="shirtnumber">3</td>
       <td class="player large-link">
-        <a href="/players/flor-van-den-eynden/467645/" class="flag_16 left_16 belgium_16_left">F. Van Den Eynden</a>
-        
-      </td>
-      <td class="bookings">
-      </td>
-    </tr>
-    <tr class="odd">
-      <td class="shirtnumber">17</td>
-      <td class="player large-link">
-        <a href="/players/bryan-albert-van-hove/666251/" class="flag_16 left_16 belgium_16_left">B. Van Hove</a>
+        <a href="/players/dirk-carlson/387285/" class="flag_16 left_16 luxembourg_16_left">D. Carlson</a>
         
       </td>
       <td class="bookings">
       </td>
     </tr>
     <tr class="even">
-      <td class="shirtnumber">23</td>
+      <td class="shirtnumber">4</td>
       <td class="player large-link">
-        <a href="/players/elmo-lieftink/325822/" class="flag_16 left_16 netherlands_16_left">E. Lieftink</a>
+        <a href="/players/boy-kemper/463009/" class="flag_16 left_16 netherlands_16_left">B. Kemper</a>
+        
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="odd">
+      <td class="shirtnumber">5</td>
+      <td class="player large-link">
+        <a href="/players/denzel-hall/508910/" class="flag_16 left_16 netherlands_16_left">D. Hall</a>
+        
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="shirtnumber">8</td>
+      <td class="player large-link">
+        <a href="/players/jordy-wehrmann/426586/" class="flag_16 left_16 netherlands_16_left">J. Wehrmann</a>
+        
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="odd">
+      <td class="shirtnumber">6</td>
+      <td class="player large-link">
+        <a href="/players/dhoraso-moreo-klas/538920/" class="flag_16 left_16 netherlands_16_left">D. Klas</a>
+        <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
+      </td>
+      <td class="bookings">
+        <span><img src="/media/v2.1.1/img/events/YC.png" width="12" height="13" /> 55'</span>
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="shirtnumber">10</td>
+      <td class="player large-link">
+        <a href="/players/max-de-waal/632222/" class="flag_16 left_16 netherlands_16_left">M. de Waal</a>
+        
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="odd">
+      <td class="shirtnumber">9</td>
+      <td class="player large-link">
+        <a href="/players/thomas-verheijdt/256045/" class="flag_16 left_16 netherlands_16_left">T. Verheydt</a>
+        
+      </td>
+      <td class="bookings">
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="shirtnumber">11</td>
+      <td class="player large-link">
+        <a href="/players/joel-zwarts/506330/" class="flag_16 left_16 netherlands_16_left">J. Zwarts</a>
         
       </td>
       <td class="bookings">
@@ -1815,54 +1930,16 @@ document.addEventListener('DOMContentLoaded', () => {
     <tr class="odd">
       <td class="shirtnumber">7</td>
       <td class="player large-link">
-        <a href="/players/wassim-essanoussi/649931/" class="flag_16 left_16 netherlands_16_left">W. Essanoussi</a>
+        <a href="/players/xander-severina/695569/" class="flag_16 left_16 netherlands_16_left">X. Severina</a>
         <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
       </td>
       <td class="bookings">
-      </td>
-    </tr>
-    <tr class="even">
-      <td class="shirtnumber">6</td>
-      <td class="player large-link">
-        <a href="/players/jarno-lion/741611/" class="flag_16 left_16 belgium_16_left">J. Lion</a>
-        
-      </td>
-      <td class="bookings">
-      </td>
-    </tr>
-    <tr class="odd">
-      <td class="shirtnumber">11</td>
-      <td class="player large-link">
-        <a href="/players/peter-van-ooijen/218119/" class="flag_16 left_16 netherlands_16_left">P. van Ooijen</a>
-        <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
-      </td>
-      <td class="bookings">
-        <span><img src="/media/v2.1.1/img/events/YC.png" width="12" height="13" /> 37'</span>
-      </td>
-    </tr>
-    <tr class="even">
-      <td class="shirtnumber">9</td>
-      <td class="player large-link">
-        <a href="/players/martijn-kaars/463470/" class="flag_16 left_16 netherlands_16_left">M. Kaars</a>
-        
-      </td>
-      <td class="bookings">
-      </td>
-    </tr>
-    <tr class="odd">
-      <td class="shirtnumber">19</td>
-      <td class="player large-link">
-        <a href="/players/jelle-goselink/553311/" class="flag_16 left_16 netherlands_16_left">J. Goselink</a>
-        <img src="/media/v2.1.1/img/events/SO.png" width="13" height="13" title="Invallers" alt="Invallers" />
-      </td>
-      <td class="bookings">
-        <span><img src="/media/v2.1.1/img/events/YC.png" width="12" height="13" /> 24'</span>
       </td>
     </tr>
     <tr class="even">
       <td colspan="3" style="padding: 0.5em;">
         <strong>Coach:</strong>
-        <a href="/coaches/sven-swinnen/520004/" class="flag_16 left_16 belgium_16_left">S. Swinnen</a>
+        <a href="/coaches/dirk-kuyt/45/" class="flag_16 left_16 netherlands_16_left">D. Kuijt</a>
       </td>
     </tr>
     </tbody>
@@ -1887,90 +1964,70 @@ document.addEventListener('DOMContentLoaded', () => {
           <tbody>
           
           <tr class="odd">
-              <td class="shirtnumber">29</td>
+              <td class="shirtnumber">6</td>
               <td class="player large-link">
                   <p class="substitute substitute-in">
-                      <a href="/players/ayouba-kosiah/567703/" class="flag_16 left_16 liberia_16_left">A. Kosiah</a>
+                      <a href="/players/orestis-kiomourtzoglou/408335/" class="flag_16 left_16 germany_16_left">O. Kiomourtzoglou</a>
                       <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
                   </p>
-                  <p class="substitute substitute-out">for <a href="/players/charles-jesaja-herrmann/478847/">J. Herrmann</a> 64'</p>
+                  <p class="substitute substitute-out">for <a href="/players/marko-vejinovic/66278/">M. Vejinović</a> 59'</p>
               </td>
               <td class="bookings">
               </td>
           </tr>
           <tr class="even">
-              <td class="shirtnumber">14</td>
-              <td class="player large-link">
-                  <p class="substitute substitute-in">
-                      <a href="/players/boris-van-schuppen/567733/" class="flag_16 left_16 netherlands_16_left">B. van Schuppen</a>
-                      <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
-                  </p>
-                  <p class="substitute substitute-out">for <a href="/players/sabir-agougil/567732/">S. Agougil</a> 80'</p>
-              </td>
-              <td class="bookings">
-              </td>
-          </tr>
-          <tr class="odd">
-              <td class="shirtnumber">23</td>
-              <td class="player large-link">
-                  <p class="substitute substitute-in">
-                      <a href="/players/rowan-besselink/853736/" class="flag_16 left_16 netherlands_16_left">R. Besselink</a>
-                      <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
-                  </p>
-                  <p class="substitute substitute-out">for <a href="/players/odysseus-velanas/452059/">O. Velanas</a> 83'</p>
-              </td>
-              <td class="bookings">
-              </td>
-          </tr>
-          <tr class="even">
-              <td class="shirtnumber">37</td>
-              <td class="player large-link">
-                  <p class="substitute substitute-in">
-                      <a href="/players/aron-van-lare/571724/" class="flag_16 left_16 netherlands_16_left">A. van Lare</a>
-                      
-                  </p>
-              </td>
-              <td class="bookings">
-              </td>
-          </tr>
-          <tr class="odd">
               <td class="shirtnumber">17</td>
               <td class="player large-link">
                   <p class="substitute substitute-in">
-                      <a href="/players/vieri-kotzebue/632793/" class="flag_16 left_16 netherlands_16_left">V. Kotzebue</a>
-                      
+                      <a href="/players/thomas-bruns/168503/" class="flag_16 left_16 netherlands_16_left">T. Bruns</a>
+                      <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
                   </p>
-              </td>
-              <td class="bookings">
-              </td>
-          </tr>
-          <tr class="even">
-              <td class="shirtnumber">30</td>
-              <td class="player large-link">
-                  <p class="substitute substitute-in">
-                      <a href="/players/omar-mekkaoui/778113/" class="flag_16 left_16 netherlands_16_left">O. Mekkaoui</a>
-                      
-                  </p>
+                  <p class="substitute substitute-out">for <a href="/players/lucas-schoofs/338263/">L. Schoofs</a> 67'</p>
               </td>
               <td class="bookings">
               </td>
           </tr>
           <tr class="odd">
-              <td class="shirtnumber">21</td>
+              <td class="shirtnumber">5</td>
               <td class="player large-link">
                   <p class="substitute substitute-in">
-                      <a href="/players/moreno-rutten/255147/" class="flag_16 left_16 netherlands_16_left">M. Rutten</a>
-                      
+                      <a href="/players/marco-rente/450717/" class="flag_16 left_16 germany_16_left">M. Rente</a>
+                      <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
                   </p>
+                  <p class="substitute substitute-out">for <a href="/players/sven-sonnenberg/440863/">S. Sonnenberg</a> 86'</p>
               </td>
               <td class="bookings">
               </td>
           </tr>
           <tr class="even">
-              <td class="shirtnumber">25</td>
+              <td class="shirtnumber">20</td>
               <td class="player large-link">
                   <p class="substitute substitute-in">
-                      <a href="/players/stef-de-wijs/853738/" class="flag_16 left_16 netherlands_16_left">S. de Wijs</a>
+                      <a href="/players/kasper-lunding-jakobsen/469401/" class="flag_16 left_16 denmark_16_left">K. Lunding</a>
+                      <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
+                  </p>
+                  <p class="substitute substitute-out">for <a href="/players/nikolai-laursen/349513/">N. Laursen</a> 86'</p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="odd">
+              <td class="shirtnumber">32</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/sem-scheperman/641190/" class="flag_16 left_16 netherlands_16_left">S. Scheperman</a>
+                      <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
+                  </p>
+                  <p class="substitute substitute-out">for <a href="/players/anas-ouahim/359287/">A. Ouahim</a> 86'</p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="even">
+              <td class="shirtnumber">9</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/sinan-bakis/260923/" class="flag_16 left_16 turkey_16_left">S. Bakış</a>
                       
                   </p>
               </td>
@@ -1981,7 +2038,62 @@ document.addEventListener('DOMContentLoaded', () => {
               <td class="shirtnumber">26</td>
               <td class="player large-link">
                   <p class="substitute substitute-in">
-                      <a href="/players/martijn-brandt/632789/" class="flag_16 left_16 netherlands_16_left">M. Brandt</a>
+                      <a href="/players/koen-bucker/454477/" class="flag_16 left_16 netherlands_16_left">K. Bucker</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="even">
+              <td class="shirtnumber">22</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/mateo-le/538202/" class="flag_16 left_16 croatia_16_left">M. Leš</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="odd">
+              <td class="shirtnumber">2</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/sylian-mokono/537706/" class="flag_16 left_16 netherlands_16_left">S. Mokono</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="even">
+              <td class="shirtnumber">8</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/elias-sierra/519184/" class="flag_16 left_16 belgium_16_left">E. Sierra</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="odd">
+              <td class="shirtnumber">34</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/chiel-olde-keizer/838847/" class="flag_16 left_16 netherlands_16_left">C. Keizer</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="even">
+              <td class="shirtnumber">28</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/robin-jalving/464812/" class="flag_16 left_16 netherlands_16_left">R. Jalving</a>
                       
                   </p>
               </td>
@@ -2003,81 +2115,13 @@ document.addEventListener('DOMContentLoaded', () => {
           <tbody>
           
           <tr class="odd">
-              <td class="shirtnumber">33</td>
+              <td class="shirtnumber">34</td>
               <td class="player large-link">
                   <p class="substitute substitute-in">
-                      <a href="/players/gaetan-carina-alexander-bosiers/459759/" class="flag_16 left_16 belgium_16_left">G. Bosiers</a>
+                      <a href="/players/amar-ati/459760/" class="flag_16 left_16 bosnia-herzegovina_16_left">A. Ćatić</a>
                       <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
                   </p>
-                  <p class="substitute substitute-out">for <a href="/players/jelle-goselink/553311/">J. Goselink</a> 66'</p>
-              </td>
-              <td class="bookings">
-              </td>
-          </tr>
-          <tr class="even">
-              <td class="shirtnumber">25</td>
-              <td class="player large-link">
-                  <p class="substitute substitute-in">
-                      <a href="/players/eros-maddy/568002/" class="flag_16 left_16 netherlands_16_left">E. Maddy</a>
-                      <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
-                  </p>
-                  <p class="substitute substitute-out">for <a href="/players/peter-van-ooijen/218119/">P. van Ooijen</a> 74'</p>
-              </td>
-              <td class="bookings">
-              </td>
-          </tr>
-          <tr class="odd">
-              <td class="shirtnumber">10</td>
-              <td class="player large-link">
-                  <p class="substitute substitute-in">
-                      <a href="/players/arno-van-keilegom/617905/" class="flag_16 left_16 belgium_16_left">A. Van Keilegom</a>
-                      <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
-                  </p>
-                  <p class="substitute substitute-out">for <a href="/players/wassim-essanoussi/649931/">W. Essanoussi</a> 74'</p>
-              </td>
-              <td class="bookings">
-              </td>
-          </tr>
-          <tr class="even">
-              <td class="shirtnumber">5</td>
-              <td class="player large-link">
-                  <p class="substitute substitute-in">
-                      <a href="/players/david-mistrafovic/519270/" class="flag_16 left_16 switzerland_16_left">D. Mistrafović</a>
-                      
-                  </p>
-              </td>
-              <td class="bookings">
-              </td>
-          </tr>
-          <tr class="odd">
-              <td class="shirtnumber">8</td>
-              <td class="player large-link">
-                  <p class="substitute substitute-in">
-                      <a href="/players/marcus-scholten/632543/" class="flag_16 left_16 netherlands_16_left">M. Scholten</a>
-                      
-                  </p>
-              </td>
-              <td class="bookings">
-              </td>
-          </tr>
-          <tr class="even">
-              <td class="shirtnumber">22</td>
-              <td class="player large-link">
-                  <p class="substitute substitute-in">
-                      <a href="/players/ahmed-azmi/632742/" class="flag_16 left_16 morocco_16_left">A. Azmi</a>
-                      
-                  </p>
-              </td>
-              <td class="bookings">
-              </td>
-          </tr>
-          <tr class="odd">
-              <td class="shirtnumber">44</td>
-              <td class="player large-link">
-                  <p class="substitute substitute-in">
-                      <a href="/players/julian-geerts/856393/" class="flag_16 left_16 netherlands_16_left">J. Julian</a>
-                      
-                  </p>
+                  <p class="substitute substitute-out">for <a href="/players/xander-severina/695569/">X. Severina</a> 46'</p>
               </td>
               <td class="bookings">
               </td>
@@ -2086,7 +2130,30 @@ document.addEventListener('DOMContentLoaded', () => {
               <td class="shirtnumber">21</td>
               <td class="player large-link">
                   <p class="substitute substitute-in">
-                      <a href="/players/robin-mantel/502712/" class="flag_16 left_16 belgium_16_left">R. Mantel</a>
+                      <a href="/players/gregor-breinburg/103352/" class="flag_16 left_16 aruba_16_left">G. Breinburg</a>
+                      <img src="/media/v2.1.1/img/events/SI.png" width="12" height="13" title="Invallers" alt="Invallers" />
+                  </p>
+                  <p class="substitute substitute-out">for <a href="/players/dhoraso-moreo-klas/538920/">D. Klas</a> 71'</p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="odd">
+              <td class="shirtnumber">23</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/luuk-koopmans/149059/" class="flag_16 left_16 netherlands_16_left">L. Koopmans</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="even">
+              <td class="shirtnumber">27</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/rafael-struick/835248/" class="flag_16 left_16 netherlands_16_left">R. Struick</a>
                       
                   </p>
               </td>
@@ -2094,10 +2161,87 @@ document.addEventListener('DOMContentLoaded', () => {
               </td>
           </tr>
           <tr class="odd">
-              <td class="shirtnumber">16</td>
+              <td class="shirtnumber">28</td>
               <td class="player large-link">
                   <p class="substitute substitute-in">
-                      <a href="/players/emir-muhammed-terzi/562572/" class="flag_16 left_16 germany_16_left">E. Terzi</a>
+                      <a href="/players/kilian-nikiema/630128/" class="flag_16 left_16 burkina-faso_16_left">K. Nikiéma</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="even">
+              <td class="shirtnumber">24</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/finn-dicke/803176/" class="flag_16 left_16 netherlands_16_left">F. Dicke</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="odd">
+              <td class="shirtnumber">31</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/nigel-owusu/830091/" class="flag_16 left_16 netherlands_16_left">N. Owusu</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="even">
+              <td class="shirtnumber">30</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/malik-sellouki/601547/" class="flag_16 left_16 france_16_left">M. Sellouki</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="odd">
+              <td class="shirtnumber">15</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/sacha-komljenovic/753991/" class="flag_16 left_16 netherlands_16_left">S. Komljenovic</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="even">
+              <td class="shirtnumber">20</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/gylermo-siereveld/632797/" class="flag_16 left_16 netherlands_16_left">G. Siereveld</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="odd">
+              <td class="shirtnumber">14</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/silvinho-esajas/697037/" class="flag_16 left_16 netherlands_16_left">S. Esajas</a>
+                      
+                  </p>
+              </td>
+              <td class="bookings">
+              </td>
+          </tr>
+          <tr class="even">
+              <td class="shirtnumber">45</td>
+              <td class="player large-link">
+                  <p class="substitute substitute-in">
+                      <a href="/players/guillem-rodriguez-martinez/537279/" class="flag_16 left_16 spain_16_left">Guillem Rodríguez</a>
                       
                   </p>
               </td>
@@ -2127,18 +2271,18 @@ document.addEventListener('DOMContentLoaded', () => {
   <tbody>
       <tr>
         <td>Scheidsrechter:</td>
-        <td class="player"><a href="/referees/erwin-blank/151003/" class="flag_16 left _16 netherlands_16_left referee">E. Blank</a></td>
+        <td class="player"><a href="/referees/jeroen-manschot/148750/" class="flag_16 left _16 netherlands_16_left referee">J. Manschot</a></td>
       </tr>
       <tr>
         <td>Assistenten:</td>
         <td class="player">
-          <a href="/referees/frans-ozinga/211853/" class="flag_16 left _16 netherlands_16_left referee">F. Ozinga</a>
-          <a href="/referees/d-frijn/393131/" class="flag_16 left _16 netherlands_16_left referee">D. Frijn</a>
+          <a href="/referees/kevin-bodde/438783/" class="flag_16 left _16 netherlands_16_left referee">K. Bodde</a>
+          <a href="/referees/michael-osseweijer/421895/" class="flag_16 left _16 netherlands_16_left referee">M. Osseweijer</a>
         </td>
       </tr>
       <tr>
         <td>Vierde official:</td>
-        <td class="player"><a href="/referees/t-hardeman/548960/" class="flag_16 left _16 netherlands_16_left referee">T. Hardeman</a></td>
+        <td class="player"><a href="/referees/stijn-van-zuilichem/611303/" class="flag_16 left _16 netherlands_16_left referee">S. van Zuilichem</a></td>
       </tr>
   </tbody>
 </table>
@@ -2166,7 +2310,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="block  clearfix block_match_team_matches-wrapper body-table header-wrapper" id="page_match_1_block_match_team_matches_20-wrapper" data-betting-enabled="">
     <h2 class="header-label ">
         <span class="header-label-2">
-          NAC Breda wedstrijden
+          Heracles Almelo wedstrijden
         </span>
     </h2>
 
@@ -2237,21 +2381,114 @@ document.addEventListener('DOMContentLoaded', () => {
     </thead>
     <tbody>
           
-          <tr class="even      match  border no-date-repetition" data-timestamp="1657904400" id="page_match_1_block_match_team_matches_20_match-3793126" data-competition=732 data-competition=732 data-event-id="99arce3eq38rb12h8pn4e8178" data-competition-uuid="" data-status="Played" data-expand="3793126">
+          <tr class="even      match  border no-date-repetition" data-timestamp="1658579400" id="page_match_1_block_match_team_matches_20_match-3808228" data-competition=732 data-competition=732 data-event-id="dknm9piktk3nuota22s7gl5g" data-competition-uuid="" data-status="Cancelled" data-expand="3808228">
             
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1657904400' data-format='dd/mm/yy'>15/07/22</span></td>
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1658579400' data-format='dd/mm/yy'>23/07/22</span></td>
             <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                    NAC Breda
+                  <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                    Heracles Almelo
+                  </a>
+              </td>
+            
+            <td class="score-time status">
+              <a href="/matches/2022/07/23/world/club-friendlies/stichting-heracles-almelo/ofi-heraklion-fc/3808228/" title="Geannuleerd" class=" ">
+                
+                GEANN
+                
+              </a>
+            </td>
+              <td class="team team-b ">
+                <a href="/teams/greece/ofi-heraklion-fc/1048/" title="OFI Kreta">
+                  OFI Kreta
+                </a>
+              </td>
+            <td class="events-button button first-occur">
+            </td>
+
+
+            
+            
+            
+          </tr>
+          <tr class="odd      match  border no-date-repetition" data-timestamp="1659114000" id="page_match_1_block_match_team_matches_20_match-3793106" data-competition=732 data-competition=732 data-event-id="9ltb3fvjnl2c8kh1wt998h34k" data-competition-uuid="" data-status="Played" data-expand="3793106">
+            
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1659114000' data-format='dd/mm/yy'>29/07/22</span></td>
+            <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
+            
+              <td class="team team-a ">
+                  <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                    Heracles Almelo
                   </a>
               </td>
             
             <td class="score-time score">
-              <a href="/matches/2022/07/15/world/club-friendlies/nac-bv/fc-volendam/3793126/" class="  result-draw">
+              <a href="/matches/2022/07/29/world/club-friendlies/stichting-heracles-almelo/nijmegen-eendracht-combinatie/3793106/" class="  result-loss">
                 
-                0 - 0
+                1 - 3
+                
+              </a>
+            </td>
+              <td class="team team-b strong">
+                <a href="/teams/netherlands/nijmegen-eendracht-combinatie/1528/" title="N.E.C.">
+                  N.E.C.
+                </a>
+              </td>
+            <td class="events-button button first-occur">
+            </td>
+
+
+            
+            
+            
+          </tr>
+          <tr class="even      match  border no-date-repetition" data-timestamp="1659178800" id="page_match_1_block_match_team_matches_20_match-3900683" data-competition=732 data-competition=732 data-event-id="47i6ycmkcuih68xesnzlzvf9w" data-competition-uuid="" data-status="Played" data-expand="3900683">
+            
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1659178800' data-format='dd/mm/yy'>30/07/22</span></td>
+            <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
+            
+              <td class="team team-a strong">
+                  <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                    Heracles Almelo
+                  </a>
+              </td>
+            
+            <td class="score-time score">
+              <a href="/matches/2022/07/30/world/club-friendlies/stichting-heracles-almelo/de-treffers/3900683/" class="  result-win">
+                
+                5 - 0
+                
+              </a>
+            </td>
+              <td class="team team-b ">
+                <a href="/teams/netherlands/de-treffers/4716/" title="De Treffers">
+                  De Treffers
+                </a>
+              </td>
+            <td class="events-button button first-occur">
+            </td>
+
+
+            
+            
+            
+          </tr>
+          <tr class="odd      match  border no-date-repetition" data-timestamp="1659184200" id="page_match_1_block_match_team_matches_20_match-3793107" data-competition=732 data-competition=732 data-event-id="bndbbkxfq3hf7626yosshk7x0" data-competition-uuid="" data-status="Cancelled" data-expand="3793107">
+            
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1659184200' data-format='dd/mm/yy'>30/07/22</span></td>
+            <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
+            
+              <td class="team team-a ">
+                  <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                    Heracles Almelo
+                  </a>
+              </td>
+            
+            <td class="score-time status">
+              <a href="/matches/2022/07/30/world/club-friendlies/stichting-heracles-almelo/fc-volendam/3793107/" title="Geannuleerd" class=" ">
+                
+                GEANN
                 
               </a>
             </td>
@@ -2268,125 +2505,31 @@ document.addEventListener('DOMContentLoaded', () => {
             
             
           </tr>
-          <tr class="odd      match  border no-date-repetition" data-timestamp="1658588400" id="page_match_1_block_match_team_matches_20_match-3793127" data-competition=732 data-competition=732 data-event-id="ckzqnstfd22r1d9qm3tk183ro" data-competition-uuid="" data-status="Played" data-expand="3793127">
-            
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1658588400' data-format='dd/mm/yy'>23/07/22</span></td>
-            <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
-            
-              <td class="team team-a strong">
-                  <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                    NAC Breda
-                  </a>
-              </td>
-            
-            <td class="score-time score">
-              <a href="/matches/2022/07/23/world/club-friendlies/nac-bv/fc-eindhoven/3793127/" class="  result-win">
-                
-                1 - 0
-                
-              </a>
-            </td>
-              <td class="team team-b ">
-                <a href="/teams/netherlands/fc-eindhoven/1549/" title="FC Eindhoven">
-                  FC Eindhoven
-                </a>
-              </td>
-            <td class="events-button button first-occur">
-            </td>
-
-
-            
-            
-            
-          </tr>
-          <tr class="even      match  border no-date-repetition" data-timestamp="1658919600" id="page_match_1_block_match_team_matches_20_match-3804521" data-competition=732 data-competition=732 data-event-id="5ipzt6x0uig82xgcay64q5lhw" data-competition-uuid="" data-status="Played" data-expand="3804521">
-            
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1658919600' data-format='dd/mm/yy'>27/07/22</span></td>
-            <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-1/r66308/" title="Club vriendschappelijk">CLV</a></td>
-            
-              <td class="team team-a strong">
-                  <a href="/teams/netherlands/feyenoord-rotterdam-nv/1518/" title="Feyenoord">
-                    Feyenoord
-                  </a>
-              </td>
-            
-            <td class="score-time score">
-              <a href="/matches/2022/07/27/world/club-friendlies/feyenoord-rotterdam-nv/nac-bv/3804521/" class="  result-loss">
-                
-                6 - 1
-                
-              </a>
-            </td>
-              <td class="team team-b ">
-                <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                  NAC Breda
-                </a>
-              </td>
-            <td class="events-button button first-occur">
-                <a href="/matches/2022/07/27/world/club-friendlies/feyenoord-rotterdam-nv/nac-bv/3804521/#events" title="Bekijk gebeurtenis" class="events-button-button ">Bekijk gebeurtenis</a>
-            </td>
-
-
-            
-            
-            
-          </tr>
-          <tr class="odd      match  border no-date-repetition" data-timestamp="1659202200" id="page_match_1_block_match_team_matches_20_match-3793134" data-competition=732 data-competition=732 data-event-id="2lca6otm9mkp02st4uo5lu0b8" data-competition-uuid="" data-status="Played" data-expand="3793134">
-            
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1659202200' data-format='dd/mm/yy'>30/07/22</span></td>
-            <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
-            
-              <td class="team team-a strong">
-                  <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                    NAC Breda
-                  </a>
-              </td>
-            
-            <td class="score-time score">
-              <a href="/matches/2022/07/30/world/club-friendlies/nac-bv/royal-rivirton-excelsior/3793134/" class="  result-win">
-                
-                2 - 1
-                
-              </a>
-            </td>
-              <td class="team team-b ">
-                <a href="/teams/belgium/royal-rivirton-excelsior/237/" title="Excelsior Virton">
-                  Excelsior Virton
-                </a>
-              </td>
-            <td class="events-button button first-occur">
-            </td>
-
-
-            
-            
-            
-          </tr>
-          <tr class="even      match  border no-date-repetition" data-timestamp="1659722400" id="page_match_1_block_match_team_matches_20_match-3798125" data-competition=5 data-competition=5 data-event-id="ecrtq4eplbqvsjgptsdrfjzmc" data-competition-uuid="" data-status="Played" data-expand="3798125">
+          <tr class="even      match  border no-date-repetition" data-timestamp="1659722400" id="page_match_1_block_match_team_matches_20_match-3798124" data-competition=5 data-competition=5 data-event-id="ecpaoixo1hloenhnfojtv4xlg" data-competition-uuid="" data-status="Played" data-expand="3798124">
             
             <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1659722400' data-format='dd/mm/yy'>05/08/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a strong">
-                  <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                    NAC Breda
+                  <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                    Heracles Almelo
                   </a>
               </td>
             
             <td class="score-time score">
-              <a href="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" class="  result-win">
+              <a href="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" class="  result-win">
                 
-                1 - 0
+                4 - 0
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                  Helmond Sport
+                <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                  ADO Den Haag
                 </a>
               </td>
             <td class="events-button button first-occur">
-                <a href="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/#events" title="Bekijk gebeurtenis" class="events-button-button ">Bekijk gebeurtenis</a>
+                <a href="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/#events" title="Bekijk gebeurtenis" class="events-button-button ">Bekijk gebeurtenis</a>
             </td>
 
 
@@ -2394,27 +2537,27 @@ document.addEventListener('DOMContentLoaded', () => {
             
             
           </tr>
-          <tr class="odd      match  border no-date-repetition" data-timestamp="1660586400" id="page_match_1_block_match_team_matches_20_match-3798653" data-competition=5 data-competition=5 data-event-id="4dp3jstlwax19ic6ndqlly1p0" data-competition-uuid="" data-status="Fixture" data-expand="3798653">
+          <tr class="odd      match  border no-date-repetition" data-timestamp="1660586400" id="page_match_1_block_match_team_matches_20_match-3798651" data-competition=5 data-competition=5 data-event-id="4dg8va25ihfofac8qz344vytw" data-competition-uuid="" data-status="Fixture" data-expand="3798651">
             
             <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1660586400' data-format='dd/mm/yy'>15/08/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/stichting-mvv/1550/" title="MVV Maastricht">
-                    MVV Maastricht
+                  <a href="/teams/netherlands/jong-utrecht/22879/" title="Jong FC Utrecht">
+                    Jong FC Utrecht
                   </a>
               </td>
             
             <td class="score-time status">
-              <a href="/matches/2022/08/15/netherlands/eerste-divisie/stichting-mvv/nac-bv/3798653/" class=" ">
+              <a href="/matches/2022/08/15/netherlands/eerste-divisie/jong-utrecht/stichting-heracles-almelo/3798651/" class=" ">
                 
                 <span class='timestamp' data-value='1660586400' data-format='HH : MM'>20 : 00</span>
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                  NAC Breda
+                <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                  Heracles Almelo
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2425,27 +2568,27 @@ document.addEventListener('DOMContentLoaded', () => {
             
             
           </tr>
-          <tr class="even      match  border no-date-repetition" data-timestamp="1660932000" id="page_match_1_block_match_team_matches_20_match-3798658" data-competition=5 data-competition=5 data-event-id="4e5r1wkgcelfzqelcyv72hous" data-competition-uuid="" data-status="Fixture" data-expand="3798658">
+          <tr class="even      match  border no-date-repetition" data-timestamp="1661191200" id="page_match_1_block_match_team_matches_20_match-3798663" data-competition=5 data-competition=5 data-event-id="4eow7sf1fi0gfbno4b8umu5n8" data-competition-uuid="" data-status="Fixture" data-expand="3798663">
             
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1660932000' data-format='dd/mm/yy'>19/08/22</span></td>
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1661191200' data-format='dd/mm/yy'>22/08/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                    NAC Breda
+                  <a href="/teams/netherlands/jong-psv/4789/" title="Jong PSV">
+                    Jong PSV
                   </a>
               </td>
             
             <td class="score-time status">
-              <a href="/matches/2022/08/19/netherlands/eerste-divisie/nac-bv/bvo-top-oss/3798658/" class=" ">
+              <a href="/matches/2022/08/22/netherlands/eerste-divisie/jong-psv/stichting-heracles-almelo/3798663/" class=" ">
                 
-                <span class='timestamp' data-value='1660932000' data-format='HH : MM'>20 : 00</span>
+                <span class='timestamp' data-value='1661191200' data-format='HH : MM'>20 : 00</span>
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/bvo-top-oss/1542/" title="TOP Oss">
-                  TOP Oss
+                <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                  Heracles Almelo
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2456,27 +2599,27 @@ document.addEventListener('DOMContentLoaded', () => {
             
             
           </tr>
-          <tr class="odd      match  border no-date-repetition" data-timestamp="1661536800" id="page_match_1_block_match_team_matches_20_match-3798670" data-competition=5 data-competition=5 data-event-id="4fdm3a9yqw0xxej1zv4lc2hp0" data-competition-uuid="" data-status="Fixture" data-expand="3798670">
+          <tr class="odd      match  border no-date-repetition" data-timestamp="1661796000" id="page_match_1_block_match_team_matches_20_match-3798667" data-competition=5 data-competition=5 data-event-id="4f3fnd9v9c9n4yz2r98t3svmc" data-competition-uuid="" data-status="Fixture" data-expand="3798667">
             
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1661536800' data-format='dd/mm/yy'>26/08/22</span></td>
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1661796000' data-format='dd/mm/yy'>29/08/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/roda-jc/1520/" title="Roda JC Kerkrade">
-                    Roda JC Kerkrade
+                  <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                    Heracles Almelo
                   </a>
               </td>
             
             <td class="score-time status">
-              <a href="/matches/2022/08/26/netherlands/eerste-divisie/roda-jc/nac-bv/3798670/" class=" ">
+              <a href="/matches/2022/08/29/netherlands/eerste-divisie/stichting-heracles-almelo/stichting-mvv/3798667/" class=" ">
                 
-                <span class='timestamp' data-value='1661536800' data-format='HH : MM'>20 : 00</span>
+                <span class='timestamp' data-value='1661796000' data-format='HH : MM'>20 : 00</span>
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                  NAC Breda
+                <a href="/teams/netherlands/stichting-mvv/1550/" title="MVV Maastricht">
+                  MVV Maastricht
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2487,27 +2630,27 @@ document.addEventListener('DOMContentLoaded', () => {
             
             
           </tr>
-          <tr class="even      match  border no-date-repetition" data-timestamp="1662141600" id="page_match_1_block_match_team_matches_20_match-3798676" data-competition=5 data-competition=5 data-event-id="4fzxvcjn3yr8upaptlzm13o5w" data-competition-uuid="" data-status="Fixture" data-expand="3798676">
+          <tr class="even      match  border no-date-repetition" data-timestamp="1662400800" id="page_match_1_block_match_team_matches_20_match-3798681" data-competition=5 data-competition=5 data-event-id="4ghh02w6e7q3b31r9q5mu5mac" data-competition-uuid="" data-status="Fixture" data-expand="3798681">
             
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1662141600' data-format='dd/mm/yy'>02/09/22</span></td>
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1662400800' data-format='dd/mm/yy'>05/09/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                    NAC Breda
+                  <a href="/teams/netherlands/jong-ajax/4781/" title="Jong Ajax">
+                    Jong Ajax
                   </a>
               </td>
             
             <td class="score-time status">
-              <a href="/matches/2022/09/02/netherlands/eerste-divisie/nac-bv/fc-eindhoven/3798676/" class=" ">
+              <a href="/matches/2022/09/05/netherlands/eerste-divisie/jong-ajax/stichting-heracles-almelo/3798681/" class=" ">
                 
-                <span class='timestamp' data-value='1662141600' data-format='HH : MM'>20 : 00</span>
+                <span class='timestamp' data-value='1662400800' data-format='HH : MM'>20 : 00</span>
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/fc-eindhoven/1549/" title="FC Eindhoven">
-                  FC Eindhoven
+                <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                  Heracles Almelo
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2518,27 +2661,27 @@ document.addEventListener('DOMContentLoaded', () => {
             
             
           </tr>
-          <tr class="odd      match  border no-date-repetition" data-timestamp="1662746400" id="page_match_1_block_match_team_matches_20_match-3798688" data-competition=5 data-competition=5 data-event-id="4h7mc9vstklife7fzlv5vtc7o" data-competition-uuid="" data-status="Fixture" data-expand="3798688">
+          <tr class="odd      match  border no-date-repetition" data-timestamp="1662746400" id="page_match_1_block_match_team_matches_20_match-3798689" data-competition=5 data-competition=5 data-event-id="4hb2pmnflblvx7zkvvgjfiuj8" data-competition-uuid="" data-status="Fixture" data-expand="3798689">
             
             <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1662746400' data-format='dd/mm/yy'>09/09/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/bv-de-graafschap/1537/" title="De Graafschap">
-                    De Graafschap
+                  <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                    Heracles Almelo
                   </a>
               </td>
             
             <td class="score-time status">
-              <a href="/matches/2022/09/09/netherlands/eerste-divisie/bv-de-graafschap/nac-bv/3798688/" class=" ">
+              <a href="/matches/2022/09/09/netherlands/eerste-divisie/stichting-heracles-almelo/vvv-venlo/3798689/" class=" ">
                 
                 <span class='timestamp' data-value='1662746400' data-format='HH : MM'>20 : 00</span>
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                  NAC Breda
+                <a href="/teams/netherlands/vvv-venlo/1538/" title="VVV-Venlo">
+                  VVV-Venlo
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2562,7 +2705,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   <script>
   (function() {
-    var block = new MatchesBlock('page_match_1_block_match_team_matches_20', 'block_match_team_matches', {"page":0,"block_service_id":"match_summary_block_matchteammatches","team_id":1524,"competition_id":0,"filter":"all","new_design":false});
+    var block = new MatchesBlock('page_match_1_block_match_team_matches_20', 'block_match_team_matches', {"page":0,"block_service_id":"match_summary_block_matchteammatches","team_id":1536,"competition_id":0,"filter":"all","new_design":false});
     block.registerForCallbacks();
     block.addCallbackObserver('page_match_1_block_match_team_matches_20_1_1', 'changeCompetition', {"competition_id":0});
 block.addCallbackObserver('page_match_1_block_match_team_matches_20_1_2', 'changeCompetition', {"competition_id":5});
@@ -2589,7 +2732,7 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
   <div class="block  clearfix block_match_team_matches-wrapper body-table header-wrapper" id="page_match_1_block_match_team_matches_21-wrapper" data-betting-enabled="">
     <h2 class="header-label ">
         <span class="header-label-2">
-          Helmond Sport wedstrijden
+          ADO Den Haag wedstrijden
         </span>
     </h2>
 
@@ -2607,7 +2750,10 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
               <a id="page_match_1_block_match_team_matches_21_1_2" class="" >Keuken Kampioen Divisie</a>
             </li>
             <li>
-              <a id="page_match_1_block_match_team_matches_21_1_3" class="" >Club vriendschappelijk</a>
+              <a id="page_match_1_block_match_team_matches_21_1_3" class="" >Play-offs 1/2</a>
+            </li>
+            <li>
+              <a id="page_match_1_block_match_team_matches_21_1_4" class="" >Club vriendschappelijk</a>
             </li>
         </ul>
       </div>
@@ -2657,30 +2803,31 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
     </thead>
     <tbody>
           
-          <tr class="even      match  border no-date-repetition" data-timestamp="1657616400" id="page_match_1_block_match_team_matches_21_match-3855355" data-competition=732 data-competition=732 data-event-id="8a5nxtq21bycoksjoih92eb6c" data-competition-uuid="" data-status="Played" data-expand="3855355">
+          <tr class="even      match  border no-date-repetition" data-timestamp="1653840000" id="page_match_1_block_match_team_matches_21_match-3789693" data-competition=286 data-competition=286 data-event-id="ac92zpgbyru4wamk0isrjtvys" data-competition-uuid="" data-status="Played" data-expand="3789693">
             
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1657616400' data-format='dd/mm/yy'>12/07/22</span></td>
-            <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1653840000' data-format='dd/mm/yy'>29/05/22</span></td>
+            <td class="competition"><a href="/national/netherlands/nacompetitie/20212022/3rd-round/r63399/" title="Play-offs 1/2">PL1</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                    Helmond Sport
+                  <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                    ADO Den Haag
                   </a>
               </td>
             
             <td class="score-time score">
-              <a href="/matches/2022/07/12/world/club-friendlies/stichting-helmond-sport/royal-sporting-club-anderlecht/3855355/" class="  result-loss">
-                
-                0 - 2
-                
+              <a href="/matches/2022/05/29/netherlands/nacompetitie/hfc-ado-den-haag/sbv-excelsior/3789693/" class="  result-loss">
+                <span class="score-addition score-addition-left ">P</span>
+                4 - 4
+                <span class="score-addition score-addition-right addition-visible">P</span>
               </a>
             </td>
               <td class="team team-b strong">
-                <a href="/teams/belgium/royal-sporting-club-anderlecht/215/" title="Anderlecht">
-                  Anderlecht
+                <a href="/teams/netherlands/sbv-excelsior/1532/" title="Excelsior">
+                  Excelsior
                 </a>
               </td>
             <td class="events-button button first-occur">
+                <a href="/matches/2022/05/29/netherlands/nacompetitie/hfc-ado-den-haag/sbv-excelsior/3789693/#events" title="Bekijk gebeurtenis" class="events-button-button ">Bekijk gebeurtenis</a>
             </td>
 
 
@@ -2688,27 +2835,27 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
             
             
           </tr>
-          <tr class="odd      match  border no-date-repetition" data-timestamp="1657980000" id="page_match_1_block_match_team_matches_21_match-3796218" data-competition=732 data-competition=732 data-event-id="5fdze08m5za3j49v4zzdm2ck4" data-competition-uuid="" data-status="Played" data-expand="3796218">
+          <tr class="odd      match  border no-date-repetition" data-timestamp="1657972800" id="page_match_1_block_match_team_matches_21_match-3814444" data-competition=732 data-competition=732 data-event-id="brtkgostm1jojr4wawtdlvi1g" data-competition-uuid="" data-status="Cancelled" data-expand="3814444">
             
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1657980000' data-format='dd/mm/yy'>16/07/22</span></td>
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1657972800' data-format='dd/mm/yy'>16/07/22</span></td>
             <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                    Helmond Sport
+                  <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                    ADO Den Haag
                   </a>
               </td>
             
-            <td class="score-time score">
-              <a href="/matches/2022/07/16/world/club-friendlies/stichting-helmond-sport/stichting-go-ahead-eagles/3796218/" class="  result-draw">
+            <td class="score-time status">
+              <a href="/matches/2022/07/16/world/club-friendlies/hfc-ado-den-haag/kmsk-deinze/3814444/" title="Geannuleerd" class=" ">
                 
-                1 - 1
+                GEANN
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/stichting-go-ahead-eagles/1540/" title="Go Ahead Eagles">
-                  Go Ahead Eagles
+                <a href="/teams/belgium/kmsk-deinze/238/" title="Deinze">
+                  Deinze
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2719,58 +2866,27 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
             
             
           </tr>
-          <tr class="even      match  border no-date-repetition" data-timestamp="1658595600" id="page_match_1_block_match_team_matches_21_match-3796482" data-competition=732 data-competition=732 data-event-id="5c1iw2ggk5e9epgdprcrv504" data-competition-uuid="" data-status="Played" data-expand="3796482">
+          <tr class="even      match  border no-date-repetition" data-timestamp="1658509200" id="page_match_1_block_match_team_matches_21_match-3866707" data-competition=732 data-competition=732 data-event-id="781r9ahptlx4cd5nq14bg31g4" data-competition-uuid="" data-status="Played" data-expand="3866707">
             
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1658595600' data-format='dd/mm/yy'>23/07/22</span></td>
-            <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
-            
-              <td class="team team-a ">
-                  <a href="/teams/belgium/lierse-kempenzonen/44363/" title="Lierse K">
-                    Lierse K
-                  </a>
-              </td>
-            
-            <td class="score-time score">
-              <a href="/matches/2022/07/23/world/club-friendlies/lierse-kempenzonen/stichting-helmond-sport/3796482/" class="  result-win">
-                
-                0 - 1
-                
-              </a>
-            </td>
-              <td class="team team-b strong">
-                <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                  Helmond Sport
-                </a>
-              </td>
-            <td class="events-button button first-occur">
-            </td>
-
-
-            
-            
-            
-          </tr>
-          <tr class="odd      match  border no-date-repetition" data-timestamp="1659193200" id="page_match_1_block_match_team_matches_21_match-3803659" data-competition=732 data-competition=732 data-event-id="8aka17w66lolewcv1t5209qfo" data-competition-uuid="" data-status="Played" data-expand="3803659">
-            
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1659193200' data-format='dd/mm/yy'>30/07/22</span></td>
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1658509200' data-format='dd/mm/yy'>22/07/22</span></td>
             <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
             
               <td class="team team-a strong">
-                  <a href="/teams/belgium/kv-red-star-waasland/250/" title="SK Beveren">
-                    SK Beveren
+                  <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                    ADO Den Haag
                   </a>
               </td>
             
             <td class="score-time score">
-              <a href="/matches/2022/07/30/world/club-friendlies/kv-red-star-waasland/stichting-helmond-sport/3803659/" class="  result-loss">
+              <a href="/matches/2022/07/22/world/club-friendlies/hfc-ado-den-haag/kv-red-star-waasland/3866707/" class="  result-win">
                 
                 2 - 1
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                  Helmond Sport
+                <a href="/teams/belgium/kv-red-star-waasland/250/" title="SK Beveren">
+                  SK Beveren
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2781,31 +2897,62 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
             
             
           </tr>
-          <tr class="even      match  border no-date-repetition" data-timestamp="1659722400" id="page_match_1_block_match_team_matches_21_match-3798125" data-competition=5 data-competition=5 data-event-id="ecrtq4eplbqvsjgptsdrfjzmc" data-competition-uuid="" data-status="Played" data-expand="3798125">
+          <tr class="odd      match  border no-date-repetition" data-timestamp="1659114000" id="page_match_1_block_match_team_matches_21_match-3824500" data-competition=732 data-competition=732 data-event-id="34jq080z998zslflvfkbsza50" data-competition-uuid="" data-status="Cancelled" data-expand="3824500">
+            
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1659114000' data-format='dd/mm/yy'>29/07/22</span></td>
+            <td class="competition"><a href="/international/world/club-friendlies/2022/club-friendlies-3/r66310/" title="Club vriendschappelijk">CLV</a></td>
+            
+              <td class="team team-a ">
+                  <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                    ADO Den Haag
+                  </a>
+              </td>
+            
+            <td class="score-time status">
+              <a href="/matches/2022/07/29/world/club-friendlies/hfc-ado-den-haag/fc-volendam/3824500/" title="Geannuleerd" class=" ">
+                
+                GEANN
+                
+              </a>
+            </td>
+              <td class="team team-b ">
+                <a href="/teams/netherlands/fc-volendam/1531/" title="FC Volendam">
+                  FC Volendam
+                </a>
+              </td>
+            <td class="events-button button first-occur">
+            </td>
+
+
+            
+            
+            
+          </tr>
+          <tr class="even      match  border no-date-repetition" data-timestamp="1659722400" id="page_match_1_block_match_team_matches_21_match-3798124" data-competition=5 data-competition=5 data-event-id="ecpaoixo1hloenhnfojtv4xlg" data-competition-uuid="" data-status="Played" data-expand="3798124">
             
             <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1659722400' data-format='dd/mm/yy'>05/08/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a strong">
-                  <a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">
-                    NAC Breda
+                  <a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">
+                    Heracles Almelo
                   </a>
               </td>
             
             <td class="score-time score">
-              <a href="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/" class="  result-loss">
+              <a href="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/" class="  result-loss">
                 
-                1 - 0
+                4 - 0
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                  Helmond Sport
+                <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                  ADO Den Haag
                 </a>
               </td>
             <td class="events-button button first-occur">
-                <a href="/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/#events" title="Bekijk gebeurtenis" class="events-button-button ">Bekijk gebeurtenis</a>
+                <a href="/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/#events" title="Bekijk gebeurtenis" class="events-button-button ">Bekijk gebeurtenis</a>
             </td>
 
 
@@ -2813,27 +2960,27 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
             
             
           </tr>
-          <tr class="odd      match  border no-date-repetition" data-timestamp="1660327200" id="page_match_1_block_match_team_matches_21_match-3798647" data-competition=5 data-competition=5 data-event-id="4cyleafwbadlfxh618gk1aas4" data-competition-uuid="" data-status="Fixture" data-expand="3798647">
+          <tr class="odd      match  border no-date-repetition" data-timestamp="1660472100" id="page_match_1_block_match_team_matches_21_match-3798650" data-competition=5 data-competition=5 data-event-id="4dbwo0vvn785d1zm8gnsjpwyc" data-competition-uuid="" data-status="Fixture" data-expand="3798650">
             
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1660327200' data-format='dd/mm/yy'>12/08/22</span></td>
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1660472100' data-format='dd/mm/yy'>14/08/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                    Helmond Sport
+                  <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                    ADO Den Haag
                   </a>
               </td>
             
             <td class="score-time status">
-              <a href="/matches/2022/08/12/netherlands/eerste-divisie/stichting-helmond-sport/jong-az/3798647/" class=" ">
+              <a href="/matches/2022/08/14/netherlands/eerste-divisie/hfc-ado-den-haag/fc-den-bosch/3798650/" class=" ">
                 
-                <span class='timestamp' data-value='1660327200' data-format='HH : MM'>20 : 00</span>
+                <span class='timestamp' data-value='1660472100' data-format='HH : MM'>12 : 15</span>
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/jong-az/7253/" title="Jong AZ">
-                  Jong AZ
+                <a href="/teams/netherlands/fc-den-bosch/1533/" title="FC Den Bosch">
+                  FC Den Bosch
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2844,27 +2991,27 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
             
             
           </tr>
-          <tr class="even      match  border no-date-repetition" data-timestamp="1660932000" id="page_match_1_block_match_team_matches_21_match-3798656" data-competition=5 data-competition=5 data-event-id="4dz4phy5h99kvb5nv0je70avo" data-competition-uuid="" data-status="Fixture" data-expand="3798656">
+          <tr class="even      match  border no-date-repetition" data-timestamp="1660932000" id="page_match_1_block_match_team_matches_21_match-3798657" data-competition=5 data-competition=5 data-event-id="4e2dq32vii1pf6yfzx3j571uc" data-competition-uuid="" data-status="Fixture" data-expand="3798657">
             
             <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1660932000' data-format='dd/mm/yy'>19/08/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                    Helmond Sport
+                  <a href="/teams/netherlands/stichting-mvv/1550/" title="MVV Maastricht">
+                    MVV Maastricht
                   </a>
               </td>
             
             <td class="score-time status">
-              <a href="/matches/2022/08/19/netherlands/eerste-divisie/stichting-helmond-sport/fc-eindhoven/3798656/" class=" ">
+              <a href="/matches/2022/08/19/netherlands/eerste-divisie/stichting-mvv/hfc-ado-den-haag/3798657/" class=" ">
                 
                 <span class='timestamp' data-value='1660932000' data-format='HH : MM'>20 : 00</span>
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/fc-eindhoven/1549/" title="FC Eindhoven">
-                  FC Eindhoven
+                <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                  ADO Den Haag
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2875,27 +3022,27 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
             
             
           </tr>
-          <tr class="odd      match  border no-date-repetition" data-timestamp="1661536800" id="page_match_1_block_match_team_matches_21_match-3798671" data-competition=5 data-competition=5 data-event-id="4fgzcqmpf9yv24f2ooy5tld04" data-competition-uuid="" data-status="Fixture" data-expand="3798671">
+          <tr class="odd      match  border no-date-repetition" data-timestamp="1661681700" id="page_match_1_block_match_team_matches_21_match-3798672" data-competition=5 data-competition=5 data-event-id="4fkknxrccn9zf8wb65ubukp3o" data-competition-uuid="" data-status="Fixture" data-expand="3798672">
             
-            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1661536800' data-format='dd/mm/yy'>26/08/22</span></td>
+            <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1661681700' data-format='dd/mm/yy'>28/08/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/stormvogels-telstar-combinatie/1544/" title="Telstar">
-                    Telstar
+                  <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                    ADO Den Haag
                   </a>
               </td>
             
             <td class="score-time status">
-              <a href="/matches/2022/08/26/netherlands/eerste-divisie/stormvogels-telstar-combinatie/stichting-helmond-sport/3798671/" class=" ">
+              <a href="/matches/2022/08/28/netherlands/eerste-divisie/hfc-ado-den-haag/jong-ajax/3798672/" class=" ">
                 
-                <span class='timestamp' data-value='1661536800' data-format='HH : MM'>20 : 00</span>
+                <span class='timestamp' data-value='1661681700' data-format='HH : MM'>12 : 15</span>
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                  Helmond Sport
+                <a href="/teams/netherlands/jong-ajax/4781/" title="Jong Ajax">
+                  Jong Ajax
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2906,27 +3053,27 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
             
             
           </tr>
-          <tr class="even      match  border no-date-repetition" data-timestamp="1662141600" id="page_match_1_block_match_team_matches_21_match-3798675" data-competition=5 data-competition=5 data-event-id="4fv2jget1cjr12jupvtjw5hxw" data-competition-uuid="" data-status="Fixture" data-expand="3798675">
+          <tr class="even      match  border no-date-repetition" data-timestamp="1662141600" id="page_match_1_block_match_team_matches_21_match-3798679" data-competition=5 data-competition=5 data-event-id="4gaeugx4urwme5ybegifgff2s" data-competition-uuid="" data-status="Fixture" data-expand="3798679">
             
             <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1662141600' data-format='dd/mm/yy'>02/09/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                    Helmond Sport
+                  <a href="/teams/netherlands/sbv-willem-ii-tilburg/1521/" title="Willem II">
+                    Willem II
                   </a>
               </td>
             
             <td class="score-time status">
-              <a href="/matches/2022/09/02/netherlands/eerste-divisie/stichting-helmond-sport/fc-omniworld/3798675/" class=" ">
+              <a href="/matches/2022/09/02/netherlands/eerste-divisie/sbv-willem-ii-tilburg/hfc-ado-den-haag/3798679/" class=" ">
                 
                 <span class='timestamp' data-value='1662141600' data-format='HH : MM'>20 : 00</span>
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/fc-omniworld/4529/" title="Almere City FC">
-                  Almere City FC
+                <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                  ADO Den Haag
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2937,27 +3084,27 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
             
             
           </tr>
-          <tr class="odd      match  border no-date-repetition" data-timestamp="1662746400" id="page_match_1_block_match_team_matches_21_match-3798693" data-competition=5 data-competition=5 data-event-id="4hqcrrb3jbijfom9kaojh5hqs" data-competition-uuid="" data-status="Fixture" data-expand="3798693">
+          <tr class="odd      match  border no-date-repetition" data-timestamp="1662746400" id="page_match_1_block_match_team_matches_21_match-3798684" data-competition=5 data-competition=5 data-event-id="4gslvo0pwd3qbqg0ibprt5ij8" data-competition-uuid="" data-status="Fixture" data-expand="3798684">
             
             <td class="full-date" nowrap="nowrap"><span class='timestamp' data-value='1662746400' data-format='dd/mm/yy'>09/09/22</span></td>
             <td class="competition"><a href="/national/netherlands/eerste-divisie/20222023/regular-season/r68964/" title="Keuken Kampioen Divisie">KKD</a></td>
             
               <td class="team team-a ">
-                  <a href="/teams/netherlands/jong-utrecht/22879/" title="Jong FC Utrecht">
-                    Jong FC Utrecht
+                  <a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">
+                    ADO Den Haag
                   </a>
               </td>
             
             <td class="score-time status">
-              <a href="/matches/2022/09/09/netherlands/eerste-divisie/jong-utrecht/stichting-helmond-sport/3798693/" class=" ">
+              <a href="/matches/2022/09/09/netherlands/eerste-divisie/hfc-ado-den-haag/jong-az/3798684/" class=" ">
                 
                 <span class='timestamp' data-value='1662746400' data-format='HH : MM'>20 : 00</span>
                 
               </a>
             </td>
               <td class="team team-b ">
-                <a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">
-                  Helmond Sport
+                <a href="/teams/netherlands/jong-az/7253/" title="Jong AZ">
+                  Jong AZ
                 </a>
               </td>
             <td class="events-button button first-occur">
@@ -2981,11 +3128,12 @@ block.addCallbackObserver('page_match_1_block_match_team_matches_20_2_3', 'filte
   </div>
   <script>
   (function() {
-    var block = new MatchesBlock('page_match_1_block_match_team_matches_21', 'block_match_team_matches', {"page":0,"block_service_id":"match_summary_block_matchteammatches","team_id":1534,"competition_id":0,"filter":"all","new_design":false});
+    var block = new MatchesBlock('page_match_1_block_match_team_matches_21', 'block_match_team_matches', {"page":0,"block_service_id":"match_summary_block_matchteammatches","team_id":1514,"competition_id":0,"filter":"all","new_design":false});
     block.registerForCallbacks();
     block.addCallbackObserver('page_match_1_block_match_team_matches_21_1_1', 'changeCompetition', {"competition_id":0});
 block.addCallbackObserver('page_match_1_block_match_team_matches_21_1_2', 'changeCompetition', {"competition_id":5});
-block.addCallbackObserver('page_match_1_block_match_team_matches_21_1_3', 'changeCompetition', {"competition_id":732});
+block.addCallbackObserver('page_match_1_block_match_team_matches_21_1_3', 'changeCompetition', {"competition_id":286});
+block.addCallbackObserver('page_match_1_block_match_team_matches_21_1_4', 'changeCompetition', {"competition_id":732});
 block.addCallbackObserver('page_match_1_block_match_team_matches_21_2_1', 'filterMatches', {"filter":"all"});
 block.addCallbackObserver('page_match_1_block_match_team_matches_21_2_2', 'filterMatches', {"filter":"home"});
 block.addCallbackObserver('page_match_1_block_match_team_matches_21_2_3', 'filterMatches', {"filter":"away"});
@@ -3058,7 +3206,7 @@ target_type: 'mix'
         widgetSize: "MPU2",
         pageCode: "EV",
         competitionId: "",
-        eventId: "3798125",
+        eventId: "3798124",
         teamId: "",
         playerId: "",
         analytics: {
@@ -3146,7 +3294,7 @@ target_type: 'mix'
       </tr>
     </thead>
     <tbody>
-      <tr class="odd   team_rank"  id="team_rank_row_1536" data-team_id="1536">
+      <tr class="odd highlight  team_rank"  id="team_rank_row_1536" data-team_id="1536">
         <td class="rank rank-dark-green">1</td>
         <td class="text team large-link"><a href="/teams/netherlands/stichting-heracles-almelo/1536/" title="Heracles Almelo">Heracles Almelo</a></td>
 
@@ -3296,7 +3444,7 @@ target_type: 'mix'
 
 
       </tr>
-      <tr class="even highlight  team_rank"  id="team_rank_row_1524" data-team_id="1524">
+      <tr class="even   team_rank"  id="team_rank_row_1524" data-team_id="1524">
         <td class="rank ">6</td>
         <td class="text team large-link"><a href="/teams/netherlands/nac-bv/1524/" title="NAC Breda">NAC Breda</a></td>
 
@@ -3566,7 +3714,7 @@ target_type: 'mix'
 
 
       </tr>
-      <tr class="odd highlight  team_rank"  id="team_rank_row_1534" data-team_id="1534">
+      <tr class="odd   team_rank"  id="team_rank_row_1534" data-team_id="1534">
         <td class="rank ">15</td>
         <td class="text team large-link"><a href="/teams/netherlands/stichting-helmond-sport/1534/" title="Helmond Sport">Helmond Sport</a></td>
 
@@ -3716,7 +3864,7 @@ target_type: 'mix'
 
 
       </tr>
-      <tr class="even   team_rank"  id="team_rank_row_1514" data-team_id="1514">
+      <tr class="even highlight  team_rank"  id="team_rank_row_1514" data-team_id="1514">
         <td class="rank ">20</td>
         <td class="text team large-link"><a href="/teams/netherlands/hfc-ado-den-haag/1514/" title="ADO Den Haag">ADO Den Haag</a></td>
 

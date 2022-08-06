@@ -7,14 +7,48 @@ from bs4.element import ResultSet, Tag
 from typing import List, Tuple
 import re
 import codecs
+import os
 
 
-def read_html_from_url(location_to_scrape:str) -> str:
+EXAMPLE_MATCH_URLS = {
+    'default':'https://nl.soccerway.com/matches/2022/05/15/netherlands/eredivisie/sbv-vitesse/afc-ajax/3512762/',
+    'pen_missed':'https://nl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/',
+    'red_card':'https://nl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/',
+}
+EXAMPLE_TXT_PATH = 'scraper_soccerway\html_examples'
+
+
+def read_html_from_url(location_to_scrape: str, scenario_file: str = None) -> str:
+    """Read html from URL and save as txt file if desired."""
     REQUEST_HEADERS = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:100.0) Gecko/20100101 Firefox/100.0"}
     result = requests.get(location_to_scrape, headers=REQUEST_HEADERS)
-    with open('test_html.txt', 'w', encoding='utf-8') as f:
-        f.write(result.text)
+
+    if scenario_file:
+        with open(file=scenario_file, mode='x', encoding='utf-8') as f:
+            f.write(result.text)
+        print(f'Saved scraping result as {scenario_file}')
+
     return result.text
+
+
+def load_sample(scenario: str) -> str:
+    """Load a sample, either from file or from url."""
+
+    scenario_file = os.path.join(os.getcwd(), EXAMPLE_TXT_PATH, f'{scenario}.txt')
+    scenario_file_exists = os.path.exists(scenario_file)
+    print(f'{scenario_file} exists: {scenario_file_exists}')
+
+    if scenario_file_exists:
+        html_string = read_html_from_file(scenario_file)
+    else:
+        if example_match in EXAMPLE_MATCH_URLS.keys():
+            url = EXAMPLE_MATCH_URLS[example_match]
+        else: 
+            print(f'Example match name {example_match} not found, scraping default url.')
+            url = EXAMPLE_MATCH_URLS['default']
+        html_string = read_html_from_url(url, scenario_file)    
+
+    return html_string
 
 
 def read_html_from_file(location_to_scrape:str) -> str:
@@ -63,8 +97,6 @@ def determine_winning_team(score_home: int, score_away: int, lineups: pd.DataFra
         lineups['Draw'] = True
     
     return lineups
-
-
 
 
 def find_all_links_in_table(soup: BeautifulSoup) -> List: 
@@ -203,7 +235,7 @@ def return_minute_after_image_search(link_list: list[int], img_name: str, row: T
     
 def extract_match_events_from_lineup_container(
     html_string: str
-    ) -> Tuple[List[str], List[str], List[str], List[str], List[str], List[str], List[int]]:
+    ) -> Tuple[List[str], List[str], List[str], List[str], List[str], List[str], List[int], List[int]]:
     """Extract important match events from the HTML, return as a tuple of lists"""
 
     soup = BeautifulSoup(html_string, 'html.parser')
@@ -217,6 +249,7 @@ def extract_match_events_from_lineup_container(
     goals_own = []
     penalty_missed = []
     minutes_red_card = []
+    minutes_pen_mis = []
 
     for result in soup_lineups:
         rows = result.find_all('tr')
@@ -232,29 +265,40 @@ def extract_match_events_from_lineup_container(
                     return_href_after_image_search(goals_own, '/OG.png', row, child)
                     return_href_after_image_search(penalty_missed, '/PM.png', row, child)
 
+                    return_minute_after_image_search(minutes_red_card, '/Y2C.png', row, child)
                     return_minute_after_image_search(minutes_red_card, '/RC.png', row, child)
+                    return_minute_after_image_search(minutes_pen_mis, '/PM.png', row, child)
                     
-    return cards_yellow, cards_red, goals_general, goals_penalty, goals_own, penalty_missed, minutes_red_card
+    return cards_yellow, cards_red, goals_general, goals_penalty, goals_own, penalty_missed, minutes_red_card, minutes_pen_mis
     
 
 def append_match_events(html_string: str, lineups: pd.DataFrame) -> pd.DataFrame:
     """Append the lineups with information on who took part in match events."""
     
     lineups[['KaartGeel', 'KaartRood', 'Goal', 'GoalEigen', 'PenaltyGoal', 'PenaltyGemist']] = 0
-    yc, rc, goals, goals_pen, goals_own, pen_mis, rc_min = extract_match_events_from_lineup_container(html_string)
+    yc, rc, goals, goals_pen, goals_own, pen_mis, rc_min, pen_mis_min = extract_match_events_from_lineup_container(html_string)
     
-    for player_href in yc: lineups.loc[player_href == lineups['Link'], 'KaartGeel'] += 1 
-    for player_href in rc: lineups.loc[player_href == lineups['Link'], 'KaartRood'] += 1 
+    for player_href in yc: lineups.loc[player_href == lineups['Link'], 'KaartGeel'] += 1      
     for player_href in goals: lineups.loc[player_href == lineups['Link'], 'Goal'] += 1 
     for player_href in goals_pen: lineups.loc[player_href == lineups['Link'], 'GoalEigen'] += 1 
     for player_href in goals_own: lineups.loc[player_href == lineups['Link'], 'PenaltyGoal'] += 1 
-    for player_href in pen_mis: lineups.loc[player_href == lineups['Link'], 'PenaltyGemist'] += 1 
-        
+    
+    # Red Card has extra logic for minutes played
+    for player_href, minutes in zip(rc, rc_min): 
+        lineups.loc[player_href == lineups['Link'], 'KaartRood'] += 1
+        lineups.loc[player_href == lineups['Link'], 'Minuten_Gespeeld'] -= (90-minutes)
+
+    # Penalty missed: extra logic to give active goalkeeper of opposition a +1 on PenaltyStopped
+    # TODO: This needs info on player positions (G)
+    for player_href, minutes in zip(pen_mis, pen_mis_min):
+        lineups.loc[player_href == lineups['Link'], 'PenaltyGemist'] += 1     
+
     return lineups
 
-url = 'https://nl.soccerway.com/matches/2022/05/15/netherlands/eredivisie/sbv-vitesse/afc-ajax/3512762/'
-filepath = 'test_html.txt' 
-html_string = read_html_text(filepath)
+
+# Select example match
+example_match = 'default'
+html_string = load_sample(example_match)
 
 club_urls = extract_url_by_class(html_string, 'a', 'team-title')
 match_state = extract_txt_by_class(html_string, 'span', 'match-state')
@@ -276,6 +320,6 @@ print(lineups.columns)
 print(lineups)
 
 # TODO: Add penalty stopped to goalkeeper
-# TODO: calculate minutes played for subs and players with red cards
+
 
 
