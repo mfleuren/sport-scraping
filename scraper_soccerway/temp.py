@@ -317,17 +317,40 @@ def extract_squad_from_html(html_string: str) -> pd.DataFrame:
     return result_short
 
 
+def extract_matches_from_html(html_string: str) -> pd.DataFrame:
+    """Extract info from matches table."""
+
+    # Extract basic table 
+    soup = BeautifulSoup(html_string, 'html.parser')
+    result = parse_html_table(soup)
+    result.columns = ['Datum', 'Competitie', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1', 'x2']
+
+    # Extract URLS
+    soup_matches = soup.find_all('table', class_='matches')
+    all_urls = find_all_links_in_table(soup_matches[0])
+    all_urls_no_events = [url for url in all_urls if '#events' not in url]    
+    chunk_size = 4
+    urls_in_chunks = [all_urls_no_events[i:i+chunk_size] for i in range(0, len(all_urls_no_events), chunk_size)]    
+    result[['x3', 'url_club_home', 'url_match', 'url_club_away']] = urls_in_chunks
+
+    # Filter only Eredivisie
+    result = result[result['Competitie'] == 'ERE']
+
+    # Drop unnecessary columns
+    result.drop(['x1', 'x2', 'x3'], axis=1, inplace=True)
+    return result
+
+
 # Select example match
-example_match = 'squad'
+example_match = 'matches'
 html_string = load_sample(example_match)
 
 if example_match == 'squad':
     squad = extract_squad_from_html(html_string)
-    print(squad.head())
 elif example_match == 'clubs':
     pass
 elif example_match == 'matches':
-    pass
+    matches =  extract_matches_from_html(html_string)
 else:
     club_urls = extract_url_by_class(html_string, 'a', 'team-title')
     match_state = extract_txt_by_class(html_string, 'span', 'match-state')
@@ -349,6 +372,7 @@ else:
     print(lineups)
 
     # TODO: Add penalty stopped to goalkeeper
+
     
 
 
