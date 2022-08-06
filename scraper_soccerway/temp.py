@@ -11,6 +11,7 @@ import os
 
 
 EXAMPLE_MATCH_URLS = {
+    'squad':'https://nl.soccerway.com/teams/netherlands/sportclub-heerenveen/1519/squad/',
     'default':'https://nl.soccerway.com/matches/2022/05/15/netherlands/eredivisie/sbv-vitesse/afc-ajax/3512762/',
     'pen_missed':'https://nl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/',
     'red_card':'https://nl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/',
@@ -63,6 +64,11 @@ def read_html_text(location_to_scrape: str) -> str:
         text = read_html_from_file(location_to_scrape)
     return text
 
+
+def remove_duplicates_from_list(lst: list) -> list:
+    """"Remove duplicates from list while maintaining the order"""
+    return list(dict.fromkeys(lst))
+    
 
 def extract_url_by_class(html_string: str, level:str, class_str:str) -> List[str]:
     tree = html.fromstring(html_string)
@@ -296,30 +302,53 @@ def append_match_events(html_string: str, lineups: pd.DataFrame) -> pd.DataFrame
     return lineups
 
 
+def extract_squad_from_html(html_string: str) -> pd.DataFrame:
+    """Extracts squad information from HTML."""
+
+    soup = BeautifulSoup(html_string, 'html.parser')
+    result = parse_html_table(soup)
+    result_short = result[['Unnamed: 0', 'Naam', 'P']].rename({'Unnamed: 0':'Rugnummer', 'P':'Positie'}, axis=1)
+
+    # Append with player links
+    soup_squad = soup.find_all('div', class_='squad-container')
+    player_urls = remove_duplicates_from_list(find_all_links_in_table(soup_squad[0]))
+    result_short['Link'] = player_urls[:-1] # Do not include the last person, the coach
+    
+    return result_short
+
+
 # Select example match
-example_match = 'default'
+example_match = 'squad'
 html_string = load_sample(example_match)
 
-club_urls = extract_url_by_class(html_string, 'a', 'team-title')
-match_state = extract_txt_by_class(html_string, 'span', 'match-state')
-#TODO: Quit process if match state is not FT
+if example_match != 'squad':
+    club_urls = extract_url_by_class(html_string, 'a', 'team-title')
+    match_state = extract_txt_by_class(html_string, 'span', 'match-state')
+    #TODO: Quit process if match state is not FT
 
-final_score = extract_txt_by_class(html_string, 'h3', 'thick scoretime')[0]
-final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
-final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
+    final_score = extract_txt_by_class(html_string, 'h3', 'thick scoretime')[0]
+    final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
+    final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
 
-lineups = extract_team_lineup(html_string)
-lineups = (
-    lineups
-    .pipe((determine_winning_team, 'lineups'), score_home=final_score_home, score_away=final_score_away)
-    .pipe((append_match_events, 'lineups'), html_string=html_string)
-    .pipe((append_assisters, 'lineups'), html_string=html_string)
-)
+    lineups = extract_team_lineup(html_string)
+    lineups = (
+        lineups
+        .pipe((determine_winning_team, 'lineups'), score_home=final_score_home, score_away=final_score_away)
+        .pipe((append_match_events, 'lineups'), html_string=html_string)
+        .pipe((append_assisters, 'lineups'), html_string=html_string)
+    )
 
-print(lineups.columns)
-print(lineups)
+    print(lineups.columns)
+    print(lineups)
 
-# TODO: Add penalty stopped to goalkeeper
+    # TODO: Add penalty stopped to goalkeeper
+else:
+    squad = extract_squad_from_html(html_string)
+    print(squad.head())
+
+
+
+
 
 
 
