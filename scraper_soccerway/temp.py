@@ -321,7 +321,14 @@ def extract_squad_from_html(html_string: str) -> pd.DataFrame:
 example_match = 'squad'
 html_string = load_sample(example_match)
 
-if example_match != 'squad':
+if example_match == 'squad':
+    squad = extract_squad_from_html(html_string)
+    print(squad.head())
+elif example_match == 'clubs':
+    pass
+elif example_match == 'matches':
+    pass
+else:
     club_urls = extract_url_by_class(html_string, 'a', 'team-title')
     match_state = extract_txt_by_class(html_string, 'span', 'match-state')
     #TODO: Quit process if match state is not FT
@@ -342,10 +349,7 @@ if example_match != 'squad':
     print(lineups)
 
     # TODO: Add penalty stopped to goalkeeper
-else:
-    squad = extract_squad_from_html(html_string)
-    print(squad.head())
-
+    
 
 
 
