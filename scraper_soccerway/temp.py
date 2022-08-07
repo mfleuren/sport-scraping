@@ -341,6 +341,25 @@ def extract_matches_from_html(html_string: str) -> pd.DataFrame:
     return result
 
 
+def extract_clubs_from_html(html_string: str) -> pd.DataFrame:
+    """Extract info from clubs table."""
+
+    # Extract basic table
+    soup = BeautifulSoup(html_string, 'html.parser')
+    result = parse_html_table(soup)
+    result = result.iloc[:-2]['Team'].to_frame()   
+
+    # Extract URLS
+    soup_clubs = soup.find_all('table', class_='leaguetable sortable table detailed-table')
+    all_urls = find_all_links_in_table(soup_clubs[0])
+    all_team_urls = [url for url in all_urls if 'teams' in url]
+    result['SW_TeamURL'] = all_team_urls
+    result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(r'teams/netherlands/([a-z-].*)/[0-9].*/', expand=True)
+    result['SW_TeamID'] = result['SW_TeamURL'].str.extract(r'teams/netherlands/[a-z-].*/([0-9].*)/', expand=True).astype('int')
+    
+    return result
+    
+
 # Select example match
 example_match = 'matches'
 html_string = load_sample(example_match)
@@ -348,7 +367,7 @@ html_string = load_sample(example_match)
 if example_match == 'squad':
     squad = extract_squad_from_html(html_string)
 elif example_match == 'clubs':
-    pass
+    matches =  extract_clubs_from_html(html_string)
 elif example_match == 'matches':
     matches =  extract_matches_from_html(html_string)
 else:
