@@ -10,6 +10,14 @@ import codecs
 import os
 
 
+REGEXES = {
+    'team_name_from_url':r'teams/netherlands/(.*)/.*/',
+    'team_id_from_url':r'teams/netherlands/.*/(.*)/',
+    'player_name_from_url':r'players/(.*)/.*/',
+    'player_id_from_url':r'players/.*/(.*)/',
+}
+
+
 EXAMPLE_MATCH_URLS = {
     'squad':'https://nl.soccerway.com/teams/netherlands/sportclub-heerenveen/1519/squad/',
     'default':'https://nl.soccerway.com/matches/2022/05/15/netherlands/eredivisie/sbv-vitesse/afc-ajax/3512762/',
@@ -170,6 +178,8 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str) -> pd.DataFr
 
     # Drop the coach
     full_lineup = full_lineup[~full_lineup['Speler'].str.contains('Coach:', regex=False)]
+    full_lineup['SW_Naam'] = full_lineup['Link'].str.extract(REGEXES['player_name_from_url'], expand=True)
+    full_lineup['SW_ID'] = full_lineup['Link'].str.extract(REGEXES['player_id_from_url'], expand=True).astype('int')
 
     return full_lineup
     
@@ -313,6 +323,8 @@ def extract_squad_from_html(html_string: str) -> pd.DataFrame:
     soup_squad = soup.find_all('div', class_='squad-container')
     player_urls = remove_duplicates_from_list(find_all_links_in_table(soup_squad[0]))
     result_short['Link'] = player_urls[:-1] # Do not include the last person, the coach
+    result_short['SW_Naam'] = result_short['Link'].str.extract(REGEXES['player_name_from_url'], expand=True)
+    result_short['SW_ID'] = result_short['Link'].str.extract(REGEXES['player_id_from_url'], expand=True).astype('int')
     
     return result_short
 
@@ -354,20 +366,20 @@ def extract_clubs_from_html(html_string: str) -> pd.DataFrame:
     all_urls = find_all_links_in_table(soup_clubs[0])
     all_team_urls = [url for url in all_urls if 'teams' in url]
     result['SW_TeamURL'] = all_team_urls
-    result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(r'teams/netherlands/([a-z-].*)/[0-9].*/', expand=True)
-    result['SW_TeamID'] = result['SW_TeamURL'].str.extract(r'teams/netherlands/[a-z-].*/([0-9].*)/', expand=True).astype('int')
+    result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(REGEXES['team_name_from_url'], expand=True)
+    result['SW_TeamID'] = result['SW_TeamURL'].str.extract(REGEXES['team_id_from_url'], expand=True).astype('int')
     
     return result
-    
+
 
 # Select example match
-example_match = 'matches'
+example_match = 'default'
 html_string = load_sample(example_match)
 
 if example_match == 'squad':
     squad = extract_squad_from_html(html_string)
 elif example_match == 'clubs':
-    matches =  extract_clubs_from_html(html_string)
+    clubs =  extract_clubs_from_html(html_string)
 elif example_match == 'matches':
     matches =  extract_matches_from_html(html_string)
 else:
@@ -386,9 +398,6 @@ else:
         .pipe((append_match_events, 'lineups'), html_string=html_string)
         .pipe((append_assisters, 'lineups'), html_string=html_string)
     )
-
-    print(lineups.columns)
-    print(lineups)
 
     # TODO: Add penalty stopped to goalkeeper
 
