@@ -37,6 +37,8 @@ FILE_FOOTBALL_TEAMS_INPUT = os.path.join(FOOTBALL_PATH_INPUT, 'teams.csv')
 FILE_FOOTBALL_TEAMS_RESULTS = os.path.join(FOOTBALL_PATH_RESULTS, 'teams.csv')
 FILE_FOOTBALL_SUBSTITUTIONS = os.path.join(FOOTBALL_PATH_INPUT, 'substitutions.csv')
 FILE_FOOTBALL_POINTS_SCHEME = os.path.join(FOOTBALL_PATH_INPUT, 'points_scheme.csv')
+FILE_FOOTBALL_POINTS_PLAYER = os.path.join(FOOTBALL_PATH_RESULTS, 'points_player.csv')
+FILE_FOOTBALL_POINTS_COACH = os.path.join(FOOTBALL_PATH_RESULTS, 'points_coach.csv')
 
 
 """
@@ -121,13 +123,16 @@ class CompetitionData:
     chosen_teams: pd.DataFrame = field(init=False)
     substitutions: pd.DataFrame = field(init=False)
     points_scheme: pd.DataFrame = field(init=False)
+    points_player: pd.DataFrame = field(init=False)
+    points_coach: pd.DataFrame = field(init=False)
 
-    
 
     def __post_init__(self):
         self.chosen_teams = self.load_file_from_input_or_results(FILE_FOOTBALL_TEAMS_INPUT, FILE_FOOTBALL_TEAMS_RESULTS)
         self.substitutions = pd.read_csv(FILE_FOOTBALL_SUBSTITUTIONS, sep=';')
         self.points_scheme = pd.read_csv(FILE_FOOTBALL_POINTS_SCHEME, sep=';')
+        self.points_player = self.load_file_from_results(FILE_FOOTBALL_POINTS_PLAYER)
+        self.points_coach = self.load_file_from_results(FILE_FOOTBALL_POINTS_COACH)
 
 
     def load_file_from_input_or_results(self, 
@@ -156,9 +161,13 @@ class CompetitionData:
             print(f'Unexpected Exception. Files {input_path} and {result_path} both not found.')
             raise
 
+
+    def load_file_from_results(self, path: Union[str, os.PathLike]) -> pd.DataFrame:
+        """Load file from Results folder, if not exists pre-allocate empty DataFrame."""
+        return pd.read_csv(path, sep=';') if os.path.exists(path) else pd.DataFrame()
         
 
 if __name__ == '__main__':
     data = CompetitionData()
-    print(data.points_scheme.columns)
+    print(data.points_player)
 
