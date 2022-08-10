@@ -9,6 +9,16 @@ import codecs
 import os
 
 
+EXAMPLE_MATCH_URLS = {
+    'squad':'https://nl.soccerway.com/teams/netherlands/sportclub-heerenveen/1519/squad/',
+    'matches':'https://nl.soccerway.com/teams/netherlands/sportclub-heerenveen/1519/matches/',
+    'clubs':'https://nl.soccerway.com/national/netherlands/eredivisie/20222023/regular-season/r69885/tables/',
+    'default':'https://nl.soccerway.com/matches/2022/05/15/netherlands/eredivisie/sbv-vitesse/afc-ajax/3512762/',
+    'pen_missed':'https://nl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/',
+    'red_card':'https://nl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/',
+}
+EXAMPLE_TXT_PATH = 'scraper_soccerway\html_examples'
+
 REGEXES = {
     'team_name_from_url':r'teams/netherlands/(.*)/.*/',
     'team_id_from_url':r'teams/netherlands/.*/(.*)/',
@@ -16,19 +26,12 @@ REGEXES = {
     'player_id_from_url':r'players/.*/(.*)/',
 }
 
-
-EXAMPLE_MATCH_URLS = {
-    'squad':'https://nl.soccerway.com/teams/netherlands/sportclub-heerenveen/1519/squad/',
-    'default':'https://nl.soccerway.com/matches/2022/05/15/netherlands/eredivisie/sbv-vitesse/afc-ajax/3512762/',
-    'pen_missed':'https://nl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/stichting-heracles-almelo/hfc-ado-den-haag/3798124/',
-    'red_card':'https://nl.soccerway.com/matches/2022/08/05/netherlands/eerste-divisie/nac-bv/stichting-helmond-sport/3798125/',
-}
-EXAMPLE_TXT_PATH = 'scraper_soccerway\html_examples'
+REQUEST_HEADERS = requests.utils.default_headers()
+REQUEST_HEADERS.update({"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"})
 
 
 def read_html_from_url(location_to_scrape: str, scenario_file: str = None) -> str:
     """Read html from URL and save as txt file if desired."""
-    REQUEST_HEADERS = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:100.0) Gecko/20100101 Firefox/100.0"}
     result = requests.get(location_to_scrape, headers=REQUEST_HEADERS)
 
     if scenario_file:
@@ -113,6 +116,7 @@ def determine_winning_team(score_home: int, score_away: int, lineups: pd.DataFra
 
 
 def find_all_links_in_table(soup: BeautifulSoup) -> List: 
+    """Loop through all rows in a table and extract links from the fields."""
     links = []
     for tr in soup.findAll("tr"):
         trs = tr.findAll("td")
@@ -125,10 +129,10 @@ def find_all_links_in_table(soup: BeautifulSoup) -> List:
     return links
 
 
-def parse_html_table(soup: BeautifulSoup) -> pd.DataFrame:
+def parse_html_table(content: str) -> pd.DataFrame:
     """Parse html table to dataframe. Remove column Kaarten if it exists."""
     
-    df = pd.read_html(str(soup), encoding='utf-8')[0]
+    df = pd.read_html(content)[0]
     if 'Kaarten' in df.columns:
         df.drop('Kaarten', axis=1, inplace=True)
     
@@ -189,7 +193,8 @@ def extract_team_lineup(html_string: str) -> pd.DataFrame:
     Return as a single DataFrame with Home_Team as a boolean column to indicate which team played at home.
     """
 
-    soup = BeautifulSoup(html_string, 'html.parser')
+    result = requests.get(html_string, REQUEST_HEADERS)
+    soup = BeautifulSoup(result.content, 'html.parser')
     soup_lineups = soup.find_all('div', class_='combined-lineups-container')
 
     full_lineup_home = extract_lineup_from_html(soup_lineups, 'left')
@@ -205,7 +210,8 @@ def extract_team_lineup(html_string: str) -> pd.DataFrame:
 def determine_assisters(html_string: str) -> List[str]:
     """Determine who assisted goals, return as a list containing the url's of the player pages."""
 
-    soup = BeautifulSoup(html_string, 'html.parser')
+    result = requests.get(html_string, REQUEST_HEADERS)
+    soup = BeautifulSoup(result.content, 'html.parser')
     all_scorers_list = soup.find('ul', {'class':'scorer-info'}).findChildren('span', {'class':'scorer'})
 
     assister_urls = [] 
@@ -253,7 +259,8 @@ def extract_match_events_from_lineup_container(
     ) -> Tuple[List[str], List[str], List[str], List[str], List[str], List[str], List[int], List[int]]:
     """Extract important match events from the HTML, return as a tuple of lists"""
 
-    soup = BeautifulSoup(html_string, 'html.parser')
+    result = requests.get(html_string, REQUEST_HEADERS)
+    soup = BeautifulSoup(result.content, 'html.parser')
     soup_lineups = soup.find_all('div', class_='combined-lineups-container')
     
     # Pre-allocate empty lists
@@ -314,7 +321,8 @@ def append_match_events(html_string: str, lineups: pd.DataFrame) -> pd.DataFrame
 def extract_squad_from_html(html_string: str) -> pd.DataFrame:
     """Extracts squad information from HTML."""
 
-    soup = BeautifulSoup(html_string, 'html.parser')
+    result = requests.get(html_string, REQUEST_HEADERS)
+    soup = BeautifulSoup(result.content, 'html.parser')
     result = parse_html_table(soup)
     result_short = result[['Unnamed: 0', 'Naam', 'P']].rename({'Unnamed: 0':'Rugnummer', 'P':'Positie'}, axis=1)
 
@@ -332,7 +340,8 @@ def extract_matches_from_html(html_string: str) -> pd.DataFrame:
     """Extract info from matches table."""
 
     # Extract basic table 
-    soup = BeautifulSoup(html_string, 'html.parser')
+    result = requests.get(html_string, REQUEST_HEADERS)
+    soup = BeautifulSoup(result.content, 'html.parser')
     result = parse_html_table(soup)
     result.columns = ['Datum', 'Competitie', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1', 'x2']
 
@@ -356,49 +365,55 @@ def extract_clubs_from_html(html_string: str) -> pd.DataFrame:
     """Extract info from clubs table."""
 
     # Extract basic table
-    soup = BeautifulSoup(html_string, 'html.parser')
-    result = parse_html_table(soup)
-    result = result.iloc[:-2]['Team'].to_frame()   
+    result = requests.get(html_string, REQUEST_HEADERS)
+    print(result.status_code)
+    print(REQUEST_HEADERS)
+    content = result.content.decode(result.encoding)
+    print(content)
+    result = parse_html_table(content)
+    result = result.iloc[:-2]['Team'].to_frame()  
 
-    # Extract URLS
-    soup_clubs = soup.find_all('table', class_='leaguetable sortable table detailed-table')
-    all_urls = find_all_links_in_table(soup_clubs[0])
-    all_team_urls = [url for url in all_urls if 'teams' in url]
-    result['SW_TeamURL'] = all_team_urls
-    result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(REGEXES['team_name_from_url'], expand=True)
-    result['SW_TeamID'] = result['SW_TeamURL'].str.extract(REGEXES['team_id_from_url'], expand=True).astype('int')
+
+    # # Extract URLS
+    # soup_clubs = soup.find_all('table', class_='leaguetable sortable table detailed-table')
+    # all_urls = find_all_links_in_table(soup_clubs[0])
+    # all_team_urls = [url for url in all_urls if 'teams' in url]
+    # result['SW_TeamURL'] = all_team_urls
+    # result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(REGEXES['team_name_from_url'], expand=True)
+    # result['SW_TeamID'] = result['SW_TeamURL'].str.extract(REGEXES['team_id_from_url'], expand=True).astype('int')
     
     return result
 
 
-# Select example match
-example_match = 'default'
-html_string = load_sample(example_match)
+if __name__ == '__main__':
+    # Select example match
+    example_match = 'clubs'
+    html_string = load_sample(example_match)
 
-if example_match == 'squad':
-    squad = extract_squad_from_html(html_string)
-elif example_match == 'clubs':
-    clubs =  extract_clubs_from_html(html_string)
-elif example_match == 'matches':
-    matches =  extract_matches_from_html(html_string)
-else:
-    club_urls = extract_url_by_class(html_string, 'a', 'team-title')
-    match_state = extract_txt_by_class(html_string, 'span', 'match-state')
-    #TODO: Quit process if match state is not FT
+    if example_match == 'squad':
+        squad = extract_squad_from_html(html_string)
+    elif example_match == 'clubs':
+        clubs =  extract_clubs_from_html(html_string)
+    elif example_match == 'matches':
+        matches =  extract_matches_from_html(html_string)
+    else:
+        club_urls = extract_url_by_class(html_string, 'a', 'team-title')
+        match_state = extract_txt_by_class(html_string, 'span', 'match-state')
+        #TODO: Quit process if match state is not FT
 
-    final_score = extract_txt_by_class(html_string, 'h3', 'thick scoretime')[0]
-    final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
-    final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
+        final_score = extract_txt_by_class(html_string, 'h3', 'thick scoretime')[0]
+        final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
+        final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
 
-    lineups = extract_team_lineup(html_string)
-    lineups = (
-        lineups
-        .pipe((determine_winning_team, 'lineups'), score_home=final_score_home, score_away=final_score_away)
-        .pipe((append_match_events, 'lineups'), html_string=html_string)
-        .pipe((append_assisters, 'lineups'), html_string=html_string)
-    )
+        lineups = extract_team_lineup(html_string)
+        lineups = (
+            lineups
+            .pipe((determine_winning_team, 'lineups'), score_home=final_score_home, score_away=final_score_away)
+            .pipe((append_match_events, 'lineups'), html_string=html_string)
+            .pipe((append_assisters, 'lineups'), html_string=html_string)
+        )
 
-    # TODO: Add penalty stopped to goalkeeper
+        # TODO: Add penalty stopped to goalkeeper
 
     
 
