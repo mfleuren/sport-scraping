@@ -10,6 +10,7 @@ SET CONSTANTS
 """
 
 load_dotenv()
+
 # Cycling input
 PATH_INPUT = os.path.join(
     os.getcwd(), 
@@ -34,11 +35,20 @@ FOOTBALL_PATH_RESULTS = os.path.join(
     )
 
 FILE_FOOTBALL_TEAMS_INPUT = os.path.join(FOOTBALL_PATH_INPUT, 'teams.csv')
-FILE_FOOTBALL_TEAMS_RESULTS = os.path.join(FOOTBALL_PATH_RESULTS, 'teams.csv')
 FILE_FOOTBALL_SUBSTITUTIONS = os.path.join(FOOTBALL_PATH_INPUT, 'substitutions.csv')
 FILE_FOOTBALL_POINTS_SCHEME = os.path.join(FOOTBALL_PATH_INPUT, 'points_scheme.csv')
+
+FILE_FOOTBALL_TEAMS_RESULTS = os.path.join(FOOTBALL_PATH_RESULTS, 'teams.csv')
 FILE_FOOTBALL_POINTS_PLAYER = os.path.join(FOOTBALL_PATH_RESULTS, 'points_player.csv')
 FILE_FOOTBALL_POINTS_COACH = os.path.join(FOOTBALL_PATH_RESULTS, 'points_coach.csv')
+FILE_FOOTBALL_DIM_CLUBS = os.path.join(FOOTBALL_PATH_RESULTS, 'dim_clubs.csv')
+FILE_FOOTBALL_MATCHES = os.path.join(FOOTBALL_PATH_RESULTS, 'matches.csv')
+
+FOOTBALL_YEAR = os.getenv('FOOTBALL_COMPETITION_YEAR')
+FOOTBALL_YEARCODE = FOOTBALL_YEAR + str(int(FOOTBALL_YEAR)+1)
+FOOTBALL_COMPETITION_CODE = os.getenv('FOOTBALL_COMPETITION_CODE')
+
+
 
 
 """
@@ -125,6 +135,8 @@ class CompetitionData:
     points_scheme: pd.DataFrame = field(init=False)
     points_player: pd.DataFrame = field(init=False)
     points_coach: pd.DataFrame = field(init=False)
+    dim_clubs: pd.DataFrame = field(init=False)
+    matches: pd.DataFrame = field(init=False)
 
 
     def __post_init__(self):
@@ -133,6 +145,8 @@ class CompetitionData:
         self.points_scheme = pd.read_csv(FILE_FOOTBALL_POINTS_SCHEME, sep=';')
         self.points_player = self.load_file_from_results(FILE_FOOTBALL_POINTS_PLAYER)
         self.points_coach = self.load_file_from_results(FILE_FOOTBALL_POINTS_COACH)
+        self.dim_clubs = self.load_clubs(FILE_FOOTBALL_DIM_CLUBS)
+        self.matches = self.load_file_from_results(FILE_FOOTBALL_MATCHES)
 
 
     def load_file_from_input_or_results(self, 
@@ -165,9 +179,56 @@ class CompetitionData:
     def load_file_from_results(self, path: Union[str, os.PathLike]) -> pd.DataFrame:
         """Load file from Results folder, if not exists pre-allocate empty DataFrame."""
         return pd.read_csv(path, sep=';') if os.path.exists(path) else pd.DataFrame()
+
+
+    def save_files_to_results(self) -> None:
+        """Save datafile to Results folder"""
+
+        if self.chosen_teams.shape[0] != 0:
+            self.chosen_teams.to_csv(FILE_FOOTBALL_TEAMS_RESULTS, sep=';', index=False)
+            print('Saved chosen teams data to disk.')
+
+        if self.points_player.shape[0] != 0:
+            self.points_player.to_csv(FILE_FOOTBALL_POINTS_PLAYER, sep=';', index=False)
+            print('Saved points by player data to disk.')
+
+        if self.points_coach.shape[0] != 0:
+            self.points_coach.to_csv(FILE_FOOTBALL_POINTS_COACH, sep=';', index=False)
+            print('Saved points by coach data to disk.')
+
+        if self.matches.shape[0] != 0:
+            self.matches.to_csv(FILE_FOOTBALL_MATCHES, sep=';', index=False)
+            print('Saved matches data to disk.')
+        
+    
+    def load_clubs(self, path: Union[str, os.PathLike]) -> pd.DataFrame:
+        """Load the dimension table with club information, if it doesn't exist scrape it from Soccerway"""
+
+        if os.path.exists(path):
+            df = pd.read_csv(path, sep=';')
+            print(f'Loaded file {path} from result.')
+            return df
+        else:
+            import sys
+            sys.path.append(os.getcwd())
+            sys.path.append(os.path.join(os.getcwd(), 'scraper_soccerway'))
+            from scraper_soccerway.gather import extract_clubs_from_html
+
+            url = f"https://nl.soccerway.com/national/netherlands/eredivisie/{FOOTBALL_YEARCODE}/regular-season/{FOOTBALL_COMPETITION_CODE}/tables/"
+            print(url)
+
+            clubs = extract_clubs_from_html(url)
+
+            clubs.to_csv(path, sep=';', index=False)
+
+            return clubs
+
+
+
+
         
 
-if __name__ == '__main__':
+if __name__ == '__main__':   
     data = CompetitionData()
-    print(data.points_player)
+    data.save_files_to_results()
 
