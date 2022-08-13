@@ -31,7 +31,6 @@ client = start_webclient()
 
 def open_website_in_client(url:str) -> str:
     result = client.get(url)
-    print(f"Website response code: {result.status_code}")
 
     if result.status_code == 200:        
         return result.content.decode(result.encoding)
@@ -76,6 +75,32 @@ def extract_clubs_from_html(url: str) -> pd.DataFrame:
     result['SW_TeamID'] = result['SW_TeamURL'].str.extract(cfg.REGEXES['team_id_from_url'], expand=True).astype('int')
     
     return result
+
+
+def determine_match_clusters(matches: pd.DataFrame) -> pd.DataFrame:
+    """
+    Determine the cluster a match belongs to.
+
+    Rules: 
+    - First (chronologically ordered) match is cluster 1
+    - Match is of the same cluster as the previous match if there is 0 or 1 day in between  
+    """
+
+    matches['Datum'] = pd.to_datetime(matches['Datum'])
+    matches = matches.sort_values(by='Datum').reset_index(drop=True)
+    matches['Datum_Diff'] = (matches['Datum'] - matches.shift(1)['Datum']).dt.days.fillna(0)
+
+    clusters = []
+    for idx, row in matches.iterrows():
+        if idx == 0: 
+            clusters.append(1)
+        elif row['Datum_Diff'] <= 1: 
+            clusters.append(clusters[-1])
+        else: clusters.append(clusters[-1]+1)
+        
+    matches['Cluster'] = clusters
+
+    return matches
 
 
 def extract_matches_from_html(html_string: str) -> pd.DataFrame:

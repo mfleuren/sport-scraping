@@ -1,3 +1,5 @@
+DEFAULT_SLEEP_S = 1
+
 EXAMPLE_MATCH_URLS = {
     'squad':'https://nl.soccerway.com/teams/netherlands/sportclub-heerenveen/1519/squad/',
     'matches':'https://nl.soccerway.com/teams/netherlands/sportclub-heerenveen/1519/matches/',
