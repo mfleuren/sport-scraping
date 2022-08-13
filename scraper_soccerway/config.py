@@ -18,6 +18,9 @@ REGEXES = {
     'match_id_from_url':r'/matches/.*/.*/.*/.*/.*/.*/.*/(.*)/',
 }
 
+BASE_URL = 'https://nl.soccerway.com'
 URLS = {
-    'matches':'https://nl.soccerway.com/teams/netherlands/{club_name}/{club_id}/matches/'
+    'matches':BASE_URL+'/teams/netherlands/{club_name}/{club_id}/matches/',
+    'teams':BASE_URL+'/teams/netherlands/{club_name}/{club_id}/squad/',
+
 }

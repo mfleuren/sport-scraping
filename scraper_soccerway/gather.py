@@ -12,7 +12,7 @@ load_dotenv()
 
 import sys
 sys.path.append(os.getcwd())
-import config as cfg
+import config
 
 
 """
@@ -31,7 +31,6 @@ client = start_webclient()
 
 def open_website_in_client(url:str) -> str:
     result = client.get(url)
-
     if result.status_code == 200:        
         return result.content.decode(result.encoding)
     else:
@@ -52,14 +51,15 @@ def find_all_links_in_table(soup: BeautifulSoup) -> List:
     return links
 
 
+def remove_duplicates_from_list(lst: list) -> list:
+    """"Remove duplicates from list while maintaining the order"""
+    return list(dict.fromkeys(lst))
+
+
 def extract_clubs_from_html(url: str) -> pd.DataFrame:
     """Extract info from clubs table."""
 
-    # Open website and get HTML
-    client = start_webclient()
-    get_result = client.get(url)
-    print(f'Status code: {get_result.status_code}')
-    html_string = get_result.content.decode(get_result.encoding)
+    html_string = open_website_in_client(url)
 
     # Extract basic table
     result = pd.read_html(html_string)[0]
@@ -71,8 +71,8 @@ def extract_clubs_from_html(url: str) -> pd.DataFrame:
     all_urls = find_all_links_in_table(soup_clubs[0])
     all_team_urls = [url for url in all_urls if 'teams' in url]
     result['SW_TeamURL'] = all_team_urls
-    result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(cfg.REGEXES['team_name_from_url'], expand=True)
-    result['SW_TeamID'] = result['SW_TeamURL'].str.extract(cfg.REGEXES['team_id_from_url'], expand=True).astype('int')
+    result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(config.REGEXES['team_name_from_url'], expand=True)
+    result['SW_TeamID'] = result['SW_TeamURL'].str.extract(config.REGEXES['team_id_from_url'], expand=True).astype('int')
     
     return result
 
@@ -103,8 +103,10 @@ def determine_match_clusters(matches: pd.DataFrame) -> pd.DataFrame:
     return matches
 
 
-def extract_matches_from_html(html_string: str) -> pd.DataFrame:
+def extract_matches_from_html(url: str) -> pd.DataFrame:
     """Extract info from matches table."""
+
+    html_string = open_website_in_client(url)
 
     # Extract basic table 
     result = pd.read_html(html_string)[0]
@@ -134,10 +136,29 @@ def extract_matches_from_html(html_string: str) -> pd.DataFrame:
 
     return result
 
+
+def extract_squad_from_html(url: str) -> pd.DataFrame:
+    """Extracts squad information from HTML."""
+    
+    html_string = open_website_in_client(url)
+
+    # Basic table
+    result = pd.read_html(html_string)[0]
+    result_short = result[['Unnamed: 0', 'Naam', 'P']].rename({'Unnamed: 0':'Rugnummer', 'P':'Positie'}, axis=1)
+
+    # Append with player links
+    soup = BeautifulSoup(html_string, 'html.parser')
+    soup_squad = soup.find_all('div', class_='squad-container')
+    player_urls = remove_duplicates_from_list(find_all_links_in_table(soup_squad[0]))
+    result_short['Link'] = player_urls[:-1] # Do not include the last person, the coach
+    result_short['SW_Naam'] = result_short['Link'].str.extract(config.REGEXES['player_name_from_url'], expand=True)
+    result_short['SW_ID'] = result_short['Link'].str.extract(config.REGEXES['player_id_from_url'], expand=True).astype('int')
+    
+    return result_short
+
+
 if __name__ == '__main__':
-
-    url = 'https://nl.soccerway.com/national/netherlands/eredivisie/20222023/regular-season/r69885/tables/'
-    html_str = open_website_in_client(url)
-
-    clubs = extract_clubs_from_html(html_str)
-    print(clubs)
+    url = 'https://nl.soccerway.com/teams/netherlands/sportclub-heerenveen/1519/squad/'
+    html_string = open_website_in_client(url)
+    result = extract_squad_from_html(html_string)
+    print(result)
