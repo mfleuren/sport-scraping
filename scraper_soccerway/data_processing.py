@@ -221,17 +221,16 @@ class CompetitionData:
         self.dim_players.sort_values(by='SW_ID', inplace=True)
         
 
-    def get_matches_to_scrape(self) -> list[int]:
+    def get_rounds_to_scrape(self) -> list[int]:
         """Return the IDs of the rounds to scrape."""
 
         rounds_to_scrape= []
         for name, group in self.matches.groupby('Cluster'):
-            if all(group['Datum'].dt.date < date.today()):
+            if all(pd.to_datetime(group['Datum']).dt.date < date.today()):
                 # TODO: Add check if round is already scraped 
                 rounds_to_scrape.append(name)
             else:
                 break
-
         return rounds_to_scrape
 
 
@@ -239,6 +238,8 @@ if __name__ == '__main__':
     data = CompetitionData()
     # data.update_matches()
     # data.update_players()
-    data.get_matches_to_scrape()
-    data.save_files_to_results()
+    for round in data.get_rounds_to_scrape():
+        data.teams = data.process_substitutions()
+
+    # data.save_files_to_results()
 
