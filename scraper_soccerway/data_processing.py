@@ -38,6 +38,7 @@ FILE_FOOTBALL_POINTS_COACH = os.path.join(FOOTBALL_PATH_RESULTS, 'points_coach.c
 FILE_FOOTBALL_DIM_CLUBS = os.path.join(FOOTBALL_PATH_RESULTS, 'dim_clubs.csv')
 FILE_FOOTBALL_DIM_PLAYERS = os.path.join(FOOTBALL_PATH_RESULTS, 'dim_players.csv')
 FILE_FOOTBALL_MATCHES = os.path.join(FOOTBALL_PATH_RESULTS, 'matches.csv')
+FILE_FOOTBALL_MATCH_EVENTS = os.path.join(FOOTBALL_PATH_RESULTS, 'match_events.csv')
 
 FOOTBALL_YEAR = os.getenv('FOOTBALL_COMPETITION_YEAR')
 FOOTBALL_YEARCODE = FOOTBALL_YEAR + str(int(FOOTBALL_YEAR)+1)
@@ -64,6 +65,7 @@ class CompetitionData:
     dim_clubs: pd.DataFrame = field(init=False)
     dim_players: pd.DataFrame = field(init=False)
     matches: pd.DataFrame = field(init=False)
+    match_events: pd.DataFrame = field(init=False)
 
 
     def __post_init__(self):
@@ -75,6 +77,7 @@ class CompetitionData:
         self.dim_clubs = self.load_clubs(FILE_FOOTBALL_DIM_CLUBS)
         self.dim_players = self.load_file_from_results(FILE_FOOTBALL_DIM_PLAYERS)
         self.matches = self.load_file_from_results(FILE_FOOTBALL_MATCHES)
+        self.match_events = self.load_file_from_results(FILE_FOOTBALL_MATCH_EVENTS)
 
 
     def load_file_from_input_or_results(self, 
@@ -139,6 +142,10 @@ class CompetitionData:
         if self.points_coach.shape[0] != 0:
             self.points_coach.to_csv(FILE_FOOTBALL_POINTS_COACH, sep=';', index=False)
             print('Saved points by coach data to disk.')
+
+        if self.match_events.shape[0] != 0:
+            self.match_events.to_csv(FILE_FOOTBALL_MATCH_EVENTS, sep=';', index=False)
+            print('Saved match events data to disk.')
         
     
     def load_clubs(self, path: Union[str, os.PathLike]) -> pd.DataFrame:
@@ -281,9 +288,23 @@ class CompetitionData:
 
         validate_tactics(teams_new)
 
-        return pd.concat([self.chosen_teams, teams_new]).reset_index(drop=True)
+        return self.chosen_teams.append(teams_new).reset_index(drop=True)
 
 
+    def process_new_matches(self, gameweek: int):
+        """Determine which matches to scrape, perform scraping, store results in DataFrame."""
+
+        all_match_events = pd.DataFrame()
+
+        gameweek_matches = self.matches[self.matches['Cluster'] == gameweek]
+        for _,match in tqdm(gameweek_matches.iterrows(), total=gameweek_matches.shape[0]):
+            match_events = gather.extract_match_events(match['url_match'], self.dim_players)
+
+            single_match_events = self.match_events.append(match_events).reset_index(drop=True)
+            all_match_events = all_match_events.append(single_match_events)
+            time.sleep(config.DEFAULT_SLEEP_S)
+
+        return self.match_events.append(all_match_events).reset_index(drop=True)
 
 
 
@@ -294,7 +315,8 @@ if __name__ == '__main__':
     # data.update_players()
     for gameweek in data.get_rounds_to_scrape():
         data.chosen_teams = data.process_teammodifications(gameweek)
+        data.match_events = data.process_new_matches(gameweek)
 
-    print(data.chosen_teams.tail())
-    # data.save_files_to_results()
+    # print(data.chosen_teams.tail())
+    data.save_files_to_results()
 
