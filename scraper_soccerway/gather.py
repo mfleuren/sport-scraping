@@ -339,8 +339,8 @@ def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd
     
     for player_href in yc: lineups.loc[player_href == lineups['Link'], 'Kaart_Geel'] += 1      
     for player_href in goals: lineups.loc[player_href == lineups['Link'], 'Goal'] += 1 
-    for player_href in goals_pen: lineups.loc[player_href == lineups['Link'], 'Goal_Eigen'] += 1 
-    for player_href in goals_own: lineups.loc[player_href == lineups['Link'], 'Penalty_Goal'] += 1 
+    for player_href in goals_own: lineups.loc[player_href == lineups['Link'], 'Goal_Eigen'] += 1 
+    for player_href in goals_pen: lineups.loc[player_href == lineups['Link'], 'Penalty_Goal'] += 1 
     
     # Red Card has extra logic for minutes played
     for player_href, minutes in zip(rc, rc_min): 
