@@ -1,11 +1,14 @@
 from typing import Union
 from dataclasses import dataclass, field
+from wsgiref import validate
+from unidecode import unidecode
 
 import os
 import time
 from datetime import date
 from tqdm import tqdm
 import pandas as pd
+
 
 import config, gather 
 
@@ -179,6 +182,7 @@ class CompetitionData:
         # Determine match cluster
         self.matches = gather.determine_match_clusters(self.matches)   
 
+
     def update_players(self):
 
         for _,row in tqdm(self.dim_clubs.iterrows(), total=self.dim_clubs.shape[0]):
@@ -234,12 +238,63 @@ class CompetitionData:
         return rounds_to_scrape
 
 
+    def process_teammodifications(self, gameweek: int) -> pd.DataFrame:
+        """Process substitutions and team checks and append the complete teams to the dataclass."""
+
+        def validate_tactics(teams: pd.DataFrame) -> None:
+            for coach, data in teams.groupby('Coach'):
+                K = (data['Positie'] == 'K').sum()
+                V = (data['Positie'] == 'V').sum()
+                M = (data['Positie'] == 'M').sum()
+                A = (data['Positie'] == 'A').sum()                       
+                tactic = f'{K}{V}{M}{A}'
+
+                if K + V + M + A != 11:
+                    print(f'Team of {coach} does not have 11 players.')
+                    raise Exception
+
+                elif tactic not in config.ALLOWED_TACTICS:
+                    print(f'Team of {coach} plays a tactic that is not allowed: {tactic}')
+                    raise Exception
+
+                elif data['Team'].nunique() != 11:
+                    p = data.duplicated(subset=['Team'], keep=False)
+                    print(f"Team of {coach} has more than 1 player of the same team: {p['Speler'].tolist()}")
+                    raise Exception
+
+                else:
+                    pass
+
+        teams_new = self.chosen_teams[self.chosen_teams['Speelronde'] == gameweek-1].copy()
+        teams_new['Speelronde'] = gameweek
+
+        # Process substitutions
+        subs = self.substitutions[self.substitutions['Speelronde']==gameweek].copy()
+        for _, row in subs.iterrows():
+            sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
+            teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
+        
+        # Join chosen team and dim_players to get info on clubs and positions
+        self.dim_players['Naam_fix'] = self.dim_players.apply(lambda x: unidecode(x['Naam']), axis=1)
+        players = self.dim_players.set_index('Naam_fix')[['Positie', 'Team', 'Link']]
+        teams_new = teams_new.join(players, on='Speler')
+
+        validate_tactics(teams_new)
+
+        return pd.concat([self.chosen_teams, teams_new]).reset_index(drop=True)
+
+
+
+
+
+
 if __name__ == '__main__':   
     data = CompetitionData()
     # data.update_matches()
     # data.update_players()
-    for round in data.get_rounds_to_scrape():
-        data.teams = data.process_substitutions()
+    for gameweek in data.get_rounds_to_scrape():
+        data.chosen_teams = data.process_teammodifications(gameweek)
 
+    print(data.chosen_teams.tail())
     # data.save_files_to_results()
 

@@ -24,3 +24,5 @@ URLS = {
     'teams':BASE_URL+'/teams/netherlands/{club_name}/{club_id}/squad/',
 
 }
+
+ALLOWED_TACTICS = ['1343', '1352', '1433', '1442', '1451', '1541', '1532']
