@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 
 import os
 import time
+from datetime import date
 from tqdm import tqdm
 import pandas as pd
 
@@ -220,10 +221,24 @@ class CompetitionData:
         self.dim_players.sort_values(by='SW_ID', inplace=True)
         
 
+    def get_matches_to_scrape(self) -> list[int]:
+        """Return the IDs of the rounds to scrape."""
+
+        rounds_to_scrape= []
+        for name, group in self.matches.groupby('Cluster'):
+            if all(group['Datum'].dt.date < date.today()):
+                # TODO: Add check if round is already scraped 
+                rounds_to_scrape.append(name)
+            else:
+                break
+
+        return rounds_to_scrape
+
 
 if __name__ == '__main__':   
     data = CompetitionData()
     # data.update_matches()
     # data.update_players()
+    data.get_matches_to_scrape()
     data.save_files_to_results()
 
