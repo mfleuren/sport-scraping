@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import numpy as np
 from lxml import html
 from bs4 import BeautifulSoup
 import re
@@ -334,7 +335,7 @@ def extract_match_events_from_lineup_container(
 def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd.DataFrame) -> pd.DataFrame:
     """Append the lineups with information on who took part in match events."""
     
-    lineups[['Kaart_Geel', 'Kaart_Rood', 'Goal', 'Goal_Eigen', 'Penalty_Goal', 'Penalty_Gemist']] = 0
+    lineups[['Kaart_Geel', 'Kaart_Rood', 'Goal', 'Goal_Eigen', 'Penalty_Goal', 'Penalty_Gemist', 'Penalty_Gestopt']] = 0
     yc, rc, goals, goals_pen, goals_own, pen_mis, rc_min, pen_mis_min = extract_match_events_from_lineup_container(html_string)
     
     for player_href in yc: lineups.loc[player_href == lineups['Link'], 'Kaart_Geel'] += 1      
@@ -386,6 +387,19 @@ def determine_winning_team(score_home: int, score_away: int, lineups: pd.DataFra
     return lineups
 
 
+def determine_goals_against(lineups: pd.DataFrame, score_home: int, score_away: int) -> pd.DataFrame:
+    """Append lineups with goals against and clean sheet."""
+
+    lineups['Tegendoelpunt'] = 0
+    lineups.loc[lineups['Home_Team'], 'Tegendoelpunt'] = score_away
+    lineups.loc[~lineups['Home_Team'], 'Tegendoelpunt'] = score_home
+
+    lineups['CleanSheet'] = 0
+    lineups.loc[lineups['Home_Team'], 'CleanSheet'] = (score_away == 0)
+    lineups.loc[~lineups['Home_Team'], 'CleanSheet'] = (score_home == 0)
+    
+    return lineups
+
 def extract_match_events(url: str, dim_players: pd.DataFrame) -> pd.DataFrame:
 
     html_string = open_website_in_client(config.BASE_URL + url)
@@ -404,6 +418,7 @@ def extract_match_events(url: str, dim_players: pd.DataFrame) -> pd.DataFrame:
         .pipe((determine_winning_team, 'lineups'), score_home=final_score_home, score_away=final_score_away)
         .pipe((append_match_events, 'lineups'), html_string=html_string, dim_players=dim_players)
         .pipe((append_assisters, 'lineups'), html_string=html_string)
+        .pipe((determine_goals_against, 'lineups'), score_home=final_score_home, score_away=final_score_away)
     )
     lineups['match_url'] = url
     return lineups

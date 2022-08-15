@@ -291,7 +291,7 @@ class CompetitionData:
         return self.chosen_teams.append(teams_new).reset_index(drop=True)
 
 
-    def process_new_matches(self, gameweek: int):
+    def process_new_matches(self, gameweek: int) -> pd.DataFrame:
         """Determine which matches to scrape, perform scraping, store results in DataFrame."""
 
         all_match_events = pd.DataFrame()
@@ -303,20 +303,72 @@ class CompetitionData:
             single_match_events = self.match_events.append(match_events).reset_index(drop=True)
             all_match_events = all_match_events.append(single_match_events)
             time.sleep(config.DEFAULT_SLEEP_S)
+        all_match_events['Speelronde'] = gameweek
 
         return self.match_events.append(all_match_events).reset_index(drop=True)
 
 
+    def calculate_point_by_player(self, gameweek: int) -> pd.DataFrame:
+        """Perform points calculations"""
+
+        events = self.match_events[self.match_events['Speelronde']==gameweek]
+        player = self.dim_players
+        events_player = events.join(player[['Link', 'Positie']].set_index('Link'), on='Link')
+        points_player = events_player.join(self.points_scheme.set_index('Positie'), on='Positie', lsuffix='_e', rsuffix='_p')
+
+        points_player[['Wedstrijd_Gewonnen_e', 'Wedstrijd_Gelijk_e', 'Wedstrijd_Verloren_e', 'CleanSheet_e']] = \
+            points_player[['Wedstrijd_Gewonnen_e', 'Wedstrijd_Gelijk_e', 'Wedstrijd_Verloren_e', 'CleanSheet_e']].astype('bool') 
+        
+        points_player['P_Gespeeld'] = points_player['Wedstrijd_Gespeeld'] * (points_player['Minuten_Gespeeld']/90)
+        points_player['P_Gewonnen'] = points_player['Wedstrijd_Gewonnen_p'] * (points_player['Minuten_Gespeeld']/90) * points_player['Wedstrijd_Gewonnen_e']
+        points_player['P_Gelijk'] = points_player['Wedstrijd_Gelijk_p'] * (points_player['Minuten_Gespeeld']/90) * points_player['Wedstrijd_Gelijk_e']
+        points_player['P_Verloren'] = points_player['Wedstrijd_Verloren_p'] * (points_player['Minuten_Gespeeld']/90) * points_player['Wedstrijd_Verloren_e']
+        points_player['P_Kaart_Geel'] = points_player['Kaart_Geel_p'] * points_player['Kaart_Geel_e']
+        points_player['P_Kaart_Rood'] = points_player['Kaart_Rood_p'] * points_player['Kaart_Rood_e']
+        points_player['P_Doelpunt'] = points_player['Doelpunt'] * points_player['Goal']
+        points_player['P_Assist'] = points_player['Assist_p'] * points_player['Assist_e']
+        points_player['P_Tegendoelpunt'] = points_player['Tegendoelpunt_p'] * points_player['Tegendoelpunt_e']
+        points_player['P_Eigen_Doelpunt'] = points_player['Eigen_Doelpunt'] * points_player['Goal_Eigen']
+        points_player['P_Clean_Sheet'] = points_player['CleanSheet_p'] * points_player['CleanSheet_e']
+        points_player['P_Penalty_Gescoord'] = points_player['Penalty_Gescoord'] * points_player['Penalty_Goal']
+        points_player['P_Penalty_Gemist'] = points_player['Penalty_Gemist_p'] * points_player['Penalty_Gemist_e']
+        points_player['P_Penalty_Gestopt'] = points_player['Penalty_Gestopt_p'] * points_player['Penalty_Gestopt_e']
+
+        cols_to_keep = ['Speler', 'Link'] + points_player.columns[points_player.columns.str.contains('P_')].tolist()
+        cols_to_drop = points_player.columns[~points_player.columns.isin(cols_to_keep)]
+        points_player.drop(cols_to_drop, axis=1, inplace=True)
+        points_player['P_Totaal'] = points_player.drop(['Speler', 'Link'], axis=1).sum(axis=1)
+        points_player['Speelronde'] = gameweek
+
+        # print(points_player.sort_values('P_Totaal', ascending=False).head(15))
+        # print(points_player[points_player['Speler']=='Danilo'].T)
+
+        return self.points_player.append(points_player)
+
+
+    def calculate_points_by_coach(self, gameweek: int) -> pd.DataFrame:
+        """Calculate points by coach"""
+
+        points_player = self.points_player[self.points_player['Speelronde']==gameweek]
+        coach_teams = self.chosen_teams[self.chosen_teams['Speelronde']==gameweek]
+
+        cols_to_drop = points_player.columns[~points_player.columns.isin(['Link', 'P_Totaal'])]
+        coach_teams = coach_teams.join(points_player.drop(cols_to_drop, axis=1).set_index('Link'), on='Link')
+        
+        return coach_teams
 
 
 if __name__ == '__main__':   
     data = CompetitionData()
     # data.update_matches()
     # data.update_players()
-    for gameweek in data.get_rounds_to_scrape():
-        data.chosen_teams = data.process_teammodifications(gameweek)
-        data.match_events = data.process_new_matches(gameweek)
+    for gameweek in [1]: #data.get_rounds_to_scrape():
+    #     data.chosen_teams = data.process_teammodifications(gameweek)
+        # data.match_events = data.process_new_matches(gameweek)
+        data.points_player = data.calculate_point_by_player(gameweek)
+        data.points_coach = data.calculate_points_by_coach(gameweek)
 
     # print(data.chosen_teams.tail())
-    data.save_files_to_results()
+    # data.save_files_to_results()
+
 
