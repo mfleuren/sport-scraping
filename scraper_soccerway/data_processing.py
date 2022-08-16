@@ -1,6 +1,5 @@
 from typing import Union
 from dataclasses import dataclass, field
-from wsgiref import validate
 from unidecode import unidecode
 
 import os
@@ -8,13 +7,16 @@ import time
 from datetime import date
 from tqdm import tqdm
 import pandas as pd
+from distutils.util import strtobool
 
 
-import config, gather 
+import config, gather, forum_message 
+from utility import forum_robot
 
 from dotenv import load_dotenv
 load_dotenv()
 
+MAKE_POST = strtobool(os.getenv('IMGUR_UPLOAD')) and strtobool(os.getenv('FORUM_POST'))
 
 # Football input
 FOOTBALL_PATH_INPUT = os.path.join(
@@ -192,44 +194,47 @@ class CompetitionData:
 
     def update_players(self):
 
-        for _,row in tqdm(self.dim_clubs.iterrows(), total=self.dim_clubs.shape[0]):
-
-            match_url = construct_url(config.URLS['teams'], row['SW_Teamnaam'], row['SW_TeamID'])
-            players_for_club = gather.extract_squad_from_html(match_url)
-            players_for_club['Team'] = row['Team']
-            self.dim_players = self.dim_players.append(players_for_club)
-
-            time.sleep(config.DEFAULT_SLEEP_S)
-
         def check_duplicates(df: pd.DataFrame, diff_col: str = None, keep: str = 'last') -> pd.Series:
-            columns = df.columns.drop(diff_col) if diff_col else df.columns
-            duplicated_mask = df.duplicated(subset=columns, keep=keep)
+            
+            cols_to_drop_constant = ['Rugnummer', 'Naam', 'Naam_fix', 'Positie_Order', 'Team_Order', 'Naam_Order']
+            cols_to_drop = [diff_col] + cols_to_drop_constant if diff_col else cols_to_drop_constant
+            columns_to_check = df.columns[~df.columns.isin(cols_to_drop)]
+            duplicated_mask = df.duplicated(subset=columns_to_check, keep=keep)
 
             if not diff_col: return duplicated_mask
 
             if (duplicated_mask.sum() > 0) & (keep == 'last'):
                 print(f'Found {duplicated_mask.sum()} changes in column {diff_col}')
 
-                all_duplicates_mask = df.duplicated(subset=columns, keep=False)
+                all_duplicates_mask = df.duplicated(subset=columns_to_check, keep=False)
                 changes = df[all_duplicates_mask].groupby('Naam').agg({diff_col:['first', 'last']})
 
                 for name,row in changes.iterrows():
                     print(f"\t{name:16s}\t{row[diff_col]['first']:>12s}  -->  {row[diff_col]['last']:12s}")              
             return duplicated_mask
 
+        all_players = self.dim_players.copy()
+        for _,row in tqdm(self.dim_clubs.iterrows(), total=self.dim_clubs.shape[0]):
+
+            match_url = construct_url(config.URLS['teams'], row['SW_Teamnaam'], row['SW_TeamID'])
+            players_for_club = gather.extract_squad_from_html(match_url)
+            players_for_club['Team'] = row['Team']
+            all_players = all_players.append(players_for_club)
+            time.sleep(config.DEFAULT_SLEEP_S)       
+
         # Remove completely duplicated rows
-        duplicated_mask = check_duplicates(self.dim_players)
-        self.dim_players = self.dim_players[~duplicated_mask]
+        duplicated_mask = check_duplicates(df=all_players)
+        all_players = all_players[~duplicated_mask]
 
         # Check for players that changed position - keep the original row
-        duplicated_mask_pos = check_duplicates(self.dim_players, 'Positie', 'first')
-        self.dim_players = self.dim_players[~duplicated_mask_pos]
+        duplicated_mask_pos = check_duplicates(df=all_players, diff_col='Positie', keep='first')
+        all_players = all_players[~duplicated_mask_pos]
 
         # Check for players that changed club - keep the new row
-        duplicated_mask_team = check_duplicates(self.dim_players, 'Team', 'last')
-        self.dim_players = self.dim_players[~duplicated_mask_team]     
+        duplicated_mask_team = check_duplicates(df=all_players, diff_col='Team', keep='last')
+        all_players = all_players[~duplicated_mask_team]     
 
-        self.dim_players.sort_values(by='SW_ID', inplace=True)
+        self.dim_players = all_players.sort_values(by='SW_ID')
         
 
     def get_rounds_to_scrape(self) -> list[int]:
@@ -258,15 +263,18 @@ class CompetitionData:
 
                 if K + V + M + A != 11:
                     print(f'Team of {coach} does not have 11 players.')
+                    print(data)
                     raise Exception
 
                 elif tactic not in config.ALLOWED_TACTICS:
                     print(f'Team of {coach} plays a tactic that is not allowed: {tactic}')
+                    print(data)
                     raise Exception
 
                 elif data['Team'].nunique() != 11:
                     p = data.duplicated(subset=['Team'], keep=False)
                     print(f"Team of {coach} has more than 1 player of the same team: {p['Speler'].tolist()}")
+                    print(data)
                     raise Exception
 
                 else:
@@ -274,12 +282,17 @@ class CompetitionData:
 
         teams_new = self.chosen_teams[self.chosen_teams['Speelronde'] == gameweek-1].copy()
         teams_new['Speelronde'] = gameweek
+        if 'Positie' in teams_new.columns:
+            teams_new.drop(['Positie', 'Team', 'Link'], axis=1, inplace=True)
 
         # Process substitutions
         subs = self.substitutions[self.substitutions['Speelronde']==gameweek].copy()
+        if subs.shape[0] > 0:
+            print(f"Processed substitutions, speelronde {gameweek}:")
         for _, row in subs.iterrows():
             sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
             teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
+            print(f"{row['Coach']} [{row['Wissel_Uit']} --> {row['Wissel_In']}]")
         
         # Join chosen team and dim_players to get info on clubs and positions
         self.dim_players['Naam_fix'] = self.dim_players.apply(lambda x: unidecode(x['Naam']), axis=1)
@@ -296,12 +309,10 @@ class CompetitionData:
 
         all_match_events = pd.DataFrame()
 
-        gameweek_matches = self.matches[self.matches['Cluster'] == gameweek]
+        gameweek_matches = self.matches[self.matches['Cluster'] == gameweek].copy()
         for _,match in tqdm(gameweek_matches.iterrows(), total=gameweek_matches.shape[0]):
-            match_events = gather.extract_match_events(match['url_match'], self.dim_players)
-
-            single_match_events = self.match_events.append(match_events).reset_index(drop=True)
-            all_match_events = all_match_events.append(single_match_events)
+            match_events = gather.extract_match_events(match['url_match'], self.dim_players.copy())
+            all_match_events = all_match_events.append(match_events)
             time.sleep(config.DEFAULT_SLEEP_S)
         all_match_events['Speelronde'] = gameweek
 
@@ -311,10 +322,12 @@ class CompetitionData:
     def calculate_point_by_player(self, gameweek: int) -> pd.DataFrame:
         """Perform points calculations"""
 
-        events = self.match_events[self.match_events['Speelronde']==gameweek]
-        player = self.dim_players
+        all_events = self.match_events.copy()
+        events = all_events[all_events['Speelronde']==gameweek]
+        player = self.dim_players.copy()
         events_player = events.join(player[['Link', 'Positie']].set_index('Link'), on='Link')
-        points_player = events_player.join(self.points_scheme.set_index('Positie'), on='Positie', lsuffix='_e', rsuffix='_p')
+        points_scheme = self.points_scheme.copy().set_index('Positie')
+        points_player = events_player.join(points_scheme, on='Positie', lsuffix='_e', rsuffix='_p')
 
         points_player[['Wedstrijd_Gewonnen_e', 'Wedstrijd_Gelijk_e', 'Wedstrijd_Verloren_e', 'CleanSheet_e']] = \
             points_player[['Wedstrijd_Gewonnen_e', 'Wedstrijd_Gelijk_e', 'Wedstrijd_Verloren_e', 'CleanSheet_e']].astype('bool') 
@@ -340,35 +353,62 @@ class CompetitionData:
         points_player['P_Totaal'] = points_player.drop(['Speler', 'Link'], axis=1).sum(axis=1)
         points_player['Speelronde'] = gameweek
 
-        # print(points_player.sort_values('P_Totaal', ascending=False).head(15))
-        # print(points_player[points_player['Speler']=='Danilo'].T)
-
         return self.points_player.append(points_player)
 
 
     def calculate_points_by_coach(self, gameweek: int) -> pd.DataFrame:
         """Calculate points by coach"""
 
-        points_player = self.points_player[self.points_player['Speelronde']==gameweek]
-        coach_teams = self.chosen_teams[self.chosen_teams['Speelronde']==gameweek]
+        points_player_all = self.points_player.copy()
+        chosen_teams_all = self.chosen_teams.copy()
+
+        points_player = points_player_all[points_player_all['Speelronde']==gameweek]
+        coach_teams = chosen_teams_all[chosen_teams_all['Speelronde']==gameweek]
 
         cols_to_drop = points_player.columns[~points_player.columns.isin(['Link', 'P_Totaal'])]
         coach_teams = coach_teams.join(points_player.drop(cols_to_drop, axis=1).set_index('Link'), on='Link')
         
-        return coach_teams
+        return self.points_coach.append(coach_teams)
+
+
+def create_message_and_post(data: CompetitionData, gameweeks: list[int]) -> None:
+
+    message = forum_message.Message(gameweeks=gameweeks)
+    message.create_substitutions_table(data.substitutions.copy())
+    message.create_round_ranking(data.points_coach.copy())
+    message.create_general_ranking(data.points_coach.copy())
+    message.create_teams_overview(data.chosen_teams.copy())
+    message.create_players_overview(data.dim_players.copy())
+
+    single_message = []
+    for idx,_ in enumerate(gameweeks):
+        single_message.append(message.substitution_table[idx])
+        single_message.append(message.round_ranking[idx])
+    single_message.append(message.general_ranking)
+    single_message.append(message.teams_overview)
+    single_message.append(message.players_overview)
+
+    final_message = ''.join(single_message)
+    
+    if MAKE_POST:
+        forum_robot.post_results_to_forum(final_message)
 
 
 if __name__ == '__main__':   
     data = CompetitionData()
-    # data.update_matches()
+    data.update_matches()
     # data.update_players()
-    for gameweek in [1]: #data.get_rounds_to_scrape():
-    #     data.chosen_teams = data.process_teammodifications(gameweek)
-        # data.match_events = data.process_new_matches(gameweek)
+    rounds_to_scrape = data.get_rounds_to_scrape()
+    for gameweek in rounds_to_scrape:
+        print(f'Scraping round {gameweek}')
+        data.chosen_teams = data.process_teammodifications(gameweek)
+        data.match_events = data.process_new_matches(gameweek)
         data.points_player = data.calculate_point_by_player(gameweek)
         data.points_coach = data.calculate_points_by_coach(gameweek)
 
-    # print(data.chosen_teams.tail())
-    # data.save_files_to_results()
+    create_message_and_post(data, rounds_to_scrape)
+    data.save_files_to_results()
 
+    # TODO: Fix Pavlidis (and possible others) missing after update_players()
+    # TODO: Subtract points for > 3 substitutions
 

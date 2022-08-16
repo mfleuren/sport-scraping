@@ -409,8 +409,8 @@ def extract_match_events(url: str, dim_players: pd.DataFrame) -> pd.DataFrame:
     #TODO: Quit process if match state is not FT
 
     final_score = extract_txt_by_class(html_string, 'h3', 'thick scoretime')[0]
-    final_score_home = extract_txt_from_string(final_score, '([0-9.*])-')
-    final_score_away = extract_txt_from_string(final_score, '-([0-9.*])')
+    final_score_home = int(extract_txt_from_string(final_score, '([0-9.*])-'))
+    final_score_away = int(extract_txt_from_string(final_score, '-([0-9.*])'))
 
     lineups = extract_team_lineup(html_string)
     lineups = (
