@@ -56,10 +56,10 @@ class Message:
             self.round_ranking.append(''.join(table))
 
 
-    def create_general_ranking(self, df: pd.DataFrame):
+    def create_general_ranking(self, points: pd.DataFrame, subs: pd.DataFrame):
         """Create a string containing a formatted table with the general ranking after a given round.""" 
 
-        points_by_coach = (df
+        points_by_coach = (points
             .groupby('Coach', as_index=False)['P_Totaal']
             .sum()
             .sort_values(by='P_Totaal', ascending=False)
@@ -67,11 +67,21 @@ class Message:
             )
         points_by_coach['Stand'] = points_by_coach.index + 1
 
+        subs_by_coach = (subs[subs['Speelronde'] <= self.gameweeks[-1]]
+            .groupby('Coach')['Wissel_In']
+            .count()
+            .rename({'Wissel_In':'N_Wissels'}, axis=1)
+            )
+        points_by_coach = points_by_coach.join(subs_by_coach, on='Coach')
+        points_by_coach['Minpunten_Wissels'] = 0
+        points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'Minpunten_Wissels'] =  -20 * points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'N_Wissels']      
+        points_by_coach['P_AlgemeenKlassement'] = points_by_coach['P_Totaal'] + points_by_coach['Minpunten_Wissels']
+
         table = [f'[b][u]Algemeen klassement na speelronde {self.gameweeks[-1]}.[/u][/b]']
         table_header = f'[tr][td][b]Positie[/b][/td][td][b]Coach[/b][/td][td][b]Punten[/b][/td][/tr]'
         table_body = []
         for _, row in points_by_coach.iterrows():
-            table_body.append(f"[tr][td]{row['Stand']}[/td][td]{row['Coach']}[/td][td]{row['P_Totaal']:.2f}[/td][/tr]")
+            table_body.append(f"[tr][td]{row['Stand']}[/td][td]{row['Coach']}[/td][td]{row['P_AlgemeenKlassement']:.2f}[/td][/tr]")
         table.append(f"[table]{table_header}{''.join(table_body)}[/table]")
 
         self.general_ranking = ''.join(table)
@@ -134,7 +144,7 @@ if __name__ == '__main__':
     message = Message(gameweeks=gameweeks)
     message.create_substitutions_table(substitutions)
     message.create_round_ranking(points_coach)
-    message.create_general_ranking(points_coach)
+    message.create_general_ranking(points_coach, substitutions)
     message.create_teams_overview(chosen_teams)
     message.create_players_overview(dim_players)
     
