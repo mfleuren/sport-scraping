@@ -26,7 +26,7 @@ class Message:
                 table_header = f'[tr][td][b]Speelronde[/b][/td][td][b]Coach[/b][/td][td][b]Speler IN[/b][/td][td][b]Speler UIT[/b][/td][td][b]Wissel #[/b][/td][/tr]'
                 table_body = []
                 for _,row in substitutions.iterrows():
-                    table_body.append(f"[tr][td]{gameweek}[/td][td]{row['Coach']}[/td][td]{row['Wissel_In']}[/td][td]{row['Wissel_Uit']}[/td][td]{row['N_Wissel']}[/td][/tr]")
+                    table_body.append(f"[tr][td]{gameweek}[/td][td]{row['Coach']}[/td][td]{row['Wissel_In']}[/td][td]{row['Wissel_Uit']}[/td][td]{row['N_Wissel']+1}[/td][/tr]")
                 table.append(f"[table]{table_header}{''.join(table_body)}[/table]")
 
             self.substitution_table.append(''.join(table))
