@@ -372,6 +372,7 @@ class CompetitionData:
 
 
 def create_message_and_post(data: CompetitionData, gameweeks: list[int]) -> None:
+    """Process the data and generate a message to post on a internet forum."""
 
     message = forum_message.Message(gameweeks=gameweeks)
     message.create_substitutions_table(data.substitutions.copy())
@@ -394,21 +395,23 @@ def create_message_and_post(data: CompetitionData, gameweeks: list[int]) -> None
         forum_robot.post_results_to_forum(final_message)
 
 
-if __name__ == '__main__':   
+def soccerway_scraper():
+    """Perform a round in the soccerway scraper"""
+
     data = CompetitionData()
-    # data.update_matches()
+    data.update_matches()
     data.update_players()
-    # rounds_to_scrape = data.get_rounds_to_scrape()
-    # for gameweek in rounds_to_scrape:
-    #     print(f'Scraping round {gameweek}')
-    #     data.chosen_teams = data.process_teammodifications(gameweek)
-    #     data.match_events = data.process_new_matches(gameweek)
-    #     data.points_player = data.calculate_point_by_player(gameweek)
-    #     data.points_coach = data.calculate_points_by_coach(gameweek)
+    rounds_to_scrape = data.get_rounds_to_scrape()
+    for gameweek in rounds_to_scrape:
+        print(f'Scraping round {gameweek}')
+        data.chosen_teams = data.process_teammodifications(gameweek)
+        data.match_events = data.process_new_matches(gameweek)
+        data.points_player = data.calculate_point_by_player(gameweek)
+        data.points_coach = data.calculate_points_by_coach(gameweek)
 
-    # create_message_and_post(data, rounds_to_scrape)
-    # data.save_files_to_results()
+    create_message_and_post(data, rounds_to_scrape)
+    data.save_files_to_results()
 
-    # TODO: Fix Pavlidis (and possible others) missing after update_players()
-    # TODO: Subtract points for > 3 substitutions
 
+if __name__ == '__main__':   
+    soccerway_scraper()
