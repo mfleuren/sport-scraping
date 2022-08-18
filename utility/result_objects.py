@@ -3,14 +3,12 @@ import pandas as pd
 import numpy as np
 import os
 
-from dotenv import load_dotenv
-from typing import Union
-
+from distutils.util import strtobool
 
 """
 SET CONSTANTS
 """
-
+from dotenv import load_dotenv
 load_dotenv()
 
 # Cycling input
@@ -23,6 +21,7 @@ PATH_RESULTS = os.path.join(
     os.getcwd(), 'results', 
     f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}"
     )
+EXPORT_DATA = strtobool(os.getenv('EXPORT_DATA'))
 
 """
 DATACLASSES FOR CYCLING SCRAPERS
@@ -33,6 +32,7 @@ class Message:
     img_urls: list[str] = field(default_factory=list)
     coach_mentions: list[list[str]] = field(default_factory=list)
     summary_img_urls: list[str] = field(default_factory=list)
+    substitution_list: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -51,10 +51,14 @@ class StageResults:
         self.matches = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_MATCHES')), sep=';')
         self.matches['MATCH_DATE'] = pd.to_datetime(self.matches['MATCH_DATE'], format='%d-%m-%Y')
 
-        self.teams = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_TEAMS')), sep=';', encoding='latin-1')
-        if not any(['ROUND_IN', 'ROUND_OUT']) in self.teams.columns:
-            self.teams['ROUND_IN'] = np.where(self.teams['POSITION'] == 'In',1, np.nan)
-            self.teams['ROUND_OUT'] = np.nan
+        if os.path.exists(os.path.join(PATH_RESULTS, os.getenv('FILENAME_TEAMS'))):
+            self.teams = pd.read_csv(os.path.join(PATH_RESULTS, os.getenv('FILENAME_TEAMS')), sep=';', encoding='latin-1')
+        else:
+            self.teams = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_TEAMS')), sep=';', encoding='latin-1')        
+            if not any(['ROUND_IN', 'ROUND_OUT']) in self.teams.columns:
+                self.teams['ROUND_IN'] = np.where(self.teams['POSITION'] == 'In',1, np.nan)
+                self.teams['ROUND_OUT'] = np.nan
+        self.teams.dropna(subset=['RIDER', 'COACH'], inplace=True)
 
         self.default_points = pd.read_csv(os.path.join(PATH_INPUT, os.getenv('FILENAME_POINTS')), sep=';')      
 
@@ -75,25 +79,27 @@ class StageResults:
 
 
     def export_concatenated_data(self) -> None:
-        self.all_results.to_csv(
-            os.path.join(PATH_RESULTS, os.getenv('FILENAME_ALL_RESULTS')), 
-            index=False
-            )
-        self.all_points.to_csv(
-            os.path.join(PATH_RESULTS, os.getenv('FILENAME_ALL_POINTS')), 
-            index=False
-            )
+
+        if EXPORT_DATA:
+            self.all_results.to_csv(
+                os.path.join(PATH_RESULTS, os.getenv('FILENAME_ALL_RESULTS')), 
+                index=False
+                )
+            self.all_points.to_csv(
+                os.path.join(PATH_RESULTS, os.getenv('FILENAME_ALL_POINTS')), 
+                index=False
+                )
 
 
     def export_teams(self) -> None:
         self.teams.to_csv(
-            os.path.join(PATH_INPUT, os.getenv('FILENAME_TEAMS')), 
-            index=False
+            os.path.join(PATH_RESULTS, os.getenv('FILENAME_TEAMS')), 
+            index=False,
+            sep=';'
         )
         
 
     def append_stages_to_existing_data(self):
         self.all_results = pd.concat([self.all_results, pd.concat(self.stage_results)], ignore_index=True)
         self.all_points = pd.concat([self.all_points, pd.concat(self.stage_points)], ignore_index=True)
-
 
