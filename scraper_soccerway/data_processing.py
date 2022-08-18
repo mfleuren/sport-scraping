@@ -224,15 +224,15 @@ class CompetitionData:
 
         # Remove completely duplicated rows
         duplicated_mask = check_duplicates(df=all_players)
-        all_players = all_players[~duplicated_mask]
+        all_players = all_players[~duplicated_mask].copy()
 
         # Check for players that changed position - keep the original row
         duplicated_mask_pos = check_duplicates(df=all_players, diff_col='Positie', keep='first')
-        all_players = all_players[~duplicated_mask_pos]
+        all_players = all_players[~duplicated_mask_pos].copy()
 
         # Check for players that changed club - keep the new row
         duplicated_mask_team = check_duplicates(df=all_players, diff_col='Team', keep='last')
-        all_players = all_players[~duplicated_mask_team]     
+        all_players = all_players[~duplicated_mask_team].copy() 
 
         self.dim_players = all_players.sort_values(by='SW_ID')
         
@@ -396,18 +396,18 @@ def create_message_and_post(data: CompetitionData, gameweeks: list[int]) -> None
 
 if __name__ == '__main__':   
     data = CompetitionData()
-    data.update_matches()
-    # data.update_players()
-    rounds_to_scrape = data.get_rounds_to_scrape()
-    for gameweek in rounds_to_scrape:
-        print(f'Scraping round {gameweek}')
-        data.chosen_teams = data.process_teammodifications(gameweek)
-        data.match_events = data.process_new_matches(gameweek)
-        data.points_player = data.calculate_point_by_player(gameweek)
-        data.points_coach = data.calculate_points_by_coach(gameweek)
+    # data.update_matches()
+    data.update_players()
+    # rounds_to_scrape = data.get_rounds_to_scrape()
+    # for gameweek in rounds_to_scrape:
+    #     print(f'Scraping round {gameweek}')
+    #     data.chosen_teams = data.process_teammodifications(gameweek)
+    #     data.match_events = data.process_new_matches(gameweek)
+    #     data.points_player = data.calculate_point_by_player(gameweek)
+    #     data.points_coach = data.calculate_points_by_coach(gameweek)
 
-    create_message_and_post(data, rounds_to_scrape)
-    data.save_files_to_results()
+    # create_message_and_post(data, rounds_to_scrape)
+    # data.save_files_to_results()
 
     # TODO: Fix Pavlidis (and possible others) missing after update_players()
     # TODO: Subtract points for > 3 substitutions
