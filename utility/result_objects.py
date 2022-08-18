@@ -2,15 +2,30 @@ from dataclasses import dataclass, field
 import pandas as pd
 import numpy as np
 import os
+
 from distutils.util import strtobool
+
+"""
+SET CONSTANTS
+"""
 from dotenv import load_dotenv
-
-
 load_dotenv()
-PATH_INPUT = os.path.join(os.getcwd(), 'inputs', f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}")
-PATH_RESULTS = os.path.join(os.getcwd(), 'results', f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}")
+
+# Cycling input
+PATH_INPUT = os.path.join(
+    os.getcwd(), 
+    'inputs', 
+    f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}"
+    )
+PATH_RESULTS = os.path.join(
+    os.getcwd(), 'results', 
+    f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}"
+    )
 EXPORT_DATA = strtobool(os.getenv('EXPORT_DATA'))
 
+"""
+DATACLASSES FOR CYCLING SCRAPERS
+"""
 
 @dataclass
 class Message:
@@ -87,3 +102,4 @@ class StageResults:
     def append_stages_to_existing_data(self):
         self.all_results = pd.concat([self.all_results, pd.concat(self.stage_results)], ignore_index=True)
         self.all_points = pd.concat([self.all_points, pd.concat(self.stage_points)], ignore_index=True)
+
