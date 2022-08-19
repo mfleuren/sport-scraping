@@ -1,10 +1,13 @@
 import requests
 import pandas as pd
+import numpy as np
 from unidecode import unidecode
 import time
 import os
 from dotenv import load_dotenv
 
+import sys
+sys.path.append(os.getcwd())
 from utility.result_objects import StageResults
 
 
@@ -63,14 +66,18 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
     table_list = pd.read_html(html_text)
     all_rankings = ['STAGE', 'GC', 'SPRINT', 'KOM', 'YOUTH']
     ranking_exists = match[all_rankings].values
-    ranking_idx = [i for i, y in enumerate(ranking_exists) if y]
-    for idx, _ in enumerate(ranking_idx):
-        result_table = clean_results_table(table_list[idx], match)
+    ranking_val = [all_rankings[i] for i,y in enumerate(ranking_exists) if y]
+    for idx, val in enumerate(ranking_val):
+
+        if match['TTT'] & (idx == 0):
+            result_table = clean_ttt_table(table_list[idx], match)
+        else:
+            result_table = clean_results_table(table_list[idx], match)
 
         if match['MATCH'] != 22:
-            result_table['RANKING'] = f"stage_{all_rankings[idx].lower()}"
+            result_table['RANKING'] = f"stage_{val.lower()}"
         else:
-            result_table['RANKING'] = f"gc_{all_rankings[idx].lower()}"
+            result_table['RANKING'] = f"gc_{val.lower()}"
 
         all_result_tables = pd.concat([all_result_tables, result_table], ignore_index=True)
 
@@ -109,3 +116,47 @@ def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFra
     else: 
         COLUMNS_TO_KEEP = ['RNK', 'RIDER', 'FIRSTNAME', 'SURNAME', 'TEAM', 'MATCH']   
         return results_table[COLUMNS_TO_KEEP]
+
+
+def clean_ttt_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFrame:
+    """Clean table script specifically for TTT."""
+
+    raw_table['Pos.'].fillna(method='ffill', inplace=True)
+    raw_table['Pos.'] = raw_table['Pos.'].astype('int')
+    raw_table.rename({'Pos.':'RNK', 'Team':'RIDER'}, axis=1, inplace=True)
+
+    # Create Team column
+    raw_table['TEAM'] = np.nan
+    raw_table.loc[raw_table['Time'].notna(), 'TEAM'] = raw_table.loc[raw_table['Time'].notna(), 'RIDER']
+    raw_table['TEAM'].fillna(method='ffill', inplace=True)
+    
+    # Drop team rows
+    results_table = raw_table[raw_table['Time'].isna()].copy()
+
+    # Convert name characters to unicode
+    results_table['RIDER'] = results_table.apply(lambda x: unidecode(x['RIDER']), axis=1)
+
+    # Remove times from rider
+    results_table['RIDER'] = results_table['RIDER'].str.replace(r'\+[\d:]{4,5}', '', regex=True)
+
+    # Split ridername in surname and firstname
+    results_table['SURNAME'] = (results_table['RIDER']
+                                .str.extract('([A-Z ]*)')[0]
+                                .replace('[A-Z]$', '', regex=True)
+                                .str.strip()
+                                )
+    results_table['FIRSTNAME'] = results_table.apply(lambda x: x['RIDER'].replace(x['SURNAME'], '').strip(), axis=1)
+
+    # Add match information
+    results_table['MATCH'] = match['MATCH']
+
+    COLUMNS_TO_KEEP = ['RNK', 'RIDER', 'FIRSTNAME', 'SURNAME', 'TEAM', 'MATCH'] 
+    return results_table[COLUMNS_TO_KEEP]
+
+
+# if __name__ == '__main__':
+
+#     url = 'https://www.procyclingstats.com/race/vuelta-a-espana/2022/stage-1'
+#     result = requests.get(url)
+#     raw_table = pd.read_html(result.text)[0]
+#     clean_ttt_table(raw_table)

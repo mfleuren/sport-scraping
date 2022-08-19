@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 import os
 import pandas as pd
 from datetime import datetime
+
+import sys
+sys.path.append(os.getcwd())
 from scraper_pcs.process_substitutions import process_substitutions, create_teams_plot
 from scraper_pcs.webscraper import scrape_website
 from scraper_pcs.calculate_scores import calculate_match_points, calculate_match_standings, calculate_stage_points
