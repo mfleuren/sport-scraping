@@ -10,7 +10,6 @@ import sys
 sys.path.append(os.getcwd())
 from utility.result_objects import StageResults
 
-
 load_dotenv()
 
 
@@ -32,6 +31,8 @@ def scrape_website(results: StageResults, match: pd.Series, stage_race: bool = F
         url = construct_pcs_stage_url(match['URL_EPITHET'])
     else:
         url = construct_pcs_url(match['URL_EPITHET'])
+
+    print(url)
 
     result = requests.get(url)
     statuscode = result.status_code
@@ -64,15 +65,41 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
     all_result_tables = pd.DataFrame()
 
     table_list = pd.read_html(html_text)
+    number_of_tables = len(table_list)
+
     all_rankings = ['STAGE', 'GC', 'SPRINT', 'KOM', 'YOUTH']
     ranking_exists = match[all_rankings].values
     ranking_val = [all_rankings[i] for i,y in enumerate(ranking_exists) if y]
+
+    ## Method to get the number of tables by classification type
+    number_of_stage_tables = 1
+    number_of_gc_tables = 1
+    number_of_sprint_tables = 3
+    number_of_mnt_tables = 2
+    number_of_youth_tables = 2
+    number_of_team_tables = 2
+
+    expected_number_of_tables = [number_of_stage_tables, number_of_gc_tables, number_of_sprint_tables,\
+        number_of_mnt_tables, number_of_youth_tables, number_of_team_tables]
+    cumsum_number_of_tables = np.cumsum(expected_number_of_tables)-1
+
+    if number_of_tables != np.sum(expected_number_of_tables):
+        number_of_mnt_tables += (number_of_tables - np.sum(expected_number_of_tables))
+        expected_number_of_tables = [number_of_stage_tables, number_of_gc_tables, number_of_sprint_tables,\
+            number_of_mnt_tables, number_of_youth_tables, number_of_team_tables]
+        cumsum_number_of_tables = np.cumsum(expected_number_of_tables)-1
+
     for idx, val in enumerate(ranking_val):
 
-        if match['TTT'] & (idx == 0):
-            result_table = clean_ttt_table(table_list[idx], match)
+        if idx != 0:
+            table_number = cumsum_number_of_tables[idx-1]+1
         else:
-            result_table = clean_results_table(table_list[idx], match)
+            table_number = cumsum_number_of_tables[idx]
+
+        if match['TTT'] & (idx == 0):
+            result_table = clean_ttt_table(table_list[table_number], match)
+        else:
+            result_table = clean_results_table(table_list[table_number], match)
 
         if match['MATCH'] != 22:
             result_table['RANKING'] = f"stage_{val.lower()}"
@@ -155,8 +182,7 @@ def clean_ttt_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFrame:
 
 
 # if __name__ == '__main__':
-
-#     url = 'https://www.procyclingstats.com/race/vuelta-a-espana/2022/stage-1'
-#     result = requests.get(url)
-#     raw_table = pd.read_html(result.text)[0]
+    # url = 'https://www.procyclingstats.com/race/vuelta-a-espana/2022/stage-2'
+    # result = requests.get(url)
+    # raw_tables = read_result_table_stage(result.text)
 #     clean_ttt_table(raw_table)
