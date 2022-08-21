@@ -242,11 +242,14 @@ class CompetitionData:
 
         rounds_to_scrape= []
         for name, group in self.matches.groupby('Cluster'):
-            if all(pd.to_datetime(group['Datum']).dt.date < date.today()):
-                # TODO: Add check if round is already scraped 
+            rounds_already_processed = self.points_coach['Speelronde'].unique().tolist()
+
+            if all(pd.to_datetime(group['Datum']).dt.date <= date.today()) &\
+                (group.iloc[0]['Cluster'] not in rounds_already_processed):               
+
                 rounds_to_scrape.append(name)
             else:
-                break
+                continue
         return rounds_to_scrape
 
 
@@ -296,7 +299,7 @@ class CompetitionData:
         
         # Join chosen team and dim_players to get info on clubs and positions
         self.dim_players['Naam_fix'] = self.dim_players.apply(lambda x: unidecode(x['Naam']), axis=1)
-        players = self.dim_players.set_index('Naam_fix')[['Positie', 'Team', 'Link']]
+        players = self.dim_players.set_index('Naam_fix')[['Positie', 'Team', 'Link']].copy()
         teams_new = teams_new.join(players, on='Speler')
 
         validate_tactics(teams_new)
@@ -402,6 +405,7 @@ def soccerway_scraper():
     data.update_matches()
     data.update_players()
     rounds_to_scrape = data.get_rounds_to_scrape()
+    print(rounds_to_scrape)
     for gameweek in rounds_to_scrape:
         print(f'Scraping round {gameweek}')
         data.chosen_teams = data.process_teammodifications(gameweek)
@@ -409,8 +413,9 @@ def soccerway_scraper():
         data.points_player = data.calculate_point_by_player(gameweek)
         data.points_coach = data.calculate_points_by_coach(gameweek)
 
-    create_message_and_post(data, rounds_to_scrape)
-    data.save_files_to_results()
+    if len(rounds_to_scrape) > 0:
+        create_message_and_post(data, rounds_to_scrape)
+        data.save_files_to_results()
 
 
 if __name__ == '__main__':   
