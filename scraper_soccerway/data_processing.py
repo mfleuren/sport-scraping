@@ -380,7 +380,7 @@ def create_message_and_post(data: CompetitionData, gameweeks: list[int]) -> None
     message = forum_message.Message(gameweeks=gameweeks)
     message.create_substitutions_table(data.substitutions.copy())
     message.create_round_ranking(data.points_coach.copy())
-    message.create_general_ranking(data.points_coach.copy())
+    message.create_general_ranking(data.points_coach.copy(), data.substitutions.copy())
     message.create_teams_overview(data.chosen_teams.copy())
     message.create_players_overview(data.dim_players.copy())
 
@@ -405,7 +405,6 @@ def soccerway_scraper():
     data.update_matches()
     data.update_players()
     rounds_to_scrape = data.get_rounds_to_scrape()
-    print(rounds_to_scrape)
     for gameweek in rounds_to_scrape:
         print(f'Scraping round {gameweek}')
         data.chosen_teams = data.process_teammodifications(gameweek)
@@ -420,3 +419,5 @@ def soccerway_scraper():
 
 if __name__ == '__main__':   
     soccerway_scraper()
+
+# TODO: Add points to chosen teams message

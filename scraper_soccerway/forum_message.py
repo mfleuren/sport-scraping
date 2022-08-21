@@ -60,6 +60,7 @@ class Message:
         """Create a string containing a formatted table with the general ranking after a given round.""" 
 
         points_by_coach = (points
+            .copy()
             .groupby('Coach', as_index=False)['P_Totaal']
             .sum()
             .sort_values(by='P_Totaal', ascending=False)
@@ -68,11 +69,14 @@ class Message:
         points_by_coach['Stand'] = points_by_coach.index + 1
 
         subs_by_coach = (subs[subs['Speelronde'] <= self.gameweeks[-1]]
+            .copy()
             .groupby('Coach')['Wissel_In']
             .count()
-            .rename({'Wissel_In':'N_Wissels'}, axis=1)
             )
+        subs_by_coach.name = 'N_Wissels'
+        print(subs_by_coach)
         points_by_coach = points_by_coach.join(subs_by_coach, on='Coach')
+        print(points_by_coach)
         points_by_coach['Minpunten_Wissels'] = 0
         points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'Minpunten_Wissels'] =  -20 * points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'N_Wissels']      
         points_by_coach['P_AlgemeenKlassement'] = points_by_coach['P_Totaal'] + points_by_coach['Minpunten_Wissels']
@@ -92,13 +96,13 @@ class Message:
 
         chosen_teams = df[df['Speelronde'] == self.gameweeks[-1]].copy()
         chosen_teams['Positie_Order'] = chosen_teams['Positie'].map(dict({'K':0, 'V':1, 'M':2, 'A':3}))
-        section = [f'[b][u]Gekozen teams na speelronde {self.gameweeks[-1]}.[/u][/b]\n']
+        section = [f'[b][u]Gekozen teams na speelronde {self.gameweeks[-1]}.[/u][/b]\n[spoiler]']
         
         
         for coach in sorted(chosen_teams['Coach'].unique(), key=str.casefold):
             section_body = []
             section_body.append(f'[b]{coach}[/b]')
-            table_header = f'[tr][td][td][b]Positie[/b][/td][td][b]Speler[/b][/td][/tr]'
+            table_header = f'[tr][td][b]Positie[/b][/td][td][b]Speler[/b][/td][/tr]'
             
             coach_team = chosen_teams[chosen_teams['Coach']==coach].sort_values(by=['Positie_Order', 'Speler'])
             table_body = []
@@ -107,6 +111,8 @@ class Message:
             section_body.append(f"[spoiler][table]{table_header}{''.join(table_body)}[/table][/spoiler]")
 
             section.append(''.join(section_body))
+        
+        section.append('[/spoiler]')
 
         self.teams_overview = ''.join(section)
 
