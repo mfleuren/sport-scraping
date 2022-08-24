@@ -290,7 +290,7 @@ def create_mention_string(coaches: list) -> str:
     unique_coaches = np.unique(coaches)
 
     mention_list = ['Mentions voor de beste coaches in de etappe en het algemeen klassement: ']
-    for coach in unique_coaches:
+    for coach in sorted(unique_coaches, key=str.casefold):
         mention_list.append(f'@{coach} ')
     mention_string = ''.join(mention_list) + f'\n'
 
