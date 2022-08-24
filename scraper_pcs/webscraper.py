@@ -71,30 +71,14 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
     ranking_exists = match[all_rankings].values
     ranking_val = [all_rankings[i] for i,y in enumerate(ranking_exists) if y]
 
-    ## Method to get the number of tables by classification type
-    number_of_stage_tables = 1
-    number_of_gc_tables = 1
-    number_of_sprint_tables = 3
-    number_of_mnt_tables = 2
-    number_of_youth_tables = 2
-    number_of_team_tables = 2
-
-    expected_number_of_tables = [number_of_stage_tables, number_of_gc_tables, number_of_sprint_tables,\
-        number_of_mnt_tables, number_of_youth_tables, number_of_team_tables]
-    cumsum_number_of_tables = np.cumsum(expected_number_of_tables)-1
-
-    if number_of_tables != np.sum(expected_number_of_tables):
-        number_of_mnt_tables += (number_of_tables - np.sum(expected_number_of_tables))
-        expected_number_of_tables = [number_of_stage_tables, number_of_gc_tables, number_of_sprint_tables,\
-            number_of_mnt_tables, number_of_youth_tables, number_of_team_tables]
-        cumsum_number_of_tables = np.cumsum(expected_number_of_tables)-1
+    idx_with_rnk = []
+    for idx, table in enumerate(table_list):
+        if 'Rnk' in table.columns:
+            idx_with_rnk.append(idx) 
 
     for idx, val in enumerate(ranking_val):
 
-        if idx != 0:
-            table_number = cumsum_number_of_tables[idx-1]+1
-        else:
-            table_number = cumsum_number_of_tables[idx]
+        table_number = idx_with_rnk[idx]
 
         if match['TTT'] & (idx == 0):
             result_table = clean_ttt_table(table_list[table_number], match)

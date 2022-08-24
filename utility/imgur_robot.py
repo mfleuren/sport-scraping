@@ -3,6 +3,7 @@ import base64
 import requests
 import os
 import pathlib
+import time
 
 def upload_to_imgur(image_full_path:Union[str, pathlib.Path]) -> str:
     """Upload a saved image to IMGUR.com and return the url in BB-code tags"""    
@@ -23,6 +24,8 @@ def upload_to_imgur(image_full_path:Union[str, pathlib.Path]) -> str:
         )
        
     message = f"[img]{j1.json()['data']['link']}[/img]\n"
+
+    time.sleep(1.5)
     
     return message
     
