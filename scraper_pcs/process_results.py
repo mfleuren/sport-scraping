@@ -278,8 +278,8 @@ def create_teams_message(data: pd.DataFrame) -> str:
 
 def list_best_coaches(data: pd.DataFrame) -> list:
 
-    ranked_data = data.groupby('COACH')['POINTS'].sum().sort_values(ascending=False)
-    best_coaches = ranked_data.head(3).index.to_list()
+    ranked_data = data.groupby('COACH', as_index=False)['POINTS'].sum().sort_values(by='POINTS', ascending=False)
+    best_coaches = ranked_data['COACH'].head(3).to_list()
     print(f'Best coaches: {best_coaches}')
 
     return best_coaches

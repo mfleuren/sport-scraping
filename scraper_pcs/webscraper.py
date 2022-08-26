@@ -73,7 +73,7 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
 
     idx_with_rnk = []
     for idx, table in enumerate(table_list):
-        if 'Rnk' in table.columns:
+        if ('Rnk' in table.columns) or ('Pos.' in table.columns):
             idx_with_rnk.append(idx) 
 
     for idx, val in enumerate(ranking_val):
@@ -81,7 +81,7 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
         table_number = idx_with_rnk[idx]
 
         if match['TTT'] & (idx == 0):
-            result_table = clean_ttt_table(table_list[table_number], match)
+            result_table = clean_ttt_table(table_list[idx], match)
         else:
             result_table = clean_results_table(table_list[table_number], match)
 
@@ -101,7 +101,7 @@ def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFra
     results_table = raw_table.copy()
 
     # Remove TEAM from rider name
-    results_table['RIDER'] = results_table.apply(lambda x: x['Rider'].replace(x['Team'], ''), axis=1)
+    results_table['RIDER'] = results_table.apply(lambda x: x['Rider'].replace(str(x['Team']), ''), axis=1)
 
     # Convert name characters to unicode
     results_table['RIDER'] = results_table.apply(lambda x: unidecode(x['RIDER']), axis=1)
