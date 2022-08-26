@@ -59,9 +59,9 @@ def calculate_match_standings(results: StageResults, message: Message) -> Tuple[
 def mask_scores_inactive_riders(scores: pd.DataFrame) -> pd.DataFrame:
     """Replace the scores of inactive riders with 0."""
 
-    mask_in = np.array(scores['MATCH'] < scores['ROUND_IN'])
-    mask_out = np.array(scores['MATCH'] >= scores['ROUND_OUT'])
-    scores.loc[mask_in | mask_out, 'POINTS'] = 0
+    mask_in = (scores['MATCH'] < scores['ROUND_IN']) | (scores['ROUND_IN'].isna())
+    mask_out = scores['MATCH'] >= scores['ROUND_OUT']
+    scores.loc[(mask_in | mask_out), 'POINTS'] = 0
 
     return scores
 
