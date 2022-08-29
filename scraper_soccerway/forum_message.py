@@ -95,7 +95,8 @@ class Message:
         """Create a string containing formatted tables with the chosen teams after a given round."""
 
         chosen_teams = df[df['Speelronde'] == self.gameweeks[-1]].copy()
-        chosen_teams['Positie_Order'] = chosen_teams['Positie'].map(dict({'K':0, 'V':1, 'M':2, 'A':3}))
+        chosen_teams['Positie'].fillna('X', inplace=True)
+        chosen_teams['Positie_Order'] = chosen_teams['Positie'].map(dict({'K':0, 'V':1, 'M':2, 'A':3, '-':4}))
         section = [f'[b][u]Gekozen teams na speelronde {self.gameweeks[-1]}.[/u][/b]\n[spoiler]']
         
         

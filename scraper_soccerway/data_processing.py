@@ -32,6 +32,7 @@ FOOTBALL_PATH_RESULTS = os.path.join(
 
 FILE_FOOTBALL_TEAMS_INPUT = os.path.join(FOOTBALL_PATH_INPUT, 'teams.csv')
 FILE_FOOTBALL_SUBSTITUTIONS = os.path.join(FOOTBALL_PATH_INPUT, 'substitutions.csv')
+FILE_FOOTBALL_FREE_SUBSTITUTIONS = os.path.join(FOOTBALL_PATH_INPUT, 'free_substitutions.csv')
 FILE_FOOTBALL_POINTS_SCHEME = os.path.join(FOOTBALL_PATH_INPUT, 'points_scheme.csv')
 
 FILE_FOOTBALL_TEAMS_RESULTS = os.path.join(FOOTBALL_PATH_RESULTS, 'teams.csv')
@@ -73,6 +74,7 @@ class CompetitionData:
     def __post_init__(self):
         self.chosen_teams = self.load_file_from_input_or_results(FILE_FOOTBALL_TEAMS_INPUT, FILE_FOOTBALL_TEAMS_RESULTS)
         self.substitutions = pd.read_csv(FILE_FOOTBALL_SUBSTITUTIONS, sep=';')
+        self.free_substitutions = pd.read_csv(FILE_FOOTBALL_FREE_SUBSTITUTIONS, sep=';')
         self.points_scheme = pd.read_csv(FILE_FOOTBALL_POINTS_SCHEME, sep=';')
         self.points_player = self.load_file_from_results(FILE_FOOTBALL_POINTS_PLAYER)
         self.points_coach = self.load_file_from_results(FILE_FOOTBALL_POINTS_COACH)
@@ -261,23 +263,25 @@ class CompetitionData:
                 K = (data['Positie'] == 'K').sum()
                 V = (data['Positie'] == 'V').sum()
                 M = (data['Positie'] == 'M').sum()
-                A = (data['Positie'] == 'A').sum()                       
+                A = (data['Positie'] == 'A').sum()
+                special = data['Speler'].str.contains('!').sum()                       
                 tactic = f'{K}{V}{M}{A}'
 
-                if K + V + M + A != 11:
+                if K + V + M + A + special != 11:
+                    print(data)
                     print(f'Team of {coach} does not have 11 players.')
-                    print(data)
                     raise Exception
 
-                elif tactic not in config.ALLOWED_TACTICS:
+                elif tactic not in config.ALLOWED_TACTICS and special == 0:
+                    print(data)
                     print(f'Team of {coach} plays a tactic that is not allowed: {tactic}')
-                    print(data)
                     raise Exception
 
-                elif data['Team'].nunique() != 11:
+                elif data['Team'].nunique() != 11 and special == 0:
                     p = data.duplicated(subset=['Team'], keep=False)
+                    print(special)
+                    print(data[['Speler', 'Team']])
                     print(f"Team of {coach} has more than 1 player of the same team: {p['Speler'].tolist()}")
-                    print(data)
                     raise Exception
 
                 else:
@@ -292,6 +296,15 @@ class CompetitionData:
         subs = self.substitutions[self.substitutions['Speelronde']==gameweek].copy()
         if subs.shape[0] > 0:
             print(f"Processed substitutions, speelronde {gameweek}:")
+        for _, row in subs.iterrows():
+            sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
+            teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
+            print(f"{row['Coach']} [{row['Wissel_Uit']} --> {row['Wissel_In']}]")
+
+        # Process free substitutions
+        subs = self.free_substitutions[self.free_substitutions['Speelronde']==gameweek].copy()
+        if subs.shape[0] > 0:
+            print(f"Processed free substitutions, speelronde {gameweek}:")
         for _, row in subs.iterrows():
             sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
             teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
