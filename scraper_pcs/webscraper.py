@@ -65,7 +65,6 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
     all_result_tables = pd.DataFrame()
 
     table_list = pd.read_html(html_text)
-    number_of_tables = len(table_list)
 
     all_rankings = ['STAGE', 'GC', 'SPRINT', 'KOM', 'YOUTH']
     ranking_exists = match[all_rankings].values
@@ -78,7 +77,10 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
 
     for idx, val in enumerate(ranking_val):
 
-        table_number = idx_with_rnk[idx]
+        if match['MATCH'] != 22:
+            table_number = idx_with_rnk[idx]
+        else: 
+            table_number = idx_with_rnk[idx+1] #Skip first table
 
         if match['TTT'] & (idx == 0):
             result_table = clean_ttt_table(table_list[idx], match)
