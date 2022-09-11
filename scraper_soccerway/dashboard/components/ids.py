@@ -1,4 +1,6 @@
-BAR_CHART = "bar-chart"
+BAR_CHART_ROUND = "bar-chart-round"
+BAR_CHART_GC = "bar-chart-gc"
 
 ROUND_DROPDOWN = "round-dropdown"
-SELECT_ALL_ROUNDS_BUTTON = "select-all-rounds-button"
+COACHES_DROPDOWN = "coaches-dropdown"
+SELECT_ALL_COACHES_BUTTON = "select-all-coaches-button"
