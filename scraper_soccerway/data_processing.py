@@ -182,7 +182,7 @@ class CompetitionData:
 
             match_url = construct_url(config.URLS['matches'], row['SW_Teamnaam'], row['SW_TeamID'])
             matches_for_club = gather.extract_matches_from_html(match_url)
-            self.matches = self.matches.append(matches_for_club)
+            self.matches = pd.concat([self.matches, matches_for_club], ignore_index=True)
 
             time.sleep(config.DEFAULT_SLEEP_S)
 
@@ -221,7 +221,7 @@ class CompetitionData:
             match_url = construct_url(config.URLS['teams'], row['SW_Teamnaam'], row['SW_TeamID'])
             players_for_club = gather.extract_squad_from_html(match_url)
             players_for_club['Team'] = row['Team']
-            all_players = all_players.append(players_for_club)
+            all_players = pd.concat([all_players, players_for_club], ignore_index=True)
             time.sleep(config.DEFAULT_SLEEP_S)       
 
         # Remove completely duplicated rows
@@ -317,7 +317,7 @@ class CompetitionData:
 
         validate_tactics(teams_new)
 
-        return self.chosen_teams.append(teams_new).reset_index(drop=True)
+        return pd.concat([self.chosen_teams, teams_new], ignore_index=True)
 
 
     def process_new_matches(self, gameweek: int) -> pd.DataFrame:
@@ -328,11 +328,11 @@ class CompetitionData:
         gameweek_matches = self.matches[self.matches['Cluster'] == gameweek].copy()
         for _,match in tqdm(gameweek_matches.iterrows(), total=gameweek_matches.shape[0]):
             match_events = gather.extract_match_events(match['url_match'], self.dim_players.copy())
-            all_match_events = all_match_events.append(match_events)
+            all_match_events = pd.concat([all_match_events, match_events], ignore_index=True)
             time.sleep(config.DEFAULT_SLEEP_S)
         all_match_events['Speelronde'] = gameweek
 
-        return self.match_events.append(all_match_events).reset_index(drop=True)
+        return pd.concat([self.match_events, all_match_events], ignore_index=True)
 
 
     def calculate_point_by_player(self, gameweek: int) -> pd.DataFrame:
@@ -369,7 +369,7 @@ class CompetitionData:
         points_player['P_Totaal'] = points_player.drop(['Speler', 'Link'], axis=1).sum(axis=1)
         points_player['Speelronde'] = gameweek
 
-        return self.points_player.append(points_player)
+        return pd.concat([self.points_player, points_player], ignore_index=True)
 
 
     def calculate_points_by_coach(self, gameweek: int) -> pd.DataFrame:
@@ -384,7 +384,7 @@ class CompetitionData:
         cols_to_drop = points_player.columns[~points_player.columns.isin(['Link', 'P_Totaal'])]
         coach_teams = coach_teams.join(points_player.drop(cols_to_drop, axis=1).set_index('Link'), on='Link')
         
-        return self.points_coach.append(coach_teams)
+        return pd.concat([self.points_coach, coach_teams], ignore_index=True)
 
 
 def create_message_and_post(data: CompetitionData, gameweeks: list[int]) -> None:
