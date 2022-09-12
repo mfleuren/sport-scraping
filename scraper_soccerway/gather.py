@@ -243,7 +243,6 @@ def extract_team_lineup(html_string: str) -> pd.DataFrame:
                     .merge(full_lineup_home, full_lineup_away, how='outer', indicator='Home_Team')
                    .replace({'Home_Team':{'left_only':True, 'right_only':False}})
                   )
-    full_lineup['Home_Team'] = full_lineup['Home_Team'].astype(bool)
 
     return full_lineup.reset_index(drop=True)
     
@@ -426,6 +425,6 @@ def extract_match_events(url: str, dim_players: pd.DataFrame) -> pd.DataFrame:
 
 
 # if __name__ == '__main__':
-#     url = config.EXAMPLE_MATCH_URLS.get('red_card')
-#     result = extract_match_events(url)
-#     print(result)
+    # url = config.EXAMPLE_MATCH_URLS.get('red_card')
+    # result = extract_match_events(url)
+    # print(result)
