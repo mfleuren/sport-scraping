@@ -79,7 +79,7 @@ class Message:
         points_by_coach = points_by_coach.join(subs_by_coach, on='Coach')
         print(points_by_coach)
         points_by_coach['Minpunten_Wissels'] = 0
-        points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'Minpunten_Wissels'] =  -20 * points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'N_Wissels']      
+        points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'Minpunten_Wissels'] =  -20 * (points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'N_Wissels'] - 3)      
         points_by_coach['P_AlgemeenKlassement'] = points_by_coach['P_Totaal'] + points_by_coach['Minpunten_Wissels']
 
         table = [f'[b][u]Algemeen klassement na speelronde {self.gameweeks[-1]}.[/u][/b]']
