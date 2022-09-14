@@ -15,8 +15,9 @@ class Message:
         """Create a string containing a formatted table with substitutions by game round."""
 
         for gameweek in self.gameweeks:
+            
+            df['N_Wissel'] = df.groupby('Coach').cumcount()
             substitutions = df[df['Speelronde']==gameweek]
-            substitutions['N_Wissel'] = substitutions.groupby('Coach').cumcount()
 
             if substitutions.shape[0] == 0:
                 table = f'[b][u]Geen wissels in speelronde {gameweek}.[/u][/b]\n'
