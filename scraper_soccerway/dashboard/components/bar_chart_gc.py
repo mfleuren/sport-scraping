@@ -6,9 +6,7 @@ import pandas as pd
 from . import ids
 
 
-data = pd.read_csv('.\\.\\results\\2022_Eredivisie\\points_coach.csv', sep=';')
-
-def render(app: Dash) -> html.Div:
+def render(app: Dash, data: pd.DataFrame) -> html.Div:
     
     @app.callback(
         Output(ids.BAR_CHART_GC, "children"),

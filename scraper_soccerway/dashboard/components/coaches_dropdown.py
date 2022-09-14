@@ -5,9 +5,8 @@ import numpy as np
 
 from . import ids
 
-data = pd.read_csv('.\\.\\results\\2022_Eredivisie\\points_coach.csv', sep=';')
 
-def render(app: Dash) -> html.Div:
+def render(app: Dash, data: pd.DataFrame) -> html.Div:
     
     all_coaches = data['Coach'].unique()
 
