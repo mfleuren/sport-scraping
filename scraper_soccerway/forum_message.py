@@ -67,7 +67,6 @@ class Message:
             .sort_values(by='P_Totaal', ascending=False)
             .reset_index(drop=True)
             )
-        points_by_coach['Stand'] = points_by_coach.index + 1
 
         subs_by_coach = (subs[subs['Speelronde'] <= self.gameweeks[-1]]
             .copy()
@@ -85,8 +84,8 @@ class Message:
         table = [f'[b][u]Algemeen klassement na speelronde {self.gameweeks[-1]}.[/u][/b]']
         table_header = f'[tr][td][b]Positie[/b][/td][td][b]Coach[/b][/td][td][b]Punten[/b][/td][/tr]'
         table_body = []
-        for _, row in points_by_coach.sort_values(by='P_AlgemeenKlassement', ascending=False).iterrows():
-            table_body.append(f"[tr][td]{row['Stand']}[/td][td]{row['Coach']}[/td][td]{row['P_AlgemeenKlassement']:.2f}[/td][/tr]")
+        for idx, row in points_by_coach.sort_values(by='P_AlgemeenKlassement', ascending=False).iterrows():
+            table_body.append(f"[tr][td]{idx}[/td][td]{row['Coach']}[/td][td]{row['P_AlgemeenKlassement']:.2f}[/td][/tr]")
         table.append(f"[table]{table_header}{''.join(table_body)}[/table]")
 
         self.general_ranking = ''.join(table)
