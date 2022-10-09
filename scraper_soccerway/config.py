@@ -20,8 +20,8 @@ REGEXES = {
 
 BASE_URL = 'https://nl.soccerway.com'
 URLS = {
-    'matches':BASE_URL+'/teams/netherlands/{club_name}/{club_id}/matches/',
-    'teams':BASE_URL+'/teams/netherlands/{club_name}/{club_id}/squad/',
+    'matches':BASE_URL+'/international/europe/{tournament_name}/{tournament_id}/matches/',
+    'teams':BASE_URL+'/international/europe/{tournament_name}/{tournament_id}/squad/',
 
 }
 

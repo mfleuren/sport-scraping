@@ -73,8 +73,6 @@ class CompetitionData:
 
     def __post_init__(self):
         self.chosen_teams = self.load_file_from_input_or_results(FILE_FOOTBALL_TEAMS_INPUT, FILE_FOOTBALL_TEAMS_RESULTS)
-        self.substitutions = pd.read_csv(FILE_FOOTBALL_SUBSTITUTIONS, sep=';')
-        self.free_substitutions = pd.read_csv(FILE_FOOTBALL_FREE_SUBSTITUTIONS, sep=';')
         self.points_scheme = pd.read_csv(FILE_FOOTBALL_POINTS_SCHEME, sep=';')
         self.points_player = self.load_file_from_results(FILE_FOOTBALL_POINTS_PLAYER)
         self.points_coach = self.load_file_from_results(FILE_FOOTBALL_POINTS_COACH)
@@ -82,6 +80,10 @@ class CompetitionData:
         self.dim_players = self.load_file_from_results(FILE_FOOTBALL_DIM_PLAYERS)
         self.matches = self.load_file_from_results(FILE_FOOTBALL_MATCHES)
         self.match_events = self.load_file_from_results(FILE_FOOTBALL_MATCH_EVENTS)
+
+        if strtobool(os.getenv('FOOTBALL_SUBSTITUTIONS')):
+            self.substitutions = pd.read_csv(FILE_FOOTBALL_SUBSTITUTIONS, sep=';')
+            self.free_substitutions = pd.read_csv(FILE_FOOTBALL_FREE_SUBSTITUTIONS, sep=';')
 
 
     def load_file_from_input_or_results(self, 
