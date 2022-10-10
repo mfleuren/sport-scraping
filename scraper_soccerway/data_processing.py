@@ -8,6 +8,7 @@ from datetime import date
 from tqdm import tqdm
 import pandas as pd
 from distutils.util import strtobool
+import re
 
 
 import config, gather, forum_message 
@@ -186,8 +187,10 @@ class CompetitionData:
 
             time.sleep(config.DEFAULT_SLEEP_S)
 
+        self.matches['url_id'] = self.matches['url_match'].str.extract(r'/matches/.*/.*/.*/.*/.*/.*/.*/(.*)/')
+
         # If a match_id is duplicated, only keep the last entry (most up to date)
-        duplicated_mask = self.matches.duplicated(subset=['url_match'], keep='last')
+        duplicated_mask = self.matches.duplicated(subset=['url_id'], keep='last')
         self.matches = self.matches[~duplicated_mask]
 
         # Determine match cluster
