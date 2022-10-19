@@ -9,9 +9,8 @@ from tqdm import tqdm
 import pandas as pd
 from distutils.util import strtobool
 
-
 import config, gather, forum_message 
-from utility import forum_robot
+# from utility import forum_robot
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -22,12 +21,12 @@ MAKE_POST = strtobool(os.getenv('IMGUR_UPLOAD')) and strtobool(os.getenv('FORUM_
 FOOTBALL_PATH_INPUT = os.path.join(
     os.getcwd(), 
     'inputs', 
-    f"{os.getenv('FOOTBALL_COMPETITION_YEAR')}_{os.getenv('FOOTBALL_COMPETITION_NAME')}"
+    f"{config.TOURNAMENT_YEAR}_{config.TOURNAMENT_NAME}"
     )
 FOOTBALL_PATH_RESULTS = os.path.join(
     os.getcwd(), 
     'results', 
-    f"{os.getenv('FOOTBALL_COMPETITION_YEAR')}_{os.getenv('FOOTBALL_COMPETITION_NAME')}"
+    f"{config.TOURNAMENT_YEAR}_{config.TOURNAMENT_NAME}"
     )
 
 FILE_FOOTBALL_TEAMS_INPUT = os.path.join(FOOTBALL_PATH_INPUT, 'teams.csv')
@@ -43,8 +42,8 @@ FILE_FOOTBALL_DIM_PLAYERS = os.path.join(FOOTBALL_PATH_RESULTS, 'dim_players.csv
 FILE_FOOTBALL_MATCHES = os.path.join(FOOTBALL_PATH_RESULTS, 'matches.csv')
 FILE_FOOTBALL_MATCH_EVENTS = os.path.join(FOOTBALL_PATH_RESULTS, 'match_events.csv')
 
-FOOTBALL_YEAR = os.getenv('FOOTBALL_COMPETITION_YEAR')
-FOOTBALL_YEARCODE = FOOTBALL_YEAR + str(int(FOOTBALL_YEAR)+1)
+FOOTBALL_YEAR = config.TOURNAMENT_YEAR
+FOOTBALL_YEARCODE = str(FOOTBALL_YEAR)
 FOOTBALL_COMPETITION_CODE = os.getenv('FOOTBALL_COMPETITION_CODE')
 
 """
@@ -162,15 +161,10 @@ class CompetitionData:
             print(f'Loaded file {path} from result.')
             return df
         else:
-            import sys
-            sys.path.append(os.getcwd())
-            sys.path.append(os.path.join(os.getcwd(), 'scraper_soccerway'))
-            from scraper_soccerway.gather import extract_clubs_from_html
 
-            url = f"https://nl.soccerway.com/national/netherlands/eredivisie/{FOOTBALL_YEARCODE}/regular-season/{FOOTBALL_COMPETITION_CODE}/tables/"
+            url = config.URLS['teams']
             print(url)
-
-            clubs = extract_clubs_from_html(url)
+            clubs = gather.extract_clubs_from_html(url)
 
             clubs.to_csv(path, sep=';', index=False)
 

@@ -82,19 +82,21 @@ def extract_clubs_from_html(url: str) -> pd.DataFrame:
 
     html_string = open_website_in_client(url)
 
-    # Extract basic table
-    result = pd.read_html(html_string)[0]
-    result = result.iloc[:-2]['Team'].to_frame()  
-
     # Extract URLS
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_clubs = soup.find_all('table', class_='leaguetable sortable table detailed-table')
-    all_urls = find_all_links_in_table(soup_clubs[0])
+
+    all_urls = []
+    for sc in soup_clubs:
+        sc_urls = find_all_links_in_table(sc)
+        all_urls = all_urls + sc_urls
+
     all_team_urls = [url for url in all_urls if 'teams' in url]
-    result['SW_TeamURL'] = all_team_urls
-    result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(config.REGEXES['team_name_from_url'], expand=True)
-    result['SW_TeamID'] = result['SW_TeamURL'].str.extract(config.REGEXES['team_id_from_url'], expand=True).astype('int')
-    
+    result = pd.DataFrame(all_team_urls, columns=['SW_TeamURL'])
+    result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(config.REGEXES['nation_name_from_url'], expand=True)
+    result['Team'] = result['SW_Teamnaam']
+    result['SW_TeamID'] = result['SW_TeamURL'].str.extract(config.REGEXES['nation_id_from_url'], expand=True).astype('int')
+
     return result
 
 
