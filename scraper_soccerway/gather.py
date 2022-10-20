@@ -132,30 +132,31 @@ def extract_matches_from_html(url: str) -> pd.DataFrame:
     html_string = open_website_in_client(url)
 
     # Extract basic table 
-    result = pd.read_html(html_string)[0]
-    result.columns = ['Datum', 'Competitie', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1', 'x2']
-    result['Datum'] = pd.to_datetime(result['Datum'], format='%d/%m/%y').dt.date
+    result = pd.read_html(html_string)
+    result = result[0]
+    result = result[~result['Dag'].str.contains('Speelweek')]
+       
+    if len(result.columns) == 5:
+        result.columns = ['Datum', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1']
+    elif len(result.columns) == 7:
+        result.columns = ['Datum', 'Competitie', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1', 'x2']
+
+    result['Datum'] = result['Datum'].shift(1) # Date is located one line above match
+    result = result.iloc[1::2].copy()
+    result['Datum'] = result['Datum'].str.extract(r'([0-9]{2}/[0-9]{2}/[0-9]{4})')
+    result['Datum'] = pd.to_datetime(result['Datum'], format='%d/%m/%Y', errors='coerce').dt.date
 
     # Extract URLS
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_matches = soup.find_all('table', class_='matches')
     all_urls = find_all_links_in_table(soup_matches[0])
     all_urls_no_events = [url for url in all_urls if '#events' not in url]    
-    chunk_size = 4
+    chunk_size = 3
     urls_in_chunks = [all_urls_no_events[i:i+chunk_size] for i in range(0, len(all_urls_no_events), chunk_size)]    
-    result[['x3', 'url_club_home', 'url_match', 'url_club_away']] = urls_in_chunks
-
-    # Filter only Eredivisie
-    result = result[result['Competitie'] == 'ERE']
-
-    # Filter matches for only relevant season
-    year = int(os.getenv('FOOTBALL_COMPETITION_YEAR'))
-    begin = datetime.date(year, 7, 15)
-    end = datetime.date(year+1, 6, 1)
-    result = result[(result['Datum'] >= begin) & (result['Datum'] < end)]
+    result[['url_club_home', 'url_match', 'url_club_away']] = urls_in_chunks
 
     # Drop unnecessary columns
-    result.drop(['x1', 'x2', 'x3'], axis=1, inplace=True)
+    result.drop(['x1'], axis=1, inplace=True)
 
     return result
 
