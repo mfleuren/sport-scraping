@@ -126,39 +126,47 @@ def determine_match_clusters(matches: pd.DataFrame) -> pd.DataFrame:
     return matches
 
 
-def extract_matches_from_html(url: str) -> pd.DataFrame:
+def extract_matches_from_html(url: str, chunk_size: int = None) -> pd.DataFrame:
     """Extract info from matches table."""
+
+    all_results = pd.DataFrame()
 
     html_string = open_website_in_client(url)
 
     # Extract basic table 
-    result = pd.read_html(html_string)
-    result = result[0]
-    result = result[~result['Dag'].str.contains('Speelweek')]
-       
-    if len(result.columns) == 5:
-        result.columns = ['Datum', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1']
-    elif len(result.columns) == 7:
-        result.columns = ['Datum', 'Competitie', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1', 'x2']
-
-    result['Datum'] = result['Datum'].shift(1) # Date is located one line above match
-    result = result.iloc[1::2].copy()
-    result['Datum'] = result['Datum'].str.extract(r'([0-9]{2}/[0-9]{2}/[0-9]{4})')
-    result['Datum'] = pd.to_datetime(result['Datum'], format='%d/%m/%Y', errors='coerce').dt.date
-
-    # Extract URLS
+    results = pd.read_html(html_string)
     soup = BeautifulSoup(html_string, 'html.parser')
-    soup_matches = soup.find_all('table', class_='matches')
-    all_urls = find_all_links_in_table(soup_matches[0])
-    all_urls_no_events = [url for url in all_urls if '#events' not in url]    
-    chunk_size = 3
-    urls_in_chunks = [all_urls_no_events[i:i+chunk_size] for i in range(0, len(all_urls_no_events), chunk_size)]    
-    result[['url_club_home', 'url_match', 'url_club_away']] = urls_in_chunks
+    soup_tables = soup.find_all('table', class_='matches')
 
-    # Drop unnecessary columns
-    result.drop(['x1'], axis=1, inplace=True)
+    for result, soup_table in zip(results, soup_tables):
+        try:
+            result = result[~result['Dag'].str.contains('Speelweek')]
+            
+            if len(result.columns) == 5:
+                result.columns = ['Datum', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1']
+            elif len(result.columns) == 7:
+                result.columns = ['Datum', 'Competitie', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1', 'x2']
 
-    return result
+            result['Datum'] = result['Datum'].shift(1) # Date is located one line above match
+            result = result.iloc[1::2].copy()
+            result['Datum'] = result['Datum'].str.extract(r'([0-9]{2}/[0-9]{2}/[0-9]{4})')
+            result['Datum'] = pd.to_datetime(result['Datum'], format='%d/%m/%Y', errors='coerce').dt.date
+
+            # Extract URLS
+
+            all_urls = find_all_links_in_table(soup_table)
+            all_urls_no_events = [url for url in all_urls if '#events' not in url]    
+            urls_in_chunks = [all_urls_no_events[i:i+chunk_size] for i in range(0, len(all_urls_no_events), chunk_size)]    
+            result[['url_club_home', 'url_match', 'url_club_away']] = urls_in_chunks
+
+            # Drop unnecessary columns
+            result.drop(['x1'], axis=1, inplace=True)
+
+            all_results = pd.concat([all_results, result])
+        except:
+            continue
+
+    return all_results.reset_index(drop=True)
 
 
 def extract_squad_from_html(url: str) -> pd.DataFrame:
