@@ -126,7 +126,7 @@ def determine_match_clusters(matches: pd.DataFrame) -> pd.DataFrame:
     return matches
 
 
-def extract_matches_from_html(url: str, chunk_size: int = None) -> pd.DataFrame:
+def extract_matches_from_html_tournament(url: str, chunk_size: int = None) -> pd.DataFrame:
     """Extract info from matches table."""
 
     all_results = pd.DataFrame()
@@ -140,14 +140,14 @@ def extract_matches_from_html(url: str, chunk_size: int = None) -> pd.DataFrame:
 
     for result, soup_table in zip(results, soup_tables):
         try:
-            result = result[~result['Dag'].str.contains('Speelweek')]
+            result = result[~result['Dag'].str.contains('Speelweek')].copy()
             
             if len(result.columns) == 5:
-                result.columns = ['Datum', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1']
+                result.columns = ['Datum_og', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1']
             elif len(result.columns) == 7:
-                result.columns = ['Datum', 'Competitie', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1', 'x2']
+                result.columns = ['Datum_og', 'Competitie', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1', 'x2']
 
-            result['Datum'] = result['Datum'].shift(1) # Date is located one line above match
+            result['Datum'] = result['Datum_og'].shift(1) # Date is located one line above match
             result = result.iloc[1::2].copy()
             result['Datum'] = result['Datum'].str.extract(r'([0-9]{2}/[0-9]{2}/[0-9]{4})')
             result['Datum'] = pd.to_datetime(result['Datum'], format='%d/%m/%Y', errors='coerce').dt.date
@@ -160,7 +160,7 @@ def extract_matches_from_html(url: str, chunk_size: int = None) -> pd.DataFrame:
             result[['url_club_home', 'url_match', 'url_club_away']] = urls_in_chunks
 
             # Drop unnecessary columns
-            result.drop(['x1'], axis=1, inplace=True)
+            result.drop(['x1', 'Datum_og'], axis=1, inplace=True)
 
             all_results = pd.concat([all_results, result])
         except:
@@ -169,20 +169,25 @@ def extract_matches_from_html(url: str, chunk_size: int = None) -> pd.DataFrame:
     return all_results.reset_index(drop=True)
 
 
-def extract_squad_from_html(url: str) -> pd.DataFrame:
+def extract_squad_from_html(url: str, remove_coach: bool = True) -> pd.DataFrame:
     """Extracts squad information from HTML."""
     
     html_string = open_website_in_client(url)
 
     # Basic table
-    result = pd.read_html(html_string)[0]
-    result_short = result[['Unnamed: 0', 'Naam', 'P']].rename({'Unnamed: 0':'Rugnummer', 'P':'Positie'}, axis=1)
+    results = pd.read_html(html_string)
+    result = results[0]
+    COLUMN_NAME_MAP = {'Unnamed: 0':'Rugnummer', 'P':'Positie'}
+    result_short = result[['Unnamed: 0', 'Naam', 'P']].rename(COLUMN_NAME_MAP, axis=1).copy()
 
     # Append with player links
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_squad = soup.find_all('div', class_='squad-container')
     player_urls = remove_duplicates_from_list(find_all_links_in_table(soup_squad[0]))
-    result_short['Link'] = player_urls[:-1] # Do not include the last person, the coach
+    if remove_coach:
+        result_short['Link'] = player_urls[:-1] # Do not include the last person, the coach
+    else: 
+        result_short['Link'] = player_urls
     result_short['SW_Naam'] = result_short['Link'].str.extract(config.REGEXES['player_name_from_url'], expand=True)
     result_short['SW_ID'] = result_short['Link'].str.extract(config.REGEXES['player_id_from_url'], expand=True).astype('int')
     

@@ -18,8 +18,8 @@ REGEXES = {
 BASE_URL = 'https://nl.soccerway.com'
 URLS = {
     'matches_group':f"{BASE_URL}/international/europe/{TOURNAMENT_NAME}/{TOURNAMENT_YEAR}/group-stage/{TOURNAMENT_ID_GROUP}/matches/",
-    'matches_finals':f"{BASE_URL}/international/europe/{TOURNAMENT_NAME}/{TOURNAMENT_YEAR}/group-stage/{TOURNAMENT_ID_GROUP}/matches/",
-    'teams':f"{BASE_URL}/international/europe/{TOURNAMENT_NAME}/{TOURNAMENT_YEAR}/group-stage/{TOURNAMENT_ID_GROUP}/",
+    'matches_finals':f"{BASE_URL}/international/europe/{TOURNAMENT_NAME}/{TOURNAMENT_YEAR}/{TOURNAMENT_ID_FINALS}/final-stages/",
+    'teams':"{base_url}/teams/{team_name}/{team_name}/{team_id}/squad/",
 }
 
 ALLOWED_TACTICS = ['1343', '1352', '1433', '1442', '1451', '1541', '1532']
