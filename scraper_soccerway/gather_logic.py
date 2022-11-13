@@ -1,7 +1,7 @@
 import time
-from turtle import update
 from tqdm import tqdm
 import pandas as pd
+from unidecode import unidecode
 
 from scraper_soccerway import gather, config
 from scraper_soccerway.data_processing import CompetitionData
@@ -55,7 +55,6 @@ def update_players(data: CompetitionData) -> CompetitionData:
     for _,row in tqdm(data.dim_clubs.iterrows(), total=data.dim_clubs.shape[0]):
 
         match_url = construct_url(config.URLS['teams'], row['SW_Teamnaam'], row['SW_TeamID'])
-        print(match_url)
         players_for_club = gather.extract_squad_from_html(match_url, remove_coach=False)
         players_for_club['Team'] = row['Team']
         all_players = pd.concat([all_players, players_for_club], ignore_index=True)
@@ -73,8 +72,15 @@ def update_players(data: CompetitionData) -> CompetitionData:
     duplicated_mask_team = check_duplicates(df=all_players, diff_col='Team', keep='last')
     all_players = all_players[~duplicated_mask_team].copy() 
 
+    all_players['Naam_fix'] = all_players.apply(lambda x: unidecode(x['Naam']), axis=1)
     data.dim_players = all_players.sort_values(by='SW_ID')
 
     return data
 
+
+def create_full_team_selections(data: CompetitionData) -> CompetitionData:
+
+    data.chosen_teams = pd.merge(data.chosen_teams, data.dim_players, left_on='Speler', right_on='Naam_fix', how='left')
+
+    return data
 
