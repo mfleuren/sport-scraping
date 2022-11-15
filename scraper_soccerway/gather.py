@@ -194,7 +194,7 @@ def extract_squad_from_html(url: str, remove_coach: bool = True) -> pd.DataFrame
     return result_short
 
 
-def find_substitutions(subs_df: pd.DataFrame, base_df: pd.DataFrame) -> pd.DataFrame:
+def find_substitutions(subs_df: pd.DataFrame, base_df: pd.DataFrame, match_duration: int) -> pd.DataFrame:
     """
     Combine DataFrame with substitutions with the DataFrame containing starting 11.
     Determine minutes played for each player.
@@ -202,25 +202,26 @@ def find_substitutions(subs_df: pd.DataFrame, base_df: pd.DataFrame) -> pd.DataF
 
     subs_df_split = (subs_df['Speler'].str.split('([\w\s\.]+) for ([\w\s\.]+) ([0-9]+)\'', expand=True))
     all_subs = subs_df_split[1].fillna(subs_df_split[0]).rename('Speler')
-    sub_minutes_played = 90-subs_df_split[3].fillna(90).astype('int').rename('Minuten_Gespeeld')
+    sub_minutes_played = match_duration-subs_df_split[3].fillna(match_duration).astype('int').rename('Minuten_Gespeeld')
     subs_df2 = pd.concat([subs_df['#'], all_subs, subs_df['Link'], sub_minutes_played], axis=1)
 
     players_out = subs_df_split[2].rename('Speler')
-    players_out_minutes_played = subs_df_split[3].fillna(90).astype('int').rename('Minuten_Gespeeld')
+    players_out_minutes_played = subs_df_split[3].fillna(match_duration).astype('int').rename('Minuten_Gespeeld')
     players_out_df = pd.concat([players_out, players_out_minutes_played], axis=1).dropna()
 
     base_df = base_df.join(players_out_df.set_index('Speler'), on='Speler')
-    base_df['Minuten_Gespeeld'].fillna(90, inplace=True)
+    base_df['Minuten_Gespeeld'].fillna(match_duration, inplace=True)
     base_df['Minuten_Gespeeld'] = base_df['Minuten_Gespeeld'].astype('int')
 
     combined_lineup = pd.concat([base_df, subs_df2])
     return combined_lineup
 
 
-def extract_lineup_from_html(soup_lineups: ResultSet, position:str) -> pd.DataFrame:
+def extract_lineup_from_html(soup_lineups: ResultSet, position:str, match_duration: int) -> pd.DataFrame:
     """
     Extract the full team lineup from a BeautifulSoup Resultset. 
     Position indicates whether to process the left- or right container.
+    match_duration indicates the total minutes in a match.
     """
 
     soup_lineup = soup_lineups[0].find('div', class_='container '+position)
@@ -231,7 +232,7 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str) -> pd.DataFr
     subs = pd.read_html(str(soup_subs))[0]
     subs['Link'] = find_all_links_in_table(soup_subs)
 
-    full_lineup = find_substitutions(subs, lineups)
+    full_lineup = find_substitutions(subs, lineups, match_duration)
     full_lineup.reset_index(drop=True, inplace=True)
 
     # Drop the coach & Kaarten column
@@ -244,7 +245,7 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str) -> pd.DataFr
     return full_lineup
     
 
-def extract_team_lineup(html_string: str) -> pd.DataFrame:
+def extract_team_lineup(html_string: str, match_duration: int) -> pd.DataFrame:
     """
     Extract the full team lineups and minutes played for home and away teams.
     Return as a single DataFrame with Home_Team as a boolean column to indicate which team played at home.
@@ -253,8 +254,8 @@ def extract_team_lineup(html_string: str) -> pd.DataFrame:
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_lineups = soup.find_all('div', class_='combined-lineups-container')
 
-    full_lineup_home = extract_lineup_from_html(soup_lineups, 'left')
-    full_lineup_away = extract_lineup_from_html(soup_lineups, 'right')
+    full_lineup_home = extract_lineup_from_html(soup_lineups, 'left', match_duration)
+    full_lineup_away = extract_lineup_from_html(soup_lineups, 'right', match_duration)
     full_lineup = (pd
                     .merge(full_lineup_home, full_lineup_away, how='outer', indicator='Home_Team')
                    .replace({'Home_Team':{'left_only':True, 'right_only':False}})
@@ -349,7 +350,7 @@ def extract_match_events_from_lineup_container(
     return cards_yellow, cards_red, goals_general, goals_penalty, goals_own, penalty_missed, minutes_red_card, minutes_pen_mis
     
 
-def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd.DataFrame) -> pd.DataFrame:
+def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd.DataFrame, match_duration: int) -> pd.DataFrame:
     """Append the lineups with information on who took part in match events."""
     
     lineups[['Kaart_Geel', 'Kaart_Rood', 'Goal', 'Goal_Eigen', 'Penalty_Goal', 'Penalty_Gemist', 'Penalty_Gestopt']] = 0
@@ -363,7 +364,7 @@ def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd
     # Red Card has extra logic for minutes played
     for player_href, minutes in zip(rc, rc_min): 
         lineups.loc[player_href == lineups['Link'], 'Kaart_Rood'] += 1
-        lineups.loc[player_href == lineups['Link'], 'Minuten_Gespeeld'] -= (90-minutes)
+        lineups.loc[player_href == lineups['Link'], 'Minuten_Gespeeld'] -= (match_duration-minutes)
 
     # Penalty missed: extra logic to give active goalkeeper of opposition a +1 on PenaltyStopped
     for player_href, minutes in zip(pen_mis, pen_mis_min):
@@ -374,9 +375,7 @@ def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd
         lineups_with_pos = lineups.join(dim_players[['Link', 'Positie']].set_index('Link'))
         gk_mask = (lineups_with_pos['Positie']=='K') & (lineups_with_pos['Home_Team']==gk_team)
         for idx,gk in lineups_with_pos[gk_mask].iterrows():
-            if gk['Minuten_Gespeeld'] == 90:
-                lineups.iloc[idx]['Penalty_Gestopt'] += 1
-            elif gk['Minuten_Gespeeld'] > pen_mis_min:
+            if gk['Minuten_Gespeeld'] > pen_mis_min:
                 lineups.iloc[idx]['Penalty_Gestopt'] += 1
             elif gk['Minuten_Gespeeld'] > 0:
                 lineups.iloc[idx]['Penalty_Gestopt'] += 1
@@ -423,17 +422,28 @@ def extract_match_events(url: str, dim_players: pd.DataFrame) -> pd.DataFrame:
 
     club_urls = extract_url_by_class(html_string, 'a', 'team-title')
     match_state = extract_txt_by_class(html_string, 'span', 'match-state')
+    if isinstance(match_state, list):
+        match_state = match_state[0]
+    
+    if match_state == 'FT':
+        match_duration = 90
+    elif match_state == 'AET':
+        match_duration = 120
+    else:
+        raise Exception
+
+
     #TODO: Quit process if match state is not FT
 
     final_score = extract_txt_by_class(html_string, 'h3', 'thick scoretime')[0]
     final_score_home = int(extract_txt_from_string(final_score, '([0-9.*])-'))
     final_score_away = int(extract_txt_from_string(final_score, '-([0-9.*])'))
 
-    lineups = extract_team_lineup(html_string)
+    lineups = extract_team_lineup(html_string, match_duration)
     lineups = (
         lineups
         .pipe((determine_winning_team, 'lineups'), score_home=final_score_home, score_away=final_score_away)
-        .pipe((append_match_events, 'lineups'), html_string=html_string, dim_players=dim_players)
+        .pipe((append_match_events, 'lineups'), html_string=html_string, dim_players=dim_players, match_duration=match_duration)
         .pipe((append_assisters, 'lineups'), html_string=html_string)
         .pipe((determine_goals_against, 'lineups'), score_home=final_score_home, score_away=final_score_away)
     )

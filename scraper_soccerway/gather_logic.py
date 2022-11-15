@@ -92,6 +92,7 @@ def create_full_team_selections(data: CompetitionData) -> CompetitionData:
 
     return data
 
+
 def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
     """
     Determine which matches to scrape today. There are two criteria:
@@ -103,7 +104,23 @@ def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
 
     played_matches = data.matches["Datum"] < datetime.today()
     processed_matches = pd.Series([True] * len(played_matches))
-    processed_matches[0] = False
+    processed_matches[25] = False
     matches_to_scrape = data.matches[played_matches & ~processed_matches].copy()
 
     return matches_to_scrape
+
+
+def scrape_matches(data: CompetitionData) -> CompetitionData:
+
+    matches_to_scrape = determine_matches_to_scrape(data)
+    print(matches_to_scrape)
+
+    all_match_events = pd.DataFrame()
+    for _,match in tqdm(matches_to_scrape.iterrows(), total=matches_to_scrape.shape[0]):
+            print(match['url_match'])
+            match_events = gather.extract_match_events(match['url_match'], data.dim_players)
+            all_match_events = pd.concat([all_match_events, match_events], ignore_index=True)
+            time.sleep(config.DEFAULT_SLEEP_S)
+
+    print(all_match_events.columns)
+    print(all_match_events.iloc[1].squeeze())
