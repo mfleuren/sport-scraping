@@ -122,7 +122,25 @@ class CompetitionData:
 
     def load_file_from_results(self, path: Union[str, os.PathLike]) -> pd.DataFrame:
         """Load file from Results folder, if not exists pre-allocate empty DataFrame."""
-        return pd.read_csv(path, sep=';') if os.path.exists(path) else pd.DataFrame()
+
+        if os.path.exists(path):
+            df = pd.read_csv(path, sep=';')
+
+            if 'Datum' in df.columns:
+                df['Datum'] = pd.to_datetime(df['Datum'], format='%Y-%m-%d')
+
+            print(f'Loaded file {path} from result, converted Datum column.')
+
+            return df
+            
+        else: 
+
+            df = pd.DataFrame()
+
+            print(f'Could not find file {path} from result, allocated an empty DataFrame.')
+
+            return df
+
 
 
     def save_files_to_results(self) -> None:

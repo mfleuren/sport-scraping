@@ -2,6 +2,7 @@ import time
 from tqdm import tqdm
 import pandas as pd
 from unidecode import unidecode
+from datetime import datetime
 
 from scraper_soccerway import gather, config
 from scraper_soccerway.data_processing import CompetitionData
@@ -26,6 +27,8 @@ def update_matches(data: CompetitionData) -> CompetitionData:
     # If a match_id is duplicated, only keep the last entry (most up to date)
     duplicated_mask = data.matches.duplicated(subset=['url_match'], keep='last')
     data.matches = data.matches[~duplicated_mask]
+
+    data.matches['Datum'] = pd.to_datetime(data.matches['Datum'])
 
     return data
 
@@ -80,7 +83,27 @@ def update_players(data: CompetitionData) -> CompetitionData:
 
 def create_full_team_selections(data: CompetitionData) -> CompetitionData:
 
-    data.chosen_teams = pd.merge(data.chosen_teams, data.dim_players, left_on='Speler', right_on='Naam_fix', how='left')
+    data.chosen_teams = pd.merge(
+        left=data.chosen_teams[['Coach', 'Speler', 'Speelronde']], 
+        right=data.dim_players, 
+        left_on='Speler', 
+        right_on='Naam_fix', 
+        how='left')
 
     return data
 
+def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
+    """
+    Determine which matches to scrape today. There are two criteria:
+    (1) Match is finished, i.e. date is in the past
+    (2) Match is not yet processed
+
+    TODO: implement criterium 2
+    """
+
+    played_matches = data.matches["Datum"] < datetime.today()
+    processed_matches = pd.Series([True] * len(played_matches))
+    processed_matches[0] = False
+    matches_to_scrape = data.matches[played_matches & ~processed_matches].copy()
+
+    return matches_to_scrape
