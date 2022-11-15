@@ -49,7 +49,8 @@ def find_all_links_in_table(soup: BeautifulSoup) -> List:
         for each in trs:
             try:
                 link = each.find('a')['href']
-                links.append(link)
+                if 'players' in link:
+                    links.append(link)
             except:
                 pass
     return links
@@ -169,7 +170,7 @@ def extract_matches_from_html_tournament(url: str, chunk_size: int = None) -> pd
     return all_results.reset_index(drop=True)
 
 
-def extract_squad_from_html(url: str, remove_coach: bool = True) -> pd.DataFrame:
+def extract_squad_from_html(url: str) -> pd.DataFrame:
     """Extracts squad information from HTML."""
     
     html_string = open_website_in_client(url)
@@ -184,10 +185,6 @@ def extract_squad_from_html(url: str, remove_coach: bool = True) -> pd.DataFrame
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_squad = soup.find_all('div', class_='squad-container')
     player_urls = remove_duplicates_from_list(find_all_links_in_table(soup_squad[0]))
-    if remove_coach:
-        result_short['Link'] = player_urls[:-1] # Do not include the last person, the coach
-    else: 
-        result_short['Link'] = player_urls
     result_short['SW_Naam'] = result_short['Link'].str.extract(config.REGEXES['player_name_from_url'], expand=True)
     result_short['SW_ID'] = result_short['Link'].str.extract(config.REGEXES['player_id_from_url'], expand=True).astype('int')
     
@@ -226,6 +223,9 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str, match_durati
 
     soup_lineup = soup_lineups[0].find('div', class_='container '+position)
     lineups = pd.read_html(str(soup_lineup))[0]
+    lineups.dropna(inplace=True, how='all')
+    print(lineups.tail(3))
+    lineups = lineups[~lineups['Speler'].str.contains('Coach:')]
     lineups['Link'] = find_all_links_in_table(soup_lineup)
 
     soup_subs = soup_lineups[1].find('div', class_='container '+position)

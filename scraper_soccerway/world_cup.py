@@ -1,4 +1,3 @@
-from datetime import datetime
 import pandas as pd
 
 from data_processing import CompetitionData
@@ -11,6 +10,6 @@ data = CompetitionData()
 # data = gather_logic.create_full_team_selections(data)
 # validate.tactics(data.chosen_teams)
 
-gather_logic.scrape_matches(data)
+data = gather_logic.scrape_matches(data)
 
-# data.save_files_to_results()
+data.save_files_to_results()
