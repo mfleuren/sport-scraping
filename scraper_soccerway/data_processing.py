@@ -180,7 +180,7 @@ class CompetitionData:
             return df
         else:
 
-            url = config.URLS['teams']
+            url = config.URLS['start_teams']
             print(url)
             clubs = gather.extract_clubs_from_html(url)
 

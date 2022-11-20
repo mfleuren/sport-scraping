@@ -13,9 +13,12 @@ def construct_url(fmt_url: str, team: str, id: str) -> str:
 
 
 def update_matches(data: CompetitionData) -> CompetitionData:
-    """Loop through all club URLs and update match dates and match URLs."""
+    """Loop through all tournament stages and update match dates and match URLs."""
 
-    urls = [config.URLS["matches_group"], config.URLS["matches_finals"]]
+    urls = [config.URLS["matches_group"]]
+    
+    if datetime.today() >= pd.to_datetime(config.TOURNAMENT_START_OF_KO):
+        urls.append(config.URLS["matches_finals"])
 
     for url in tqdm(urls, total=len(urls)):
 

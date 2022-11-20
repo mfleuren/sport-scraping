@@ -41,7 +41,7 @@ def open_website_in_client(url:str) -> str:
         raise ConnectionError
 
 
-def find_all_links_in_table(soup: BeautifulSoup) -> List: 
+def find_all_links_in_table(soup: BeautifulSoup, cat: str = None) -> List: 
     """Loop through all rows in a table and extract links from the fields."""
     links = []
     for tr in soup.findAll("tr"):
@@ -49,7 +49,10 @@ def find_all_links_in_table(soup: BeautifulSoup) -> List:
         for each in trs:
             try:
                 link = each.find('a')['href']
-                if 'players' in link:
+                if cat:
+                    if cat in link:
+                        links.append(link)
+                else:
                     links.append(link)
             except:
                 pass
@@ -89,7 +92,7 @@ def extract_clubs_from_html(url: str) -> pd.DataFrame:
 
     all_urls = []
     for sc in soup_clubs:
-        sc_urls = find_all_links_in_table(sc)
+        sc_urls = find_all_links_in_table(sc, cat='teams')
         all_urls = all_urls + sc_urls
 
     all_team_urls = [url for url in all_urls if 'teams' in url]
@@ -156,14 +159,18 @@ def extract_matches_from_html_tournament(url: str, chunk_size: int = None) -> pd
             # Extract URLS
 
             all_urls = find_all_links_in_table(soup_table)
-            all_urls_no_events = [url for url in all_urls if '#events' not in url]    
-            urls_in_chunks = [all_urls_no_events[i:i+chunk_size] for i in range(0, len(all_urls_no_events), chunk_size)]    
+            all_urls_no_events = [url for url in all_urls if '#events' not in url] 
+            print(all_urls_no_events)   
+            urls_in_chunks = [all_urls_no_events[i:i+chunk_size] for i in range(0, len(all_urls_no_events), chunk_size)]   
+            print(urls_in_chunks) 
             result[['url_club_home', 'url_match', 'url_club_away']] = urls_in_chunks
 
             # Drop unnecessary columns
             result.drop(['x1', 'Datum_og'], axis=1, inplace=True)
 
             all_results = pd.concat([all_results, result])
+
+            print(all_results)
         except:
             continue
 
@@ -184,7 +191,8 @@ def extract_squad_from_html(url: str) -> pd.DataFrame:
     # Append with player links
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_squad = soup.find_all('div', class_='squad-container')
-    player_urls = remove_duplicates_from_list(find_all_links_in_table(soup_squad[0]))
+    player_urls = remove_duplicates_from_list(find_all_links_in_table(soup_squad[0], cat='player'))
+    result_short['Link'] = player_urls
     result_short['SW_Naam'] = result_short['Link'].str.extract(config.REGEXES['player_name_from_url'], expand=True)
     result_short['SW_ID'] = result_short['Link'].str.extract(config.REGEXES['player_id_from_url'], expand=True).astype('int')
     
@@ -226,11 +234,11 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str, match_durati
     lineups.dropna(inplace=True, how='all')
     print(lineups.tail(3))
     lineups = lineups[~lineups['Speler'].str.contains('Coach:')]
-    lineups['Link'] = find_all_links_in_table(soup_lineup)
+    lineups['Link'] = find_all_links_in_table(soup_lineup, cat='player')
 
     soup_subs = soup_lineups[1].find('div', class_='container '+position)
     subs = pd.read_html(str(soup_subs))[0]
-    subs['Link'] = find_all_links_in_table(soup_subs)
+    subs['Link'] = find_all_links_in_table(soup_subs, cat='player')
 
     full_lineup = find_substitutions(subs, lineups, match_duration)
     full_lineup.reset_index(drop=True, inplace=True)
