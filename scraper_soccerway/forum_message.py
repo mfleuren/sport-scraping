@@ -94,11 +94,15 @@ class Message:
     def create_teams_overview(self, df: pd.DataFrame):
         """Create a string containing formatted tables with the chosen teams after a given round."""
 
-        chosen_teams = df[df['Speelronde'] == self.gameweeks[-1]].copy()
+        if self.gameweeks:
+            chosen_teams = df[df['Speelronde'] == self.gameweeks[-1]].copy()
+            section = [f'[b][u]Gekozen teams na speelronde {self.gameweeks[-1]}.[/u][/b]\n[spoiler]']
+        else:
+            chosen_teams = df.copy()
+            section = [f'[b][u]Gekozen teams.[/u][/b]\n[spoiler]']
+
         chosen_teams['Positie'].fillna('X', inplace=True)
-        chosen_teams['Positie_Order'] = chosen_teams['Positie'].map(dict({'K':0, 'V':1, 'M':2, 'A':3, '-':4}))
-        section = [f'[b][u]Gekozen teams na speelronde {self.gameweeks[-1]}.[/u][/b]\n[spoiler]']
-        
+        chosen_teams['Positie_Order'] = chosen_teams['Positie'].map(dict({'K':0, 'V':1, 'M':2, 'A':3, '-':4}))      
         
         for coach in sorted(chosen_teams['Coach'].unique(), key=str.casefold):
             section_body = []

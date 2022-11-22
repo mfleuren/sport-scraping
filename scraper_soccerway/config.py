@@ -23,7 +23,7 @@ URLS = {
     'matches_group':f"{BASE_URL}/international/{TOURNAMENT_CONTINENT}/{TOURNAMENT_NAME}/{TOURNAMENT_YEAR}-{TOURNAMENT_NATION}/group-stage/{TOURNAMENT_ID_GROUP}/matches/",
     'matches_finals':f"{BASE_URL}/international/{TOURNAMENT_CONTINENT}/{TOURNAMENT_NAME}/{TOURNAMENT_YEAR}-{TOURNAMENT_NATION}/{TOURNAMENT_ID_FINALS}/final-stages/",
     'start_teams':f"{BASE_URL}/international/{TOURNAMENT_CONTINENT}/{TOURNAMENT_NAME}/{TOURNAMENT_YEAR}-{TOURNAMENT_NATION}/group-stage/{TOURNAMENT_ID_GROUP}",
-    'teams':"{base_url}/teams/{team_name}/{team_name}/{team_id}/squad/",
+    'teams':"{base_url}/teams/{team_name}/{team_name}/{team_id}",
 }
 
 ALLOWED_TACTICS = ['1343', '1352', '1433', '1442', '1451', '1541', '1532']
