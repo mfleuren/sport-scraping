@@ -19,13 +19,13 @@ def generate_lineups(teams: pd.DataFrame) -> None:
     Y_JITTER = {
         1: [0],
         2: [0, 0],
-        3: [0, 0.07, 0],
-        4: [0, 0.07, 0.07, 0],
-        5: [0, 0.07, 0.14, 0.07, 0],
+        3: [0, 0.10, 0],
+        4: [0, 0.10, 0.10, 0],
+        5: [0, 0.09, 0.09, 0.18, 0],
     }
 
     fig, ax = plt.subplots(
-        int(np.ceil(teams["Coach"].nunique() / 3)), 3, figsize=(21.0, 29.7)
+        int(np.ceil(teams["Coach"].nunique() / 2)), 2, figsize=(21.0, 29.7)
     )
     plt.tight_layout()
     ax_idx = 0
@@ -33,9 +33,9 @@ def generate_lineups(teams: pd.DataFrame) -> None:
     for coach, team in teams.groupby("Coach"):
 
         if ax.ndim == 1:
-            plt.sca(ax[ax_idx % 3])
+            plt.sca(ax[ax_idx % 2])
         else:
-            plt.sca(ax[int(ax_idx / 3), ax_idx % 3])
+            plt.sca(ax[int(ax_idx / 2), ax_idx % 2])
 
         plt.title(f"Coach: {coach}", size=18)
         plt.axis("off")
@@ -75,3 +75,7 @@ def generate_lineups(teams: pd.DataFrame) -> None:
             )
 
         ax_idx += 1
+
+    
+
+    fig.savefig('lineups.png')

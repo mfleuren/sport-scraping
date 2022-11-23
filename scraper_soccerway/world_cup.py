@@ -10,3 +10,6 @@ validate.tactics(data.chosen_teams)
 # data = gather_logic.scrape_matches(data)
 
 data.save_files_to_results()
+
+import generate_figures
+generate_figures.generate_lineups(data.chosen_teams)

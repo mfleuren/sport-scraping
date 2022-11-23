@@ -15,7 +15,7 @@ import config, gather, forum_message
 from dotenv import load_dotenv
 load_dotenv()
 
-MAKE_POST = strtobool(os.getenv('IMGUR_UPLOAD')) and strtobool(os.getenv('FORUM_POST'))
+# MAKE_POST = strtobool(os.getenv('IMGUR_UPLOAD')) and strtobool(os.getenv('FORUM_POST'))
 
 # Football input
 FOOTBALL_PATH_INPUT = os.path.join(
@@ -80,9 +80,9 @@ class CompetitionData:
         self.matches = self.load_file_from_results(FILE_FOOTBALL_MATCHES)
         self.match_events = self.load_file_from_results(FILE_FOOTBALL_MATCH_EVENTS)
 
-        if strtobool(os.getenv('FOOTBALL_SUBSTITUTIONS')):
-            self.substitutions = pd.read_csv(FILE_FOOTBALL_SUBSTITUTIONS, sep=';')
-            self.free_substitutions = pd.read_csv(FILE_FOOTBALL_FREE_SUBSTITUTIONS, sep=';')
+        # if strtobool(os.getenv('FOOTBALL_SUBSTITUTIONS')):
+        #     self.substitutions = pd.read_csv(FILE_FOOTBALL_SUBSTITUTIONS, sep=';')
+        #     self.free_substitutions = pd.read_csv(FILE_FOOTBALL_FREE_SUBSTITUTIONS, sep=';')
 
 
     def load_file_from_input_or_results(self, 
