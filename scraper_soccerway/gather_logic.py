@@ -127,11 +127,16 @@ def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
     (2) Match is not yet processed
     """
 
-    played_matches = data.matches["Datum"] < datetime.today()
-    processed_matches = data.matches["url_match"].isin(data.match_events["match_url"])
-    # processed_matches = pd.Series([True] * len(played_matches))
-    # processed_matches[5] = False
-    matches_to_scrape = data.matches[played_matches & ~processed_matches].copy()
+    data.matches = data.matches.sort_values(by='Datum')
+
+    played_matches = data.matches["Datum"] < datetime.today().strftime('%Y-%m-%d')
+
+    if data.match_events.shape[0] > 0:
+        processed_matches = data.matches["url_match"].isin(data.match_events["match_url"])
+    else:
+        processed_matches = pd.Series([False] * len(played_matches))
+
+    matches_to_scrape = data.matches[played_matches & ~processed_matches]
 
     return matches_to_scrape
 
@@ -149,8 +154,5 @@ def scrape_matches(data: CompetitionData) -> CompetitionData:
             [data.match_events, match_events], ignore_index=True
         )
         time.sleep(config.DEFAULT_SLEEP_S)
-
-        # TODO: Austria has two coaches
-        # Example matches/2021/06/17/europe/european-championships/netherlands/austria/3188291/
 
     return data

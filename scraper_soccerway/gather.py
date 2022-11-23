@@ -160,17 +160,13 @@ def extract_matches_from_html_tournament(url: str, chunk_size: int = None) -> pd
 
             all_urls = find_all_links_in_table(soup_table)
             all_urls_no_events = [url for url in all_urls if '#events' not in url] 
-            print(all_urls_no_events)   
             urls_in_chunks = [all_urls_no_events[i:i+chunk_size] for i in range(0, len(all_urls_no_events), chunk_size)]   
-            print(urls_in_chunks) 
             result[['url_club_home', 'url_match', 'url_club_away']] = urls_in_chunks
 
             # Drop unnecessary columns
             result.drop(['x1', 'Datum_og'], axis=1, inplace=True)
 
             all_results = pd.concat([all_results, result])
-
-            print(all_results)
         except:
             continue
 
@@ -277,13 +273,14 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str, match_durati
     soup_lineup = soup_lineups[0].find('div', class_='container '+position)
     lineups = pd.read_html(str(soup_lineup))[0]
     lineups.dropna(inplace=True, how='all')
-    print(lineups.tail(3))
     lineups = lineups[~lineups['Speler'].str.contains('Coach:')]
     lineups['Link'] = find_all_links_in_table(soup_lineup, cat='player')
+    lineups['Basisspeler'] = True
 
     soup_subs = soup_lineups[1].find('div', class_='container '+position)
     subs = pd.read_html(str(soup_subs))[0]
     subs['Link'] = find_all_links_in_table(soup_subs, cat='player')
+    subs['Basisspeler'] = False
 
     full_lineup = find_substitutions(subs, lineups, match_duration)
     full_lineup.reset_index(drop=True, inplace=True)
@@ -292,6 +289,7 @@ def extract_lineup_from_html(soup_lineups: ResultSet, position:str, match_durati
     full_lineup = full_lineup[~full_lineup['Speler'].str.contains('Coach:', regex=False)]
     full_lineup.drop(['Kaarten'], axis=1, inplace=True)
 
+    full_lineup["Basisspeler"] = full_lineup["Basisspeler"].astype('bool')
     full_lineup['SW_Naam'] = full_lineup['Link'].str.extract(config.REGEXES['player_name_from_url'], expand=True)
     full_lineup['SW_ID'] = full_lineup['Link'].str.extract(config.REGEXES['player_id_from_url'], expand=True).astype('int')
 
@@ -362,12 +360,17 @@ def extract_match_events_from_lineup_container(
             link_list.append(row.find('td', {'class':'player large-link'}).a['href'])
 
 
-    def return_minute_after_image_search(link_list: list[int], img_name: str, row: Tag, text: Tag):
+    def return_minute_after_image_search(link_list: list[int], img_name: str, text: Tag):
         """Append a list with the minute a certain action is performed."""
         
-        result = re.findall(f'.*{img_name}.+/> ([0-9]+)\'+', str(text))
+        result = re.findall(f'.*{img_name}.+/> ([0-9]+)[\'\+]+', str(text))
+        
         if result:
-            link_list.append(int(result[0]))
+            for res in result:
+                if '+' in result:
+                    link_list.append(int(res[:2]))
+                else:
+                    link_list.append(int(res))
 
     soup = BeautifulSoup(html_string, 'html.parser')
     soup_lineups = soup.find_all('div', class_='combined-lineups-container')
@@ -381,6 +384,9 @@ def extract_match_events_from_lineup_container(
     penalty_missed = []
     minutes_red_card = []
     minutes_pen_mis = []
+    minutes_goals = []
+    minutes_goals_pen = []
+    minutes_goals_own = []
 
     for result in soup_lineups:
         rows = result.find_all('tr')
@@ -396,18 +402,27 @@ def extract_match_events_from_lineup_container(
                     return_href_after_image_search(goals_own, '/OG.png', row, child)
                     return_href_after_image_search(penalty_missed, '/PM.png', row, child)
 
-                    return_minute_after_image_search(minutes_red_card, '/Y2C.png', row, child)
-                    return_minute_after_image_search(minutes_red_card, '/RC.png', row, child)
-                    return_minute_after_image_search(minutes_pen_mis, '/PM.png', row, child)
+                    return_minute_after_image_search(minutes_red_card, '/Y2C.png', child)
+                    return_minute_after_image_search(minutes_red_card, '/RC.png', child)
+                    return_minute_after_image_search(minutes_pen_mis, '/PM.png', child)
+                    return_minute_after_image_search(minutes_goals, 'G.png', child)
+                    return_minute_after_image_search(minutes_goals_pen, 'PG.png', child)
+                    return_minute_after_image_search(minutes_goals_own, 'OG.png', child)
                     
-    return cards_yellow, cards_red, goals_general, goals_penalty, goals_own, penalty_missed, minutes_red_card, minutes_pen_mis
+    return cards_yellow, cards_red, goals_general, goals_penalty, goals_own, \
+           penalty_missed, minutes_red_card, minutes_pen_mis, minutes_goals, \
+           minutes_goals_pen, minutes_goals_own
+
+
     
 
 def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd.DataFrame, match_duration: int) -> pd.DataFrame:
     """Append the lineups with information on who took part in match events."""
     
     lineups[['Kaart_Geel', 'Kaart_Rood', 'Goal', 'Goal_Eigen', 'Penalty_Goal', 'Penalty_Gemist', 'Penalty_Gestopt']] = 0
-    yc, rc, goals, goals_pen, goals_own, pen_mis, rc_min, pen_mis_min = extract_match_events_from_lineup_container(html_string)
+    yc, rc, goals, goals_pen, goals_own,\
+        pen_mis, rc_min, pen_mis_min, \
+        goals_mins, goals_pen_mins, goals_own_mins = extract_match_events_from_lineup_container(html_string)
     
     for player_href in yc: lineups.loc[player_href == lineups['Link'], 'Kaart_Geel'] += 1      
     for player_href in goals: lineups.loc[player_href == lineups['Link'], 'Goal'] += 1 
@@ -435,6 +450,37 @@ def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd
             else:
                 pass
 
+    # Determine goals against; only count when player is on the field
+    lineups['Tegendoelpunt'] = 0
+    for player_href, goal_min in zip(goals+goals_pen, goals_mins+goals_pen_mins):
+        scored_by_home_team = lineups.loc[player_href == lineups['Link'], "Home_Team"].max()
+        basisspeler_mask = (
+            lineups["Basisspeler"] &\
+            (lineups["Home_Team"] != scored_by_home_team) &\
+            (lineups["Minuten_Gespeeld"] >= goal_min)
+        )
+        wisselspeler_mask = (
+            ~lineups["Basisspeler"] &\
+            (lineups["Home_Team"] != scored_by_home_team) &\
+            ((match_duration - lineups["Minuten_Gespeeld"]) <= goal_min)
+        )
+        lineups.loc[basisspeler_mask | wisselspeler_mask, "Tegendoelpunt"] += 1
+
+    for player_href, goal_min in zip(goals_own, goals_own_mins):
+        scored_by_home_team = lineups.loc[player_href == lineups['Link'], "Home_Team"].max()
+        basisspeler_mask = (
+            lineups["Basisspeler"] &\
+            (lineups["Home_Team"] == scored_by_home_team) &\
+            (lineups["Minuten_Gespeeld"] >= goal_min)
+        )
+        wisselspeler_mask = (
+            ~lineups["Basisspeler"] &\
+            (lineups["Home_Team"] == scored_by_home_team) &\
+            ((match_duration - lineups["Minuten_Gespeeld"]) <= goal_min)
+        )
+        lineups.loc[basisspeler_mask | wisselspeler_mask, "Tegendoelpunt"] += 1
+
+
     return lineups
 
 
@@ -459,9 +505,9 @@ def determine_winning_team(score_home: int, score_away: int, lineups: pd.DataFra
 def determine_goals_against(lineups: pd.DataFrame, score_home: int, score_away: int) -> pd.DataFrame:
     """Append lineups with goals against and clean sheet."""
 
-    lineups['Tegendoelpunt'] = 0
-    lineups.loc[lineups['Home_Team'], 'Tegendoelpunt'] = score_away
-    lineups.loc[~lineups['Home_Team'], 'Tegendoelpunt'] = score_home
+    # lineups['Tegendoelpunt'] = 0
+    # lineups.loc[lineups['Home_Team'], 'Tegendoelpunt'] = score_away
+    # lineups.loc[~lineups['Home_Team'], 'Tegendoelpunt'] = score_home
 
     lineups['CleanSheet'] = 0
     lineups.loc[lineups['Home_Team'], 'CleanSheet'] = (score_away == 0)
@@ -484,7 +530,6 @@ def extract_match_events(url: str, dim_players: pd.DataFrame) -> pd.DataFrame:
         match_duration = 120
     else:
         raise Exception
-
 
     #TODO: Quit process if match state is not FT
 
