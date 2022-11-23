@@ -77,10 +77,10 @@ def update_players(data: CompetitionData) -> CompetitionData:
     all_players = data.dim_players.copy()
     for _, row in tqdm(data.dim_clubs.iterrows(), total=data.dim_clubs.shape[0]):
 
-        match_url = construct_url(
+        team_url = construct_url(
             config.URLS["teams"], row["SW_Teamnaam"], row["SW_TeamID"]
         )
-        players_for_club = gather.extract_squad_from_html(match_url)
+        players_for_club = gather.extract_front_squad_from_html(team_url)
         players_for_club["Team"] = row["Team"]
         all_players = pd.concat([all_players, players_for_club], ignore_index=True)
         time.sleep(config.DEFAULT_SLEEP_S)

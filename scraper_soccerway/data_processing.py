@@ -233,7 +233,7 @@ class CompetitionData:
         for _,row in tqdm(self.dim_clubs.iterrows(), total=self.dim_clubs.shape[0]):
 
             match_url = construct_url(config.URLS['teams'], row['SW_Teamnaam'], row['SW_TeamID'])
-            players_for_club = gather.extract_squad_from_html(match_url)
+            players_for_club = gather.extract_front_squad_from_html(match_url)
             players_for_club['Team'] = row['Team']
             all_players = pd.concat([all_players, players_for_club], ignore_index=True)
             time.sleep(config.DEFAULT_SLEEP_S)       

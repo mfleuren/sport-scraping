@@ -184,6 +184,7 @@ def extract_squad_from_html(url: str) -> pd.DataFrame:
 
     # Basic table
     results = pd.read_html(html_string)
+
     result = results[0]
     COLUMN_NAME_MAP = {'Unnamed: 0':'Rugnummer', 'P':'Positie'}
     result_short = result[['Unnamed: 0', 'Naam', 'P']].rename(COLUMN_NAME_MAP, axis=1).copy()
@@ -197,6 +198,50 @@ def extract_squad_from_html(url: str) -> pd.DataFrame:
     result_short['SW_ID'] = result_short['Link'].str.extract(config.REGEXES['player_id_from_url'], expand=True).astype('int')
     
     return result_short
+
+
+def extract_front_squad_from_html(url: str) -> pd.DataFrame:
+    """Use URL with teams 'front page'."""
+
+    html_string = open_website_in_client(url)
+    soup = BeautifulSoup(html_string, 'lxml')
+
+    table =  soup.find_all(['table'], class_='table squad sortable')[0]
+
+    long_position = None
+    all_players = pd.DataFrame()
+
+
+    SHORT_POSITIONS = {"Keepers":"K", "Verdedigers":"V", "Middenvelders":"M", "Aanvallers":"A"}   
+
+    for row in table:
+
+        # Determine header
+        if isinstance(row.find("th"), Tag):
+            long_position = row.text.strip()
+
+        if long_position == 'Coach':
+            continue
+
+        # Determine player
+        if isinstance(row.find("td"), Tag):
+            table = f"<table>{row}</table>" 
+            df = pd.read_html(table)[0]
+
+            players = pd.concat([df[1], df[3]]).sort_index().dropna()
+            players.name = 'Naam'
+            players = pd.DataFrame(players).reset_index(drop=True)
+            players['Naam'] = players['Naam'].str.replace(r' [0-9]{2} jaar', '', regex=True)
+
+            links = pd.DataFrame(find_all_links_in_table(row, "players")).drop_duplicates(ignore_index=True)
+            players['Link'] = links
+            players['Positie'] = SHORT_POSITIONS[long_position]
+            players['SW_Naam'] = players['Link'].str.extract(config.REGEXES['player_name_from_url'], expand=True)
+            players['SW_ID'] = players['Link'].str.extract(config.REGEXES['player_id_from_url'], expand=True).astype('int')
+    
+            all_players = pd.concat([all_players, players], ignore_index=True)        
+
+    return all_players
 
 
 def find_substitutions(subs_df: pd.DataFrame, base_df: pd.DataFrame, match_duration: int) -> pd.DataFrame:
