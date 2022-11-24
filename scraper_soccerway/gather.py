@@ -246,7 +246,7 @@ def find_substitutions(subs_df: pd.DataFrame, base_df: pd.DataFrame, match_durat
     Determine minutes played for each player.
     """
 
-    subs_df_split = (subs_df['Speler'].str.split('([\w\s\.]+) for ([\w\s\.]+) ([0-9]+)[\'\+]', expand=True))
+    subs_df_split = (subs_df['Speler'].str.split(r'([\w\s\.-]+) for ([\w\s\.-]+) ([0-9]+)[\'\+]', expand=True, regex=True))
     all_subs = subs_df_split[1].fillna(subs_df_split[0]).rename('Speler')
     sub_minutes_played = match_duration-subs_df_split[3].fillna(match_duration).astype('int').rename('Minuten_Gespeeld')
     subs_df2 = pd.concat([subs_df['#'], all_subs, subs_df['Link'], sub_minutes_played, subs_df['Basisspeler']], axis=1)
