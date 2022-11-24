@@ -542,7 +542,9 @@ def extract_match_events(url: str, dim_players: pd.DataFrame) -> pd.DataFrame:
         .pipe((append_assisters, 'lineups'), html_string=html_string)
         .pipe((determine_clean_sheet, 'lineups'), score_home=final_score_home, score_away=final_score_away)
     )
-    lineups['match_url'] = url
+    lineups['Match_Url'] = url
+    lineups['Match_Duration'] = match_duration
+
     return lineups
 
 

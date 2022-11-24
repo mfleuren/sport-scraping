@@ -150,6 +150,7 @@ def scrape_matches(data: CompetitionData) -> CompetitionData:
         matches_to_scrape.iterrows(), total=matches_to_scrape.shape[0]
     ):
         match_events = gather.extract_match_events(match["url_match"], data.dim_players)
+        match_events = match_events.join(data.matches.set_index('url_match')['Datum'], on='Match_Url')
         data.match_events = pd.concat(
             [data.match_events, match_events], ignore_index=True
         )
