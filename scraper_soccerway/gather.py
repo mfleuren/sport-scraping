@@ -246,10 +246,10 @@ def find_substitutions(subs_df: pd.DataFrame, base_df: pd.DataFrame, match_durat
     Determine minutes played for each player.
     """
 
-    subs_df_split = (subs_df['Speler'].str.split('([\w\s\.]+) for ([\w\s\.]+) ([0-9]+)\'', expand=True))
+    subs_df_split = (subs_df['Speler'].str.split('([\w\s\.]+) for ([\w\s\.]+) ([0-9]+)[\'\+]', expand=True))
     all_subs = subs_df_split[1].fillna(subs_df_split[0]).rename('Speler')
     sub_minutes_played = match_duration-subs_df_split[3].fillna(match_duration).astype('int').rename('Minuten_Gespeeld')
-    subs_df2 = pd.concat([subs_df['#'], all_subs, subs_df['Link'], sub_minutes_played], axis=1)
+    subs_df2 = pd.concat([subs_df['#'], all_subs, subs_df['Link'], sub_minutes_played, subs_df['Basisspeler']], axis=1)
 
     players_out = subs_df_split[2].rename('Speler')
     players_out_minutes_played = subs_df_split[3].fillna(match_duration).astype('int').rename('Minuten_Gespeeld')
@@ -453,7 +453,7 @@ def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd
     # Determine goals against; only count when player is on the field
     lineups['Tegendoelpunt'] = 0
     for player_href, goal_min in zip(goals+goals_pen, goals_mins+goals_pen_mins):
-        scored_by_home_team = lineups.loc[player_href == lineups['Link'], "Home_Team"].max()
+        scored_by_home_team = lineups.loc[lineups['Link'] == player_href, "Home_Team"].max()
         basisspeler_mask = (
             lineups["Basisspeler"] &\
             (lineups["Home_Team"] != scored_by_home_team) &\
@@ -464,10 +464,11 @@ def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd
             (lineups["Home_Team"] != scored_by_home_team) &\
             ((match_duration - lineups["Minuten_Gespeeld"]) <= goal_min)
         )
+
         lineups.loc[basisspeler_mask | wisselspeler_mask, "Tegendoelpunt"] += 1
 
     for player_href, goal_min in zip(goals_own, goals_own_mins):
-        scored_by_home_team = lineups.loc[player_href == lineups['Link'], "Home_Team"].max()
+        scored_by_home_team = lineups.loc[lineups['Link'] == player_href, "Home_Team"].max()
         basisspeler_mask = (
             lineups["Basisspeler"] &\
             (lineups["Home_Team"] == scored_by_home_team) &\
@@ -502,12 +503,8 @@ def determine_winning_team(score_home: int, score_away: int, lineups: pd.DataFra
     return lineups
 
 
-def determine_goals_against(lineups: pd.DataFrame, score_home: int, score_away: int) -> pd.DataFrame:
-    """Append lineups with goals against and clean sheet."""
-
-    # lineups['Tegendoelpunt'] = 0
-    # lineups.loc[lineups['Home_Team'], 'Tegendoelpunt'] = score_away
-    # lineups.loc[~lineups['Home_Team'], 'Tegendoelpunt'] = score_home
+def determine_clean_sheet(lineups: pd.DataFrame, score_home: int, score_away: int) -> pd.DataFrame:
+    """Append lineups with clean sheet."""
 
     lineups['CleanSheet'] = 0
     lineups.loc[lineups['Home_Team'], 'CleanSheet'] = (score_away == 0)
@@ -543,7 +540,7 @@ def extract_match_events(url: str, dim_players: pd.DataFrame) -> pd.DataFrame:
         .pipe((determine_winning_team, 'lineups'), score_home=final_score_home, score_away=final_score_away)
         .pipe((append_match_events, 'lineups'), html_string=html_string, dim_players=dim_players, match_duration=match_duration)
         .pipe((append_assisters, 'lineups'), html_string=html_string)
-        .pipe((determine_goals_against, 'lineups'), score_home=final_score_home, score_away=final_score_away)
+        .pipe((determine_clean_sheet, 'lineups'), score_home=final_score_home, score_away=final_score_away)
     )
     lineups['match_url'] = url
     return lineups

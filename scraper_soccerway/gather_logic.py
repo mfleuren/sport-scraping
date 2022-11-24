@@ -129,7 +129,7 @@ def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
 
     data.matches = data.matches.sort_values(by='Datum')
 
-    played_matches = data.matches["Datum"] < datetime.today().strftime('%Y-%m-%d')
+    played_matches = data.matches["Datum"] < datetime(2022, 11, 22) #datetime.today().strftime('%Y-%m-%d')
 
     if data.match_events.shape[0] > 0:
         processed_matches = data.matches["url_match"].isin(data.match_events["match_url"])
