@@ -435,18 +435,19 @@ def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd
         lineups.loc[player_href == lineups['Link'], 'Minuten_Gespeeld'] -= (match_duration-minutes)
 
     # Penalty missed: extra logic to give active goalkeeper of opposition a +1 on PenaltyStopped
-    for player_href, minutes in zip(pen_mis, pen_mis_min):
-        lineups.loc[player_href == lineups['Link'], 'Penalty_Gemist'] += 1  
+    for player_href, pen_min in zip(pen_mis, pen_mis_min):
+        lineups.loc[player_href == lineups['Link'], 'Penalty_Gemist'] += 1
 
         # Find active opposition goalkeeper
-        gk_team = ~lineups.loc[player_href == lineups['Link'], 'Home_Team'].unique()[0]
-        lineups_with_pos = lineups.join(dim_players[['Link', 'Positie']].set_index('Link'))
+        gk_team = ~lineups.loc[lineups['Link'] == player_href, 'Home_Team'].unique()[0]
+        lineups_with_pos = lineups.join(dim_players[['Link', 'Positie']].set_index('Link'), on='Link').copy()
         gk_mask = (lineups_with_pos['Positie']=='K') & (lineups_with_pos['Home_Team']==gk_team)
         for idx,gk in lineups_with_pos[gk_mask].iterrows():
-            if gk['Minuten_Gespeeld'] > pen_mis_min:
-                lineups.iloc[idx]['Penalty_Gestopt'] += 1
+
+            if gk['Minuten_Gespeeld'] > pen_min:
+                lineups.loc[idx, 'Penalty_Gestopt'] += 1
             elif gk['Minuten_Gespeeld'] > 0:
-                lineups.iloc[idx]['Penalty_Gestopt'] += 1
+                lineups.loc[idx, 'Penalty_Gestopt'] += 1
             else:
                 pass
 
