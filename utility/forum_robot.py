@@ -35,7 +35,7 @@ def login_to_forum(browser: mechanize.Browser) -> mechanize.Browser:
         browser.submit()
         print(f"Successfully logged in to {os.getenv('FORUM_BASE_URL')} with username {os.getenv('FORUM_ACCOUNT')}.")
     except:
-        LoginException()
+        raise LoginException()
         
     return browser
 
@@ -48,12 +48,15 @@ def post_message(browser: mechanize.Browser, message:str) -> None:
         browser.select_form('quick_reply')
         browser['message'] = message
         browser.submit()
+        print('Posted message.')
     except:
-        PostException()
+        raise PostException()
 
 
 def post_results_to_forum(message: str) -> None:
 
+    print(message)
     browser = start_mechanize_browser()
     browser = login_to_forum(browser)
     post_message(browser, message)
+    

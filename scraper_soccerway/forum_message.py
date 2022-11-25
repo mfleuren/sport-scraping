@@ -57,7 +57,7 @@ class Message:
             self.round_ranking.append(''.join(table))
 
 
-    def create_general_ranking(self, points: pd.DataFrame, subs: pd.DataFrame):
+    def create_general_ranking(self, points: pd.DataFrame, subs: pd.DataFrame = None):
         """Create a string containing a formatted table with the general ranking after a given round.""" 
 
         points_by_coach = (points
@@ -68,24 +68,30 @@ class Message:
             .reset_index(drop=True)
             )
 
-        subs_by_coach = (subs[subs['Speelronde'] <= self.gameweeks[-1]]
-            .copy()
-            .groupby('Coach')['Wissel_In']
-            .count()
-            )
-        subs_by_coach.name = 'N_Wissels'
-        print(subs_by_coach)
-        points_by_coach = points_by_coach.join(subs_by_coach, on='Coach')
-        print(points_by_coach)
-        points_by_coach['Minpunten_Wissels'] = 0
-        points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'Minpunten_Wissels'] =  -20 * (points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'N_Wissels'] - 3)      
-        points_by_coach['P_AlgemeenKlassement'] = points_by_coach['P_Totaal'] + points_by_coach['Minpunten_Wissels']
+        if subs:
+            subs_by_coach = (subs[subs['Speelronde'] <= self.gameweeks[-1]]
+                .copy()
+                .groupby('Coach')['Wissel_In']
+                .count()
+                )
+            subs_by_coach.name = 'N_Wissels'
+            print(subs_by_coach)
+            points_by_coach = points_by_coach.join(subs_by_coach, on='Coach')
+            print(points_by_coach)
+            points_by_coach['Minpunten_Wissels'] = 0
+            points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'Minpunten_Wissels'] =  -20 * (points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'N_Wissels'] - 3)      
+            points_by_coach['P_AlgemeenKlassement'] = points_by_coach['P_Totaal'] + points_by_coach['Minpunten_Wissels']
+        else:
+            points_by_coach['P_AlgemeenKlassement'] = points_by_coach['P_Totaal']
 
-        table = [f'[b][u]Algemeen klassement na speelronde {self.gameweeks[-1]}.[/u][/b]']
+        if len(self.gameweeks) > 0:
+            table = [f'[b][u]Algemeen klassement na speelronde {self.gameweeks[-1]}.[/u][/b]']
+        else:
+            table = [f'[b][u]Algemeen klassement.[/u][/b]']
         table_header = f'[tr][td][b]Positie[/b][/td][td][b]Coach[/b][/td][td][b]Punten[/b][/td][/tr]'
         table_body = []
         for idx, row in points_by_coach.sort_values(by='P_AlgemeenKlassement', ascending=False).iterrows():
-            table_body.append(f"[tr][td]{idx}[/td][td]{row['Coach']}[/td][td]{row['P_AlgemeenKlassement']:.2f}[/td][/tr]")
+            table_body.append(f"[tr][td]{idx+1}[/td][td]{row['Coach']}[/td][td]{row['P_AlgemeenKlassement']:.2f}[/td][/tr]")
         table.append(f"[table]{table_header}{''.join(table_body)}[/table]")
 
         self.general_ranking = ''.join(table)
@@ -94,7 +100,7 @@ class Message:
     def create_teams_overview(self, df: pd.DataFrame):
         """Create a string containing formatted tables with the chosen teams after a given round."""
 
-        if self.gameweeks:
+        if len(self.gameweeks) > 0:
             chosen_teams = df[df['Speelronde'] == self.gameweeks[-1]].copy()
             section = [f'[b][u]Gekozen teams na speelronde {self.gameweeks[-1]}.[/u][/b]\n[spoiler]']
         else:
@@ -112,7 +118,7 @@ class Message:
             coach_team = chosen_teams[chosen_teams['Coach']==coach].sort_values(by=['Positie_Order', 'Speler'])
             table_body = []
             for _, row in coach_team.iterrows():
-                table_body.append(f"[tr][td]{row['Positie']}[/td][td]{row['Speler']}[/td][/tr]")
+                table_body.append(f"[tr][td]{row['Positie']}[/td][td]{row['Speler']}[/td][td]{row['P_Totaal']:.2f}[/td][/tr]")
             section_body.append(f"[spoiler][table]{table_header}{''.join(table_body)}[/table][/spoiler]")
 
             section.append(''.join(section_body))
