@@ -432,7 +432,10 @@ def append_match_events(html_string: str, lineups: pd.DataFrame, dim_players: pd
     # Red Card has extra logic for minutes played
     for player_href, minutes in zip(rc, rc_min): 
         lineups.loc[player_href == lineups['Link'], 'Kaart_Rood'] += 1
-        lineups.loc[player_href == lineups['Link'], 'Minuten_Gespeeld'] -= (match_duration-minutes)
+        if match_duration <= minutes:
+            lineups.loc[player_href == lineups['Link'], 'Minuten_Gespeeld'] -= (match_duration-minutes)
+        else: # Prevent edge case where players get red card after FT
+            lineups.loc[player_href == lineups['Link'], 'Minuten_Gespeeld'] = match_duration
 
     # Penalty missed: extra logic to give active goalkeeper of opposition a +1 on PenaltyStopped
     for player_href, pen_min in zip(pen_mis, pen_mis_min):
