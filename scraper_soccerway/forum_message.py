@@ -84,7 +84,7 @@ class Message:
         else:
             points_by_coach['P_AlgemeenKlassement'] = points_by_coach['P_Totaal']
 
-        point_by_coach_summed = points_by_coach.groupby(['Coach', 'Speler'], as_index=False)['P_AlgemeenKlassement'].sum()
+        point_by_coach_summed = points_by_coach.groupby('Coach', as_index=False)['P_AlgemeenKlassement'].sum()
 
         if len(self.gameweeks) > 0:
             table = [f'[b][u]Algemeen klassement na speelronde {self.gameweeks[-1]}.[/u][/b]']
@@ -92,7 +92,7 @@ class Message:
             table = [f'[b][u]Algemeen klassement.[/u][/b]']
         table_header = f'[tr][td][b]Positie[/b][/td][td][b]Coach[/b][/td][td][b]Punten[/b][/td][/tr]'
         table_body = []
-        for idx, row in point_by_coach_summed.sort_values(by='P_AlgemeenKlassement', ascending=False).iterrows():
+        for idx, row in point_by_coach_summed.sort_values(by='P_AlgemeenKlassement', ascending=False).reset_index(drop=True).iterrows():
             table_body.append(f"[tr][td]{idx+1}[/td][td]{row['Coach']}[/td][td]{row['P_AlgemeenKlassement']:.2f}[/td][/tr]")
         table.append(f"[table]{table_header}{''.join(table_body)}[/table]")
 
