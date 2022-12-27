@@ -1,10 +1,45 @@
-TOURNAMENT_NAME = 'world-cup'
-TOURNAMENT_YEAR = 2022
-TOURNAMENT_ID_GROUP = 'r49519'
-TOURNAMENT_ID_FINALS = 's16394'
-TOURNAMENT_CONTINENT = "world"
-TOURNAMENT_NATION = "qatar"
-TOURNAMENT_START_OF_KO = '2022-12-03'
+COMPETITION_SETTINGS = {
+    "eredivisie-2022": {
+        "NAME":"Eredivisie",
+        "YEAR":"2022",
+        "TOURNAMENT":False,
+        "ID":"r69885", 
+        "URLS": {
+            "matches":"{base_url}/teams/netherlands/{team_name}/{team_id}/matches/",
+            "teams":"{base_url}/teams/netherlands/{team_name}/{team_id}/squad/",
+            "teams_start":"{base_url}/national/netherlands/eredivisie/{year}/regular-season/{id}/tables/"
+        }
+    },
+    "world-cup-2022": {
+        "NAME":"world-cup",
+        "YEAR":2022,
+        "TOURNAMENT":True,
+        "ID_GROUP":"r49519",
+        "ID_FINALS":"s16394",
+        "CONTINENT":"world",
+        "NATION":"qatar",
+        "START_OF_KO":"2022-12-03",
+        "URLS": {
+            "matches_group":"{base_url}/international/{continent}/{name}/{year}-{nation}/group-stage/{id_group}/matches/",
+            "matches_finals":"{base_url}/international/{continent}/{name}/{year}-{nation}/{id_finals}/final-stages/",
+            "start_teams":"{base_url}/international/{continent}/{name}/{year}-{nation}/group-stage/{id_group}",
+            "teams":"{base_url}/teams/{team_name}/{team_name}/{team_id}"
+        }
+    }
+}
+
+LOCAL_FILES = {
+    "teams":"teams.csv",
+    "substitutions":"substitutions.csv",
+    "substitutions_free":"free_substitutions.csv",
+    "points_scheme":"points_scheme.csv",
+    "points_player":"points_player.csv",
+    "points_coach":"points_coach.csv",
+    "clubs":"dim_clubs.csv",
+    "players":"dim_players.csv",
+    "matches":"matches.csv",
+    "match_events":"match_events.csv"
+}
 
 DEFAULT_SLEEP_S = 1
 
@@ -19,12 +54,6 @@ REGEXES = {
 }
 
 BASE_URL = 'https://nl.soccerway.com'
-URLS = {
-    'matches_group':f"{BASE_URL}/international/{TOURNAMENT_CONTINENT}/{TOURNAMENT_NAME}/{TOURNAMENT_YEAR}-{TOURNAMENT_NATION}/group-stage/{TOURNAMENT_ID_GROUP}/matches/",
-    'matches_finals':f"{BASE_URL}/international/{TOURNAMENT_CONTINENT}/{TOURNAMENT_NAME}/{TOURNAMENT_YEAR}-{TOURNAMENT_NATION}/{TOURNAMENT_ID_FINALS}/final-stages/",
-    'start_teams':f"{BASE_URL}/international/{TOURNAMENT_CONTINENT}/{TOURNAMENT_NAME}/{TOURNAMENT_YEAR}-{TOURNAMENT_NATION}/group-stage/{TOURNAMENT_ID_GROUP}",
-    'teams':"{base_url}/teams/{team_name}/{team_name}/{team_id}",
-}
 
 ALLOWED_TACTICS = ['1343', '1352', '1433', '1442', '1451', '1541', '1532']
 

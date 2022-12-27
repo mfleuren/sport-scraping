@@ -59,6 +59,7 @@ DATACLASSES FOR FOOTBALL SCRAPERS
 
 @dataclass
 class CompetitionData:
+    tournament: str
     chosen_teams: pd.DataFrame = field(init=False)
     substitutions: pd.DataFrame = field(init=False)
     points_scheme: pd.DataFrame = field(init=False)
@@ -68,6 +69,9 @@ class CompetitionData:
     dim_players: pd.DataFrame = field(init=False)
     matches: pd.DataFrame = field(init=False)
     match_events: pd.DataFrame = field(init=False)
+
+    def __init__(self, tournament: str):
+        self.tournament = tournament
 
 
     def __post_init__(self):
