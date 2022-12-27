@@ -5,3 +5,11 @@ lxml
 beautifulsoup4
 html5lib
 python-dotenv
+Babel
+dash
+dash-bootstrap-components
+pandas
+pandas-stubs
+plotly
+pyyaml
+python-i18n[YAML]

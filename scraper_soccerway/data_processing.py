@@ -9,29 +9,29 @@ from tqdm import tqdm
 import pandas as pd
 from distutils.util import strtobool
 
-
 import config, gather, forum_message 
-from utility import forum_robot
+# from utility import forum_robot
 
 from dotenv import load_dotenv
 load_dotenv()
 
-MAKE_POST = strtobool(os.getenv('IMGUR_UPLOAD')) and strtobool(os.getenv('FORUM_POST'))
+# MAKE_POST = strtobool(os.getenv('IMGUR_UPLOAD')) and strtobool(os.getenv('FORUM_POST'))
 
 # Football input
 FOOTBALL_PATH_INPUT = os.path.join(
     os.getcwd(), 
     'inputs', 
-    f"{os.getenv('FOOTBALL_COMPETITION_YEAR')}_{os.getenv('FOOTBALL_COMPETITION_NAME')}"
+    f"{config.TOURNAMENT_YEAR}_{config.TOURNAMENT_NAME}"
     )
 FOOTBALL_PATH_RESULTS = os.path.join(
     os.getcwd(), 
     'results', 
-    f"{os.getenv('FOOTBALL_COMPETITION_YEAR')}_{os.getenv('FOOTBALL_COMPETITION_NAME')}"
+    f"{config.TOURNAMENT_YEAR}_{config.TOURNAMENT_NAME}"
     )
 
 FILE_FOOTBALL_TEAMS_INPUT = os.path.join(FOOTBALL_PATH_INPUT, 'teams.csv')
 FILE_FOOTBALL_SUBSTITUTIONS = os.path.join(FOOTBALL_PATH_INPUT, 'substitutions.csv')
+FILE_FOOTBALL_FREE_SUBSTITUTIONS = os.path.join(FOOTBALL_PATH_INPUT, 'free_substitutions.csv')
 FILE_FOOTBALL_POINTS_SCHEME = os.path.join(FOOTBALL_PATH_INPUT, 'points_scheme.csv')
 
 FILE_FOOTBALL_TEAMS_RESULTS = os.path.join(FOOTBALL_PATH_RESULTS, 'teams.csv')
@@ -42,8 +42,8 @@ FILE_FOOTBALL_DIM_PLAYERS = os.path.join(FOOTBALL_PATH_RESULTS, 'dim_players.csv
 FILE_FOOTBALL_MATCHES = os.path.join(FOOTBALL_PATH_RESULTS, 'matches.csv')
 FILE_FOOTBALL_MATCH_EVENTS = os.path.join(FOOTBALL_PATH_RESULTS, 'match_events.csv')
 
-FOOTBALL_YEAR = os.getenv('FOOTBALL_COMPETITION_YEAR')
-FOOTBALL_YEARCODE = FOOTBALL_YEAR + str(int(FOOTBALL_YEAR)+1)
+FOOTBALL_YEAR = config.TOURNAMENT_YEAR
+FOOTBALL_YEARCODE = str(FOOTBALL_YEAR)
 FOOTBALL_COMPETITION_CODE = os.getenv('FOOTBALL_COMPETITION_CODE')
 
 """
@@ -72,7 +72,6 @@ class CompetitionData:
 
     def __post_init__(self):
         self.chosen_teams = self.load_file_from_input_or_results(FILE_FOOTBALL_TEAMS_INPUT, FILE_FOOTBALL_TEAMS_RESULTS)
-        self.substitutions = pd.read_csv(FILE_FOOTBALL_SUBSTITUTIONS, sep=';')
         self.points_scheme = pd.read_csv(FILE_FOOTBALL_POINTS_SCHEME, sep=';')
         self.points_player = self.load_file_from_results(FILE_FOOTBALL_POINTS_PLAYER)
         self.points_coach = self.load_file_from_results(FILE_FOOTBALL_POINTS_COACH)
@@ -80,6 +79,10 @@ class CompetitionData:
         self.dim_players = self.load_file_from_results(FILE_FOOTBALL_DIM_PLAYERS)
         self.matches = self.load_file_from_results(FILE_FOOTBALL_MATCHES)
         self.match_events = self.load_file_from_results(FILE_FOOTBALL_MATCH_EVENTS)
+
+        # if strtobool(os.getenv('FOOTBALL_SUBSTITUTIONS')):
+        #     self.substitutions = pd.read_csv(FILE_FOOTBALL_SUBSTITUTIONS, sep=';')
+        #     self.free_substitutions = pd.read_csv(FILE_FOOTBALL_FREE_SUBSTITUTIONS, sep=';')
 
 
     def load_file_from_input_or_results(self, 
@@ -119,7 +122,25 @@ class CompetitionData:
 
     def load_file_from_results(self, path: Union[str, os.PathLike]) -> pd.DataFrame:
         """Load file from Results folder, if not exists pre-allocate empty DataFrame."""
-        return pd.read_csv(path, sep=';') if os.path.exists(path) else pd.DataFrame()
+
+        if os.path.exists(path):
+            df = pd.read_csv(path, sep=';')
+
+            if 'Datum' in df.columns:
+                df['Datum'] = pd.to_datetime(df['Datum'], format='%Y-%m-%d')
+
+            print(f'Loaded file {path} from result, converted Datum column.')
+
+            return df
+            
+        else: 
+
+            df = pd.DataFrame()
+
+            print(f'Could not find file {path} from result, allocated an empty DataFrame.')
+
+            return df
+
 
 
     def save_files_to_results(self) -> None:
@@ -158,15 +179,10 @@ class CompetitionData:
             print(f'Loaded file {path} from result.')
             return df
         else:
-            import sys
-            sys.path.append(os.getcwd())
-            sys.path.append(os.path.join(os.getcwd(), 'scraper_soccerway'))
-            from scraper_soccerway.gather import extract_clubs_from_html
 
-            url = f"https://nl.soccerway.com/national/netherlands/eredivisie/{FOOTBALL_YEARCODE}/regular-season/{FOOTBALL_COMPETITION_CODE}/tables/"
+            url = config.URLS['start_teams']
             print(url)
-
-            clubs = extract_clubs_from_html(url)
+            clubs = gather.extract_clubs_from_html(url)
 
             clubs.to_csv(path, sep=';', index=False)
 
@@ -180,7 +196,7 @@ class CompetitionData:
 
             match_url = construct_url(config.URLS['matches'], row['SW_Teamnaam'], row['SW_TeamID'])
             matches_for_club = gather.extract_matches_from_html(match_url)
-            self.matches = self.matches.append(matches_for_club)
+            self.matches = pd.concat([self.matches, matches_for_club], ignore_index=True)
 
             time.sleep(config.DEFAULT_SLEEP_S)
 
@@ -217,9 +233,9 @@ class CompetitionData:
         for _,row in tqdm(self.dim_clubs.iterrows(), total=self.dim_clubs.shape[0]):
 
             match_url = construct_url(config.URLS['teams'], row['SW_Teamnaam'], row['SW_TeamID'])
-            players_for_club = gather.extract_squad_from_html(match_url)
+            players_for_club = gather.extract_front_squad_from_html(match_url)
             players_for_club['Team'] = row['Team']
-            all_players = all_players.append(players_for_club)
+            all_players = pd.concat([all_players, players_for_club], ignore_index=True)
             time.sleep(config.DEFAULT_SLEEP_S)       
 
         # Remove completely duplicated rows
@@ -261,23 +277,25 @@ class CompetitionData:
                 K = (data['Positie'] == 'K').sum()
                 V = (data['Positie'] == 'V').sum()
                 M = (data['Positie'] == 'M').sum()
-                A = (data['Positie'] == 'A').sum()                       
+                A = (data['Positie'] == 'A').sum()
+                special = data['Speler'].str.contains('!').sum()                       
                 tactic = f'{K}{V}{M}{A}'
 
-                if K + V + M + A != 11:
+                if K + V + M + A + special != 11:
+                    print(data)
                     print(f'Team of {coach} does not have 11 players.')
-                    print(data)
                     raise Exception
 
-                elif tactic not in config.ALLOWED_TACTICS:
+                elif tactic not in config.ALLOWED_TACTICS and special == 0:
+                    print(data)
                     print(f'Team of {coach} plays a tactic that is not allowed: {tactic}')
-                    print(data)
                     raise Exception
 
-                elif data['Team'].nunique() != 11:
+                elif data['Team'].nunique() != 11 and special == 0:
                     p = data.duplicated(subset=['Team'], keep=False)
+                    print(special)
+                    print(data[['Speler', 'Team']])
                     print(f"Team of {coach} has more than 1 player of the same team: {p['Speler'].tolist()}")
-                    print(data)
                     raise Exception
 
                 else:
@@ -296,6 +314,15 @@ class CompetitionData:
             sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
             teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
             print(f"{row['Coach']} [{row['Wissel_Uit']} --> {row['Wissel_In']}]")
+
+        # Process free substitutions
+        subs = self.free_substitutions[self.free_substitutions['Speelronde']==gameweek].copy()
+        if subs.shape[0] > 0:
+            print(f"Processed free substitutions, speelronde {gameweek}:")
+        for _, row in subs.iterrows():
+            sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
+            teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
+            print(f"{row['Coach']} [{row['Wissel_Uit']} --> {row['Wissel_In']}]")
         
         # Join chosen team and dim_players to get info on clubs and positions
         self.dim_players['Naam_fix'] = self.dim_players.apply(lambda x: unidecode(x['Naam']), axis=1)
@@ -304,7 +331,7 @@ class CompetitionData:
 
         validate_tactics(teams_new)
 
-        return self.chosen_teams.append(teams_new).reset_index(drop=True)
+        return pd.concat([self.chosen_teams, teams_new], ignore_index=True)
 
 
     def process_new_matches(self, gameweek: int) -> pd.DataFrame:
@@ -315,11 +342,11 @@ class CompetitionData:
         gameweek_matches = self.matches[self.matches['Cluster'] == gameweek].copy()
         for _,match in tqdm(gameweek_matches.iterrows(), total=gameweek_matches.shape[0]):
             match_events = gather.extract_match_events(match['url_match'], self.dim_players.copy())
-            all_match_events = all_match_events.append(match_events)
+            all_match_events = pd.concat([all_match_events, match_events], ignore_index=True)
             time.sleep(config.DEFAULT_SLEEP_S)
         all_match_events['Speelronde'] = gameweek
 
-        return self.match_events.append(all_match_events).reset_index(drop=True)
+        return pd.concat([self.match_events, all_match_events], ignore_index=True)
 
 
     def calculate_point_by_player(self, gameweek: int) -> pd.DataFrame:
@@ -356,7 +383,7 @@ class CompetitionData:
         points_player['P_Totaal'] = points_player.drop(['Speler', 'Link'], axis=1).sum(axis=1)
         points_player['Speelronde'] = gameweek
 
-        return self.points_player.append(points_player)
+        return pd.concat([self.points_player, points_player], ignore_index=True)
 
 
     def calculate_points_by_coach(self, gameweek: int) -> pd.DataFrame:
@@ -371,7 +398,7 @@ class CompetitionData:
         cols_to_drop = points_player.columns[~points_player.columns.isin(['Link', 'P_Totaal'])]
         coach_teams = coach_teams.join(points_player.drop(cols_to_drop, axis=1).set_index('Link'), on='Link')
         
-        return self.points_coach.append(coach_teams)
+        return pd.concat([self.points_coach, coach_teams], ignore_index=True)
 
 
 def create_message_and_post(data: CompetitionData, gameweeks: list[int]) -> None:
@@ -380,7 +407,7 @@ def create_message_and_post(data: CompetitionData, gameweeks: list[int]) -> None
     message = forum_message.Message(gameweeks=gameweeks)
     message.create_substitutions_table(data.substitutions.copy())
     message.create_round_ranking(data.points_coach.copy())
-    message.create_general_ranking(data.points_coach.copy())
+    message.create_general_ranking(data.points_coach.copy(), data.substitutions.copy())
     message.create_teams_overview(data.chosen_teams.copy())
     message.create_players_overview(data.dim_players.copy())
 
@@ -405,7 +432,6 @@ def soccerway_scraper():
     data.update_matches()
     data.update_players()
     rounds_to_scrape = data.get_rounds_to_scrape()
-    print(rounds_to_scrape)
     for gameweek in rounds_to_scrape:
         print(f'Scraping round {gameweek}')
         data.chosen_teams = data.process_teammodifications(gameweek)
@@ -420,3 +446,5 @@ def soccerway_scraper():
 
 if __name__ == '__main__':   
     soccerway_scraper()
+
+# TODO: Add points to chosen teams message
