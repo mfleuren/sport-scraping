@@ -147,16 +147,20 @@ def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
 def scrape_matches(data: CompetitionData) -> CompetitionData:
 
     matches_to_scrape = determine_matches_to_scrape(data)
-    print(matches_to_scrape)
+    for game_round in matches_to_scrape["Cluster"].unique():
 
-    for _, match in tqdm(
-        matches_to_scrape.iterrows(), total=matches_to_scrape.shape[0]
-    ):
-        match_events = gather.extract_match_events(match["url_match"], data.dim_players)
-        match_events = match_events.join(data.matches.set_index('url_match')['Datum'], on='Match_Url')
-        data.match_events = pd.concat(
-            [data.match_events, match_events], ignore_index=True
-        )
-        time.sleep(config.DEFAULT_SLEEP_S)
+        matches_in_round = matches_to_scrape[matches_to_scrape["Cluster"] == game_round]
+        print(game_round, matches_in_round)
+
+        for _, match in tqdm(
+            matches_in_round.iterrows(), total=matches_in_round.shape[0]
+        ):
+            match_events = gather.extract_match_events(match["url_match"], data.dim_players)
+            match_events = match_events.join(data.matches.set_index('url_match')['Datum'], on='Match_Url')
+            match_events["Speelronde"] = game_round
+            data.match_events = pd.concat(
+                [data.match_events, match_events], ignore_index=True
+            )
+            time.sleep(config.DEFAULT_SLEEP_S)
 
     return data

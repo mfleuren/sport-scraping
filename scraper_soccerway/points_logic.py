@@ -102,10 +102,13 @@ def calculate_points_by_coach(data: CompetitionData) -> CompetitionData:
     """Calculate points by team selections"""
 
     cols_to_drop = data.points_player.columns[
-        ~data.points_player.columns.isin(["Link", "P_Totaal"])
+        ~data.points_player.columns.isin(["Speler", "Speelronde", "P_Totaal"])
     ]
+
+    print(cols_to_drop)
+
     data.points_coach = data.chosen_teams.join(
-        data.points_player.drop(cols_to_drop, axis=1).set_index("Link"), on="Link"
+        data.points_player.drop(cols_to_drop, axis=1).set_index(["Speler", "Speelronde"]), on=["Speler", "Speelronde"]
     )
 
     return data
