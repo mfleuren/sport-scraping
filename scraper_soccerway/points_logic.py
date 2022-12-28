@@ -1,6 +1,6 @@
 import pandas as pd
 
-from data_processing import CompetitionData
+from competition_data import CompetitionData
 
 
 def calculate_point_by_player(data: CompetitionData) -> pd.DataFrame:

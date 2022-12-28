@@ -4,6 +4,8 @@ from scraper_soccerway import config
 
 def tactics(teams: pd.DataFrame) -> None:
     
+    teams = teams[teams["Speelronde"] == teams["Speelronde"].max()]
+
     for coach, data in teams.groupby('Coach'):
         K = (data['Positie'] == 'K').sum()
         V = (data['Positie'] == 'V').sum()

@@ -5,7 +5,7 @@ from unidecode import unidecode
 from datetime import datetime
 
 from scraper_soccerway import gather, config
-from scraper_soccerway.data_processing import CompetitionData
+from scraper_soccerway.competition_data import CompetitionData
 
 
 def construct_url(fmt_url: str, team: str, id: str) -> str:
@@ -15,11 +15,11 @@ def construct_url(fmt_url: str, team: str, id: str) -> str:
 def update_matches(data: CompetitionData) -> CompetitionData:
     """Loop through all tournament stages and update match dates and match URLs."""
 
-    urls = [config.URLS["matches_group"]]
+    if data.urls["matches"]:
+        urls = data.dim_clubs["SW_TeamURL"].apply(lambda x: config.BASE_URL + x)
+    else:
+        urls = [data.urls["matches_group"], data.urls["matches_finals"]]
     
-    if datetime.today() >= pd.to_datetime(config.TOURNAMENT_START_OF_KO):
-        urls.append(config.URLS["matches_finals"])
-
     for url in tqdm(urls, total=len(urls)):
 
         updated_matches = gather.extract_matches_from_html_tournament(url, chunk_size=3)
@@ -78,9 +78,12 @@ def update_players(data: CompetitionData) -> CompetitionData:
     for _, row in tqdm(data.dim_clubs.iterrows(), total=data.dim_clubs.shape[0]):
 
         team_url = construct_url(
-            config.URLS["teams"], row["SW_Teamnaam"], row["SW_TeamID"]
-        )
-        players_for_club = gather.extract_front_squad_from_html(team_url)
+                data.urls["teams"], row["SW_Teamnaam"], row["SW_TeamID"]
+            )
+        if data.tournament:            
+            players_for_club = gather.extract_front_squad_from_html(team_url)
+        else:
+            players_for_club = gather.extract_squad_from_html(team_url)
         players_for_club["Team"] = row["Team"]
         all_players = pd.concat([all_players, players_for_club], ignore_index=True)
         time.sleep(config.DEFAULT_SLEEP_S)
