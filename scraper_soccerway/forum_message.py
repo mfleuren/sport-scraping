@@ -33,28 +33,27 @@ class Message:
             self.substitution_table.append(''.join(table))
 
 
-    def create_round_ranking(self, df: pd.DataFrame):
+    def create_round_ranking(self, df: pd.DataFrame, game_week: int):
         """Create a string containing a formatted table with ranking for a given round."""
         
-        for gameweek in self.gameweeks:
-            points = df[df['Speelronde']==gameweek]
-            print('points shape', points.shape)
-            points_by_coach = (points
-                .groupby('Coach', as_index=False)['P_Totaal']
-                .sum()
-                .sort_values(by='P_Totaal', ascending=False)
-                .reset_index(drop=True)
-                )
-            points_by_coach['Stand'] = points_by_coach.index + 1
+        points = df[df['Speelronde']==game_week]
+        print('points shape', points.shape)
+        points_by_coach = (points
+            .groupby('Coach', as_index=False)['P_Totaal']
+            .sum()
+            .sort_values(by='P_Totaal', ascending=False)
+            .reset_index(drop=True)
+            )
+        points_by_coach['Stand'] = points_by_coach.index + 1
 
-            table = [f'[b][u]Uitslag speelronde {gameweek}.[/u][/b]']
-            table_header = f'[tr][td][b]Positie[/b][/td][td][b]Coach[/b][/td][td][b]Punten[/b][/td][/tr]'
-            table_body = []
-            for _, row in points_by_coach.iterrows():
-                table_body.append(f"[tr][td]{row['Stand']}[/td][td]{row['Coach']}[/td][td]{row['P_Totaal']:.2f}[/td][/tr]")
-            table.append(f"[table]{table_header}{''.join(table_body)}[/table]")
+        table = [f'[b][u]Uitslag speelronde {game_week}.[/u][/b]']
+        table_header = f'[tr][td][b]Positie[/b][/td][td][b]Coach[/b][/td][td][b]Punten[/b][/td][/tr]'
+        table_body = []
+        for _, row in points_by_coach.iterrows():
+            table_body.append(f"[tr][td]{row['Stand']}[/td][td]{row['Coach']}[/td][td]{row['P_Totaal']:.2f}[/td][/tr]")
+        table.append(f"[table]{table_header}{''.join(table_body)}[/table]")
 
-            self.round_ranking.append(''.join(table))
+        self.round_ranking.append(''.join(table))
 
 
     def create_general_ranking(self, points: pd.DataFrame, subs: pd.DataFrame = None):
@@ -103,28 +102,42 @@ class Message:
         """Create a string containing formatted tables with the chosen teams after a given round."""
 
         if len(self.gameweeks) > 0:
-            chosen_teams = df[df['Speelronde'] == self.gameweeks[-1]].copy()
             section = [f'[b][u]Gekozen teams na speelronde {self.gameweeks[-1]}.[/u][/b]\n[spoiler]']
         else:
-            chosen_teams = df.copy()
             section = [f'[b][u]Gekozen teams.[/u][/b]\n[spoiler]']
 
-        chosen_teams['Positie'].fillna('X', inplace=True)
-        chosen_teams['Positie_Order'] = chosen_teams['Positie'].map(dict({'K':0, 'V':1, 'M':2, 'A':3, '-':4}))      
-        
-        for coach in sorted(chosen_teams['Coach'].unique(), key=str.casefold):
+        for coach in sorted(df["Coach"].unique(), key=str.casefold):
+
+            # Data formatting
+            df_coach = df[(df["Coach"] == coach)].copy()
+            dfg = df_coach.groupby(["Speler", "Positie"]).agg({"P_Totaal":"sum", "Speelronde":["min", "max"]})
+
+            dfg.columns = ['_'.join(col) for col in dfg.columns.values]
+
+            dfg_sel = dfg[dfg["Speelronde_max"] == dfg["Speelronde_max"].max()].copy().reset_index()
+
+            dfg_sel["Aantal_rondes"] = dfg_sel["Speelronde_max"] - dfg_sel["Speelronde_min"] + 1
+            dfg_sel["Puntengemiddelde"] = (dfg_sel["P_Totaal_sum"] / dfg_sel["Aantal_rondes"]).round(2)
+            dfg_sel["Positie_Order"] = dfg_sel["Positie"].map(dict({'K':0, 'V':1, 'M':2, 'A':3, '-':4}))
+
+            # Append section
             section_body = []
             section_body.append(f'[b]{coach}[/b]')
-            table_header = f'[tr][td][b]Positie[/b][/td][td][b]Speler[/b][/td][/tr]'
-            
-            coach_team = chosen_teams[chosen_teams['Coach']==coach].sort_values(by=['Positie_Order', 'Speler'])
+            table_header = """
+            [tr]
+            [td][b]Positie[/b][/td]
+            [td][b]Speler[/b][/td]
+            [td][b]Punten Totaal[/b][/td]
+            [td][b]Aantal Speelrondes[/b][/td]
+            [td][b]Punten Gemiddeld[/b][/td]
+            [/tr]
+            """
             table_body = []
-            for _, row in coach_team.iterrows():
-                table_body.append(f"[tr][td]{row['Positie']}[/td][td]{row['Speler']}[/td][td]{row['P_Totaal']:.2f}[/td][/tr]")
-            section_body.append(f"[spoiler][table]{table_header}{''.join(table_body)}[/table][/spoiler]")
+            for _, row in dfg_sel.sort_values(["Positie_Order", "Speler"]).iterrows():
+                table_body.append(f"[tr][td]{row['Positie']}[/td][td]{row['Speler']}[/td][td]{row['P_Totaal_sum']:.2f}[/td][td]{row['Aantal_rondes']}[/td][td]{row['Puntengemiddelde']:.2f}[/td][/tr]")
 
+            section_body.append(f"[spoiler][table]{table_header}{''.join(table_body)}[/table][/spoiler]")
             section.append(''.join(section_body))
-        
         section.append('[/spoiler]')
 
         self.teams_overview = ''.join(section)
@@ -147,10 +160,7 @@ class Message:
 
         self.players_overview = ''.join(table)
 
-            
-
-
-
+        
 
 if __name__ == '__main__':
     substitutions = pd.read_csv('E:\\DataScience\\sport-scraping\\inputs\\2022_Eredivisie\\substitutions.csv', sep=';')

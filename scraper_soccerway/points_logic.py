@@ -84,13 +84,13 @@ def calculate_point_by_player(data: CompetitionData) -> pd.DataFrame:
         points_player["Penalty_Gestopt_p"] * points_player["Penalty_Gestopt_e"]
     )
 
-    cols_to_keep = ["Speler", "Link", "Datum"] + points_player.columns[
+    cols_to_keep = ["Speler", "Link", "Datum", "Speelronde"] + points_player.columns[
         points_player.columns.str.contains("P_")
     ].tolist()
     cols_to_drop = points_player.columns[~points_player.columns.isin(cols_to_keep)]
     points_player.drop(cols_to_drop, axis=1, inplace=True)
     points_player["P_Totaal"] = points_player.drop(
-        ["Speler", "Link", "Datum"], axis=1
+        ["Speler", "Link", "Datum", "Speelronde"], axis=1
     ).sum(axis=1)
 
     data.points_player = points_player.round(2)
@@ -101,14 +101,17 @@ def calculate_point_by_player(data: CompetitionData) -> pd.DataFrame:
 def calculate_points_by_coach(data: CompetitionData) -> CompetitionData:
     """Calculate points by team selections"""
 
+    print(data.points_player.columns)
     cols_to_drop = data.points_player.columns[
-        ~data.points_player.columns.isin(["Speler", "Speelronde", "P_Totaal"])
+        ~data.points_player.columns.isin(["Link", "Speelronde", "P_Totaal"])
     ]
 
-    print(cols_to_drop)
+    print(data.points_coach.columns)
 
     data.points_coach = data.chosen_teams.join(
-        data.points_player.drop(cols_to_drop, axis=1).set_index(["Speler", "Speelronde"]), on=["Speler", "Speelronde"]
+        data.points_player.drop(cols_to_drop, axis=1).set_index(["Link", "Speelronde"]), on=["Link", "Speelronde"]
     )
+
+    data.points_coach = data.points_coach[data.points_coach["Speelronde"] > 0]
 
     return data

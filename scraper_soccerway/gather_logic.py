@@ -110,7 +110,45 @@ def update_players(data: CompetitionData) -> CompetitionData:
     return data
 
 
-def create_full_team_selections(data: CompetitionData) -> CompetitionData:
+def process_teammodifications(data: CompetitionData, gameweek: int) -> CompetitionData:
+        """Process substitutions and append the complete teams to the dataclass."""
+
+        teams_new = data.chosen_teams[data.chosen_teams['Speelronde'] == gameweek-1].copy()
+        teams_new['Speelronde'] = gameweek
+        if 'Positie' in teams_new.columns:
+            teams_new.drop(['Positie', 'Team', 'Link'], axis=1, inplace=True)
+
+        # Process substitutions
+        subs = data.substitutions[data.substitutions['Speelronde']==gameweek].copy()
+        if subs.shape[0] > 0:
+            print(f"Processed substitutions, speelronde {gameweek}:")
+        for _, row in subs.iterrows():
+            sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
+            teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
+            print(f"{row['Coach']} [{row['Wissel_Uit']} --> {row['Wissel_In']}]")
+
+        # Process free substitutions
+        subs = data.free_substitutions[data.free_substitutions['Speelronde']==gameweek].copy()
+        if subs.shape[0] > 0:
+            print(f"Processed free substitutions, speelronde {gameweek}:")
+        for _, row in subs.iterrows():
+            sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
+            teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
+            print(f"{row['Coach']} [{row['Wissel_Uit']} --> {row['Wissel_In']}]")
+        
+        # Join chosen team and dim_players to get info on clubs and positions
+        data.dim_players['Naam_fix'] = data.dim_players.apply(lambda x: unidecode(x['Naam']), axis=1)
+        players = data.dim_players.set_index('Naam_fix')[['Positie', 'Team', 'Link']].copy()
+        teams_new = teams_new.join(players, on='Speler')
+
+        data.chosen_teams = pd.concat([data.chosen_teams, teams_new], ignore_index=True)
+
+        return data
+
+
+def create_full_team_selections(data: CompetitionData, game_week: int) -> CompetitionData:
+
+    data = process_teammodifications(data, game_week)
 
     data.chosen_teams = pd.merge(
         left=data.chosen_teams[["Coach", "Speler", "Speelronde"]],
@@ -144,23 +182,20 @@ def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
     return matches_to_scrape
 
 
-def scrape_matches(data: CompetitionData) -> CompetitionData:
+def scrape_matches(data: CompetitionData, matches_to_scrape: pd.DataFrame, game_round: int) -> CompetitionData:
+   
+    matches_in_round = matches_to_scrape[matches_to_scrape["Cluster"] == game_round]
+    print(game_round, matches_in_round)
 
-    matches_to_scrape = determine_matches_to_scrape(data)
-    for game_round in matches_to_scrape["Cluster"].unique():
-
-        matches_in_round = matches_to_scrape[matches_to_scrape["Cluster"] == game_round]
-        print(game_round, matches_in_round)
-
-        for _, match in tqdm(
-            matches_in_round.iterrows(), total=matches_in_round.shape[0]
-        ):
-            match_events = gather.extract_match_events(match["url_match"], data.dim_players)
-            match_events = match_events.join(data.matches.set_index('url_match')['Datum'], on='Match_Url')
-            match_events["Speelronde"] = game_round
-            data.match_events = pd.concat(
-                [data.match_events, match_events], ignore_index=True
-            )
-            time.sleep(config.DEFAULT_SLEEP_S)
+    for _, match in tqdm(
+        matches_in_round.iterrows(), total=matches_in_round.shape[0]
+    ):
+        match_events = gather.extract_match_events(match["url_match"], data.dim_players)
+        match_events = match_events.join(data.matches.set_index('url_match')['Datum'], on='Match_Url')
+        match_events["Speelronde"] = game_round
+        data.match_events = pd.concat(
+            [data.match_events, match_events], ignore_index=True
+        )
+        time.sleep(config.DEFAULT_SLEEP_S)
 
     return data
