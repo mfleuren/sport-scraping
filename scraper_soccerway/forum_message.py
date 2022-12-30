@@ -1,6 +1,8 @@
 import pandas as pd
 from dataclasses import dataclass, field
 
+from competition_data import CompetitionData
+
 
 @dataclass
 class Message:
@@ -33,27 +35,28 @@ class Message:
             self.substitution_table.append(''.join(table))
 
 
-    def create_round_ranking(self, df: pd.DataFrame, game_week: int):
+    def create_round_ranking(self, df: pd.DataFrame):
         """Create a string containing a formatted table with ranking for a given round."""
         
-        points = df[df['Speelronde']==game_week]
-        print('points shape', points.shape)
-        points_by_coach = (points
-            .groupby('Coach', as_index=False)['P_Totaal']
-            .sum()
-            .sort_values(by='P_Totaal', ascending=False)
-            .reset_index(drop=True)
-            )
-        points_by_coach['Stand'] = points_by_coach.index + 1
+        for game_week in self.gameweeks:
 
-        table = [f'[b][u]Uitslag speelronde {game_week}.[/u][/b]']
-        table_header = f'[tr][td][b]Positie[/b][/td][td][b]Coach[/b][/td][td][b]Punten[/b][/td][/tr]'
-        table_body = []
-        for _, row in points_by_coach.iterrows():
-            table_body.append(f"[tr][td]{row['Stand']}[/td][td]{row['Coach']}[/td][td]{row['P_Totaal']:.2f}[/td][/tr]")
-        table.append(f"[table]{table_header}{''.join(table_body)}[/table]")
+            points = df[df['Speelronde']==game_week]
+            points_by_coach = (points
+                .groupby('Coach', as_index=False)['P_Totaal']
+                .sum()
+                .sort_values(by='P_Totaal', ascending=False)
+                .reset_index(drop=True)
+                )
+            points_by_coach['Stand'] = points_by_coach.index + 1
 
-        self.round_ranking.append(''.join(table))
+            table = [f'[b][u]Uitslag speelronde {game_week}.[/u][/b]']
+            table_header = f'[tr][td][b]Positie[/b][/td][td][b]Coach[/b][/td][td][b]Punten[/b][/td][/tr]'
+            table_body = []
+            for _, row in points_by_coach.iterrows():
+                table_body.append(f"[tr][td]{row['Stand']}[/td][td]{row['Coach']}[/td][td]{row['P_Totaal']:.2f}[/td][/tr]")
+            table.append(f"[table]{table_header}{''.join(table_body)}[/table]")
+
+            self.round_ranking.append(''.join(table))
 
 
     def create_general_ranking(self, points: pd.DataFrame, subs: pd.DataFrame = None):
@@ -67,16 +70,15 @@ class Message:
             .reset_index(drop=True)
             )
 
-        if subs:
-            subs_by_coach = (subs[subs['Speelronde'] <= self.gameweeks[-1]]
+        if isinstance(subs, pd.DataFrame):
+            subs_in_round = subs[subs['Speelronde'] <= points["Speelronde"].max()]
+            subs_by_coach = (subs_in_round
                 .copy()
                 .groupby('Coach')['Wissel_In']
                 .count()
                 )
             subs_by_coach.name = 'N_Wissels'
-            print(subs_by_coach)
             points_by_coach = points_by_coach.join(subs_by_coach, on='Coach')
-            print(points_by_coach)
             points_by_coach['Minpunten_Wissels'] = 0
             points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'Minpunten_Wissels'] =  -20 * (points_by_coach.loc[points_by_coach['N_Wissels'] > 3, 'N_Wissels'] - 3)      
             points_by_coach['P_AlgemeenKlassement'] = points_by_coach['P_Totaal'] + points_by_coach['Minpunten_Wissels']
@@ -151,7 +153,10 @@ class Message:
         df['Naam_Order'] = df['Naam_fix'].str.lower()
         players = df.sort_values(by=['Team_Order', 'Positie_Order', 'Naam_Order'])
 
-        table = [f'[b][u]Spelersdatabase na speelronde {self.gameweeks[-1]}.[/u][/b]']
+        if len(self.gameweeks) > 0:
+            table = [f'[b][u]Spelersdatabase na speelronde {self.gameweeks[-1]}.[/u][/b]']
+        else: 
+            table = [f'[b][u]Spelersdatabase.[/u][/b]']
         table_header = f'[tr][td]Club[/td][td]Speler[/td][td]Positie[/td][/tr]'
         table_body = []
         for _, row in players.iterrows():
@@ -160,7 +165,28 @@ class Message:
 
         self.players_overview = ''.join(table)
 
-        
+def create_message(data: CompetitionData, gameweeks: list[int]) -> str:
+    """Process the data and generate a message to post on a internet forum."""
+
+    message = Message(gameweeks=gameweeks)
+    message.create_substitutions_table(data.substitutions.copy())
+    message.create_round_ranking(data.points_coach.copy())
+    message.create_general_ranking(data.points_coach.copy(), data.substitutions.copy())
+    message.create_teams_overview(data.points_coach.copy())
+    message.create_players_overview(data.dim_players.copy())
+
+    single_message = []
+    for idx,_ in enumerate(gameweeks):
+        single_message.append(message.substitution_table[idx])
+        single_message.append(message.round_ranking[idx])
+    single_message.append(message.general_ranking)
+    single_message.append(message.teams_overview)
+    single_message.append(message.players_overview)
+
+    final_message = ''.join(single_message)
+
+    return final_message        
+
 
 if __name__ == '__main__':
     substitutions = pd.read_csv('E:\\DataScience\\sport-scraping\\inputs\\2022_Eredivisie\\substitutions.csv', sep=';')
