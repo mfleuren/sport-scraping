@@ -8,8 +8,8 @@ from utility import forum_robot
 
 data = CompetitionData("eredivisie-2022")
 
-# data = gather_logic.update_matches(data)
-# data = gather_logic.update_players(data)
+data = gather_logic.update_matches(data)
+data = gather_logic.update_players(data)
 
 matches_to_scrape = gather_logic.determine_matches_to_scrape(data)
 rounds_to_scrape = matches_to_scrape["Cluster"].unique()
