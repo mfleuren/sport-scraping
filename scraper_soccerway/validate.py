@@ -24,6 +24,7 @@ def tactics(teams: pd.DataFrame) -> None:
             unique_teams = data['Team'].nunique()
             assert not (unique_teams != 11 and special == 0), f"Team of {coach} has more than 1 player of the same team."
         except AssertionError as e:
+            
             errors += 1
             print(f'Error! {e}')
             print(data[['Speler', 'Team', 'Positie']])

@@ -30,6 +30,3 @@ final_message = forum_message.create_message(data, rounds_to_scrape)
 print(final_message)
 if strtobool(os.getenv('IMGUR_UPLOAD')) and strtobool(os.getenv('FORUM_POST')):
     forum_robot.post_results_to_forum(final_message)
-
-# import generate_figures
-# generate_figures.generate_lineups(data.chosen_teams)

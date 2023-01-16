@@ -121,7 +121,7 @@ def process_teammodifications(data: CompetitionData, gameweek: int) -> Competiti
         # Process substitutions
         subs = data.substitutions[data.substitutions['Speelronde']==gameweek].copy()
         if subs.shape[0] > 0:
-            print(f"Processed substitutions, speelronde {gameweek}:")
+            print(f"Processing substitutions, speelronde {gameweek}:")
         for _, row in subs.iterrows():
             sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
             teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
@@ -130,7 +130,7 @@ def process_teammodifications(data: CompetitionData, gameweek: int) -> Competiti
         # Process free substitutions
         subs = data.free_substitutions[data.free_substitutions['Speelronde']==gameweek].copy()
         if subs.shape[0] > 0:
-            print(f"Processed free substitutions, speelronde {gameweek}:")
+            print(f"Processing free substitutions, speelronde {gameweek}:")
         for _, row in subs.iterrows():
             sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
             teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
