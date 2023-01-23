@@ -62,7 +62,6 @@ class CompetitionData:
             os.path.join(self.local_dir_input, config.LOCAL_FILES["teams"]), 
             os.path.join(self.local_dir_result, config.LOCAL_FILES["teams"])
             )
-        print(self.chosen_teams.head())
         self.points_scheme = pd.read_csv(
             os.path.join(self.local_dir_input, config.LOCAL_FILES["points_scheme"]), 
             sep=';'
