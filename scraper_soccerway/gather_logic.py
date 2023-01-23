@@ -190,12 +190,15 @@ def scrape_matches(data: CompetitionData, matches_to_scrape: pd.DataFrame, game_
     for _, match in tqdm(
         matches_in_round.iterrows(), total=matches_in_round.shape[0]
     ):
-        match_events = gather.extract_match_events(match["url_match"], data.dim_players)
-        match_events = match_events.join(data.matches.set_index('url_match')['Datum'], on='Match_Url')
-        match_events["Speelronde"] = game_round
-        data.match_events = pd.concat(
-            [data.match_events, match_events], ignore_index=True
-        )
-        time.sleep(config.DEFAULT_SLEEP_S)
+        try:
+            match_events = gather.extract_match_events(match["url_match"], data.dim_players)
+            match_events = match_events.join(data.matches.set_index('url_match')['Datum'], on='Match_Url')
+            match_events["Speelronde"] = game_round
+            data.match_events = pd.concat(
+                [data.match_events, match_events], ignore_index=True
+            )
+            time.sleep(config.DEFAULT_SLEEP_S)
+        except gather.MatchPostponedWarning:
+            print(f"Match {match['url_match']} not processed.")
 
     return data

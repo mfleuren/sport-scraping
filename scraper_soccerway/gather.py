@@ -41,6 +41,11 @@ def open_website_in_client(url:str) -> str:
         raise ConnectionError
 
 
+class MatchPostponedWarning(Exception):
+    """Raised when match is not finished"""
+    pass
+
+
 def find_all_links_in_table(soup: BeautifulSoup, cat: str = None) -> List: 
     """Loop through all rows in a table and extract links from the fields."""
     links = []
@@ -524,17 +529,20 @@ def extract_match_events(url: str, dim_players: pd.DataFrame) -> pd.DataFrame:
 
     html_string = open_website_in_client(config.BASE_URL + url)
 
-    club_urls = extract_url_by_class(html_string, 'a', 'team-title')
     match_state = extract_txt_by_class(html_string, 'span', 'match-state')
     if isinstance(match_state, list):
-        match_state = match_state[0]
+        if len(match_state) == 0:
+            print(match_state)
+            raise MatchPostponedWarning
+        else:
+            match_state = match_state[0]
     
     if match_state == 'FT':
         match_duration = 90
     elif match_state == 'AET':
         match_duration = 120
     else:
-        raise Exception
+        raise MatchPostponedWarning
 
     #TODO: Quit process if match state is not FT
 
