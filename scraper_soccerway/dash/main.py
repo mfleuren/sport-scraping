@@ -1,8 +1,8 @@
 from dash import Dash
 import dash_bootstrap_components as dbc
 
-from src.components.layout import create_layout
-from src.data.loader import load_points_by_coach_data, load_points_by_player_data
+from scraper_soccerway.dash.src.components.layout import create_layout
+from scraper_soccerway.dash.src.data.loader import load_points_by_coach_data, load_points_by_player_data
 
 
 def main() -> None:
