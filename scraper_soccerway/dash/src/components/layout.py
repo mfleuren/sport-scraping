@@ -2,7 +2,7 @@ from dash import Dash, html
 import dash_bootstrap_components as dbc
 import pandas as pd
 
-from src.components import (
+from scraper_soccerway.dash.src.components import (
     round_dropdown, 
     coach_dropdown, 
     club_dropdown,

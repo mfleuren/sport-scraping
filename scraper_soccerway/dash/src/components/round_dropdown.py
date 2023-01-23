@@ -2,8 +2,8 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
 import pandas as pd
 
-from . import ids
-from .dropdown_helper import to_dropdown_options
+from scraper_soccerway.dash.src.components import ids
+from scraper_soccerway.dash.src.components.dropdown_helper import to_dropdown_options
 
 def render(app: Dash, data: pd.DataFrame) -> html.Div:
 

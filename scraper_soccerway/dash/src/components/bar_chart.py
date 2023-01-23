@@ -3,7 +3,7 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
 import pandas as pd
 
-from . import ids
+from scraper_soccerway.dash.src.components import ids
 
 def render(app: Dash, data: pd.DataFrame) -> html.Div:
 
