@@ -11,3 +11,7 @@ players_data = load_points_by_player_data("scraper_soccerway/dash/data/")
 app = Dash(external_stylesheets=[dbc.themes.GRID])
 app.title = "WZV League 2022-2023"
 app.layout = create_layout(app, teams_data, players_data)
+server=app.server
+
+if __name__ == "__main__":
+    app.run()
