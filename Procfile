@@ -1,0 +1,1 @@
+web: gunicorn scraper_soccerway.dash.main:server

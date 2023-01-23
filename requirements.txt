@@ -13,3 +13,4 @@ pandas-stubs
 plotly
 pyyaml
 python-i18n[YAML]
+gunicorn
