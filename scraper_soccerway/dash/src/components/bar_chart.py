@@ -23,6 +23,7 @@ def render(app: Dash, data: pd.DataFrame) -> html.Div:
         pivotted_data = filtered_data.groupby("Coach", as_index=False)["P_Totaal"].sum()
         pivotted_data["Coach_Selected"] = pivotted_data["Coach"].isin(coaches).astype(str)
         pivotted_data = pivotted_data.sort_values(by="P_Totaal", ascending=False)
+        pivotted_data.rename({"P_Totaal":"Total Points"}, axis=1, inplace=True)
 
         color_discrete_map = {"True": "blue", "False": "red"}
         category_orders = {
@@ -32,7 +33,7 @@ def render(app: Dash, data: pd.DataFrame) -> html.Div:
 
         fig = px.bar(
             pivotted_data,
-            x="P_Totaal",
+            x="Total Points",
             y="Coach",
             color="Coach_Selected",
             color_discrete_map=color_discrete_map,
