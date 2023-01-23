@@ -1,1 +1,1 @@
-web: gunicorn scraper_soccerway.dash.main:server
+web: gunicorn scraper_soccerway.dash.main:app
