@@ -25,6 +25,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 17.0;D. Blind;V;/players/daley-blind/68886/;daley-blind;68886;Ajax;D. Blind;;;
 24.0;N. Viergever;V;/players/nick--viergever/78529/;nick--viergever;78529;FC Utrecht;N. Viergever;;;
 1.0;L. Unnerstall;K;/players/lars-unnerstall/81320/;lars-unnerstall;81320;FC Twente;L. Unnerstall;;;
+19.0;D. Pröpper;M;/players/davy-propper/86220/;davy-propper;86220;Vitesse;D. Propper;;;
 ;T. Coremans;K;/players/tim-coremans/86402/;tim-coremans;86402;Sparta Rotterdam;T. Coremans;;;
 12.0;Ivo Pinto;V;/players/ivo-pinto/86672/;ivo-pinto;86672;Fortuna Sittard;Ivo Pinto;;;
 3.0;C. Mac-Intosch;V;/players/calvin-mac-intosh/87822/;calvin-mac-intosh;87822;SC Cambuur;C. Mac-Intosch;;;
@@ -55,6 +56,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 2.0;Ximo Navarro;V;/players/joaquin-navarro-jimenez/146974/;joaquin-navarro-jimenez;146974;Fortuna Sittard;Ximo Navarro;;;
 11.0;I. Bel Hassani;M;/players/iliass-bel-hassani/148887/;iliass-bel-hassani;148887;RKC Waalwijk;I. Bel Hassani;;;
 12.0;G. Rulli;K;/players/jeronimo-rulli/152109/;jeronimo-rulli;152109;Ajax;G. Rulli;;;
+;N. Foor;M;/players/navarone-foor/157078/;navarone-foor;157078;SC Cambuur;N. Foor;;;
 ;L. Jans;V;/players/laurent-jans/158185/;laurent-jans;158185;Sparta Rotterdam;L. Jans;;;
 6.0;D. Klaassen;M;/players/davy-klaassen/158581/;davy-klaassen;158581;Ajax;D. Klaassen;;;
 29.0;P. Mwene;V;/players/philipp-mwene/159812/;philipp-mwene;159812;PSV;P. Mwene;;;
@@ -172,10 +174,11 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 16.0;J. Drommel;K;/players/joel-drommel/355869/;joel-drommel;355869;PSV;J. Drommel;;;
 ;D. Abels;V;/players/dirk-abels/356783/;dirk-abels;356783;Sparta Rotterdam;D. Abels;;;
 1.0;M. Schubert;K;/players/marcus-schubert/357869/;marcus-schubert;357869;Vitesse;M. Schubert;;;
-;O. Darfalou;A;/players/-derfalou/360231/;-derfalou;360231;FC Emmen;O. Darfalou;;;
+28.0;O. Darfalou;A;/players/-derfalou/360231/;-derfalou;360231;FC Emmen;O. Darfalou;;;
 7.0;Iñigo Córdoba;M;/players/inigo-cordoba-kerejeta/372661/;inigo-cordoba-kerejeta;372661;Fortuna Sittard;Inigo Cordoba;;;
 10.0;P. Rommens;M;/players/philippe-rommens/374027/;philippe-rommens;374027;Go Ahead Eagles;P. Rommens;;;
 11.0;J. Dilrosun;M;/players/javairo-dilrosun/376321/;javairo-dilrosun;376321;Feyenoord;J. Dilrosun;;;
+;M. Chaluš;V;/players/matj-chalu/377503/;matj-chalu;377503;FC Groningen;M. Chalus;;;
 23.0;M. Sadílek;M;/players/michal-sadilek/377539/;michal-sadilek;377539;FC Twente;M. Sadilek;;;
 9.0;V. Pavlidis;A;/players/evangelos-pavlidis/379089/;evangelos-pavlidis;379089;AZ;V. Pavlidis;;;
 9.0;I. Lidberg;A;/players/isac-lidberg/379265/;isac-lidberg;379265;Go Ahead Eagles;I. Lidberg;;;
@@ -408,6 +411,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 ;S. Mijnans;M;/players/sven-mijnans/566000/;sven-mijnans;566000;Sparta Rotterdam;S. Mijnans;;;
 30.0;T. Jansen;K;/players/thijs-jansen/567657/;thijs-jansen;567657;Feyenoord;T. Jansen;;;
 44.0;R. Kluivert;V;/players/ruben-kluivert/567698/;ruben-kluivert;567698;FC Utrecht;R. Kluivert;;;
+14.0;D. Vos;V;/players/dennis-vos/567748/;dennis-vos;567748;FC Emmen;D. Vos;;;
 31.0;J. Kesting;K;/players/joey-kesting/567938/;joey-kesting;567938;RKC Waalwijk;J. Kesting;;;
 33.0;Y. Oukili;M;/players/yassin-oukili/567948/;yassin-oukili;567948;RKC Waalwijk;Y. Oukili;;;
 23.0;M. Gullit;V;/players/maxim-gullit/568074/;maxim-gullit;568074;SC Cambuur;M. Gullit;;;
@@ -436,7 +440,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 34.0;M. Bouchouari;V;/players/mohamed-bouchouari/574505/;mohamed-bouchouari;574505;FC Emmen;M. Bouchouari;;;
 14.0;A. Aventisian;V;/players/aventis-aventisian/574570/;aventis-aventisian;574570;Go Ahead Eagles;A. Aventisian;;;
 19.0;C. Tzolis;A;/players/christos-tzolis/574629/;christos-tzolis;574629;FC Twente;C. Tzolis;;;
-35.0;F. Oppegård;V;/players/fredrik-oppegard/575059/;fredrik-oppegard;575059;PSV;F. Oppegard;;;
+;F. Oppegård;V;/players/fredrik-oppegard/575059/;fredrik-oppegard;575059;Go Ahead Eagles;F. Oppegard;;;
 61.0;R. Vita;V;/players/remi-vita/575273/;remi-vita;575273;Fortuna Sittard;R. Vita;;;
 22.0;R. Al Hajj;M;/players/rami-hajal/575319/;rami-hajal;575319;sc Heerenveen;R. Al Hajj;;;
 53.0;S. van Duivenbooden;A;/players/simon-van-duivenbooden/575327/;simon-van-duivenbooden;575327;Vitesse;S. van Duivenbooden;;;
@@ -518,6 +522,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 51.0;D. Remie;K;/players/devin-remie/642809/;devin-remie;642809;Feyenoord;D. Remie;;;
 61.0;N. Schiks;K;/players/niek-schiks/643502/;niek-schiks;643502;PSV;N. Schiks;;;
 ;I. Kort;K;/players/ishan-kort/644090/;ishan-kort;644090;Sparta Rotterdam;I. Kort;;;
+16.0;B. Klaverboer;K;/players/bernt-klaverboer/645513/;bernt-klaverboer;645513;sc Heerenveen;B. Klaverboer;;;
 ;K. Slor;A;/players/kian-slor/645520/;kian-slor;645520;FC Groningen;K. Slor;;;
 43.0;M. Benita;A;/players/mimeirhel-benita/645525/;mimeirhel-benita;645525;Feyenoord;M. Benita;;;
 34.0;T. Zaal;M;/players/timo-zaal/646191/;timo-zaal;646191;sc Heerenveen;T. Zaal;;;
@@ -610,7 +615,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 36.0;A. Ismaïl;A;/players/amir-ismail/871183/;amir-ismail;871183;sc Heerenveen;A. Ismail;;;
 55.0;T. van Bergen;A;/players/thom-van-bergen/873104/;thom-van-bergen;873104;FC Groningen;T. van Bergen;;;
 39.0;J. Schreuders;M;/players/jorg-schreuders/877779/;jorg-schreuders;877779;FC Groningen;J. Schreuders;;;
-12.0;F. Quaedvlieg;A;/players/floris-hein-johannes-herman-quaedvlieg/887523/;floris-hein-johannes-herman-quaedvlieg;887523;FC Emmen;F. Quaedvlieg;;;
+;F. Quaedvlieg;A;/players/floris-hein-johannes-herman-quaedvlieg/887523/;floris-hein-johannes-herman-quaedvlieg;887523;FC Emmen;F. Quaedvlieg;;;
 38.0;V. Pichel;M;/players/vincent-pichel/888254/;vincent-pichel;888254;SC Cambuur;V. Pichel;;;
 35.0;B. Roodenburg;V;/players/bob-roodenburg/888264/;bob-roodenburg;888264;Excelsior;B. Roodenburg;;;
 48.0;M. Mariani;O;/players/maxim-mariani/888265/;maxim-mariani;888265;FC Groningen;M. Mariani;;;
