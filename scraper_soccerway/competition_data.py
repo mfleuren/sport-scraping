@@ -161,6 +161,11 @@ class CompetitionData:
                 sep=';', 
                 index=False
                 )
+            self.dim_players.to_csv(
+                f'dash/data/{config.LOCAL_FILES["players"]}',
+                sep=';',
+                index=False
+            )
             print('Saved players data to disk.')
 
         if self.chosen_teams.shape[0] != 0:
@@ -176,6 +181,11 @@ class CompetitionData:
                 os.path.join(self.local_dir_result, config.LOCAL_FILES["points_player"]), 
                 sep=';', 
                 index=False)
+            self.points_player.to_csv(
+                f'dash/data/{config.LOCAL_FILES["points_player"]}',
+                sep=';',
+                index=False
+            )
             print('Saved points by player data to disk.')
 
         if self.points_coach.shape[0] != 0:
@@ -184,6 +194,11 @@ class CompetitionData:
                 sep=';', 
                 index=False
                 )
+            self.points_coach.to_csv(
+                f'dash/data/{config.LOCAL_FILES["points_coach"]}',
+                sep=';',
+                index=False
+            )    
             print('Saved points by coach data to disk.')
 
         if self.match_events.shape[0] != 0:
@@ -193,6 +208,13 @@ class CompetitionData:
                 index=False
                 )
             print('Saved match events data to disk.')
+
+        if self.substitutions.shape[0] != 0:
+            self.substitutions.to_csv(
+                f'dash/data/{config.LOCAL_FILES["substitutions"]}',
+                sep=';',
+                index=False
+            )
         
     
     def load_clubs(self, path: Union[str, os.PathLike]) -> pd.DataFrame:
