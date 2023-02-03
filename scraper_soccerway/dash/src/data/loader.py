@@ -43,4 +43,4 @@ class DashData:
         self.points_by_player = data
 
     def load_substitutions(self) -> pd.DataFrame:
-        self.substitutions =  pd.read_csv(self.folder + "substitutions.csv", sep=';')
+        self.substitutions = pd.read_csv(self.folder + "substitutions.csv", sep=';')
