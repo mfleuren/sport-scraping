@@ -34,24 +34,21 @@ def create_layout(app: Dash, data: DashData) -> html.Div:
                             html.H6("Points by coach overview"),
                             bar_chart.render(app, data)
                         ], 
-                        lg=5,
-                        width=5
+                        md=5,
                         ),
                     dbc.Col(
                         [
                             html.H6("Points by chosen player overview"),
                             chosen_players_table.render(app, data)
                         ], 
-                        lg=3,
-                        width=3
+                        md=3,
                         ),
                     dbc.Col( 
                         [
                             html.H6("All players overview"),
                             all_players_table.render(app, data)
                         ],
-                        lg=3,
-                        width=3
+                        md=3,
                         )
                 ]
             )
