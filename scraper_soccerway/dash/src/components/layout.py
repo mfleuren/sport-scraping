@@ -1,7 +1,7 @@
 from dash import Dash, html
 import dash_bootstrap_components as dbc
-import pandas as pd
 
+from scraper_soccerway.dash.src.data.loader import DashData
 from scraper_soccerway.dash.src.components import (
     round_dropdown, 
     coach_dropdown, 
@@ -12,7 +12,7 @@ from scraper_soccerway.dash.src.components import (
     all_players_table
     )
 
-def create_layout(app: Dash, teams_data: pd.DataFrame, players_data: pd.DataFrame) -> html.Div:
+def create_layout(app: Dash, data: DashData) -> html.Div:
     """Create the dashboard layout"""
 
     return html.Div(
@@ -21,10 +21,10 @@ def create_layout(app: Dash, teams_data: pd.DataFrame, players_data: pd.DataFram
             html.H1(app.title),
             dbc.Row(
                 children=[
-                    dbc.Col(round_dropdown.render(app, teams_data)),
-                    dbc.Col(coach_dropdown.render(app, teams_data)),
-                    dbc.Col(club_dropdown.render(app, players_data)),
-                    dbc.Col(position_dropdown.render(app, players_data)),
+                    dbc.Col(round_dropdown.render(app, data)),
+                    dbc.Col(coach_dropdown.render(app, data)),
+                    dbc.Col(club_dropdown.render(app, data)),
+                    dbc.Col(position_dropdown.render(app, data)),
                 ]
             ),
             dbc.Row(
@@ -32,21 +32,21 @@ def create_layout(app: Dash, teams_data: pd.DataFrame, players_data: pd.DataFram
                     dbc.Col(
                         [
                             html.H6("Points by coach overview"),
-                            bar_chart.render(app, teams_data)
+                            bar_chart.render(app, data)
                         ], 
                         width=5
                         ),
                     dbc.Col(
                         [
                             html.H6("Points by chosen player overview"),
-                            chosen_players_table.render(app, teams_data)
+                            chosen_players_table.render(app, data)
                         ], 
                         width=3
                         ),
                     dbc.Col( 
                         [
                             html.H6("All players overview"),
-                            all_players_table.render(app, players_data)
+                            all_players_table.render(app, data)
                         ],
                         width=3
                         )

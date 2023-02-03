@@ -1,10 +1,10 @@
 from dash import Dash, dash_table, html
 from dash.dependencies import Input, Output
-import pandas as pd
 
+from scraper_soccerway.dash.src.data.loader import DashData
 from scraper_soccerway.dash.src.components import ids
 
-def render(app: Dash, data: pd.DataFrame) -> html.Div:
+def render(app: Dash, data: DashData) -> html.Div:
 
     @app.callback(
         Output(ids.ALL_PLAYERS_TABLE, "children"),
@@ -16,10 +16,10 @@ def render(app: Dash, data: pd.DataFrame) -> html.Div:
     )
     def update_data_table(positions: list[str], clubs: list[str], rounds: list[str]) -> html.Div:
         
-        filtered_data = data[
-            data["Positie"].isin(positions) &\
-            data["Team"].isin(clubs) &\
-            data["Speelronde"].isin(rounds)
+        filtered_data = data.points_by_player[
+            data.points_by_player["Positie"].isin(positions) &\
+            data.points_by_player["Team"].isin(clubs) &\
+            data.points_by_player["Speelronde"].isin(rounds)
             ]
         if filtered_data.shape[0] == 0:
             return html.Div("Geen data beschikbaar", id=ids.ALL_PLAYERS_TABLE)

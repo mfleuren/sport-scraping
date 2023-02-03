@@ -1,11 +1,11 @@
 from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
-import pandas as pd
 
+from scraper_soccerway.dash.src.data.loader import DashData
 from scraper_soccerway.dash.src.components import ids
 from scraper_soccerway.dash.src.components.dropdown_helper import to_dropdown_options
 
-def render(app: Dash, data: pd.DataFrame) -> html.Div:
+def render(app: Dash, data: DashData) -> html.Div:
 
     @app.callback(
         Output(ids.ROUND_DROPDOWN, "value"),
@@ -17,25 +17,23 @@ def render(app: Dash, data: pd.DataFrame) -> html.Div:
         print(f"Radio button value: {value}")
 
         if value == "Select Last":
-            return [data["Speelronde"].max()]
+            return [data.max_round]
         elif value == "Select All":
-            return data["Speelronde"].unique().tolist()
+            return data.all_rounds
         
-    rounds = data["Speelronde"].unique()
-
     return html.Div(
         children=[
             html.H6("Round dropdown"),
             dcc.Dropdown(
                 id=ids.ROUND_DROPDOWN,
-                options=to_dropdown_options(rounds),
-                value=rounds,
+                options=to_dropdown_options(data.all_rounds),
+                value=data.all_rounds,
                 multi=True,
                 placeholder="Choose a round"
             ),
             dcc.RadioItems(
                 id=ids.SELECT_ROUNDS_DROPDOWN_CHOICE,
-                options=["Select All", "Select Last", "Select Custom"],
+                options=["Select All", "Select Last"],
                 value="Select Last"
             )
         ]

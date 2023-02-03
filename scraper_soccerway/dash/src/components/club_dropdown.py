@@ -1,11 +1,11 @@
 from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
-import pandas as pd
 
+from scraper_soccerway.dash.src.data.loader import DashData
 from scraper_soccerway.dash.src.components import ids
 from scraper_soccerway.dash.src.components.dropdown_helper import to_dropdown_options
 
-def render(app: Dash, data: pd.DataFrame) -> html.Div:
+def render(app: Dash, data: DashData) -> html.Div:
 
     @app.callback(
         Output(ids.CLUB_DROPDOWN, "value"),
@@ -14,17 +14,15 @@ def render(app: Dash, data: pd.DataFrame) -> html.Div:
         ]
     )
     def select_all_clubs(_: int) -> list[str]:
-        return data["Team"].unique().tolist()
-
-    clubs = data["Team"].unique()
+        return data.all_clubs
 
     return html.Div(
         children=[
             html.H6("Club dropdown"),
             dcc.Dropdown(
                 id=ids.CLUB_DROPDOWN,
-                options=to_dropdown_options(clubs),
-                value=clubs,
+                options=to_dropdown_options(data.all_clubs),
+                value=data.all_clubs,
                 multi=True,
                 placeholder="Choose a club"
             ),
