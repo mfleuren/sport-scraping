@@ -18,7 +18,7 @@ def render(app: Dash, data: DashData) -> html.Div:
 
     return html.Div(
         children=[
-            html.H6("Position dropdown"),
+            html.H4("Position dropdown"),
             dcc.Dropdown(
                 id=ids.POSITION_DROPDOWN,
                 options=to_dropdown_options(data.all_positions),

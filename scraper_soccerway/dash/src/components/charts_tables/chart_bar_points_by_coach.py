@@ -7,6 +7,7 @@ from scraper_soccerway.dash.src.components import ids
 
 
 def render(app: Dash, data: DashData) -> html.Div:
+    
     @app.callback(
         Output(ids.BAR_CHART, "children"),
         [
@@ -15,6 +16,8 @@ def render(app: Dash, data: DashData) -> html.Div:
         ],
     )
     def update_bar_chart(rounds: list[str], coaches: list[str]) -> html.Div:
+
+        print("IN UPDATE BAR CHART")
 
         filtered_data = data.points_by_coach[
             data.points_by_coach["Speelronde"].isin(rounds)
@@ -75,7 +78,6 @@ def render(app: Dash, data: DashData) -> html.Div:
         fig.update_traces(
             textfont_size=12, textangle=0, textposition="outside", cliponaxis=False
         )
-
         return html.Div(dcc.Graph(figure=fig), id=ids.BAR_CHART)
 
     return html.Div(id=ids.BAR_CHART)

@@ -18,7 +18,7 @@ def render(app: Dash, data: DashData) -> html.Div:
 
     return html.Div(
         children=[
-            html.H6("Club dropdown"),
+            html.H4("Club dropdown"),
             dcc.Dropdown(
                 id=ids.CLUB_DROPDOWN,
                 options=to_dropdown_options(data.all_clubs),

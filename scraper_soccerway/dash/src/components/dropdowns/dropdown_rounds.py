@@ -23,7 +23,7 @@ def render(app: Dash, data: DashData) -> html.Div:
         
     return html.Div(
         children=[
-            html.H6("Round dropdown"),
+            html.H4("Round dropdown"),
             dcc.Dropdown(
                 id=ids.ROUND_DROPDOWN,
                 options=to_dropdown_options(data.all_rounds),

@@ -12,6 +12,12 @@ SELECT_ALL_COACHES_BUTTON = "select-all-coaches-button"
 SELECT_ALL_POSITIONS_BUTTON = "select-all-positions-button"
 SELECT_ALL_CLUBS_BUTTON = "select-all-clubs-dropdown"
 
+## TABS
+TABS_OBJECT = "tabs-object"
+TAB_OVERVIEW = "tab-overview"
+TAB_TEAM_WEEK = "tab-team-of-the-week"
+TAB_CONTENT = "tab-content"
+
 ## CHARTS
 BAR_CHART = "bar-chart"
 
