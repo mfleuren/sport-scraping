@@ -3,7 +3,7 @@ from dash.dependencies import Input, Output
 
 from scraper_soccerway.dash.src.data.loader import DashData
 from scraper_soccerway.dash.src.components import ids
-from scraper_soccerway.dash.src.components.dropdown_helper import to_dropdown_options
+from scraper_soccerway.dash.src.components.dropdowns.dropdown_helper import to_dropdown_options
 
 def render(app: Dash, data: DashData) -> html.Div:
 

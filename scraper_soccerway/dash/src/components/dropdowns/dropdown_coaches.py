@@ -3,33 +3,34 @@ from dash.dependencies import Input, Output
 
 from scraper_soccerway.dash.src.data.loader import DashData
 from scraper_soccerway.dash.src.components import ids
-from scraper_soccerway.dash.src.components.dropdown_helper import to_dropdown_options
+from scraper_soccerway.dash.src.components.dropdowns.dropdown_helper import to_dropdown_options
 
 def render(app: Dash, data: DashData) -> html.Div:
 
+
     @app.callback(
-        Output(ids.CLUB_DROPDOWN, "value"),
+        Output(ids.COACH_DROPDOWN, "value"),
         [
-            Input(ids.SELECT_ALL_CLUBS_BUTTON, "n_clicks")
+            Input(ids.SELECT_ALL_COACHES_BUTTON, "n_clicks")
         ]
     )
-    def select_all_clubs(_: int) -> list[str]:
-        return data.all_clubs
+    def select_all_coaches(_: int) -> list[str]:
+        return data.all_coaches
 
     return html.Div(
         children=[
-            html.H6("Club dropdown"),
+            html.H6("Coach dropdown"),
             dcc.Dropdown(
-                id=ids.CLUB_DROPDOWN,
-                options=to_dropdown_options(data.all_clubs),
-                value=data.all_clubs,
+                id=ids.COACH_DROPDOWN,
+                options=to_dropdown_options(data.all_coaches),
+                value=data.all_coaches,
                 multi=True,
-                placeholder="Choose a club"
+                placeholder="Choose a coach"
             ),
             html.Button(
                 className="dropdown-button",
                 children=["Select all"],
-                id=ids.SELECT_ALL_CLUBS_BUTTON,
+                id=ids.SELECT_ALL_COACHES_BUTTON,
                 n_clicks=0
             )
         ]

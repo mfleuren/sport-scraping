@@ -2,7 +2,7 @@ from dash import Dash
 import dash_bootstrap_components as dbc
 
 from scraper_soccerway.dash.src.data.loader import DashData
-from scraper_soccerway.dash.src.components.layout import create_layout
+from scraper_soccerway.dash.src.components.layout.main_layout import create_layout
 
 
 data = DashData()

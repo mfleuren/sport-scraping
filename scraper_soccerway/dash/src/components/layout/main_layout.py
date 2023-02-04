@@ -1,17 +1,19 @@
-from dash import Dash, html
+from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
 
 from scraper_soccerway.dash.src.data.loader import DashData
-from scraper_soccerway.dash.src.components import (
-    chart_bar_points_by_coach,
+from scraper_soccerway.dash.src.components.dropdowns import (
     dropdown_clubs,
     dropdown_coaches,
     dropdown_positions,
-    dropdown_rounds,
+    dropdown_rounds   
+)
+from scraper_soccerway.dash.src.components.tab_overview import (
+    chart_bar_points_by_coach,
     table_all_players,
     table_chosen_players,
     table_substitutions
-    )
+)
 
 def create_layout(app: Dash, data: DashData) -> html.Div:
     """Create the dashboard layout"""
