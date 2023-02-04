@@ -18,7 +18,7 @@ class DashData:
         self.load_points_by_player_data()
         self.load_substitutions()
 
-        self.all_rounds = self.points_by_player["Speelronde"].unique().tolist()
+        self.all_rounds = sorted(self.points_by_player["Speelronde"].unique().tolist())
         self.max_round = self.points_by_player["Speelronde"].max()
         self.all_coaches = sorted(self.points_by_coach["Coach"].unique().tolist(), key=str.casefold)
         self.all_clubs = sorted(self.points_by_player["Team"].unique().tolist(), key=str.casefold)

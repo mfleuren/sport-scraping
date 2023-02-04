@@ -9,7 +9,8 @@ from scraper_soccerway.dash.src.components import (
     dropdown_positions,
     dropdown_rounds,
     table_all_players,
-    table_chosen_players
+    table_chosen_players,
+    table_substitutions
     )
 
 def create_layout(app: Dash, data: DashData) -> html.Div:
@@ -38,17 +39,28 @@ def create_layout(app: Dash, data: DashData) -> html.Div:
                         ),
                     dbc.Col(
                         [
+                            html.H6("Substitutions in round"),
+                            table_substitutions.render(app, data)
+                        ],
+                        md=3
+                        ),                            
+                ]
+            ),
+            dbc.Row(
+                children=[
+                    dbc.Col(
+                        [
                             html.H6("Points by chosen player overview"),
                             table_chosen_players.render(app, data)
                         ], 
-                        md=3,
+                        md=5,
                         ),
                     dbc.Col( 
                         [
                             html.H6("All players overview"),
                             table_all_players.render(app, data)
                         ],
-                        md=3,
+                        md=5,
                         )
                 ]
             )

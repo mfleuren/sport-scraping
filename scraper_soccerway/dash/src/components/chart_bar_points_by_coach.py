@@ -28,10 +28,7 @@ def render(app: Dash, data: DashData) -> html.Div:
         )
 
         ## Deduct points for substitutions if rounds == all_rounds
-        print("rounds ", rounds)
-        print("all rounds ", data.all_rounds)
         if sorted(rounds) == sorted(data.all_rounds):
-            print("Deducting points for substitutions.")
             filtered_subs = data.substitutions[
                 data.substitutions["Speelronde"].isin(rounds)
             ]
@@ -41,7 +38,6 @@ def render(app: Dash, data: DashData) -> html.Div:
             pivotted_data = pivotted_data.join(
                 pivotted_subs, on="Coach", how="left"
             ).fillna(0)
-            print(pivotted_data.columns)
             pivotted_data["Minpunten"] = 0
             pivotted_data.loc[pivotted_data["N_Subs"] > 3, "Minpunten"] = 20 * (
                 pivotted_data.loc[pivotted_data["N_Subs"] > 3, "N_Subs"] - 3
@@ -49,8 +45,6 @@ def render(app: Dash, data: DashData) -> html.Div:
             pivotted_data["P_Totaal"] = (
                 pivotted_data["P_Totaal"] - pivotted_data["Minpunten"]
             )
-
-            print(pivotted_data.head())
 
         pivotted_data = pivotted_data.sort_values(by="P_Totaal", ascending=False)
         pivotted_data.rename({"P_Totaal": "Total Points"}, axis=1, inplace=True)
@@ -71,6 +65,12 @@ def render(app: Dash, data: DashData) -> html.Div:
             template="ggplot2",
             text_auto=".2f",
             barmode="overlay",
+        )
+        fig.update_xaxes(
+            range=[
+                pivotted_data["Total Points"].min() * 0.9,
+                pivotted_data["Total Points"].max() * 1.1,
+            ]
         )
         fig.update_traces(
             textfont_size=12, textangle=0, textposition="outside", cliponaxis=False

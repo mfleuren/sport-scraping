@@ -10,7 +10,7 @@ def render(app: Dash, data: DashData) -> html.Div:
         Output(ids.CHOSEN_PLAYERS_TABLE, "children"),
         [Input(ids.ROUND_DROPDOWN, "value"), Input(ids.COACH_DROPDOWN, "value")],
     )
-    def update_data_table(rounds: list[str], coaches: list[str]) -> html.Div:
+    def update_data_table(rounds: list[int], coaches: list[str]) -> html.Div:
 
         filtered_data = data.points_by_coach[
             data.points_by_coach["Speelronde"].isin(rounds)

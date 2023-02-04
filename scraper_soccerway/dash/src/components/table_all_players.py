@@ -14,7 +14,7 @@ def render(app: Dash, data: DashData) -> html.Div:
             Input(ids.ROUND_DROPDOWN, "value")
         ]            
     )
-    def update_data_table(positions: list[str], clubs: list[str], rounds: list[str]) -> html.Div:
+    def update_data_table(positions: list[str], clubs: list[str], rounds: list[int]) -> html.Div:
         
         filtered_data = data.points_by_player[
             data.points_by_player["Positie"].isin(positions) &\
