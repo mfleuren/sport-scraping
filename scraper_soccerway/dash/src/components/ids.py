@@ -15,6 +15,7 @@ SELECT_ALL_CLUBS_BUTTON = "select-all-clubs-dropdown"
 ## TABS
 TABS_OBJECT = "tabs-object"
 TAB_OVERVIEW = "tab-overview"
+TAB_PLAYERS = "tab-players"
 TAB_TEAM_WEEK = "tab-team-of-the-week"
 TAB_CONTENT = "tab-content"
 

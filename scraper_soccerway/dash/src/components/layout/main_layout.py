@@ -10,12 +10,7 @@ from scraper_soccerway.dash.src.components.dropdowns import (
     dropdown_positions,
     dropdown_rounds   
 )
-from scraper_soccerway.dash.src.components.charts_tables import (
-    chart_bar_points_by_coach,
-    table_all_players,
-    table_chosen_players,
-    table_substitutions
-)
+from scraper_soccerway.dash.src.components.layout import tab_overview, tab_players
 
 def create_layout(app: Dash, data: DashData) -> html.Div:
     """Create the dashboard layout"""
@@ -27,56 +22,17 @@ def create_layout(app: Dash, data: DashData) -> html.Div:
             Input(ids.ROUND_DROPDOWN, "value"),
             Input(ids.COACH_DROPDOWN, "value"),
             Input(ids.CLUB_DROPDOWN, "value"),
-            Input(ids.POSITION_DROPDOWN, "value")
+            Input(ids.POSITION_DROPDOWN, "value"),
         ]
         )
     def update_tab_content(tab: str, rounds: list[int], coaches: list[str], clubs: list[str], positions: list[str]) -> list[html.Div]:
 
         if tab == ids.TAB_OVERVIEW: 
             print("In Overview tab")
-            bar_chart = chart_bar_points_by_coach.render(app, data)
-            print(bar_chart)
-            return [
-            dbc.Row(
-                id=ids.BAR_CHART,
-                children=[
-                    dbc.Col(
-                        [
-                            html.H4("Test"),
-                            html.H4("Points by coach overview"),
-                            bar_chart,
-                            html.H4("Test"),
-                        ], 
-                        md=5,
-                        ),
-                    dbc.Col(
-                        [
-                            html.H4("Substitutions in round"),
-                            table_substitutions.render(app, data)
-                        ],
-                        md=3
-                        ),                            
-                ]
-            ),
-            dbc.Row(
-                children=[
-                    dbc.Col(
-                        [
-                            html.H4("Points by chosen player overview"),
-                            table_chosen_players.render(app, data)
-                        ], 
-                        md=5,
-                        ),
-                    dbc.Col( 
-                        [
-                            html.H4("All players overview"),
-                            table_all_players.render(app, data)
-                        ],
-                        md=5,
-                        )
-                ]
-            )
-        ]
+            return tab_overview.render(data, rounds, coaches)
+        elif tab == ids.TAB_PLAYERS:
+            print("In Players tab")
+            return tab_players.render(data, rounds, clubs, positions)
         else:
             print("In other tab")
             return html.Div("Under construction.")
@@ -93,16 +49,16 @@ def create_layout(app: Dash, data: DashData) -> html.Div:
                     dbc.Col(dropdown_positions.render(app, data), md=3),
                 ]
             ),
+            html.Br(),
             dcc.Tabs(
                 id=ids.TABS_OBJECT,
                 value=ids.TAB_OVERVIEW,
                 children=[
                     dcc.Tab(label="Score overview", value=ids.TAB_OVERVIEW),
+                    dcc.Tab(label="Player statistics", value=ids.TAB_PLAYERS),
                     dcc.Tab(label="Team of the Week", value=ids.TAB_TEAM_WEEK),
                 ]
-            ), 
-            dbc.Row(
-                id=ids.TAB_CONTENT
-            )
+            ),
+            html.Div(id=ids.TAB_CONTENT)
         ]
     )
