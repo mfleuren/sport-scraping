@@ -32,7 +32,7 @@ def create_layout(app: Dash, data: DashData) -> html.Div:
             return tab_overview.render(data, rounds, coaches)
         elif tab == ids.TAB_PLAYERS:
             print("In Players tab")
-            return tab_players.render(data, rounds, clubs, positions)
+            return tab_players.render(data, rounds, coaches, clubs, positions)
         else:
             print("In other tab")
             return html.Div("Under construction.")

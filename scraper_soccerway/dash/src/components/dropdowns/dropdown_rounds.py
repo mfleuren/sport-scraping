@@ -38,3 +38,7 @@ def render(app: Dash, data: DashData) -> html.Div:
             )
         ]
     )
+
+
+def rounds_to_str(rounds: list[int]) -> str:
+    return ', '.join([str(rnd) for rnd in rounds])
