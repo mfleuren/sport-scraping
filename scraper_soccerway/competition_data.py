@@ -162,7 +162,7 @@ class CompetitionData:
                 index=False
                 )
             self.dim_players.to_csv(
-                f'dash/data/{config.LOCAL_FILES["players"]}',
+                f'E:/DataScience/sport-scraping/scraper_soccerway/dash/data/{config.LOCAL_FILES["players"]}',
                 sep=';',
                 index=False
             )
@@ -182,7 +182,7 @@ class CompetitionData:
                 sep=';', 
                 index=False)
             self.points_player.to_csv(
-                f'dash/data/{config.LOCAL_FILES["points_player"]}',
+                f'E:/DataScience/sport-scraping/scraper_soccerway/dash/data/{config.LOCAL_FILES["points_player"]}',
                 sep=';',
                 index=False
             )
@@ -195,7 +195,7 @@ class CompetitionData:
                 index=False
                 )
             self.points_coach.to_csv(
-                f'dash/data/{config.LOCAL_FILES["points_coach"]}',
+                f'E:/DataScience/sport-scraping/scraper_soccerway/dash/data/{config.LOCAL_FILES["points_coach"]}',
                 sep=';',
                 index=False
             )    
@@ -211,7 +211,7 @@ class CompetitionData:
 
         if self.substitutions.shape[0] != 0:
             self.substitutions.to_csv(
-                f'dash/data/{config.LOCAL_FILES["substitutions"]}',
+                f'E:/DataScience/sport-scraping/scraper_soccerway/dash/data/{config.LOCAL_FILES["substitutions"]}',
                 sep=';',
                 index=False
             )
