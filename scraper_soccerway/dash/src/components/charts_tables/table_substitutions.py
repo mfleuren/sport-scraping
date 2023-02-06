@@ -6,7 +6,7 @@ from scraper_soccerway.dash.src.components import ids
 
 def render(data: DashData, rounds: list[int], coaches: list[str]) -> html.Div:
 
-    filtered_data = data.points_by_coach.query(
+    filtered_data = data.substitutions.query(
         f"Speelronde == {rounds} & Coach == {coaches}"
     )
 
