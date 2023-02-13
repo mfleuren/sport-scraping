@@ -395,6 +395,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 18.0;M. van Beijnen;V;/players/mike--van-beijnen/537902/;mike--van-beijnen;537902;Fortuna Sittard;M. van Beijnen;;;
 ;C. Brym;A;/players/charles-andreas-brym/538704/;charles-andreas-brym;538704;Sparta Rotterdam;C. Brym;;;
 7.0;E. Tavşan;A;/players/elayis-tavsan/540617/;elayis-tavsan;540617;N.E.C.;E. Tavsan;;;
+24.0;C. Mamengi;V;/players/christopher-mamengi/540620/;christopher-mamengi;540620;FC Utrecht;C. Mamengi;;;
 ;Vasileios Pavlidis;V;/players/vasileios-pavlidis/542757/;vasileios-pavlidis;542757;AZ;Vasileios Pavlidis;;;
 27.0;S. Sylla;V;/players/sekou-sylla/544397/;sekou-sylla;544397;SC Cambuur;S. Sylla;;;
 23.0;O. Edvardsen;A;/players/oliver-valaker-edvardsen/545481/;oliver-valaker-edvardsen;545481;Go Ahead Eagles;O. Edvardsen;;;
@@ -571,7 +572,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 21.0;E. Poku;A;/players/ernest-poku/700544/;ernest-poku;700544;AZ;E. Poku;;;
 ;B. Vugts;M;/players/brent-vugts/701965/;brent-vugts;701965;Excelsior;B. Vugts;;;
 40.0;L. Valente;M;/players/luciano-valente/703884/;luciano-valente;703884;FC Groningen;L. Valente;;;
-50.0;T. Blokzijl;V;/players/thijmen-blokzijl/703893/;thijmen-blokzijl;703893;FC Groningen;T. Blokzijl;;;
+42.0;T. Blokzijl;V;/players/thijmen-blokzijl/703893/;thijmen-blokzijl;703893;FC Groningen;T. Blokzijl;;;
 48.0;A. Milambo;M;/players/antoni-djibu-milambo/736392/;antoni-djibu-milambo;736392;Feyenoord;A. Milambo;;;
 21.0;I. Cissoko;M;/players/ibrahim-cissoko/741677/;ibrahim-cissoko;741677;N.E.C.;I. Cissoko;;;
 ;D. Karim;M;/players/karim-dermane/745799/;karim-dermane;745799;Feyenoord;D. Karim;;;
@@ -592,6 +593,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 ;G. Misehouy;A;/players/gabriel-osei-misehouy/783270/;gabriel-osei-misehouy;783270;Ajax;G. Misehouy;;;
 49.0;J. Banel;A;/players/jaydon-amauri-banel/783280/;jaydon-amauri-banel;783280;Ajax;J. Banel;;;
 24.0;J. Markelo;M;/players/jahnoah-guevara-markelo/783394/;jahnoah-guevara-markelo;783394;Go Ahead Eagles;J. Markelo;;;
+;M. Driezen;V;/players/michel-driezen/787431/;michel-driezen;787431;FC Twente;M. Driezen;;;
 25.0;G. de Regt;A;/players/gyan-de-regt/787476/;gyan-de-regt;787476;Vitesse;G. de Regt;;;
 45.0;R. Owusu-Oduro;K;/players/rome-jayden-owusu-oduro/789860/;rome-jayden-owusu-oduro;789860;AZ;R. Owusu-Oduro;;;
 43.0;L. Schouten;M;/players/lewis-schouten/789914/;lewis-schouten;789914;AZ;L. Schouten;;;
@@ -611,6 +613,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 39.0;M. Smit;A;/players/milan-smit/828395/;milan-smit;828395;SC Cambuur;M. Smit;;;
 23.0;B. van Duijl;V;/players/billy-van-duijl/832010/;billy-van-duijl;832010;FC Volendam;B. van Duijl;;;
 26.0;M. Jonathans;A;/players/miliano-jonathans/833677/;miliano-jonathans;833677;Vitesse;M. Jonathans;;;
+39.0;L. Edhart;M;/players/lynden-edhart/845691/;lynden-edhart;845691;FC Utrecht;L. Edhart;;;
 15.0;I. Yegoian;M;/players/irakli-yegoian/845725/;irakli-yegoian;845725;FC Twente;I. Yegoian;;;
 37.0;C. Lokesa;M;/players/chris-lokesa/847737/;chris-lokesa;847737;RKC Waalwijk;C. Lokesa;;;
 ;N. Groen;A;/players/nesto-groen/849103/;nesto-groen;849103;Feyenoord;N. Groen;;;
