@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 from dataclasses import dataclass, field
 
 from competition_data import CompetitionData
@@ -182,6 +183,7 @@ def create_message(data: CompetitionData, gameweeks: list[int]) -> str:
     single_message.append(message.general_ranking)
     single_message.append(message.teams_overview)
     single_message.append(message.players_overview)
+    single_message.append(f"Bekijk alle statistieken en overzichten op {os.getenv('DASH_URL')}.")
 
     final_message = ''.join(single_message)
 
