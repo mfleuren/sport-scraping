@@ -4,6 +4,8 @@ from scraper_soccerway import config
 
 def tactics(teams: pd.DataFrame) -> None:
     
+    print(f"Validating teams for Speelronde {teams['Speelronde'].max()}")
+
     teams = teams[teams["Speelronde"] == teams["Speelronde"].max()]
     errors = 0
 

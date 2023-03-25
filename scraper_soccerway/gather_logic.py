@@ -139,7 +139,7 @@ def process_teammodifications(data: CompetitionData, gameweek: int) -> Competiti
         # Join chosen team and dim_players to get info on clubs and positions
         data.dim_players['Naam_fix'] = data.dim_players.apply(lambda x: unidecode(x['Naam']), axis=1)
         players = data.dim_players.set_index('Naam_fix')[['Positie', 'Team', 'Link']].copy()
-        teams_new = teams_new.join(players, on='Speler')
+        teams_new = teams_new.join(players, on='Speler').drop_duplicates()
 
         data.chosen_teams = pd.concat([data.chosen_teams, teams_new], ignore_index=True)
 

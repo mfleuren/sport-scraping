@@ -13,6 +13,8 @@ data = gather_logic.update_players(data)
 
 matches_to_scrape = gather_logic.determine_matches_to_scrape(data)
 rounds_to_scrape = matches_to_scrape["Cluster"].unique()
+
+print(f"Scraping the following round(s): {', '.join(rounds_to_scrape.astype(str))}")
 for game_round in rounds_to_scrape:
 
     data = gather_logic.create_full_team_selections(data, game_round)
