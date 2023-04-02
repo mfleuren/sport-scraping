@@ -171,7 +171,7 @@ def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
     data.matches = data.matches.sort_values(by='Datum')
 
     max_dates_by_cluster = data.matches.groupby("Cluster", as_index=False)["Datum"].max()
-    completed_clusters = max_dates_by_cluster[max_dates_by_cluster["Datum"] < datetime.today().strftime('%Y-%m-%d')]
+    completed_clusters = max_dates_by_cluster[max_dates_by_cluster["Datum"] <= datetime.today().strftime('%Y-%m-%d')]
     played_matches = data.matches["Cluster"].isin(completed_clusters["Cluster"].unique())
 
     # played_matches = data.matches["Datum"] < datetime.today().strftime('%Y-%m-%d')
