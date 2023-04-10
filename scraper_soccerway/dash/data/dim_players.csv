@@ -469,7 +469,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 9.0;M. Sankoh;A;/players/mohamed-sankoh/584479/;mohamed-sankoh;584479;Vitesse;M. Sankoh;;;
 13.0;S. Westerveld;K;/players/sem-westerveld/585469/;sem-westerveld;585469;AZ;S. Westerveld;;;
 36.0;T. Taşçı;M;/players/muhammet-tunahan-tasci/586250/;muhammet-tunahan-tasci;586250;Fortuna Sittard;T. Tasci;;;
-;J. Seelt;V;/players/jenson-seelt/587007/;jenson-seelt;587007;PSV;J. Seelt;;;
+53.0;J. Seelt;V;/players/jenson-seelt/587007/;jenson-seelt;587007;PSV;J. Seelt;;;
 7.0;Julen Lobete;A;/players/julen-lobete-cienfuegos/587686/;julen-lobete-cienfuegos;587686;RKC Waalwijk;Julen Lobete;;;
 27.0;D. Min;A;/players/david-min/587715/;david-min;587715;RKC Waalwijk;D. Min;;;
 ;J. Kroesen;K;/players/jaimy-kroesen/589526/;jaimy-kroesen;589526;Feyenoord;J. Kroesen;;;
@@ -572,6 +572,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 ;J. Buter;V;/players/jaimy-buter/681877/;jaimy-buter;681877;Excelsior;J. Buter;;;
 34.0;S. Seymor;V;/players/serano-seymor/681878/;serano-seymor;681878;Excelsior;S. Seymor;;;
 61.0;K. Gadellaa;K;/players/kevin-gadellaa/687902/;kevin-gadellaa;687902;FC Utrecht;K. Gadellaa;;;
+;L. Comenencia;V;/players/livano-comenencia/696780/;livano-comenencia;696780;PSV;L. Comenencia;;;
 25.0;L. Zeefuik;A;/players/lequincio-zeefuik/699766/;lequincio-zeefuik;699766;FC Volendam;L. Zeefuik;;;
 ;E. van de Blaak;V;/players/emmanuel-van-de-blaak/700542/;emmanuel-van-de-blaak;700542;PSV;E. van de Blaak;;;
 22.0;M. Dekker;V;/players/maxim-dekker/700543/;maxim-dekker;700543;AZ;M. Dekker;;;
@@ -609,6 +610,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 25.0;G. de Regt;A;/players/gyan-de-regt/787476/;gyan-de-regt;787476;Vitesse;G. de Regt;;;
 45.0;R. Owusu-Oduro;K;/players/rome-jayden-owusu-oduro/789860/;rome-jayden-owusu-oduro;789860;AZ;R. Owusu-Oduro;;;
 43.0;L. Schouten;M;/players/lewis-schouten/789914/;lewis-schouten;789914;AZ;L. Schouten;;;
+;M. Godts;A;/players/mika-marcel-godts/790325/;mika-marcel-godts;790325;Ajax;M. Godts;;;
 ;L. Sauer;A;/players/leo-sauer/790415/;leo-sauer;790415;Feyenoord;L. Sauer;;;
 35.0;M. Meerdink;A;/players/mexx-meerdink/796451/;mexx-meerdink;796451;AZ;M. Meerdink;;;
 35.0;J. van der Mark;K;/players/jesper-van-der-mark/801773/;jesper-van-der-mark;801773;sc Heerenveen;J. van der Mark;;;
