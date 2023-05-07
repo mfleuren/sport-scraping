@@ -108,6 +108,9 @@ def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFra
     # Convert name characters to unicode
     results_table['RIDER'] = results_table.apply(lambda x: unidecode(x['RIDER']), axis=1)
 
+    # Remove trailing spaces
+    results_table['RIDER'] = results_table['RIDER'].str.strip()
+
     # Split ridername in surname and firstname
     results_table['SURNAME'] = (results_table['RIDER']
                                 .str.extract('([A-Z ]*)')[0]
