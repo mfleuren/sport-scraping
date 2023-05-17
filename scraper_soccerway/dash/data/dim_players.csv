@@ -596,7 +596,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 ;I. Splinter;M;/players/ilias-splinter/778105/;ilias-splinter;778105;AZ;I. Splinter;;;
 ;J. Slory;A;/players/jaden-fernando-slory/778109/;jaden-fernando-slory;778109;Feyenoord;J. Slory;;;
 ;M. Kleijn;M;/players/mike-kleijn/778111/;mike-kleijn;778111;Feyenoord;M. Kleijn;;;
-;J. van Duiven;A;/players/jason-van-duiven/778117/;jason-van-duiven;778117;PSV;J. van Duiven;;;
+44.0;J. van Duiven;A;/players/jason-van-duiven/778117/;jason-van-duiven;778117;PSV;J. van Duiven;;;
 53.0;T. de Graaff;K;/players/tom-gerard-de-graaff/783148/;tom-gerard-de-graaff;783148;Ajax;T. de Graaff;;;
 ;T. Setford;K;/players/tommy-setford/783159/;tommy-setford;783159;Ajax;T. Setford;;;
 57.0;J. Hato;V;/players/jorrel-hato/783173/;jorrel-hato;783173;Ajax;J. Hato;;;
@@ -639,6 +639,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 37.0;C. Lokesa;M;/players/chris-lokesa/847737/;chris-lokesa;847737;RKC Waalwijk;C. Lokesa;;;
 ;N. Groen;A;/players/nesto-groen/849103/;nesto-groen;849103;Feyenoord;N. Groen;;;
 ;M. Berger;K;/players/mannou-berger/851452/;mannou-berger;851452;Feyenoord;M. Berger;;;
+;D. Lourens;A;/players/dano-lourens/853141/;dano-lourens;853141;Sparta Rotterdam;D. Lourens;;;
 ;B. van der Hoek;K;/players/bob-van-der-hoek/853240/;bob-van-der-hoek;853240;Fortuna Sittard;B. van der Hoek;;;
 20.0;B. Nieling;V;/players/bryant-nieling/856038/;bryant-nieling;856038;Fortuna Sittard;B. Nieling;;;
 33.0;F. Smand;V;/players/floris-smand/856089/;floris-smand;856089;SC Cambuur;F. Smand;;;
@@ -664,3 +665,5 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix;Positie_Order;Team_Order
 42.0;G. Besselink;M;/players/gijs-besselink/895383/;gijs-besselink;895383;FC Twente;G. Besselink;;;
 40.0;R. van der Plaat;V;/players/roan-van-der-plaat/895879/;roan-van-der-plaat;895879;sc Heerenveen;R. van der Plaat;;;
 45.0;X. Woudstra;M;/players/xavi-woudstra/896295/;xavi-woudstra;896295;sc Heerenveen;X. Woudstra;;;
+31.0;M. Berenschot;A;/players/milan-berenschot/906463/;milan-berenschot;906463;Go Ahead Eagles;M. Berenschot;;;
+30.0;J. Smits;M;/players/jorn-smits/906464/;jorn-smits;906464;Go Ahead Eagles;J. Smits;;;
