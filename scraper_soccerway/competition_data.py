@@ -226,7 +226,7 @@ class CompetitionData:
             return df
         else:
 
-            if self.tournamenet:
+            if self.tournament:
                 url = self.urls["start_teams"].format(
                     base_url=config.BASE_URL,
                     continent=self.continent,

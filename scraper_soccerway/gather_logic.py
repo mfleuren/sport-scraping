@@ -13,7 +13,8 @@ def construct_url(fmt_url: str, team: str, id: str) -> str:
 
 
 def update_matches(data: CompetitionData) -> CompetitionData:
-    """Loop through all tournament stages and update match dates and match URLs."""
+    """Loop through all tournament stages and update match dates and match URLs.
+    """
 
     if data.urls["matches"]:
         urls = data.dim_clubs["SW_TeamURL"].apply(lambda x: config.BASE_URL + x)
@@ -21,7 +22,6 @@ def update_matches(data: CompetitionData) -> CompetitionData:
         urls = [data.urls["matches_group"], data.urls["matches_finals"]]
     
     for url in tqdm(urls, total=len(urls)):
-
         updated_matches = gather.extract_matches_from_html_tournament(url, chunk_size=3)
         data.matches = pd.concat([data.matches, updated_matches], ignore_index=True)
 
@@ -31,7 +31,7 @@ def update_matches(data: CompetitionData) -> CompetitionData:
     duplicated_mask = data.matches.duplicated(subset=["url_match"], keep="last")
     data.matches = data.matches[~duplicated_mask]
 
-    data.matches["Datum"] = pd.to_datetime(data.matches["Datum"])
+    data.matches = gather.determine_match_clusters(data.matches)
 
     return data
 
@@ -171,7 +171,7 @@ def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
     data.matches = data.matches.sort_values(by='Datum')
 
     max_dates_by_cluster = data.matches.groupby("Cluster", as_index=False)["Datum"].max()
-    completed_clusters = max_dates_by_cluster[max_dates_by_cluster["Datum"] <= datetime.today().strftime('%Y-%m-%d')]
+    completed_clusters = max_dates_by_cluster[max_dates_by_cluster["Datum"] <= datetime.today().date()]
     played_matches = data.matches["Cluster"].isin(completed_clusters["Cluster"].unique())
 
     # played_matches = data.matches["Datum"] < datetime.today().strftime('%Y-%m-%d')

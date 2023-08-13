@@ -7,7 +7,18 @@ COMPETITION_SETTINGS = {
         "URLS": {
             "matches":"{base_url}/teams/netherlands/{team_name}/{team_id}/matches/",
             "teams":"{base_url}/teams/netherlands/{team_name}/{team_id}/squad/",
-            "teams_start":"{base_url}/national/netherlands/eredivisie/{year}/regular-season/{id}/tables/"
+            "start_teams":"{base_url}/national/netherlands/eredivisie/{year}/regular-season/{id}/tables/"
+        }
+    },
+    "eredivisie-2023": {
+        "NAME":"Eredivisie",
+        "YEAR":"2023",
+        "TOURNAMENT":False,
+        "ID":"r77314", 
+        "URLS": {
+            "matches":"{base_url}/teams/netherlands/{team_name}/{team_id}/matches/",
+            "teams":"{base_url}/teams/netherlands/{team_name}/{team_id}/squad/",
+            "start_teams":"{base_url}/national/netherlands/eredivisie/{year}/regular-season/{id}/tables/"
         }
     },
     "world-cup-2022": {
