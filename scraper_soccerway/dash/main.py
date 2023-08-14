@@ -7,7 +7,7 @@ from scraper_soccerway.dash.src.components.layout.main_layout import create_layo
 
 data = DashData()
 app = Dash(external_stylesheets=[dbc.themes.GRID])
-app.title = "WZV League 2022-2023"
+app.title = "WZV League 2023-2024"
 app.layout = create_layout(app, data)
 server=app.server
 
