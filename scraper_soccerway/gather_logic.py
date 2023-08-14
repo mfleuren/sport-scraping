@@ -84,6 +84,7 @@ def update_players(data: CompetitionData) -> CompetitionData:
             players_for_club = gather.extract_front_squad_from_html(team_url)
         else:
             players_for_club = gather.extract_squad_from_html(team_url)
+
         players_for_club["Team"] = row["Team"]
         all_players = pd.concat([all_players, players_for_club], ignore_index=True)
         time.sleep(config.DEFAULT_SLEEP_S)
@@ -138,6 +139,7 @@ def process_teammodifications(data: CompetitionData, gameweek: int) -> Competiti
         
         # Join chosen team and dim_players to get info on clubs and positions
         data.dim_players['Naam_fix'] = data.dim_players.apply(lambda x: unidecode(x['Naam']), axis=1)
+        print(f"{data.dim_players.shape=}")
         players = data.dim_players.set_index('Naam_fix')[['Positie', 'Team', 'Link']].copy()
         teams_new = teams_new.join(players, on='Speler').drop_duplicates()
 

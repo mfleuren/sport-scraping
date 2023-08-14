@@ -86,7 +86,7 @@ def extract_txt_from_string(string:str, regex:str) -> str:
     if result: return result.group(1)
 
 
-def extract_clubs_from_html(url: str) -> pd.DataFrame:
+def extract_clubs_from_html(url: str, tournament: bool = False) -> pd.DataFrame:
     """Extract info from clubs table."""
 
     html_string = open_website_in_client(url)
@@ -102,10 +102,16 @@ def extract_clubs_from_html(url: str) -> pd.DataFrame:
 
     all_team_urls = [url for url in all_urls if 'teams' in url]
     result = pd.DataFrame(all_team_urls, columns=['SW_TeamURL'])
-    result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(config.REGEXES['nation_name_from_url'], expand=True)
-    result['Team'] = result['SW_Teamnaam']
-    result['SW_TeamID'] = result['SW_TeamURL'].str.extract(config.REGEXES['nation_id_from_url'], expand=True).astype('int')
-
+    
+    if tournament:
+        result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(config.REGEXES['nation_name_from_url'], expand=True)
+        result['Team'] = result['SW_Teamnaam']
+        result['SW_TeamID'] = result['SW_TeamURL'].str.extract(config.REGEXES['nation_id_from_url'], expand=True).astype('int')
+    else:
+        result['SW_Teamnaam'] = result['SW_TeamURL'].str.extract(config.REGEXES['team_name_from_url'], expand=True)
+        result['Team'] = result['SW_Teamnaam']
+        result['SW_TeamID'] = result['SW_TeamURL'].str.extract(config.REGEXES['team_id_from_url'], expand=True).astype('int')
+    
     return result
 
 
