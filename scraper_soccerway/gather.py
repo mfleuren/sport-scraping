@@ -124,7 +124,10 @@ def determine_match_clusters(matches: pd.DataFrame) -> pd.DataFrame:
     - Match is of the same cluster as the previous match if there is 0 or 1 day in between  
     """
 
+    matches["Datum"] = pd.to_datetime(matches["Datum"])
     matches = matches.sort_values(by='Datum').reset_index(drop=True)
+    print(matches.dtypes)
+    print(matches.shift(1).dtypes)
     matches['Datum_Diff'] = (matches['Datum'] - matches.shift(1)['Datum']).dt.days.fillna(0)
 
     clusters = []

@@ -128,9 +128,12 @@ class CompetitionData:
             df = pd.read_csv(path, sep=';')
 
             if 'Datum' in df.columns:
-                df['Datum'] = pd.to_datetime(df['Datum'], format='%Y-%m-%d')
+                df['Datum'] = pd.to_datetime(df['Datum'])
 
-            print(f'Loaded file {path} from result, converted Datum column.')
+                print(f'Loaded file {path} from result, converted Datum column.')
+            
+            else: 
+                print(f'Loaded file {path} from result, no Datum column found.')
 
             return df
             
