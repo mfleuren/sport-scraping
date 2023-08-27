@@ -126,8 +126,6 @@ def determine_match_clusters(matches: pd.DataFrame) -> pd.DataFrame:
 
     matches["Datum"] = pd.to_datetime(matches["Datum"])
     matches = matches.sort_values(by='Datum').reset_index(drop=True)
-    print(matches.dtypes)
-    print(matches.shift(1).dtypes)
     matches['Datum_Diff'] = (matches['Datum'] - matches.shift(1)['Datum']).dt.days.fillna(0)
 
     clusters = []
@@ -137,8 +135,6 @@ def determine_match_clusters(matches: pd.DataFrame) -> pd.DataFrame:
         elif row['Datum_Diff'] <= 1: 
             clusters.append(clusters[-1])
         else: clusters.append(clusters[-1]+1)
-
-    print(f"{clusters=}")
         
     matches['Cluster'] = clusters
 
