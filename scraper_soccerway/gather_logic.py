@@ -119,15 +119,6 @@ def process_teammodifications(data: CompetitionData, gameweek: int) -> Competiti
         if 'Positie' in teams_new.columns:
             teams_new.drop(['Positie', 'Team', 'Link'], axis=1, inplace=True)
 
-        # Process substitutions
-        subs = data.substitutions[data.substitutions['Speelronde']==gameweek].copy()
-        if subs.shape[0] > 0:
-            print(f"Processing substitutions, speelronde {gameweek}:")
-        for _, row in subs.iterrows():
-            sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
-            teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
-            print(f"{row['Coach']} [{row['Wissel_Uit']} --> {row['Wissel_In']}]")
-
         # Process free substitutions
         subs = data.free_substitutions[data.free_substitutions['Speelronde']==gameweek].copy()
         if subs.shape[0] > 0:
@@ -136,7 +127,16 @@ def process_teammodifications(data: CompetitionData, gameweek: int) -> Competiti
             sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
             teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
             print(f"{row['Coach']} [{row['Wissel_Uit']} --> {row['Wissel_In']}]")
-        
+
+        # Process substitutions
+        subs = data.substitutions[data.substitutions['Speelronde']==gameweek].copy()
+        if subs.shape[0] > 0:
+            print(f"Processing substitutions, speelronde {gameweek}:")
+        for _, row in subs.iterrows():
+            sub_mask = (teams_new['Coach']==row['Coach']) & (teams_new['Speler']==row['Wissel_Uit'])
+            teams_new.loc[sub_mask, 'Speler'] = row['Wissel_In']
+            print(f"{row['Coach']} [{row['Wissel_Uit']} --> {row['Wissel_In']}]")
+       
         # Join chosen team and dim_players to get info on clubs and positions
         data.dim_players['Naam_fix'] = data.dim_players.apply(lambda x: unidecode(x['Naam']), axis=1)
         print(f"{data.dim_players.shape=}")
