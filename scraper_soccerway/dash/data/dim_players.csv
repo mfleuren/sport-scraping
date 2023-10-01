@@ -482,7 +482,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 20.0;L. Hartjes;M;/players/lennard-hartjes/736390/;lennard-hartjes;736390;Excelsior;L. Hartjes
 27.0;A. Milambo;M;/players/antoni-djibu-milambo/736392/;antoni-djibu-milambo;736392;Feyenoord;A. Milambo
 41.0;D. Verduin;K;/players/duke-verduin/736659/;duke-verduin;736659;PEC Zwolle;D. Verduin
-;A. Tibidi;A;/players/alexis-tibidi/754324/;alexis-tibidi;754324;NEC;A. Tibidi
+25.0;A. Tibidi;A;/players/alexis-tibidi/754324/;alexis-tibidi;754324;NEC;A. Tibidi
 ;D. van Wageningen;M;/players/dylan-van-wageningen/755005/;dylan-van-wageningen;755005;Sparta Rotterdam;D. van Wageningen
 20.0;K. van Oevelen;K;/players/kayne-van-oevelen/755773/;kayne-van-oevelen;755773;FC Volendam;K. van Oevelen
 19.0;Y. Taha;M;/players/younes-taha-el-idrissi/755774/;younes-taha-el-idrissi;755774;FC Twente;Y. Taha
@@ -529,6 +529,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 31.0;T. Land;M;/players/tygo-land/830551/;tygo-land;830551;PSV;T. Land
 24.0;J. Mesbahi;V;/players/julien-mesbahi/830556/;julien-mesbahi;830556;FC Twente;J. Mesbahi
 39.0;M. Rots;V;/players/mats-rots/830558/;mats-rots;830558;FC Twente;M. Rots
+;J. Bal;A;/players/jesse-bal/831525/;jesse-bal;831525;Sparta Rotterdam;J. Bal
 23.0;B. van Duijl;V;/players/billy-van-duijl/832010/;billy-van-duijl;832010;FC Volendam;B. van Duijl
 26.0;M. Jonathans;A;/players/miliano-jonathans/833677/;miliano-jonathans;833677;Vitesse;M. Jonathans
 15.0;R. van Bommel;A;/players/ruben-van-bommel/834074/;ruben-van-bommel;834074;AZ;R. van Bommel
@@ -565,3 +566,4 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 40.0;E. van Ee;M;/players/espen-van-ee/921919/;espen-van-ee;921919;sc Heerenveen;E. van Ee
 ;N. Verschuren;V;/players/nick-verschuren/923634/;nick-verschuren;923634;Ajax;N. Verschuren
 36.0;C. Bos;V;/players/christian-bos/927560/;christian-bos;927560;PEC Zwolle;C. Bos
+;B. van Driel;M;/players/bram-van-driel/933550/;bram-van-driel;933550;FC Volendam;B. van Driel
