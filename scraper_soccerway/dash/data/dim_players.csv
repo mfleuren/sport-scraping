@@ -94,6 +94,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 4.0;D. Mirani;V;/players/damon-mirani/289811/;damon-mirani;289811;FC Volendam;D. Mirani
 11.0;P. van Amersfoort;M;/players/pelle-van-amersfoort/289816/;pelle-van-amersfoort;289816;sc Heerenveen;P. van Amersfoort
 7.0;Y. Namli;M;/players/younes-namli/291585/;younes-namli;291585;PEC Zwolle;Y. Namli
+10.0;R. Maulun;M;/players/-maucun/297215/;-maucun;297215;FC Volendam;R. Maulun
 44.0;A. Noppert;K;/players/andries-noppert/300862/;andries-noppert;300862;sc Heerenveen;A. Noppert
 17.0;S. Klaiber;V;/players/sean-klaiber/302164/;sean-klaiber;302164;FC Utrecht;S. Klaiber
 21.0;J. Houwen;K;/players/jeroen-houwen/303254/;jeroen-houwen;303254;RKC Waalwijk;J. Houwen
@@ -410,6 +411,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 31.0;R. Janse;K;/players/rijk-janse/632550/;rijk-janse;632550;NEC;R. Janse
 23.0;D. Huisman;M;/players/daan-huisman/632782/;daan-huisman;632782;Vitesse;D. Huisman
 14.0;C. Driouech;A;/players/couhaib-driouech/632812/;couhaib-driouech;632812;Excelsior;C. Driouech
+35.0;R. van Hees;V;/players/rickson-van-hees/632816/;rickson-van-hees;632816;FC Utrecht;R. van Hees
 36.0;T. Jansink;K;/players/timo-jansink/632823/;timo-jansink;632823;Heracles Almelo;T. Jansink
 31.0;S. Zitman;M;/players/sven-zitman/632827/;sven-zitman;632827;bvo-fc-zwolle;S. Zitman
 15.0;N. Naujoks;M;/players/noah-naujoks/632831/;noah-naujoks;632831;Excelsior;N. Naujoks
@@ -469,7 +471,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 ;A. Anello;A;/players/agustin-anello/688541/;agustin-anello;688541;Sparta Rotterdam;A. Anello
 ;Metinho;M;/players/abemly-meto-silu/691959/;abemly-meto-silu;691959;Sparta Rotterdam;Metinho
 17.0;R. Omorowa;A;/players/richie-omorowa/691971/;richie-omorowa;691971;Excelsior;R. Omorowa
-10.0;S. Hamulic;A;/players/said-hamulic/692022/;said-hamulic;692022;Vitesse;S. Hamulic
+10.0;S. Hamulić;A;/players/said-hamulic/692022/;said-hamulic;692022;Vitesse;S. Hamulic
 15.0;A. Blake;A;/players/adrian-blake/695557/;adrian-blake;695557;FC Utrecht;A. Blake
 63.0;L. Comenencia;V;/players/livano-comenencia/696780/;livano-comenencia;696780;PSV;L. Comenencia
 25.0;L. Zeefuik;A;/players/lequincio-zeefuik/699766/;lequincio-zeefuik;699766;FC Volendam;L. Zeefuik
@@ -566,4 +568,5 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 40.0;E. van Ee;M;/players/espen-van-ee/921919/;espen-van-ee;921919;sc Heerenveen;E. van Ee
 ;N. Verschuren;V;/players/nick-verschuren/923634/;nick-verschuren;923634;Ajax;N. Verschuren
 36.0;C. Bos;V;/players/christian-bos/927560/;christian-bos;927560;PEC Zwolle;C. Bos
-;B. van Driel;M;/players/bram-van-driel/933550/;bram-van-driel;933550;FC Volendam;B. van Driel
+48.0;B. van Driel;M;/players/bram-van-driel/933550/;bram-van-driel;933550;FC Volendam;B. van Driel
+16.0;B. Broekmans;K;/players/boaz-broekmans/934870/;boaz-broekmans;934870;Fortuna Sittard;B. Broekmans
