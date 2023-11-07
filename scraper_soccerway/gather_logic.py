@@ -166,7 +166,7 @@ def create_full_team_selections(data: CompetitionData, game_week: int) -> Compet
 def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
     """
     Determine which matches to scrape today. There are two criteria:
-    (1) All matches in a cluster are finished, i.e. max date is in the past
+    (1) Max date of a match is in the past
     (2) Match is not yet processed
     """
 
@@ -179,7 +179,8 @@ def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
     played_matches = data.matches["Datum"] <= datetime.today().strftime('%Y-%m-%d')
 
     if data.match_events.shape[0] > 0:
-        processed_matches = data.matches["url_match"].isin(data.match_events["Match_Url"])
+        # Disregard processed and suspended matches
+        processed_matches = data.matches["url_match"].isin(data.match_events["Match_Url"]) | (data.matches["Uitslag"] == "GEST")
     else:
         processed_matches = pd.Series([False] * len(played_matches))
 
