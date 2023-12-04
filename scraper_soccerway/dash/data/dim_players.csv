@@ -535,6 +535,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 33.0;N. Verdoni;K;/players/nando-verdoni/813110/;nando-verdoni;813110;Go Ahead Eagles;N. Verdoni
 23.0;K. Sano;M;/players/kodai-sano/815318/;kodai-sano;815318;NEC;K. Sano
 ;H. El Dahri;M;/players/hamza-el-dahri/819347/;hamza-el-dahri;819347;Sparta Rotterdam;H. El Dahri
+52.0;K. Symons;V;/players/kaya-symons/825389/;kaya-symons;825389;Vitesse;K. Symons
 ;E. Bassey;V;/players/essien-bassey/830549/;essien-bassey;830549;PSV;E. Bassey
 31.0;T. Land;M;/players/tygo-land/830551/;tygo-land;830551;PSV;T. Land
 ;R. van de Riet;V;/players/raf-van-de-riet/830552/;raf-van-de-riet;830552;PSV;R. van de Riet
@@ -546,6 +547,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 15.0;R. van Bommel;A;/players/ruben-van-bommel/834074/;ruben-van-bommel;834074;AZ;R. van Bommel
 34.0;C. Olde Keizer;V;/players/chiel-olde-keizer/838847/;chiel-olde-keizer;838847;Heracles Almelo;C. Olde Keizer
 27.0;Q. Hoeve;M;/players/quincy-anthony-edgar-nathan-hoeve/842080/;quincy-anthony-edgar-nathan-hoeve;842080;FC Volendam;Q. Hoeve
+59.0;N. Sambo;M;/players/naygiro-sambo/844614/;naygiro-sambo;844614;Vitesse;N. Sambo
 32.0;I. Yegoian;M;/players/irakli-yegoian/845725/;irakli-yegoian;845725;FC Twente;I. Yegoian
 ;T. Smolenaars;K;/players/tijn-smolenaars/846638/;tijn-smolenaars;846638;PSV;T. Smolenaars
 14.0;C. Lokesa;M;/players/chris-lokesa/847737/;chris-lokesa;847737;RKC Waalwijk;C. Lokesa
@@ -578,6 +580,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 44.0;J. Altena;M;/players/jordi-altena/921601/;jordi-altena;921601;Vitesse;J. Altena
 56.0;M. Egbring;V;/players/mats-egbring/921602/;mats-egbring;921602;Vitesse;M. Egbring
 40.0;E. van Ee;M;/players/espen-van-ee/921919/;espen-van-ee;921919;sc Heerenveen;E. van Ee
+;J. Triep;M;/players/jorn-triep/923162/;jorn-triep;923162;Sparta Rotterdam;J. Triep
 ;N. Verschuren;V;/players/nick-verschuren/923634/;nick-verschuren;923634;Ajax;N. Verschuren
 36.0;C. Bos;V;/players/christian-bos/927560/;christian-bos;927560;PEC Zwolle;C. Bos
 ;S. Gomez Van Hoogen;M;/players/samuel-gomez-van-hoogen/929514/;samuel-gomez-van-hoogen;929514;PSV;S. Gomez Van Hoogen
