@@ -1,62 +1,72 @@
 Speelronde;Coach;Wissel_Uit;Wissel_In
-2;tukkeRoel;M. Wittek;B. Kuipers
-2;FMNederland;M. Wittek;C. Arcus
-2;svvthomas;M. Manhoef;M. Kramer
-2;Suikerbrood;M. Wittek;M. Pinto
-2;Vishandel Makaay;M. Wittek;N. Isimat-Mirin
-2;Sir Robbert;M. Wittek;M. Pinto
-2;crispy;W. Willumsson;B. Kuipers
-2;crispy;M. Wittek;K. Kozlowski
-2;crispy;S. van Beek;O. Sahraoui
-2;Friggles;M. Wittek;M. Pinto
-2;Jay-Jay;M. Wittek;C. Arcus
-3;EnGCatjuh;T. Douvikas;N. Agrafiotis
-3;tukkeRoel;T. Douvikas;M. Seuntjens
-4;Sir Robbert;M. Kudus;K. Taylor
-5;FMNederland;T. Douvikas;I. Lidberg
-5;methodmich;A. Noppert;L. Unnerstall
-5;methodmich;J. Brenet;R. Flamingo
-5;methodmich;T. Douvikas;I. Nicolaescu
-5;Gordon Shumway;M. Kudus;J. Sutalo
-5;Gordon Shumway;G. Smal;S. Steijn
-5;Gordon Shumway;C. Eiting;J. Hoogma
-5;Gordon Shumway;W. Willumsson;D. Proper
-5;Gordon Shumway;P. van Aanholt;N. Lang
-5;EnGCatjuh;O. Ozyakup;A. Halilovic
-5;Tjeuke;A. Noppert;L. Unnerstall
-5;Tjeuke;M. Ugalde;O. Sahraoui
-5;Tjeuke;B. van den Boomen;J. Veerman
-5;Tjeuke;P. van Aanholt;S. Bergwijn
-5;Tjeuke;K. Sierhuis;M. Dijks
-5;Jay-Jay;J. Brenet;R. Propper
-5;Jay-Jay;T. Douvikas;M. Seuntjens
-5;Jay-Jay;J. Kitolano;T. Lauritsen
-6;crispy;J. Brenet;S. Steijn
-6;crispy;K. Kozlowski;B. Vriends
-6;Juk;A. Noppert;I. Pandur
-6;Juk;D. Hancko;B. Sosa
-6;Juk;J. Brenet;R. Propper
-6;Juk;Y. Baas;J. Teze
-6;Juk;Inigo Cordoba;P. Rommens
-6;Juk;S. Mijnans;M. van Ginkel
-6;Juk;N. Lang;V. Pavlidis
-6;Juk;S. Bergwijn;S. Gimenez
-6;Juk;S. Hamulic;O. Sahraoui
-9;FMNederland;J. Brenet;M. Hilgers
-10;svvthomas;G. Smal;B. Kuipers
-10;svvthomas;J. Willems;J. Hato
-10;svvthomas;B. van den Boomen;A. Halilovic
-10;svvthomas;L. Olden Larsen;S. Steijn
-10;svvthomas;N. Lang;L. de Jong
-14;crispy;J. Cillessen;Rober
-14;crispy;M. Seuntjens;V. Barkas
-14;tukkeRoel;M. Seuntjens;O. Fraulo
-14;methodmich;P. van Aanholt;B. Kuipers
-14;methodmich;L. Olden Larsen;M. van Ginkel
-14;methodmich;I. Nicolaescu;L. de Jong
-14;methodmich;S. Hamulic;O. Sahraoui
-14;EnGCatjuh;B. Nuytinck;B. Kuipers
-15;Tjeuke;M. Dijks;B. Kuipers
-15;methodmich;B. van den Boomen;J. Hato
-16;crispy;Rober;C. Verdonk
-16;crispy;D. de Wit;V. Pavlidis
+2.0;tukkeRoel;M. Wittek;B. Kuipers
+2.0;FMNederland;M. Wittek;C. Arcus
+2.0;svvthomas;M. Manhoef;M. Kramer
+2.0;Suikerbrood;M. Wittek;M. Pinto
+2.0;Vishandel Makaay;M. Wittek;N. Isimat-Mirin
+2.0;Sir Robbert;M. Wittek;M. Pinto
+2.0;crispy;W. Willumsson;B. Kuipers
+2.0;crispy;M. Wittek;K. Kozlowski
+2.0;crispy;S. van Beek;O. Sahraoui
+2.0;Friggles;M. Wittek;M. Pinto
+2.0;Jay-Jay;M. Wittek;C. Arcus
+3.0;EnGCatjuh;T. Douvikas;N. Agrafiotis
+3.0;tukkeRoel;T. Douvikas;M. Seuntjens
+4.0;Sir Robbert;M. Kudus;K. Taylor
+5.0;FMNederland;T. Douvikas;I. Lidberg
+5.0;methodmich;A. Noppert;L. Unnerstall
+5.0;methodmich;J. Brenet;R. Flamingo
+5.0;methodmich;T. Douvikas;I. Nicolaescu
+5.0;Gordon Shumway;M. Kudus;J. Sutalo
+5.0;Gordon Shumway;G. Smal;S. Steijn
+5.0;Gordon Shumway;C. Eiting;J. Hoogma
+5.0;Gordon Shumway;W. Willumsson;D. Proper
+5.0;Gordon Shumway;P. van Aanholt;N. Lang
+5.0;EnGCatjuh;O. Ozyakup;A. Halilovic
+5.0;Tjeuke;A. Noppert;L. Unnerstall
+5.0;Tjeuke;M. Ugalde;O. Sahraoui
+5.0;Tjeuke;B. van den Boomen;J. Veerman
+5.0;Tjeuke;P. van Aanholt;S. Bergwijn
+5.0;Tjeuke;K. Sierhuis;M. Dijks
+5.0;Jay-Jay;J. Brenet;R. Propper
+5.0;Jay-Jay;T. Douvikas;M. Seuntjens
+5.0;Jay-Jay;J. Kitolano;T. Lauritsen
+6.0;crispy;J. Brenet;S. Steijn
+6.0;crispy;K. Kozlowski;B. Vriends
+6.0;Juk;A. Noppert;I. Pandur
+6.0;Juk;D. Hancko;B. Sosa
+6.0;Juk;J. Brenet;R. Propper
+6.0;Juk;Y. Baas;J. Teze
+6.0;Juk;Inigo Cordoba;P. Rommens
+6.0;Juk;S. Mijnans;M. van Ginkel
+6.0;Juk;N. Lang;V. Pavlidis
+6.0;Juk;S. Bergwijn;S. Gimenez
+6.0;Juk;S. Hamulic;O. Sahraoui
+9.0;FMNederland;J. Brenet;M. Hilgers
+10.0;svvthomas;G. Smal;B. Kuipers
+10.0;svvthomas;J. Willems;J. Hato
+10.0;svvthomas;B. van den Boomen;A. Halilovic
+10.0;svvthomas;L. Olden Larsen;S. Steijn
+10.0;svvthomas;N. Lang;L. de Jong
+14.0;crispy;J. Cillessen;Rober
+14.0;crispy;M. Seuntjens;V. Barkas
+14.0;tukkeRoel;M. Seuntjens;O. Fraulo
+14.0;methodmich;P. van Aanholt;B. Kuipers
+14.0;methodmich;L. Olden Larsen;M. van Ginkel
+14.0;methodmich;I. Nicolaescu;L. de Jong
+14.0;methodmich;S. Hamulic;O. Sahraoui
+14.0;EnGCatjuh;B. Nuytinck;B. Kuipers
+15.0;Tjeuke;M. Dijks;B. Kuipers
+15.0;methodmich;B. van den Boomen;J. Hato
+16.0;crispy;Rober;C. Verdonk
+16.0;crispy;D. de Wit;V. Pavlidis
+19.0;Vishandel Makaay;N. Isimat-Mirin;R. Flamingo
+19.0;Vishandel Makaay;Rober;A. Halilovic
+19.0;Vishandel Makaay;T. Booth;B. van Rooij
+19.0;Jay-Jay;J. Cillessen;V. Barkas
+19.0;Jay-Jay;C. Arcus;B. Kuipers
+19.0;Jay-Jay;Y. Sugawara;B. Vriends
+19.0;Jay-Jay;S. Bergwijn;B. Brobbey
+19.0;Jay-Jay;T. Lauritsen;V. Pavlidis
+19.0;crispy;S. Bergwijn;B. Brobbey
+;;;
