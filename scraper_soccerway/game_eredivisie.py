@@ -29,5 +29,9 @@ data.save_files_to_results()
 final_message = forum_message.create_message(data, rounds_to_scrape)
 
 print(final_message)
+
+with open("output.txt", "w") as f:
+    f.write(final_message)
+
 if strtobool(os.getenv("IMGUR_UPLOAD")) and strtobool(os.getenv("FORUM_POST")):
     forum_robot.post_results_to_forum(final_message)
