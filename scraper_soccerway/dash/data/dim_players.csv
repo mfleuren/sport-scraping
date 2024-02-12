@@ -20,6 +20,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 9.0;L. de Jong;A;/players/luuk-de-jong/65056/;luuk-de-jong;65056;PSV;L. de Jong
 18.0;M. Vejinović;M;/players/marko-vejinovic/66278/;marko-vejinovic;66278;Heracles Almelo;M. Vejinovic
 8.0;D. Post;M;/players/danny-post/66351/;danny-post;66351;Almere City FC;D. Post
+27.0;K. Leerdam;V;/players/kelvin-leerdam/68354/;kelvin-leerdam;68354;Heracles Almelo;K. Leerdam
 14.0;A. Vellios;A;/players/-vellios/77882/;-vellios;77882;PEC Zwolle;A. Vellios
 24.0;N. Viergever;V;/players/nick--viergever/78529/;nick--viergever;78529;FC Utrecht;N. Viergever
 1.0;L. Unnerstall;K;/players/lars-unnerstall/81320/;lars-unnerstall;81320;FC Twente;L. Unnerstall
@@ -168,7 +169,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 9.0;S. Lammers;A;/players/sam-lammers/407736/;sam-lammers;407736;FC Utrecht;S. Lammers
 2.0;J. Lelieveld;V;/players/julian-lelieveld/407738/;julian-lelieveld;407738;RKC Waalwijk;J. Lelieveld
 18.0;M. Vlap;M;/players/michel-vlap/407742/;michel-vlap;407742;FC Twente;M. Vlap
-;S. van der Water;A;/players/silvester-van-der-water/408536/;silvester-van-der-water;408536;PEC Zwolle;S. van der Water
+8.0;S. van der Water;A;/players/silvester-van-der-water/408536/;silvester-van-der-water;408536;PEC Zwolle;S. van der Water
 1.0;E. Vaessen;K;/players/etienne-vaessen/408572/;etienne-vaessen;408572;RKC Waalwijk;E. Vaessen
 16.0;V. Edvardsen;A;/players/victor-edvardsen/409168/;victor-edvardsen;409168;Go Ahead Eagles;V. Edvardsen
 11.0;Y. Kitala;A;/players/yann-kitala/419684/;yann-kitala;419684;Almere City FC;Y. Kitala
@@ -223,6 +224,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 21.0;M. Boadu;A;/players/myron-boadu/458658/;myron-boadu;458658;FC Twente;M. Boadu
 10.0;C. Stengs;A;/players/calvin-stengs/458659/;calvin-stengs;458659;Feyenoord;C. Stengs
 23.0;J. Veerman;M;/players/joey--veerman/459312/;joey--veerman;459312;PSV;J. Veerman
+;A. Nalić;M;/players/adi-nalic/459631/;adi-nalic;459631;Almere City FC;A. Nalic
 5.0;G. Cox;V;/players/george--cox/459804/;george--cox;459804;FC Volendam;G. Cox
 2.0;S. Voet;V;/players/siemen-voet/460046/;siemen-voet;460046;Fortuna Sittard;S. Voet
 37.0;J. Šutalo;V;/players/josip-utalo/460387/;josip-utalo;460387;Ajax;J. Sutalo
@@ -286,7 +288,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 20.0;M. Belkheir;A;/players/mouhamed-menaour--belkheir/509018/;mouhamed-menaour--belkheir;509018;Fortuna Sittard;M. Belkheir
 ;Sergi Rosanas;V;/players/sergi-rosanas-moragas/509680/;sergi-rosanas-moragas;509680;Sparta Rotterdam;Sergi Rosanas
 27.0;R. Yapi;V;/players/romaric-yapi/509852/;romaric-yapi;509852;Vitesse;R. Yapi
-;R. Ledezma;M;/players/richard-ledezma/512218/;richard-ledezma;512218;PSV;R. Ledezma
+37.0;R. Ledezma;M;/players/richard-ledezma/512218/;richard-ledezma;512218;PSV;R. Ledezma
 49.0;S. Colyn;M;/players/simon-colyn/512567/;simon-colyn;512567;psv-nv;S. Colyn
 20.0;M. Kudus;M;/players/mohammed-kudus/513954/;mohammed-kudus;513954;Ajax;M. Kudus
 11.0;I. Sadiq;A;/players/ibrahim-sadiq/513977/;ibrahim-sadiq;513977;AZ;I. Sadiq
@@ -338,7 +340,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 24.0;F. Mattoir;A;/players/faiz-mattoir/547050/;faiz-mattoir;547050;Almere City FC;F. Mattoir
 20.0;O. Sahraoui;A;/players/osame-sahraoui/547286/;osame-sahraoui;547286;sc Heerenveen;O. Sahraoui
 2.0;M. Pedersen;V;/players/marcus-holmgren-pedersen/549159/;marcus-holmgren-pedersen;549159;Feyenoord;M. Pedersen
-;F. Krastev;M;/players/filip-yavorov-krastev/550509/;filip-yavorov-krastev;550509;PEC Zwolle;F. Krastev
+50.0;F. Krastev;M;/players/filip-yavorov-krastev/550509/;filip-yavorov-krastev;550509;PEC Zwolle;F. Krastev
 9.0;A. Ueda;A;/players/ayase-ueda/551425/;ayase-ueda;551425;Feyenoord;A. Ueda
 31.0;I. Pandur;K;/players/ivor-pandur/557480/;ivor-pandur;557480;Fortuna Sittard;I. Pandur
 28.0;B. van Rooij;V;/players/bart-van-rooij/557859/;bart-van-rooij;557859;NEC;B. van Rooij
@@ -466,6 +468,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 13.0;A. Kaplan;V;/players/ahmetcan-kaplan/641115/;ahmetcan-kaplan;641115;Ajax;A. Kaplan
 32.0;S. Scheperman;M;/players/sem-scheperman/641190/;sem-scheperman;641190;Heracles Almelo;S. Scheperman
 7.0;D. Cleonise;A;/players/denilho-cleonise/642338/;denilho-cleonise;642338;RKC Waalwijk;D. Cleonise
+;D. Remie;K;/players/devin-remie/642809/;devin-remie;642809;FC Utrecht;D. Remie
 21.0;D. Arts;V;/players/dleanu-arts/643504/;dleanu-arts;643504;NEC;D. Arts
 14.0;Zidane Iqbal;M;/players/zidane-iqbal/644834/;zidane-iqbal;644834;FC Utrecht;Zidane Iqbal
 16.0;B. Klaverboer;K;/players/bernt-klaverboer/645513/;bernt-klaverboer;645513;sc Heerenveen;B. Klaverboer
@@ -511,7 +514,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 10.0;S. Hamulić;A;/players/said-hamulic/692022/;said-hamulic;692022;Vitesse;S. Hamulic
 15.0;A. Blake;A;/players/adrian-blake/695557/;adrian-blake;695557;FC Utrecht;A. Blake
 63.0;L. Comenencia;V;/players/livano-comenencia/696780/;livano-comenencia;696780;PSV;L. Comenencia
-;L. Zeefuik;A;/players/lequincio-zeefuik/699766/;lequincio-zeefuik;699766;AZ;L. Zeefuik
+28.0;L. Zeefuik;A;/players/lequincio-zeefuik/699766/;lequincio-zeefuik;699766;AZ;L. Zeefuik
 22.0;M. Dekker;V;/players/maxim-dekker/700543/;maxim-dekker;700543;AZ;M. Dekker
 21.0;E. Poku;A;/players/ernest-poku/700544/;ernest-poku;700544;AZ;E. Poku
 43.0;G. van Zwam;V;/players/giovanni-van-zwam/700633/;giovanni-van-zwam;700633;Vitesse;G. van Zwam
@@ -606,7 +609,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 32.0;V. Dedes;V;/players/victor--rosendahl-dedes/854464/;victor--rosendahl-dedes;854464;PEC Zwolle;V. Dedes
 29.0;K. de Wit;M;/players/kas-de-wit/857092/;kas-de-wit;857092;NEC;K. de Wit
 28.0;P. Saathof;V;/players/pim-saathof/857131/;pim-saathof;857131;Go Ahead Eagles;P. Saathof
-;R. Weijenberg;M;/players/robbin-weijenberg/857132/;robbin-weijenberg;857132;Go Ahead Eagles;R. Weijenberg
+34.0;R. Weijenberg;M;/players/robbin-weijenberg/857132/;robbin-weijenberg;857132;Go Ahead Eagles;R. Weijenberg
 18.0;Diego Gustavo;M;/players/diego-gustavo-rodrigues-de-lima/860153/;diego-gustavo-rodrigues-de-lima;860153;FC Volendam;Diego Gustavo
 19.0;Y. Minteh;A;/players/yankuba-minteh/862574/;yankuba-minteh;862574;Feyenoord;Y. Minteh
 15.0;N. Bijnoe;V;/players/nash-bijnoe/864312/;nash-bijnoe;864312;FC Volendam;N. Bijnoe
@@ -620,10 +623,11 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 ;W. Olofsson;V;/players/wilmer-olofsson/895578/;wilmer-olofsson;895578;AZ;W. Olofsson
 42.0;R. van der Plaat;V;/players/roan-van-der-plaat/895879/;roan-van-der-plaat;895879;sc Heerenveen;R. van der Plaat
 46.0;M. van der Horst;M;/players/mika-van-der-horst/896254/;mika-van-der-horst;896254;FC Volendam;M. van der Horst
-;J. Uneken;A;/players/jesper-uneken/896685/;jesper-uneken;896685;PSV;J. Uneken
+38.0;J. Uneken;A;/players/jesper-uneken/896685/;jesper-uneken;896685;PSV;J. Uneken
 44.0;L. van Koeverden;V;/players/luc-van-koeverden/900294/;luc-van-koeverden;900294;FC Volendam;L. van Koeverden
 30.0;D. van Oorschot;A;/players/diego-van-oorschot/900479/;diego-van-oorschot;900479;Heracles Almelo;D. van Oorschot
 35.0;S. Bultman;V;/players/stijn-bultman/902555/;stijn-bultman;902555;Heracles Almelo;S. Bultman
+;A. Bais;A;/players/aymane-bais/903658/;aymane-bais;903658;Sparta Rotterdam;A. Bais
 ;M. Berenschot;A;/players/milan-berenschot/906463/;milan-berenschot;906463;Go Ahead Eagles;M. Berenschot
 ;J. Smits;M;/players/jorn-smits/906464/;jorn-smits;906464;Go Ahead Eagles;J. Smits
 ;S. van der Plas;V;/players/sven-van-der-plas/907758/;sven-van-der-plas;907758;PSV;S. van der Plas
@@ -650,3 +654,4 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 ;T. Geypens;V;/players/tim-geypens/949330/;tim-geypens;949330;Heracles Almelo;T. Geypens
 25.0;L. Vennegoor of Hesselink;A;/players/lucas-vennegoor-of-hesselink/949422/;lucas-vennegoor-of-hesselink;949422;FC Twente;L. Vennegoor of Hesselink
 ;A. Ismaïl;O;/players/amir-ismail/950490/;amir-ismail;950490;sc Heerenveen;A. Ismail
+;S. Karim;O;/players/safouane-karim/951446/;safouane-karim;951446;FC Volendam;S. Karim
