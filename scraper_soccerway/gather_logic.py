@@ -176,7 +176,7 @@ def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
     completed_clusters = max_dates_by_cluster[max_dates_by_cluster["Datum"].dt.date <= datetime.today().date()]
     played_matches = data.matches["Cluster"].isin(completed_clusters["Cluster"].unique())
 
-    played_matches = data.matches["Datum"] <= datetime.today().strftime('%Y-%m-%d')
+    played_matches = data.matches["Datum"] < datetime.today().strftime('%Y-%m-%d')
 
     if data.match_events.shape[0] > 0:
         # Disregard processed and suspended matches
