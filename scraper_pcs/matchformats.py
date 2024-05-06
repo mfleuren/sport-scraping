@@ -18,7 +18,7 @@ from scraper_pcs import process_results
 from utility import forum_robot, result_objects
 
 
-load_dotenv()
+load_dotenv(dotenv_path="pcs.env")
 
 PATH_RESULTS = os.path.join(
     os.getcwd(),
