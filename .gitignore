@@ -4,6 +4,7 @@ temp/
 __pycache__/
 *.csv
 *.png
-.env
+*.env
 *.ipynb
 .vscode/settings.json
+output.txt
