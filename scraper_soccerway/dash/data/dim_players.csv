@@ -546,6 +546,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 3.0;W. Goes;V;/players/wouter-goes/777233/;wouter-goes;777233;AZ;W. Goes
 ;O. Agougil;V;/players/oualid-agougil/778098/;oualid-agougil;778098;Ajax;O. Agougil
 24.0;S. Vos;M;/players/silvano-cliff-robbie-vos/778100/;silvano-cliff-robbie-vos;778100;Ajax;S. Vos
+62.0;E. Mastoras;V;/players/enoch-mayele-kiemba-mastoras/778101/;enoch-mayele-kiemba-mastoras;778101;AZ;E. Mastoras
 63.0;J. Slory;A;/players/jaden-fernando-slory/778109/;jaden-fernando-slory;778109;Feyenoord;J. Slory
 7.0;J. van Duiven;A;/players/jason-van-duiven/778117/;jason-van-duiven;778117;Almere City FC;J. van Duiven
 55.0;T. Bramel;K;/players/tom-bramel/778119/;tom-bramel;778119;Vitesse;T. Bramel
@@ -655,7 +656,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 ;O. Zimuangana;A;/players/onesime-zimuangana/930901/;onesime-zimuangana;930901;PSV;O. Zimuangana
 ;G. Trenidad;A;/players/geatan-trenidad/930904/;geatan-trenidad;930904;PSV;G. Trenidad
 48.0;B. van Driel;M;/players/bram-van-driel/933550/;bram-van-driel;933550;FC Volendam;B. van Driel
-16.0;B. Broekmans;K;/players/boaz-broekmans/934870/;boaz-broekmans;934870;Fortuna Sittard;B. Broekmans
+;B. Broekmans;K;/players/boaz-broekmans/934870/;boaz-broekmans;934870;Fortuna Sittard;B. Broekmans
 31.0;D. Ghafour;M;/players/dielan-ghafour/939816/;dielan-ghafour;939816;Go Ahead Eagles;D. Ghafour
 58.0;A. Visser;A;/players/andy-visser/943779/;andy-visser;943779;Vitesse;A. Visser
 35.0;D. Ruward;V;/players/dylan-ruward/947888/;dylan-ruward;947888;PEC Zwolle;D. Ruward
@@ -666,4 +667,6 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 30.0;S. Karim;O;/players/safouane-karim/951446/;safouane-karim;951446;FC Volendam;S. Karim
 ;J. De Almeida Reis;V;/players/jose-de-almeida-reis/960287/;jose-de-almeida-reis;960287;Excelsior;J. De Almeida Reis
 34.0;T. Reinders;V;/players/thomas-reinders/961616/;thomas-reinders;961616;NEC;T. Reinders
-;C. Demircioglu;A;/players/caner-demircioglu/965256/;caner-demircioglu;965256;FC Volendam;C. Demircioglu
+39.0;C. Demircioglu;A;/players/caner-demircioglu/965256/;caner-demircioglu;965256;FC Volendam;C. Demircioglu
+16.0;R. Bayram;K;/players/ramazan-bayram/965960/;ramazan-bayram;965960;Fortuna Sittard;R. Bayram
+37.0;D. Bisschops;V;/players/daan-bisschops/965961/;daan-bisschops;965961;Fortuna Sittard;D. Bisschops
