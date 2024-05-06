@@ -5,7 +5,7 @@ __pycache__/
 inputs/
 results/
 *.png
-.env
+*.env
 *.ipynb
 .vscode/
 output.txt

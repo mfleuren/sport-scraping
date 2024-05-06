@@ -13,7 +13,7 @@ import config, gather, forum_message
 # from utility import forum_robot
 
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv("soccerway.env")
 
 # MAKE_POST = strtobool(os.getenv('IMGUR_UPLOAD')) and strtobool(os.getenv('FORUM_POST'))
 
