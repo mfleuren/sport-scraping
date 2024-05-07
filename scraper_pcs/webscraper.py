@@ -64,15 +64,16 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
     all_result_tables = pd.DataFrame()
 
     table_list = pd.read_html(html_text)
+    cleaned_table_list = [table for table in table_list if "Rnk" in table.columns]
     all_rankings = ['STAGE', 'GC', 'SPRINT', 'KOM', 'YOUTH']
     ranking_exists = match[all_rankings].values
     ranking_val = [all_rankings[i] for i,y in enumerate(ranking_exists) if y]
     for idx, val in enumerate(ranking_val):
 
         if match['TTT'] & (idx == 0):
-            result_table = clean_ttt_table(table_list[idx], match)
+            result_table = clean_ttt_table(cleaned_table_list[idx], match)
         else:
-            result_table = clean_results_table(table_list[idx], match)
+            result_table = clean_results_table(cleaned_table_list[idx], match)
 
         if match['MATCH'] != 22:
             result_table['RANKING'] = f"stage_{val.lower()}"
@@ -94,6 +95,9 @@ def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFra
 
     # Convert name characters to unicode
     results_table['RIDER'] = results_table.apply(lambda x: unidecode(x['RIDER']), axis=1)
+
+    # Remove trailing spaces
+    results_table['RIDER'] = results_table['RIDER'].str.strip()
 
     # Split ridername in surname and firstname
     results_table['SURNAME'] = (results_table['RIDER']

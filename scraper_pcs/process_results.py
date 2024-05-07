@@ -41,7 +41,6 @@ def create_swarm_plot(
 
     if not gc_check:
         data = results.stage_points[-1]
-        print(data)
         match_name = data.loc[data['MATCH'].notna(), 'MATCH'].unique()[0]
         match_name = f'Stage_{int(match_name)}' if type(match_name) != 'str' else match_name
         file_name = os.path.join(PATH_RESULTS, f"{match_name.lower()}_plot.png")
@@ -58,7 +57,7 @@ def create_swarm_plot(
     gc['RELATIVE_POSITION'] = (gc['POINTS'] - gc['POINTS'].min())/(gc['POINTS'].max() - gc['POINTS'].min())
     gc['YPOSITION_TEXT'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
 
-    print(gc.head())
+    print(gc[["COACH", "POINTS"]].head())
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
     mks = itertools.cycle(['o', '^', 'p', 's', 'D', 'P'])
     markers = [next(mks) for _ in gc["COACH"].unique()]

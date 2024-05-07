@@ -4,6 +4,8 @@ import os
 import pandas as pd
 from datetime import datetime
 
+load_dotenv("G:\\Local\\sport-scraping\\pcs.env")
+
 import sys
 sys.path.append(os.getcwd())
 from scraper_pcs.process_substitutions import process_substitutions, create_teams_plot
@@ -11,9 +13,6 @@ from scraper_pcs.webscraper import scrape_website
 from scraper_pcs.calculate_scores import calculate_match_points, calculate_match_standings, calculate_stage_points
 from scraper_pcs import process_results
 from utility import forum_robot, result_objects
-
-
-load_dotenv()
 
 PATH_RESULTS = os.path.join(os.getcwd(), 'results', f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}")
 MAKE_POST = strtobool(os.getenv('IMGUR_UPLOAD')) and strtobool(os.getenv('FORUM_POST'))
