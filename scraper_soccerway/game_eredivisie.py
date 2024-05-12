@@ -1,10 +1,13 @@
 from distutils.util import strtobool
 import os
+from dotenv import load_dotenv
 
 from competition_data import CompetitionData
 import forum_message
 import gather_logic, validate, points_logic
 from utility import forum_robot
+
+load_dotenv("G:\\Local\\sport-scraping\\soccerway.env")
 
 data = CompetitionData("eredivisie-2023")
 
@@ -35,3 +38,4 @@ with open("output.txt", "w") as f:
 
 if strtobool(os.getenv("IMGUR_UPLOAD")) and strtobool(os.getenv("FORUM_POST")):
     forum_robot.post_results_to_forum(final_message)
+
