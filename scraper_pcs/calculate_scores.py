@@ -70,7 +70,7 @@ def calculate_stage_points(results: StageResults, message: Message) -> Tuple[Sta
     """Calculate the points by stage, combining rankings by rider before joining with coach teams."""
 
     stage_result = results.stage_results[-1].copy()
-    stage_result = stage_result[~stage_result['RNK'].isin(['DNS', 'DNF', 'DSQ', 'OTL'])]
+    stage_result = stage_result[~stage_result['RNK'].isin(['DNS', 'DNF', 'DSQ', 'OTL', 'NR'])]
     stage_result['RNK'] = stage_result['RNK'].astype('int')
     stage_points_by_rider = (
         stage_result

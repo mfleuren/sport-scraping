@@ -21,6 +21,7 @@ def upload_to_imgur(image_full_path:Union[str, pathlib.Path]) -> str:
             'title': os.getenv('IMGUR_IMG_TITLE')
             }
         )
+    print(f"IMGUR_RESPONSE: {j1}")
        
     message = f"[img]{j1.json()['data']['link']}[/img]\n"
     
