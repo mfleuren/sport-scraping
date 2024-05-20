@@ -215,7 +215,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 20.0;L. Czyborra;V;/players/lennart-czyborra/453551/;lennart-czyborra;453551;PEC Zwolle;L. Czyborra
 4.0;S. Kersten;V;/players/sam-kersten/453644/;sam-kersten;453644;PEC Zwolle;S. Kersten
 14.0;K. Belić;M;/players/kristijan-belic/453868/;kristijan-belic;453868;AZ;K. Belic
-9.0;Pedro Marques;A;/players/pedro-david-rosendo-marques/454356/;pedro-david-rosendo-marques;454356;NEC;Pedro Marques
+;Pedro Marques;A;/players/pedro-david-rosendo-marques/454356/;pedro-david-rosendo-marques;454356;NEC;Pedro Marques
 10.0;F. Druijf;A;/players/ferdy-druijf/454471/;ferdy-druijf;454471;PEC Zwolle;F. Druijf
 1.0;J. Schendelaar;K;/players/jasper-schendelaar/454473/;jasper-schendelaar;454473;PEC Zwolle;J. Schendelaar
 26.0;K. Bucker;K;/players/koen-bucker/454477/;koen-bucker;454477;stichting-heracles-almelo;K. Bucker
@@ -652,6 +652,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 36.0;C. Bos;V;/players/christian-bos/927560/;christian-bos;927560;PEC Zwolle;C. Bos
 ;S. Gomez Van Hoogen;M;/players/samuel-gomez-van-hoogen/929514/;samuel-gomez-van-hoogen;929514;PSV;S. Gomez Van Hoogen
 ;J. Bawuah;M;/players/jordy-bawuah/930297/;jordy-bawuah;930297;PSV;J. Bawuah
+;D. Giersthove;V;/players/djomar-giersthove/930799/;djomar-giersthove;930799;Feyenoord;D. Giersthove
 ;B. van den Boogaard;V;/players/brian-van-den-boogaard/930883/;brian-van-den-boogaard;930883;PSV;B. van den Boogaard
 ;O. Zimuangana;A;/players/onesime-zimuangana/930901/;onesime-zimuangana;930901;PSV;O. Zimuangana
 ;G. Trenidad;A;/players/geatan-trenidad/930904/;geatan-trenidad;930904;PSV;G. Trenidad
@@ -665,9 +666,11 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 25.0;L. Vennegoor of Hesselink;A;/players/lucas-vennegoor-of-hesselink/949422/;lucas-vennegoor-of-hesselink;949422;FC Twente;L. Vennegoor of Hesselink
 ;A. Ismaïl;O;/players/amir-ismail/950490/;amir-ismail;950490;sc Heerenveen;A. Ismail
 30.0;S. Karim;O;/players/safouane-karim/951446/;safouane-karim;951446;FC Volendam;S. Karim
-;J. De Almeida Reis;V;/players/jose-de-almeida-reis/960287/;jose-de-almeida-reis;960287;Excelsior;J. De Almeida Reis
+;J. de Almeida Reis;V;/players/jose-de-almeida-reis/960287/;jose-de-almeida-reis;960287;Excelsior;J. de Almeida Reis
 34.0;T. Reinders;V;/players/thomas-reinders/961616/;thomas-reinders;961616;NEC;T. Reinders
 39.0;C. Demircioglu;A;/players/caner-demircioglu/965256/;caner-demircioglu;965256;FC Volendam;C. Demircioglu
 16.0;R. Bayram;K;/players/ramazan-bayram/965960/;ramazan-bayram;965960;Fortuna Sittard;R. Bayram
 37.0;D. Bisschops;V;/players/daan-bisschops/965961/;daan-bisschops;965961;Fortuna Sittard;D. Bisschops
-;S. Hermsen;A;/players/sjors-lowis-hermsen/968663/;sjors-lowis-hermsen;968663;Fortuna Sittard;S. Hermsen
+38.0;S. Hermsen;A;/players/sjors-lowis-hermsen/968663/;sjors-lowis-hermsen;968663;Fortuna Sittard;S. Hermsen
+;J. Tijink;V;/players/jop-tijink/970328/;jop-tijink;970328;Heracles Almelo;J. Tijink
+;T. Schenkhuizen;M;/players/tristan-schenkhuizen/970333/;tristan-schenkhuizen;970333;Fortuna Sittard;T. Schenkhuizen

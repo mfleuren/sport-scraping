@@ -26,7 +26,7 @@ START WEBCLIENT
 def start_webclient() -> Session:
 
     client = requests.session()
-    client.headers.update({"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"})
+    client.headers.update({"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0"})
 
     return client
 
@@ -34,10 +34,12 @@ client = start_webclient()
 
 
 def open_website_in_client(url:str) -> str:
+
     result = client.get(url)
     if result.status_code == 200:        
         return result.content.decode(result.encoding)
     else:
+        print(result.status_code)
         raise ConnectionError
 
 
