@@ -36,6 +36,22 @@ COMPETITION_SETTINGS = {
             "start_teams":"{base_url}/international/{continent}/{name}/{year}-{nation}/group-stage/{id_group}",
             "teams":"{base_url}/teams/{team_name}/{team_name}/{team_id}"
         }
+    },
+    "european-championships-2024": {
+        "NAME":"european-championships",
+        "YEAR":2024,
+        "TOURNAMENT":True,
+        "ID_GROUP":"r64999",
+        "ID_FINALS":"s20572",
+        "CONTINENT":"europe",
+        "NATION":"germany",
+        "START_OF_KO":"2024-07-14",
+        "URLS": {
+            "matches_group":"{base_url}/international/{continent}/{name}/{year}-{nation}/group-stage/{id_group}/matches/",
+            "matches_finals":"{base_url}/international/{continent}/{name}/{year}-{nation}/{id_finals}/final-stages/",
+            "start_teams":"{base_url}/international/{continent}/{name}/{year}-{nation}/group-stage/{id_group}",
+            "teams":"{base_url}/teams/{team_name}/{team_name}/{team_id}"
+        }
     }
 }
 
@@ -60,7 +76,7 @@ REGEXES = {
     'player_name_from_url':r'players/(.*)/.*/',
     'player_id_from_url':r'players/.*/(.*)/',
     'match_id_from_url':r'/matches/.*/.*/.*/.*/.*/.*/.*/(.*)/',
-    'nation_name_from_url':r'teams/(.*)/.*/.*/',
+    'nation_name_from_url':r'/teams/(.*)/.*/.*/',
     'nation_id_from_url':r'teams/.*/.*/(.*)/'
 }
 

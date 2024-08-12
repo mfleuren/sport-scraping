@@ -1,6 +1,8 @@
 import time
 from tqdm import tqdm
+from typing import Optional
 import pandas as pd
+import numpy as np
 from unidecode import unidecode
 from datetime import datetime
 
@@ -16,15 +18,20 @@ def update_matches(data: CompetitionData) -> CompetitionData:
     """Loop through all tournament stages and update match dates and match URLs.
     """
 
-    if data.urls["matches"]:
+    if "matches" in data.urls.keys():
         urls = data.dim_clubs["SW_TeamURL"].apply(lambda x: config.BASE_URL + x)
     else:
-        urls = [data.urls["matches_group"], data.urls["matches_finals"]]
+        urls = [
+            data.urls["matches_group"].format(base_url=config.BASE_URL, continent=data.continent, name=data.name, year=data.year, nation=data.nation, id_group=data.id_group), 
+            data.urls["matches_finals"].format(base_url=config.BASE_URL, continent=data.continent, name=data.name, year=data.year, nation=data.nation, id_finals=data.id_finals), 
+            ]
     
     for url in tqdm(urls, total=len(urls)):
+        print(f"Scraping {url}.")
         updated_matches = gather.extract_matches_from_html_tournament(url, chunk_size=3)
+        print(f"Found the following matches: {updated_matches=}")
         data.matches = pd.concat([data.matches, updated_matches], ignore_index=True)
-
+        print(f"{data.matches=}")
         time.sleep(config.DEFAULT_SLEEP_S)
 
     # If a match_id is duplicated, only keep the last entry (most up to date)
@@ -148,9 +155,10 @@ def process_teammodifications(data: CompetitionData, gameweek: int) -> Competiti
         return data
 
 
-def create_full_team_selections(data: CompetitionData, game_week: int) -> CompetitionData:
+def create_full_team_selections(data: CompetitionData, game_week: Optional[int] = None) -> CompetitionData:
 
-    data = process_teammodifications(data, game_week)
+    if game_week: 
+        data = process_teammodifications(data)        
 
     data.chosen_teams = pd.merge(
         left=data.chosen_teams[["Coach", "Speler", "Speelronde"]],
@@ -159,6 +167,9 @@ def create_full_team_selections(data: CompetitionData, game_week: int) -> Compet
         right_on="Naam_fix",
         how="left",
     )
+
+    if not game_week:
+        data.chosen_teams["Speelronde"] = 1
 
     return data
 
@@ -189,14 +200,22 @@ def determine_matches_to_scrape(data: CompetitionData) -> pd.DataFrame:
     return matches_to_scrape
 
 
-def scrape_matches(data: CompetitionData, matches_to_scrape: pd.DataFrame, game_round: int) -> CompetitionData:
+def scrape_matches(data: CompetitionData, matches_to_scrape: pd.DataFrame = None, game_round: int = None) -> CompetitionData:
    
-    matches_in_round = matches_to_scrape[matches_to_scrape["Cluster"] == game_round]
-    print(game_round, matches_in_round)
+    if game_round:
+        matches_in_round = matches_to_scrape[matches_to_scrape["Cluster"] == game_round]
+        print(game_round, matches_in_round)
+    else:
+        matches_in_round = matches_to_scrape
+        game_round = 1
+        print("No game round, scrape all matches.")
 
     for _, match in tqdm(
         matches_in_round.iterrows(), total=matches_in_round.shape[0]
     ):
+        if match["url_match"] == np.nan:
+            continue
+
         try:
             match_events = gather.extract_match_events(match["url_match"], data.dim_players)
             match_events = match_events.join(data.matches.set_index('url_match')['Datum'], on='Match_Url')

@@ -41,13 +41,13 @@ class CompetitionData:
         self.local_dir_input = f"./inputs/{self.year}_{self.name}"
         self.local_dir_result = f"./results/{self.year}_{self.name}"
 
-        if self.tournament:
+        if self.tournament == True:
             self.id_group = settings["ID_GROUP"]
             self.id_finals = settings["ID_FINALS"] 
             self.nation = settings["NATION"]
             self.continent = settings["CONTINENT"]
         
-        elif self.tournament == False:
+        else:
             self.id = settings["ID"]
             self.substitutions = pd.read_csv(
                 os.path.join(self.local_dir_input, config.LOCAL_FILES["substitutions"]),
@@ -212,12 +212,13 @@ class CompetitionData:
                 )
             print('Saved match events data to disk.')
 
-        if self.substitutions.shape[0] != 0:
-            self.substitutions.to_csv(
-                f'G:/Local/sport-scraping/scraper_soccerway/dash/data/{config.LOCAL_FILES["substitutions"]}',
-                sep=';',
-                index=False
-            )
+        if hasattr(self, "substitutions"):
+            if self.substitutions.shape[0] != 0:
+                self.substitutions.to_csv(
+                    f'G:/Local/sport-scraping/scraper_soccerway/dash/data/{config.LOCAL_FILES["substitutions"]}',
+                    sep=';',
+                    index=False
+                )
         
     
     def load_clubs(self, path: Union[str, os.PathLike]) -> pd.DataFrame:
@@ -245,7 +246,7 @@ class CompetitionData:
                     id=self.id
                     )
             print(url)
-            clubs = gather.extract_clubs_from_html(url)
+            clubs = gather.extract_clubs_from_html(url, tournament=self.tournament)
 
             clubs.to_csv(path, sep=';', index=False)
 

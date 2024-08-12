@@ -2,10 +2,10 @@ import pandas as pd
 import generate_figures
 
 # Combine points and player data
-points = pd.read_csv("results/2022_World-Cup/points_player.csv", sep=";")
+points = pd.read_csv("results/2024_European-Championships/points_player.csv", sep=";")
 points_g = points.groupby("Speler")["P_Totaal"].sum().sort_values(ascending=False)
 
-players = pd.read_csv("results/2022_World-Cup/dim_players.csv", sep=";")
+players = pd.read_csv("results/2024_European-Championships/dim_players.csv", sep=";")
 players.set_index("Naam", inplace=True)
 players = players[["Positie", "Team"]]
 
@@ -14,17 +14,29 @@ df = points_g.to_frame().join(players).dropna().sort_values("P_Totaal", ascendin
 # Get best players by position and nation
 # Remove all players that score < x points
 df_sel = df.loc[df.groupby(["Team", "Positie"])["P_Totaal"].idxmax()].copy()
-df_sel = df_sel[df_sel["P_Totaal"] >= df_sel["P_Totaal"].median()].copy()
+# df_sel = df_sel[df_sel["P_Totaal"] >= 0.7*df_sel["P_Totaal"].mean()].copy()
+
+
+print(df_sel.shape)
 
 best_team_df = pd.DataFrame()
 best_score = 0
 
-for i in range(0, 5000):
+for i in range(0, 1000):
+
+    if i % 50 == 0:
+        print(f"Iteration {i}: Best score {best_score}")
 
     sample_team_df = pd.DataFrame()
     n_players = len(sample_team_df)
 
     while n_players < 11:
+
+        i_sub = 1 
+
+        if i_sub > 100:
+            break
+
         sample = df_sel.sample(n=1, weights="P_Totaal").copy()
         sample_pos = sample["Positie"].item()
 
@@ -156,6 +168,8 @@ for i in range(0, 5000):
             sample_team_df = pd.concat([sample_team_df, sample])
 
         n_players = len(sample_team_df)
+
+        i_sub += 1
 
     if sample_team_df["P_Totaal"].sum() > best_score:
         print(
