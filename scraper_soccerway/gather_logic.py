@@ -27,16 +27,16 @@ def update_matches(data: CompetitionData) -> CompetitionData:
             ]
     
     for url in tqdm(urls, total=len(urls)):
-        print(f"Scraping {url}.")
-        updated_matches = gather.extract_matches_from_html_tournament(url, chunk_size=3)
-        print(f"Found the following matches: {updated_matches=}")
+        updated_matches = gather.extract_matches_from_html_competition(url, chunk_size=3)
         data.matches = pd.concat([data.matches, updated_matches], ignore_index=True)
-        print(f"{data.matches=}")
         time.sleep(config.DEFAULT_SLEEP_S)
 
     # If a match_id is duplicated, only keep the last entry (most up to date)
     duplicated_mask = data.matches.duplicated(subset=["url_match"], keep="last")
     data.matches = data.matches[~duplicated_mask]
+
+    # Only keep matches after a certain date
+    data.matches = data.matches[data.matches["Datum"] > datetime(2024,8,1).date()]
 
     data.matches = gather.determine_match_clusters(data.matches)
 
@@ -158,7 +158,7 @@ def process_teammodifications(data: CompetitionData, gameweek: int) -> Competiti
 def create_full_team_selections(data: CompetitionData, game_week: Optional[int] = None) -> CompetitionData:
 
     if game_week: 
-        data = process_teammodifications(data)        
+        data = process_teammodifications(data, game_week)        
 
     data.chosen_teams = pd.merge(
         left=data.chosen_teams[["Coach", "Speler", "Speelronde"]],

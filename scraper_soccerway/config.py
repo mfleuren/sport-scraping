@@ -21,6 +21,17 @@ COMPETITION_SETTINGS = {
             "start_teams":"{base_url}/national/netherlands/eredivisie/{year}/regular-season/{id}/tables/"
         }
     },
+    "eredivisie-2024": {
+        "NAME":"Eredivisie",
+        "YEAR":"2024",
+        "TOURNAMENT":False,
+        "ID":"r82417", 
+        "URLS": {
+            "matches":"{base_url}/teams/netherlands/{team_name}/{team_id}/matches/",
+            "teams":"{base_url}/teams/netherlands/{team_name}/{team_id}/squad/",
+            "start_teams":"{base_url}/national/netherlands/eredivisie/{year}/regular-season/{id}/tables/"
+        }
+    },
     "world-cup-2022": {
         "NAME":"world-cup",
         "YEAR":2022,

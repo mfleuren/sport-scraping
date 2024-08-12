@@ -9,7 +9,7 @@ from utility import forum_robot
 
 load_dotenv("G:\\Local\\sport-scraping\\soccerway.env")
 
-data = CompetitionData("eredivisie-2023")
+data = CompetitionData("eredivisie-2024")
 
 data = gather_logic.update_matches(data)
 data = gather_logic.update_players(data)
@@ -18,6 +18,7 @@ matches_to_scrape = gather_logic.determine_matches_to_scrape(data)
 rounds_to_scrape = matches_to_scrape["Cluster"].unique()
 
 print(f"Scraping the following round(s): {', '.join(rounds_to_scrape.astype(str))}")
+print(data.matches.head(16))
 for game_round in rounds_to_scrape:
     data = gather_logic.create_full_team_selections(data, game_round)
     validate.tactics(data.chosen_teams)
@@ -36,6 +37,6 @@ print(final_message)
 with open("output.txt", "w") as f:
     f.write(final_message)
 
-if strtobool(os.getenv("IMGUR_UPLOAD")) and strtobool(os.getenv("FORUM_POST")):
-    forum_robot.post_results_to_forum(final_message)
+# if strtobool(os.getenv("IMGUR_UPLOAD")) and strtobool(os.getenv("FORUM_POST")):
+#     forum_robot.post_results_to_forum(final_message)
 

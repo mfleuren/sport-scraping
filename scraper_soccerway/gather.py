@@ -144,7 +144,7 @@ def determine_match_clusters(matches: pd.DataFrame) -> pd.DataFrame:
 
 
 def extract_matches_from_html_tournament(url: str, chunk_size: int = None) -> pd.DataFrame:
-    """Extract info from matches table."""
+    """Extract info from matches table for a tournament."""
 
     html_string = open_website_in_client(url)
 
@@ -166,8 +166,9 @@ def extract_matches_from_html_tournament(url: str, chunk_size: int = None) -> pd
 
             return pd.DataFrame()
 
-    if "Live" in df_text_and_href.iloc[1]["Dag"]:
-        df_text_and_href = df_text_and_href.iloc[3:].reset_index(drop=True)
+    if "Dag" in df_text_and_href.columns:
+        if "Live" in df_text_and_href.iloc[1]["Dag"]:
+            df_text_and_href = df_text_and_href.iloc[3:].reset_index(drop=True)
 
     df_text = df_text_and_href.apply(lambda col: [val[0] if isinstance(val, tuple) else None for val in col]).copy()
     df_href = df_text_and_href.apply(lambda col: [val[1] if isinstance(val, tuple) else None for val in col]).copy()
@@ -196,7 +197,84 @@ def extract_matches_from_html_tournament(url: str, chunk_size: int = None) -> pd
 
     print(result.head())
 
-    return result.drop_duplicates().reset_index(drop=True)       
+    return result.drop_duplicates().reset_index(drop=True)     
+
+
+def extract_matches_from_html_competition(url: str, chunk_size: int = None) -> pd.DataFrame:
+    """Extract info from matches table for a competition."""
+
+    all_results = pd.DataFrame()
+    html_string = open_website_in_client(url)
+    # Extract basic table 
+    results = pd.read_html(html_string)
+    soup = BeautifulSoup(html_string, 'html.parser')
+    soup_tables = soup.find_all('table', class_='matches')
+
+    for result, soup_table in zip(results, soup_tables):
+        try:
+        
+            if len(result.columns) == 5:
+                result.columns = ['Datum_og', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1']
+            elif len(result.columns) == 7:
+                result.columns = ['Datum_og', 'Competitie', 'Thuisteam', 'Uitslag', 'Uitteam', 'x1', 'x2']
+
+            result['Datum'] = result['Datum_og'].str.extract(r'([0-9]{2}/[0-9]{2}/[0-9]{2})')
+            result['Datum'] = pd.to_datetime(result['Datum'], format='%d/%m/%y', errors='coerce').dt.date
+
+            # Extract URLS
+            all_urls = find_all_links_in_table(soup_table)
+            all_urls_no_events = [url for url in all_urls if '#events' not in url and 'national' not in url] 
+            if result[result['Uitslag']=='-'].shape[0] == 0: # Default - all matches have date or result            
+                urls_in_chunks = [all_urls_no_events[i:i+chunk_size] for i in range(0, len(all_urls_no_events), chunk_size)]   
+
+            else:
+                
+                # Get adjusted chunk size by checking for dashes
+                adj_chunk_size = [chunk_size if row["Uitslag"] != "-" else chunk_size-1 for _, row in result.iterrows() ]
+
+                for idx, single_chunk_size in enumerate(adj_chunk_size):
+                    if idx == 0:
+                        urls_in_chunks = [all_urls_no_events[0:single_chunk_size]]
+                    else:
+                        processed_urls = sum(adj_chunk_size[:idx])
+                        urls_in_chunks = urls_in_chunks + [all_urls_no_events[processed_urls:processed_urls+single_chunk_size]]
+                    
+                    if single_chunk_size != chunk_size:
+
+                        urls_to_change = urls_in_chunks[-1]    
+
+                        # Append empty string before or after sequence
+                        # TODO: currently assumes a chunk size of 2
+                        if urls_to_change[0] == '':
+                            urls_to_change = [''] + urls_to_change
+                        elif urls_to_change[1] == '':
+                            urls_to_change = urls_to_change + ['']
+                        else:
+                            urls_to_change = [urls_to_change[0], '', urls_to_change[1]]
+
+                        urls_in_chunks[-1] = urls_to_change
+
+            urls_in_chunks = np.asarray(urls_in_chunks, dtype=object)
+
+            result[['url_club_home', 'url_match', 'url_club_away']] = urls_in_chunks
+
+            # Drop unnecessary columns
+            result.drop(['x1', 'x2', 'Datum_og'], axis=1, inplace=True)
+
+            # Remove matches not from Eredivisie
+            if 'Competitie' in result.columns:
+                result = result[result['Competitie'] == 'ERE']
+
+            # Remove matches from before a certain date
+            # TODO: parametrize
+            result = result[result["Datum"] > datetime.datetime(2023, 8, 1).date()]
+
+            all_results = pd.concat([all_results, result])
+        except:
+            print(f"Failed finding URLS on url {url}")
+            continue
+
+    return all_results.reset_index(drop=True)
 
 
 def extract_squad_from_html(url: str) -> pd.DataFrame:
