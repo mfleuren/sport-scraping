@@ -62,6 +62,8 @@ def grand_tour():
 
     matches_to_scrape = find_matches_to_scrape(results_data)
 
+    print(matches_to_scrape)
+
     for idx, match in matches_to_scrape.iterrows():
         print(f"Processing stage {idx+1} of {matches_to_scrape.shape[0]}.")
     
@@ -82,8 +84,10 @@ def grand_tour():
 
     single_message = process_results.create_forum_message(results_data, message_data)
     print(single_message)
-    if MAKE_POST:
-        forum_robot.post_results_to_forum(single_message)
+    with open("output.txt", "w") as f:
+        f.write(single_message)
+    # if MAKE_POST:
+    #     forum_robot.post_results_to_forum(single_message)
 
     results_data.export_concatenated_data()
     results_data.export_teams()
