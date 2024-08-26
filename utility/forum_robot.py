@@ -1,11 +1,12 @@
 import mechanize
 import os
+import json
 
-class LoginException():
+class LoginException(Exception):
     Exception('Login failed.')
 
 
-class PostException():
+class PostException(Exception):
     Exception('Could not post message.')
 
 
@@ -22,15 +23,15 @@ def start_mechanize_browser() -> mechanize.Browser:
     return browser
 
 
-def login_to_forum(browser: mechanize.Browser) -> mechanize.Browser:
+def login_to_forum(browser: mechanize.Browser, url: str = os.getenv('FORUM_LOGIN_URL')) -> mechanize.Browser:
     """Login to forum"""
 
-    browser.open(os.getenv('FORUM_LOGIN_URL'))
+    browser.open(url)
 
     # Select first form(login form) and set values to the credentials
     browser.form = list(browser.forms())[1]
-    browser["vb_login_username"] = os.getenv('FORUM_ACCOUNT')
-    browser["vb_login_password"] = os.getenv('FORUM_PASSWORD')
+    browser["login"] = os.getenv('FORUM_ACCOUNT')
+    browser["password"] = os.getenv('FORUM_PASSWORD')
     try:
         browser.submit()
         print(f"Successfully logged in to {os.getenv('FORUM_BASE_URL')} with username {os.getenv('FORUM_ACCOUNT')}.")
@@ -45,9 +46,15 @@ def post_message(browser: mechanize.Browser, message:str) -> None:
 
     try:
         browser.open(os.getenv('FORUM_TOPIC_URL'))
-        browser.select_form('quick_reply')
-        browser['message'] = message
-        browser.submit()
+        for f in browser.forms():
+            for c in f.controls:
+                print(f"{f=}, {f.name=}, {c=}, {c.type=}, {c.name=}")
+        
+        # browser.select_form('js-quickReply')
+        # browser['message'] = message
+        # browser.submit()
+
+        browser.open(url_or_request="https://www.wijzijnvoetbal.nl/forum/index.php?threads/wielrennen-148-met-puck-pieterse.59319/add-reply", data=json.dumps({"message": "test"}))
         print('Posted message.')
     except:
         raise PostException()
@@ -60,3 +67,10 @@ def post_results_to_forum(message: str) -> None:
     browser = login_to_forum(browser)
     post_message(browser, message)
     
+
+if __name__ == "__main__":
+    from dotenv import load_dotenv
+    load_dotenv(r"G:\Local\sport-scraping\pcs.env")
+    browser = start_mechanize_browser()
+    login_to_forum(browser, url='https://www.wijzijnvoetbal.nl/forum/index.php?login/')
+    post_message(browser, message="test")

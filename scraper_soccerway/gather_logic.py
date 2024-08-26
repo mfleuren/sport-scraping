@@ -36,7 +36,7 @@ def update_matches(data: CompetitionData) -> CompetitionData:
     data.matches = data.matches[~duplicated_mask]
 
     # Only keep matches after a certain date
-    data.matches = data.matches[data.matches["Datum"] > datetime(2024,8,1).date()]
+    data.matches = data.matches[pd.to_datetime(data.matches["Datum"]).dt.date > datetime(2024,8,1).date()]
 
     data.matches = gather.determine_match_clusters(data.matches)
 
