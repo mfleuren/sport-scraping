@@ -90,7 +90,7 @@ def make_substitutions(results_data: StageResults, message: Message) -> Tuple[St
         for sub in range(n_substitutions):
             coach_team = results_data.teams[results_data.teams['COACH'] == coach]
             coach_team_out = coach_team[coach_team['ROUND_OUT'] == stage]
-            coach_team_subs = coach_team[(coach_team['POSITION'] == 'Sub') & (coach_team['ROUND_OUT'].isna())] 
+            coach_team_subs = coach_team.query(f"POSITION == 'Sub' & (ROUND_OUT.isnull() | ROUND_OUT > {stage})")
 
             row_out = coach_team_out.iloc[sub]
             rider_out = row_out['RIDER']
