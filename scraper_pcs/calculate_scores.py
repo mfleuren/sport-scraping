@@ -12,7 +12,7 @@ def calculate_match_points(results: StageResults, stage_race: bool = False) -> S
     if stage_race:
         points = results.default_points.set_index(['RANKING', 'RNK'])
         join_result_points = result_df.join(points, on=['RANKING', 'RNK'])
-        join_result_points.fillna({'POINTS':0}, inplace=True) 
+        join_result_points.fillna({'POINTS':0}, inplace=True)
 
         grouped_points_by_rider = (
             join_result_points

@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import pandas as pd
 from datetime import datetime
+import time
 
 load_dotenv("G:\\Local\\sport-scraping\\pcs.env")
 
@@ -72,6 +73,9 @@ def grand_tour():
         results_data, message_data = process_substitutions(results_data, message_data)
         results_data, message_data = calculate_stage_points(results_data, message_data)
         message_data = process_results.create_swarm_plot(results_data, message_data, gc_check=False)
+
+        if matches_to_scrape.shape[0] > 3:
+            time.sleep(3)
     
     if len(matches_to_scrape) > 0:
         print("Processing general classification.")

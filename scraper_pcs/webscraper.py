@@ -76,6 +76,9 @@ def read_result_table_stage(html_text: str, match: pd.Series) -> pd.DataFrame:
             result_table = clean_results_table(cleaned_table_list[idx], match)
 
         if match['MATCH'] != 22:
+            if val == "STAGE":
+                # Skip stage result for GC
+                pass
             result_table['RANKING'] = f"stage_{val.lower()}"
         else:
             result_table['RANKING'] = f"gc_{val.lower()}"
@@ -98,6 +101,10 @@ def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFra
 
     # Remove trailing spaces
     results_table['RIDER'] = results_table['RIDER'].str.strip()
+
+    # Remove rows without rider name 
+    # NOTE: this can happen when PCS adds messages into the result table
+    results_table = results_table[results_table["RIDER"] != ""]
 
     # Split ridername in surname and firstname
     results_table['SURNAME'] = (results_table['RIDER']
