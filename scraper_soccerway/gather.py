@@ -626,7 +626,6 @@ def determine_clean_sheet(lineups: pd.DataFrame, score_home: int, score_away: in
 
 def extract_match_events(url: str, dim_players: pd.DataFrame) -> pd.DataFrame:
 
-    print(f"{url=}")
     html_string = open_website_in_client(config.BASE_URL + url)
 
     match_state = extract_txt_by_class(html_string, 'span', 'match-state')

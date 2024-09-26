@@ -1,7 +1,7 @@
 Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 25.0;K. Vermeer;K;/players/kenneth-vermeer/2175/;kenneth-vermeer;2175;bvo-fc-zwolle;K. Vermeer
 ;J. de Guzmán;M;/players/jonathan-alexander-de-guzman/2259/;jonathan-alexander-de-guzman;2259;sparta-rotterdam-bv;J. de Guzman
-;I. Perišić;A;/players/ivan-perisic/13756/;ivan-perisic;13756;psv-nv;I. Perisic
+5.0;I. Perišić;A;/players/ivan-perisic/13756/;ivan-perisic;13756;psv-nv;I. Perisic
 22.0;P. Tytoń;K;/players/przemyslaw-tyton/17326/;przemyslaw-tyton;17326;stichting-fc-twente-65;P. Tyton
 20.0;L. Schöne;M;/players/lasse-schone/17366/;lasse-schone;17366;nijmegen-eendracht-combinatie;L. Schone
 29.0;M. Kramer;A;/players/michiel-kramer/19677/;michiel-kramer;19677;rkc-waalwijk;M. Kramer
@@ -453,6 +453,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 32.0;T. de Graaff;K;/players/tom-gerard-de-graaff/783148/;tom-gerard-de-graaff;783148;stichting-fc-utrecht;T. de Graaff
 4.0;J. Hato;V;/players/jorrel-hato/783173/;jorrel-hato;783173;afc-ajax;J. Hato
 27.0;M. Milovanović;V;/players/mateja-milovanovic/783196/;mateja-milovanovic;783196;sportclub-heerenveen;M. Milovanovic
+41.0;J. Brandes;M;/players/julian-christiaan-brandes/783215/;julian-christiaan-brandes;783215;afc-ajax;J. Brandes
 49.0;J. Banel;A;/players/jaydon-amauri-banel/783280/;jaydon-amauri-banel;783280;afc-ajax;J. Banel
 39.0;M. Robberechts;A;/players/milan-robberechts/789504/;milan-robberechts;789504;fortuna-sittard;M. Robberechts
 1.0;R. Owusu-Oduro;K;/players/rome-jayden-owusu-oduro/789860/;rome-jayden-owusu-oduro;789860;stichting-az;R. Owusu-Oduro
@@ -476,6 +477,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 33.0;D. van der Haar;V;/players/damian-van-der-haar/812205/;damian-van-der-haar;812205;bvo-fc-zwolle;D. van der Haar
 33.0;N. Verdoni;K;/players/nando-verdoni/813110/;nando-verdoni;813110;stichting-go-ahead-eagles;N. Verdoni
 22.0;T. van de Loo;M;/players/tim-van-de-loo/813111/;tim-van-de-loo;813111;rkc-waalwijk;T. van de Loo
+;J. Faberski;M;/players/jan-faberski/814645/;jan-faberski;814645;afc-ajax;J. Faberski
 23.0;K. Sano;M;/players/kodai-sano/815318/;kodai-sano;815318;nijmegen-eendracht-combinatie;K. Sano
 ;H. El Dahri;M;/players/hamza-el-dahri/819347/;hamza-el-dahri;819347;sparta-rotterdam-bv;H. El Dahri
 26.0;G. Read;V;/players/givairo-read/821635/;givairo-read;821635;feyenoord-rotterdam-nv;G. Read
