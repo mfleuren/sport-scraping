@@ -335,7 +335,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 35.0;P. Wålemark;A;/players/patrik-walemark/626682/;patrik-walemark;626682;feyenoord-rotterdam-nv;P. Walemark
 23.0;Álex Balboa;M;/players/alex-balboa-bandeira/627655/;alex-balboa-bandeira;627655;fc-omniworld;Alex Balboa
 28.0;Z. Buurmeester;M;/players/zico-buurmeester/627669/;zico-buurmeester;627669;stichting-az;Z. Buurmeester
-;J. Berkhout;V;/players/jorn-berkhout/627675/;jorn-berkhout;627675;stichting-az;J. Berkhout
+51.0;J. Berkhout;V;/players/jorn-berkhout/627675/;jorn-berkhout;627675;stichting-az;J. Berkhout
 2.0;M. Hilgers;V;/players/mees-hilgers/627701/;mees-hilgers;627701;stichting-fc-twente-65;M. Hilgers
 6.0;R. Flamingo;V;/players/ryan-flamingo/627724/;ryan-flamingo;627724;psv-nv;R. Flamingo
 6.0;C. Staring;M;/players/casper-staring/628494/;casper-staring;628494;nac-bv;C. Staring
@@ -409,7 +409,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 11.0;N. Emeran;A;/players/noam-emeran/671004/;noam-emeran;671004;stichting-fc-groningen;N. Emeran
 20.0;J. Trenskow;A;/players/jacob-trenskow/672937/;jacob-trenskow;672937;sportclub-heerenveen;J. Trenskow
 15.0;F. González;V;/players/facundo-gonzalez-molino/673756/;facundo-gonzalez-molino;673756;feyenoord-rotterdam-nv;F. Gonzalez
-;A. Mortensen;A;/players/alex-mortensen/674384/;alex-mortensen;674384;stichting-fc-groningen;A. Mortensen
+33.0;A. Mortensen;A;/players/alex-mortensen/674384/;alex-mortensen;674384;stichting-fc-groningen;A. Mortensen
 ;K. Reitmaier;K;/players/kaylen-jermaine-danny-reitmaier/674708/;kaylen-jermaine-danny-reitmaier;674708;sparta-rotterdam-bv;K. Reitmaier
 ;M. Nassoh;M;/players/mohamed-nassoh/680659/;mohamed-nassoh;680659;sparta-rotterdam-bv;M. Nassoh
 ;C. Neghli;A;/players/camiel-neghli/680707/;camiel-neghli;680707;sparta-rotterdam-bv;C. Neghli
@@ -449,8 +449,10 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 31.0;J. van der Wilt;K;/players/joel-van-der-wilt/771874/;joel-van-der-wilt;771874;fc-omniworld;J. van der Wilt
 47.0;T. Gooijer;V;/players/tristan-gooijer/777215/;tristan-gooijer;777215;bvo-fc-zwolle;T. Gooijer
 33.0;D. Kwakman;M;/players/dave-kwakman/777219/;dave-kwakman;777219;stichting-az;D. Kwakman
+;R. Daal;A;/players/ro-zangelo-daal/777225/;ro-zangelo-daal;777225;stichting-az;R. Daal
 3.0;W. Goes;V;/players/wouter-goes/777233/;wouter-goes;777233;stichting-az;W. Goes
 24.0;S. Vos;M;/players/silvano-cliff-robbie-vos/778100/;silvano-cliff-robbie-vos;778100;afc-ajax;S. Vos
+;E. Mastoras;V;/players/enoch-mayele-kiemba-mastoras/778101/;enoch-mayele-kiemba-mastoras;778101;stichting-az;E. Mastoras
 37.0;J. Slory;A;/players/jaden-fernando-slory/778109/;jaden-fernando-slory;778109;feyenoord-rotterdam-nv;J. Slory
 ;M. Kleijn;V;/players/mike-kleijn/778111/;mike-kleijn;778111;sparta-rotterdam-bv;M. Kleijn
 19.0;J. van Duiven;A;/players/jason-van-duiven/778117/;jason-van-duiven;778117;psv-nv;J. van Duiven
@@ -491,6 +493,8 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 11.0;B. Önal;A;/players/basar-onal/822550/;basar-onal;822550;nijmegen-eendracht-combinatie;B. Onal
 10.0;S. ’t Zand;M;/players/shiloh-t-zand/824640/;shiloh-t-zand;824640;stichting-heracles-almelo;S. 't Zand
 9.0;M. Smit;A;/players/milan-smit/828395/;milan-smit;828395;stichting-go-ahead-eagles;M. Smit
+;E. Dijkstra;V;/players/elijah-dijkstra/830535/;elijah-dijkstra;830535;stichting-az;E. Dijkstra
+57.0;A. Sliti;A;/players/aymen-sliti/830541/;aymen-sliti;830541;feyenoord-rotterdam-nv;A. Sliti
 28.0;T. Land;M;/players/tygo-land/830551/;tygo-land;830551;psv-nv;T. Land
 24.0;J. Mesbahi;V;/players/julien-mesbahi/830556/;julien-mesbahi;830556;stichting-fc-twente-65;J. Mesbahi
 39.0;M. Rots;V;/players/mats-rots/830558/;mats-rots;830558;stichting-fc-twente-65;M. Rots
@@ -566,4 +570,4 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 26.0;D. Rallis;O;/players/dimitris-rallis/982464/;dimitris-rallis;982464;sportclub-heerenveen;D. Rallis
 35.0;T. Oostra;O;/players/ties-oostra/982465/;ties-oostra;982465;sportclub-heerenveen;T. Oostra
 39.0;I. Ahmed;M;/players/isaiah-ahmed/982466/;isaiah-ahmed;982466;sportclub-heerenveen;I. Ahmed
-;O. Panneflek;A;/players/owen-panneflek/1002934/;owen-panneflek;1002934;stichting-fc-twente-65;O. Panneflek
+48.0;O. Panneflek;A;/players/owen-panneflek/1002934/;owen-panneflek;1002934;stichting-fc-twente-65;O. Panneflek
