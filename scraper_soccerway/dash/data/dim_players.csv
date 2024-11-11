@@ -31,6 +31,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 18.0;G. Trauner;V;/players/gernot-trauner/135546/;gernot-trauner;135546;feyenoord-rotterdam-nv;G. Trauner
 50.0;A. Erceg;A;/players/ante-erceg/137741/;ante-erceg;137741;fortuna-sittard;A. Erceg
 12.0;H. Verhulst;K;/players/hobie-verhulst/138446/;hobie-verhulst;138446;stichting-az;H. Verhulst
+;K. van Veen;A;/players/kevin-van-veen/143530/;kevin-van-veen;143530;stichting-fc-groningen;K. van Veen
 1.0;L. Koopmans;K;/players/luuk-koopmans/149059/;luuk-koopmans;149059;fortuna-sittard;L. Koopmans
 21.0;J. Smits;K;/players/joshua-smits/149369/;joshua-smits;149369;sbv-willem-ii-tilburg;J. Smits
 18.0;D. Klaassen;M;/players/davy-klaassen/158581/;davy-klaassen;158581;afc-ajax;D. Klaassen
@@ -40,6 +41,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 31.0;M. Branderhorst;K;/players/mathijs-branderhorst/175358/;mathijs-branderhorst;175358;fortuna-sittard;M. Branderhorst
 19.0;T. Haye;M;/players/thom-haye/182931/;thom-haye;182931;fc-omniworld;T. Haye
 3.0;M. van der Hoorn;V;/players/mike-van-der-hoorn/190540/;mike-van-der-hoorn;190540;stichting-fc-utrecht;M. van der Hoorn
+28.0;T. Receveur;M;/players/tim-receveur/190544/;tim-receveur;190544;fc-omniworld;T. Receveur
 4.0;J. Pelupessy;M;/players/joey-pelupessy/197572/;joey-pelupessy;197572;stichting-fc-groningen;J. Pelupessy
 1.0;R. Kortsmit;K;/players/roy-kortsmit/200996/;roy-kortsmit;200996;nac-bv;R. Kortsmit
 25.0;M. Tirpan;V;/players/mickael-tirpan/202469/;mickael-tirpan;202469;sbv-willem-ii-tilburg;M. Tirpan
@@ -374,6 +376,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 15.0;Y. Baas;V;/players/youri-baas/638355/;youri-baas;638355;afc-ajax;Y. Baas
 19.0;M. van Brederode;A;/players/myron-van-brederode/638358/;myron-van-brederode;638358;stichting-az;M. van Brederode
 21.0;S. Lagsir;A;/players/samir-lagsir/638363/;samir-lagsir;638363;bvo-fc-zwolle;S. Lagsir
+;A. Foah-Sam;V;/players/amoah-foa-sam/639015/;amoah-foa-sam;639015;fc-omniworld;A. Foah-Sam
 ;S. Mito;A;/players/shunsuke-mito/640252/;shunsuke-mito;640252;sparta-rotterdam-bv;S. Mito
 2.0;B. Pereira;V;/players/brayann-pereira/640596/;brayann-pereira;640596;nijmegen-eendracht-combinatie;B. Pereira
 11.0;R. Paula;M;/players/raul-paula/640610/;raul-paula;640610;nac-bv;R. Paula
@@ -505,7 +508,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 34.0;J. Pinas;V;/players/jaden-pinas/845490/;jaden-pinas;845490;fc-omniworld;J. Pinas
 51.0;T. Smolenaars;K;/players/tijn-smolenaars/846638/;tijn-smolenaars;846638;psv-nv;T. Smolenaars
 14.0;C. Lokesa;M;/players/chris-lokesa/847737/;chris-lokesa;847737;rkc-waalwijk;C. Lokesa
-;M. Berger;K;/players/mannou-berger/851452/;mannou-berger;851452;feyenoord-rotterdam-nv;M. Berger
+41.0;M. Berger;K;/players/mannou-berger/851452/;mannou-berger;851452;feyenoord-rotterdam-nv;M. Berger
 ;M. de Ligt;V;/players/max-de-ligt/853143/;max-de-ligt;853143;sparta-rotterdam-bv;M. de Ligt
 25.0;S. Ouaissa;M;/players/sami-ouaissa/856399/;sami-ouaissa;856399;nijmegen-eendracht-combinatie;S. Ouaissa
 29.0;K. de Wit;M;/players/kas-de-wit/857092/;kas-de-wit;857092;nijmegen-eendracht-combinatie;K. de Wit
