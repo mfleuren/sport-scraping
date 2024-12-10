@@ -495,6 +495,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 50.0;J. Faberski;M;/players/jan-faberski/814645/;jan-faberski;814645;afc-ajax;J. Faberski
 23.0;K. Sano;M;/players/kodai-sano/815318/;kodai-sano;815318;nijmegen-eendracht-combinatie;K. Sano
 ;H. El Dahri;M;/players/hamza-el-dahri/819347/;hamza-el-dahri;819347;sparta-rotterdam-bv;H. El Dahri
+43.0;R. El Arguioui;M;/players/rafik--el-arguioui/821542/;rafik--el-arguioui;821542;stichting-fc-utrecht;R. El Arguioui
 26.0;G. Read;V;/players/givairo-read/821635/;givairo-read;821635;feyenoord-rotterdam-nv;G. Read
 24.0;D. Baron;K;/players/dirk-baron/821647/;dirk-baron;821647;stichting-fc-groningen;D. Baron
 ;R. Rosario;A;/players/rayvien-rosario/821748/;rayvien-rosario;821748;sparta-rotterdam-bv;R. Rosario
@@ -550,6 +551,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 21.0;E. van Ee;M;/players/espen-van-ee/921919/;espen-van-ee;921919;sportclub-heerenveen;E. van Ee
 40.0;M. Dors;M;/players/marley-dors/923158/;marley-dors;923158;fc-omniworld;M. Dors
 28.0;L. Mol;V;/players/lars-mol/923583/;lars-mol;923583;nac-bv;L. Mol
+42.0;N. Verschuren;V;/players/nick-verschuren/923634/;nick-verschuren;923634;afc-ajax;N. Verschuren
 19.0;Saná Fernandes;A;/players/sana-fernandes/926017/;sana-fernandes;926017;nac-bv;Sana Fernandes
 30.0;A. Jaddi;A;/players/aimane-jaddi/929143/;aimane-jaddi;929143;nac-bv;A. Jaddi
 2.0;W. Prins;V;/players/wouter-prins/930296/;wouter-prins;930296;stichting-fc-groningen;W. Prins
@@ -587,3 +589,4 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 39.0;I. Ahmed;M;/players/isaiah-ahmed/982466/;isaiah-ahmed;982466;sportclub-heerenveen;I. Ahmed
 48.0;O. Panneflek;A;/players/owen-panneflek/1002934/;owen-panneflek;1002934;stichting-fc-twente-65;O. Panneflek
 51.0;U. van Aalst;M;/players/uriel-van-aalst/1013189/;uriel-van-aalst;1013189;sbv-willem-ii-tilburg;U. van Aalst
+;T. Keimpema;K;/players/tjalling-keimpema/1014367/;tjalling-keimpema;1014367;sportclub-heerenveen;T. Keimpema
