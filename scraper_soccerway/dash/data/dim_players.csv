@@ -544,17 +544,20 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 ;A. Bais;A;/players/aymane-bais/903658/;aymane-bais;903658;sparta-rotterdam-bv;A. Bais
 23.0;F. Turay;A;/players/fofin-turay/909656/;fofin-turay;909656;stichting-fc-groningen;F. Turay
 9.0;K. Shiogai;A;/players/kento-shiogai/910330/;kento-shiogai;910330;nijmegen-eendracht-combinatie;K. Shiogai
+44.0;A. Bouwman;V;/players/aaron-bouwman/913693/;aaron-bouwman;913693;afc-ajax;A. Bouwman
 17.0;O. Demir;A;/players/onur-demir/914020/;onur-demir;914020;fortuna-sittard;O. Demir
 34.0;N. Fichtinger;M;/players/nick-fichtinger/914267/;nick-fichtinger;914267;bvo-fc-zwolle;N. Fichtinger
 40.0;N. Martens;K;/players/niels-martens/915583/;niels-martens;915583;fortuna-sittard;N. Martens
 28.0;M. Witteveen;M;/players/melle-joop-witteveen/915624/;melle-joop-witteveen;915624;sportclub-heerenveen;M. Witteveen
 29.0;H. Kuster;M;/players/harrie-kuster/916880/;harrie-kuster;916880;stichting-fc-twente-65;H. Kuster
+;M. Veldman;V;/players/myles-veldman/921618/;myles-veldman;921618;sbv-willem-ii-tilburg;M. Veldman
 21.0;E. van Ee;M;/players/espen-van-ee/921919/;espen-van-ee;921919;sportclub-heerenveen;E. van Ee
 40.0;M. Dors;M;/players/marley-dors/923158/;marley-dors;923158;fc-omniworld;M. Dors
 28.0;L. Mol;V;/players/lars-mol/923583/;lars-mol;923583;nac-bv;L. Mol
 42.0;N. Verschuren;V;/players/nick-verschuren/923634/;nick-verschuren;923634;afc-ajax;N. Verschuren
 19.0;Saná Fernandes;A;/players/sana-fernandes/926017/;sana-fernandes;926017;nac-bv;Sana Fernandes
 30.0;A. Jaddi;A;/players/aimane-jaddi/929143/;aimane-jaddi;929143;nac-bv;A. Jaddi
+;S. Gomez Van Hoogen;M;/players/samuel-gomez-van-hoogen/929514/;samuel-gomez-van-hoogen;929514;psv-nv;S. Gomez Van Hoogen
 2.0;W. Prins;V;/players/wouter-prins/930296/;wouter-prins;930296;stichting-fc-groningen;W. Prins
 43.0;J. Plug;V;/players/jan-plug/930803/;jan-plug;930803;feyenoord-rotterdam-nv;J. Plug
 64.0;I. Ka;K;/players/ismail-ka/931206/;ismail-ka;931206;feyenoord-rotterdam-nv;I. Ka
@@ -569,6 +572,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 57.0;N. Eggens;A;/players/nils-eggens/946067/;nils-eggens;946067;stichting-fc-groningen;N. Eggens
 70.0;R. Leicester;V;/players/roy-leicester/946352/;roy-leicester;946352;stichting-fc-groningen;R. Leicester
 25.0;C. Valerius;V;/players/cherrion-valerius/947863/;cherrion-valerius;947863;nac-bv;C. Valerius
+;D. Ruward;V;/players/dylan-ruward/947888/;dylan-ruward;947888;bvo-fc-zwolle;D. Ruward
 67.0;S. Bouland;V;/players/sven-bouland/948734/;sven-bouland;948734;stichting-fc-groningen;S. Bouland
 15.0;T. Reinders;V;/players/thomas-reinders/961616/;thomas-reinders;961616;nijmegen-eendracht-combinatie;T. Reinders
 30.0;J. Kuiper;V;/players/jay-kuiper/963237/;jay-kuiper;963237;fc-omniworld;J. Kuiper
@@ -578,6 +582,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 27.0;J. Tijink;V;/players/jop-tijink/970328/;jop-tijink;970328;stichting-heracles-almelo;J. Tijink
 38.0;T. Schenkhuizen;M;/players/tristan-schenkhuizen/970333/;tristan-schenkhuizen;970333;fortuna-sittard;T. Schenkhuizen
 46.0;D. van der Werff;M;/players/david-van-der-werff/973034/;david-van-der-werff;973034;stichting-fc-groningen;D. van der Werff
+;G. Reiziger;M;/players/gabriel-reiziger/974417/;gabriel-reiziger;974417;bvo-fc-zwolle;G. Reiziger
 27.0;O. Mohamedhoesein;M;/players/omar-mohamedhoesein/976032/;omar-mohamedhoesein;976032;nijmegen-eendracht-combinatie;O. Mohamedhoesein
 32.0;D. Apinsa;V;/players/donte-apinsa/977225/;donte-apinsa;977225;stichting-go-ahead-eagles;D. Apinsa
 18.0;D. van Reeuwijk;V;/players/daan-van-reeuwijk/980107/;daan-van-reeuwijk;980107;nac-bv;D. van Reeuwijk
@@ -591,3 +596,5 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 48.0;O. Panneflek;A;/players/owen-panneflek/1002934/;owen-panneflek;1002934;stichting-fc-twente-65;O. Panneflek
 51.0;U. van Aalst;M;/players/uriel-van-aalst/1013189/;uriel-van-aalst;1013189;sbv-willem-ii-tilburg;U. van Aalst
 ;T. Keimpema;K;/players/tjalling-keimpema/1014367/;tjalling-keimpema;1014367;sportclub-heerenveen;T. Keimpema
+;R. Bouw;V;/players/robin-bouw/1015973/;robin-bouw;1015973;sportclub-heerenveen;R. Bouw
+;K. de Leeuw;K;/players/karst-de-leeuw/1016116/;karst-de-leeuw;1016116;sbv-willem-ii-tilburg;K. de Leeuw
