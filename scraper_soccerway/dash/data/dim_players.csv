@@ -68,6 +68,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 20.0;F. Oldrup Jensen;M;/players/fredrik-oldrup-jensen/231672/;fredrik-oldrup-jensen;231672;nac-bv;F. Oldrup Jensen
 ;N. Olij;K;/players/nick-olij/235322/;nick-olij;235322;sparta-rotterdam-bv;N. Olij
 27.0;M. Martins;V;/players/marvin-da-graca/235915/;marvin-da-graca;235915;fc-omniworld;M. Martins
+16.0;Matheus;K;/players/matheus-lima-magalhaes/239000/;matheus-lima-magalhaes;239000;afc-ajax;Matheus
 8.0;M. Engels;M;/players/mario-engels/243044/;mario-engels;243044;stichting-heracles-almelo;M. Engels
 25.0;M. Brouwer;K;/players/michael-brouwer/250395/;michael-brouwer;250395;stichting-fc-utrecht;M. Brouwer
 25.0;W. Weghorst;A;/players/wout-weghorst/255205/;wout-weghorst;255205;afc-ajax;W. Weghorst
@@ -84,7 +85,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 4.0;D. Mirani;V;/players/damon-mirani/289811/;damon-mirani;289811;stichting-heracles-almelo;D. Mirani
 9.0;O. Zawada;A;/players/oskar-zawada/289870/;oskar-zawada;289870;rkc-waalwijk;O. Zawada
 7.0;Y. Namli;M;/players/younes-namli/291585/;younes-namli;291585;bvo-fc-zwolle;Y. Namli
-;L. Bossin;K;/players/liam-bossin/292779/;liam-bossin;292779;feyenoord-rotterdam-nv;L. Bossin
+39.0;L. Bossin;K;/players/liam-bossin/292779/;liam-bossin;292779;feyenoord-rotterdam-nv;L. Bossin
 44.0;A. Noppert;K;/players/andries-noppert/300862/;andries-noppert;300862;sportclub-heerenveen;A. Noppert
 ;D. Sinkgraven;V;/players/daley-sinkgraven/300873/;daley-sinkgraven;300873;fortuna-sittard;D. Sinkgraven
 21.0;H. Jurjus;K;/players/hidde-jurjus/301076/;hidde-jurjus;301076;stichting-fc-groningen;H. Jurjus
@@ -158,6 +159,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 19.0;S. Olsson;M;/players/simon-olsson/423888/;simon-olsson;423888;sportclub-heerenveen;S. Olsson
 17.0;L. Ivanušec;A;/players/luka-ivanuec/424605/;luka-ivanuec;424605;feyenoord-rotterdam-nv;L. Ivanusec
 ;M. van Bergen;A;/players/mitchell-van-bergen/426574/;mitchell-van-bergen;426574;sparta-rotterdam-bv;M. van Bergen
+3.0;T. Malacia;V;/players/tyrell-malacia/426580/;tyrell-malacia;426580;psv-nv;T. Malacia
 4.0;A. Obispo;V;/players/armando-obispo/426581/;armando-obispo;426581;psv-nv;A. Obispo
 24.0;G. Roemeratoe;M;/players/godfried-roemeratoe/426582/;godfried-roemeratoe;426582;rkc-waalwijk;G. Roemeratoe
 3.0;J. Teze;V;/players/jordan-teze/426583/;jordan-teze;426583;psv-nv;J. Teze
@@ -169,7 +171,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 18.0;K. Ogawa;A;/players/koki-ogawa/435835/;koki-ogawa;435835;nijmegen-eendracht-combinatie;K. Ogawa
 5.0;O. Wijndal;V;/players/owen-wijndal/440858/;owen-wijndal;440858;afc-ajax;O. Wijndal
 23.0;N. Vesterlund;V;/players/niklas-brondsted-vesterlund-nielsen/441234/;niklas-brondsted-vesterlund-nielsen;441234;stichting-fc-utrecht;N. Vesterlund
-10.0;T. Booth;M;/players/taylor-booth/441556/;taylor-booth;441556;stichting-fc-utrecht;T. Booth
+;T. Booth;M;/players/taylor-booth/441556/;taylor-booth;441556;stichting-fc-twente-65;T. Booth
 15.0;M. López;V;/players/marcos-johan-lopez-lanfranco/442604/;marcos-johan-lopez-lanfranco;442604;feyenoord-rotterdam-nv;M. Lopez
 8.0;J. Hove;M;/players/johan-hove/444353/;johan-hove;444353;stichting-fc-groningen;J. Hove
 18.0;I. Nicolăescu;A;/players/ion-nicolescu/446191/;ion-nicolescu;446191;sportclub-heerenveen;I. Nicolaescu
@@ -209,9 +211,10 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 6.0;M. Hoedemakers;M;/players/mees-hoedemakers/465082/;mees-hoedemakers;465082;nijmegen-eendracht-combinatie;M. Hoedemakers
 29.0;J. Wendlinger;K;/players/jonas-wendlinger/469451/;jonas-wendlinger;469451;fc-omniworld;J. Wendlinger
 1.0;L. Plogmann;K;/players/luca-plogmann/470121/;luca-plogmann;470121;stichting-go-ahead-eagles;L. Plogmann
+;M. Spenkelink;K;/players/mark-spenkelink/471327/;mark-spenkelink;471327;rkc-waalwijk;M. Spenkelink
 14.0;Rodrigo Guth;V;/players/rodrigo-guth/475116/;rodrigo-guth;475116;fortuna-sittard;Rodrigo Guth
 18.0;J. Medić;V;/players/jakov-medi/475230/;jakov-medi;475230;afc-ajax;J. Medic
-;H. Ekdal;V;/players/hjalmar-ekdal/475251/;hjalmar-ekdal;475251;stichting-fc-groningen;H. Ekdal
+4.0;H. Ekdal;V;/players/hjalmar-ekdal/475251/;hjalmar-ekdal;475251;stichting-fc-groningen;H. Ekdal
 10.0;D. van den Berg;M;/players/dave-van-den-berg-/475335/;dave-van-den-berg-;475335;bvo-fc-zwolle;D. van den Berg
 19.0;J. Carranza;A;/players/julian-carranza/475791/;julian-carranza;475791;feyenoord-rotterdam-nv;J. Carranza
 25.0;T. Oosting;M;/players/thijs-oosting/477591/;thijs-oosting;477591;stichting-fc-groningen;T. Oosting
@@ -227,6 +230,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 5.0;R. Sigurgeirsson;V;/players/runar-thor-sigurgeirsson/491746/;runar-thor-sigurgeirsson;491746;sbv-willem-ii-tilburg;R. Sigurgeirsson
 39.0;D. Janošek;M;/players/dominik-janosek/492661/;dominik-janosek;492661;nac-bv;D. Janosek
 29.0;S. Giménez;A;/players/santiago-tomas-gimenez/494293/;santiago-tomas-gimenez;494293;feyenoord-rotterdam-nv;S. Gimenez
+;B. Radulović;A;/players/bojan-radulovic/495230/;bojan-radulovic;495230;fortuna-sittard;B. Radulovic
 17.0;K. Hansen;A;/players/kornelius-normann-hansen/496125/;kornelius-normann-hansen;496125;fc-omniworld;K. Hansen
 3.0;J. Wieckhoff;V;/players/jannes-luca-wieckhoff/497167/;jannes-luca-wieckhoff;497167;stichting-heracles-almelo;J. Wieckhoff
 7.0;Róber;M;/players/roberto-gonzalez-bayon/500171/;roberto-gonzalez-bayon;500171;nijmegen-eendracht-combinatie;Rober
@@ -281,7 +285,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 25.0;C. Mamengi;V;/players/christopher-mamengi/540620/;christopher-mamengi;540620;fc-omniworld;C. Mamengi
 40.0;M. Didden;V;/players/matisse-didden/541794/;matisse-didden;541794;stichting-fc-utrecht;M. Didden
 13.0;J. Žambůrek;M;/players/jan-ambrek/542777/;jan-ambrek;542777;stichting-heracles-almelo;J. Zamburek
-;O. Edvardsen;A;/players/oliver-valaker-edvardsen/545481/;oliver-valaker-edvardsen;545481;afc-ajax;O. Edvardsen
+17.0;O. Edvardsen;A;/players/oliver-valaker-edvardsen/545481/;oliver-valaker-edvardsen;545481;afc-ajax;O. Edvardsen
 8.0;E. Linthorst;M;/players/evert-linthorst/546756/;evert-linthorst;546756;stichting-go-ahead-eagles;E. Linthorst
 24.0;F. Mattoir;A;/players/faiz-mattoir/547050/;faiz-mattoir;547050;fc-omniworld;F. Mattoir
 19.0;O. Antman;A;/players/oliver-antman/547497/;oliver-antman;547497;stichting-go-ahead-eagles;O. Antman
@@ -335,11 +339,14 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 14.0;Igor Paixão;A;/players/igor-guilherme-barbosa-da-paixao/593041/;igor-guilherme-barbosa-da-paixao;593041;feyenoord-rotterdam-nv;Igor Paixao
 17.0;A. Van Hoorenbeeck;V;/players/alec-van-hoorenbeeck/593523/;alec-van-hoorenbeeck;593523;stichting-fc-twente-65;A. Van Hoorenbeeck
 30.0;G. Ávila;V;/players/gaston-avila/594879/;gaston-avila;594879;afc-ajax;G. Avila
+;O. Pettersson;A;/players/oscar-pettersson/596851/;oscar-pettersson;596851;stichting-go-ahead-eagles;O. Pettersson
+2.0;Lucas Rosa;V;/players/lucas-oliveira-rosa/596931/;lucas-oliveira-rosa;596931;afc-ajax;Lucas Rosa
 11.0;D. Mbayo;A;/players/dylan-mbayo/599681/;dylan-mbayo;599681;bvo-fc-zwolle;D. Mbayo
 16.0;S. Mannsverk;M;/players/sivert-heggheim-mannsverk/600718/;sivert-heggheim-mannsverk;600718;afc-ajax;S. Mannsverk
 2.0;D. Rensch;V;/players/devyne-rensch/601396/;devyne-rensch;601396;afc-ajax;D. Rensch
 18.0;D. Møller Wolfe;V;/players/david-moller-wolfe/603294/;david-moller-wolfe;603294;stichting-az;D. Moller Wolfe
 14.0;B. De Keersmaecker;M;/players/brian-de-keersmaecker/605558/;brian-de-keersmaecker;605558;stichting-heracles-almelo;B. De Keersmaecker
+28.0;O. Targhalline;M;/players/oussama-targhalline/606346/;oussama-targhalline;606346;feyenoord-rotterdam-nv;O. Targhalline
 17.0;K. Lien;A;/players/kristian-stromland-lien/606757/;kristian-stromland-lien;606757;stichting-fc-groningen;K. Lien
 11.0;M. Aïko;M;/players/makan-aiko/608125/;makan-aiko;608125;fortuna-sittard;M. Aiko
 4.0;A. MacNulty;V;/players/anselmo-garcia-mcnulty/608607/;anselmo-garcia-mcnulty;608607;bvo-fc-zwolle;A. MacNulty
@@ -415,6 +422,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 11.0;Carlos Forbs;A;/players/carlos-borges/649886/;carlos-borges;649886;afc-ajax;Carlos Forbs
 16.0;S. Maikuma;V;/players/seiya-maikuma/651537/;seiya-maikuma;651537;stichting-az;S. Maikuma
 27.0;A. van Axel Dongen;A;/players/amourrichio-van-axel-dongen/654719/;amourrichio-van-axel-dongen;654719;afc-ajax;A. van Axel Dongen
+;O. Sivertsen;A;/players/oskar-siira-sivertsen/655131/;oskar-siira-sivertsen;655131;stichting-go-ahead-eagles;O. Sivertsen
 51.0;C. Setford;K;/players/charlie-setford/655389/;charlie-setford;655389;afc-ajax;C. Setford
 46.0;S. Andersen;M;/players/silas-andersen/655434/;silas-andersen;655434;stichting-fc-utrecht;S. Andersen
 7.0;J. Breum;A;/players/jakob-breum/658739/;jakob-breum;658739;stichting-go-ahead-eagles;J. Breum
@@ -424,6 +432,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 23.0;M. Lahdo;A;/players/mayckel-lahdo/660897/;mayckel-lahdo;660897;stichting-az;M. Lahdo
 17.0;R. Kuijpers;A;/players/roy-kuijpers/663306/;roy-kuijpers;663306;nac-bv;R. Kuijpers
 ;J. Baas;M;/players/julian-baas/663406/;julian-baas;663406;sparta-rotterdam-bv;J. Baas
+;J. Ideho;A;/players/joel-ideho/663982/;joel-ideho;663982;sparta-rotterdam-bv;J. Ideho
 22.0;L. Milani;V;/players/lorenzo-milani/664147/;lorenzo-milani;664147;stichting-heracles-almelo;L. Milani
 3.0;O. Aertssen;V;/players/olivier-aertssen/664645/;olivier-aertssen;664645;bvo-fc-zwolle;O. Aertssen
 34.0;C. Nadje;M;/players/chris-kevin-nadje/667108/;chris-kevin-nadje;667108;feyenoord-rotterdam-nv;C. Nadje
@@ -469,14 +478,15 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 22.0;F. Stam;V;/players/finn-stam/736439/;finn-stam;736439;stichting-fc-groningen;F. Stam
 41.0;D. Verduin;K;/players/duke-verduin/736659/;duke-verduin;736659;bvo-fc-zwolle;D. Verduin
 15.0;M. Pivaš;V;/players/miodrag-pivas/745852/;miodrag-pivas;745852;sbv-willem-ii-tilburg;M. Pivas
-;Ali Jasim;M;/players/ali-jasim-elaibi-al-tameemi/751601/;ali-jasim-elaibi-al-tameemi;751601;fc-omniworld;Ali Jasim
+12.0;Ali Jasim;M;/players/ali-jasim-elaibi-al-tameemi/751601/;ali-jasim-elaibi-al-tameemi;751601;fc-omniworld;Ali Jasim
 39.0;H. Korkmazyürek;M;/players/hasip-korkmazyurek/752773/;hasip-korkmazyurek;752773;fortuna-sittard;H. Korkmazyurek
 23.0;A. Hadj Moussa;A;/players/anis--hadj-moussa/755639/;anis--hadj-moussa;755639;feyenoord-rotterdam-nv;A. Hadj Moussa
 19.0;Y. Taha;A;/players/younes-taha-el-idrissi/755774/;younes-taha-el-idrissi;755774;stichting-fc-twente-65;Y. Taha
 14.0;L. Smans;M;/players/levi-smans/757104/;levi-smans;757104;sportclub-heerenveen;L. Smans
 77.0;L. Tunjić;A;/players/luka-tunjic/759911/;luka-tunjic;759911;fortuna-sittard;L. Tunjic
 3.0;T. Beelen;V;/players/thomas-beelen/760998/;thomas-beelen;760998;feyenoord-rotterdam-nv;T. Beelen
-;T. Abed;M;/players/tai-abed/761155/;tai-abed;761155;psv-nv;T. Abed
+47.0;T. Abed;M;/players/tai-abed/761155/;tai-abed;761155;psv-nv;T. Abed
+;S. van Duijn;A;/players/sem-van-duijn/765493/;sem-van-duijn;765493;stichting-az;S. van Duijn
 19.0;E. Bajraktarević;A;/players/esmir-bajraktarevic/766842/;esmir-bajraktarevic;766842;psv-nv;E. Bajraktarevic
 31.0;J. van der Wilt;K;/players/joel-van-der-wilt/771874/;joel-van-der-wilt;771874;fc-omniworld;J. van der Wilt
 47.0;T. Gooijer;V;/players/tristan-gooijer/777215/;tristan-gooijer;777215;bvo-fc-zwolle;T. Gooijer
@@ -507,12 +517,13 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 45.0;O. Braude;V;/players/oliver-johansen-braude/794018/;oliver-johansen-braude;794018;sportclub-heerenveen;O. Braude
 35.0;M. Meerdink;A;/players/mexx-meerdink/796451/;mexx-meerdink;796451;stichting-az;M. Meerdink
 10.0;I. Sebaoui;A;/players/ilias-sebaoui/797954/;ilias-sebaoui;797954;sportclub-heerenveen;I. Sebaoui
-;R. Bounida;M;/players/rayane-bounida/800971/;rayane-bounida;800971;afc-ajax;R. Bounida
+64.0;R. Bounida;M;/players/rayane-bounida/800971/;rayane-bounida;800971;afc-ajax;R. Bounida
 51.0;A. Dithmer;K;/players/andreas-frederik-dithmer/801435/;andreas-frederik-dithmer;801435;stichting-fc-utrecht;A. Dithmer
 5.0;J. Ritmeester van de Kamp;M;/players/jochem-ritmeester-van-de-kamp/801840/;jochem-ritmeester-van-de-kamp;801840;fc-omniworld;J. Ritmeester van de Kamp
 21.0;A. Fatah;A;/players/amar-abdirahman-ahmed/801857/;amar-abdirahman-ahmed;801857;sbv-willem-ii-tilburg;A. Fatah
 53.0;T. Kuijsten;K;/players/tristan-kuijsten/803111/;tristan-kuijsten;803111;stichting-az;T. Kuijsten
 31.0;J. Meijster;K;/players/jasper-meijster/803115/;jasper-meijster;803115;stichting-fc-groningen;J. Meijster
+;S. Carrillo;A;/players/stephano-emmanuel-carrillo-calderon/803154/;stephano-emmanuel-carrillo-calderon;803154;feyenoord-rotterdam-nv;S. Carrillo
 24.0;M. Luković;A;/players/milo-lukovi/805466/;milo-lukovi;805466;sportclub-heerenveen;M. Lukovic
 32.0;M. Dams;V;/players/matteo-dams/805736/;matteo-dams;805736;psv-nv;M. Dams
 19.0;Darío Serra;A;/players/dario-serra-alvarez/807093/;dario-serra-alvarez;807093;stichting-go-ahead-eagles;Dario Serra
@@ -527,7 +538,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 24.0;D. Baron;K;/players/dirk-baron/821647/;dirk-baron;821647;stichting-fc-groningen;D. Baron
 ;R. Rosario;A;/players/rayvien-rosario/821748/;rayvien-rosario;821748;sparta-rotterdam-bv;R. Rosario
 11.0;B. Önal;A;/players/basar-onal/822550/;basar-onal;822550;nijmegen-eendracht-combinatie;B. Onal
-;S. 't Zand;M;/players/shiloh-t-zand/824640/;shiloh-t-zand;824640;feyenoord-rotterdam-nv;S. 't Zand
+25.0;S. 't Zand;M;/players/shiloh-t-zand/824640/;shiloh-t-zand;824640;feyenoord-rotterdam-nv;S. 't Zand
 9.0;M. Smit;A;/players/milan-smit/828395/;milan-smit;828395;stichting-go-ahead-eagles;M. Smit
 43.0;E. Dijkstra;V;/players/elijah-dijkstra/830535/;elijah-dijkstra;830535;stichting-az;E. Dijkstra
 57.0;A. Sliti;A;/players/aymen-sliti/830541/;aymen-sliti;830541;feyenoord-rotterdam-nv;A. Sliti
@@ -550,8 +561,8 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 29.0;A. Adelgaard;V;/players/aske-adelgaard/857149/;aske-adelgaard;857149;stichting-go-ahead-eagles;A. Adelgaard
 31.0;L. Vogels;K;/players/luuk-vogels/858294/;luuk-vogels;858294;rkc-waalwijk;L. Vogels
 52.0;P. Reverson;K;/players/paul-peters-reverson/864306/;paul-peters-reverson;864306;afc-ajax;P. Reverson
-47.0;G. Alders;M;/players/gerald-alders/864320/;gerald-alders;864320;afc-ajax;G. Alders
-24.0;G. Zechiël;M;/players/gjivai-zechiel/864326/;gjivai-zechiel;864326;feyenoord-rotterdam-nv;G. Zechiel
+47.0;G. Alders;M;/players/gerald-alders/864320/;gerald-alders;864320;stichting-fc-twente-65;G. Alders
+;G. Zechiël;M;/players/gjivai-zechiel/864326/;gjivai-zechiel;864326;sparta-rotterdam-bv;G. Zechiel
 59.0;D. Konadu;A;/players/don-angelo-christoffel-annum-assamoah-konadu/864335/;don-angelo-christoffel-annum-assamoah-konadu;864335;afc-ajax;D. Konadu
 ;D. Tevreden;K;/players/dylan-tevreden/866324/;dylan-tevreden;866324;sparta-rotterdam-bv;D. Tevreden
 34.0;M. de Lannoy;M;/players/maurilio-de-lannoy/871164/;maurilio-de-lannoy;871164;stichting-go-ahead-eagles;M. de Lannoy
@@ -627,6 +638,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 26.0;D. Rallis;O;/players/dimitris-rallis/982464/;dimitris-rallis;982464;sportclub-heerenveen;D. Rallis
 35.0;T. Oostra;O;/players/ties-oostra/982465/;ties-oostra;982465;sportclub-heerenveen;T. Oostra
 39.0;I. Ahmed;M;/players/isaiah-ahmed/982466/;isaiah-ahmed;982466;sportclub-heerenveen;I. Ahmed
+;T. van den Elshout;M;/players/tobias-van-den-elshout/994468/;tobias-van-den-elshout;994468;feyenoord-rotterdam-nv;T. van den Elshout
 48.0;O. Panneflek;A;/players/owen-panneflek/1002934/;owen-panneflek;1002934;stichting-fc-twente-65;O. Panneflek
 51.0;U. van Aalst;M;/players/uriel-van-aalst/1013189/;uriel-van-aalst;1013189;sbv-willem-ii-tilburg;U. van Aalst
 ;T. Keimpema;K;/players/tjalling-keimpema/1014367/;tjalling-keimpema;1014367;sportclub-heerenveen;T. Keimpema
