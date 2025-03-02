@@ -29,7 +29,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 4.0;B. Martins Indi;V;/players/rolando-martins-indi/102888/;rolando-martins-indi;102888;stichting-az;B. Martins Indi
 ;T. Boere;A;/players/tom-boere/102911/;tom-boere;102911;nac-bv;T. Boere
 18.0;J. Toornstra;M;/players/jens-toornstra/110217/;jens-toornstra;110217;stichting-fc-utrecht;J. Toornstra
-;Lucas Pérez;A;/players/lucas-perez-martinez/115127/;lucas-perez-martinez;115127;psv-nv;Lucas Perez
+27.0;Lucas Pérez;A;/players/lucas-perez-martinez/115127/;lucas-perez-martinez;115127;psv-nv;Lucas Perez
 4.0;E. Schouten;V;/players/erik-schouten/134072/;erik-schouten;134072;sbv-willem-ii-tilburg;E. Schouten
 8.0;J. Clasie;M;/players/jordy-clasie/134078/;jordy-clasie;134078;stichting-az;J. Clasie
 23.0;S. Berghuis;A;/players/steven-berghuis/134080/;steven-berghuis;134080;afc-ajax;S. Berghuis
@@ -549,7 +549,10 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 39.0;M. Rots;V;/players/mats-rots/830558/;mats-rots;830558;stichting-heracles-almelo;M. Rots
 26.0;M. Jonathans;M;/players/miliano-jonathans/833677/;miliano-jonathans;833677;stichting-fc-utrecht;M. Jonathans
 7.0;R. van Bommel;A;/players/ruben-van-bommel/834074/;ruben-van-bommel;834074;stichting-az;R. van Bommel
+;Q. Hoeve;A;/players/quincy-anthony-edgar-nathan-hoeve/842080/;quincy-anthony-edgar-nathan-hoeve;842080;sparta-rotterdam-bv;Q. Hoeve
+32.0;O. de Nijs;M;/players/olivier-de-nijs/845488/;olivier-de-nijs;845488;fc-omniworld;O. de Nijs
 ;J. Pinas;V;/players/jaden-pinas/845490/;jaden-pinas;845490;fc-omniworld;J. Pinas
+68.0;T. Kraaijeveld;M;/players/thijs-kraaijeveld/845711/;thijs-kraaijeveld;845711;feyenoord-rotterdam-nv;T. Kraaijeveld
 51.0;T. Smolenaars;K;/players/tijn-smolenaars/846638/;tijn-smolenaars;846638;psv-nv;T. Smolenaars
 14.0;C. Lokesa;M;/players/chris-lokesa/847737/;chris-lokesa;847737;rkc-waalwijk;C. Lokesa
 30.0;D. Versluis;A;/players/dion-versluis/850551/;dion-versluis;850551;nac-bv;D. Versluis
@@ -649,3 +652,4 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 ;K. de Leeuw;K;/players/karst-de-leeuw/1016116/;karst-de-leeuw;1016116;sbv-willem-ii-tilburg;K. de Leeuw
 42.0;N. Dobben;K;/players/nick-dobben/1018212/;nick-dobben;1018212;bvo-fc-zwolle;N. Dobben
 27.0;Y. Sbai;M;/players/yousri-sbai/1021885/;yousri-sbai;1021885;nijmegen-eendracht-combinatie;Y. Sbai
+;O. Boakye;A;/players/ofosu-boakye/1026816/;ofosu-boakye;1026816;stichting-go-ahead-eagles;O. Boakye
