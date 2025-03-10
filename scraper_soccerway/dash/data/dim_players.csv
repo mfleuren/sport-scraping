@@ -618,7 +618,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 26.0;L. Nieuwenhuijs;A;/players/luc-nieuwenhuijs/937268/;luc-nieuwenhuijs;937268;nijmegen-eendracht-combinatie;L. Nieuwenhuijs
 33.0;M. Bresser;V;/players/michael-bresser/937271/;michael-bresser;937271;psv-nv;M. Bresser
 30.0;O. Johnson;A;/players/owen-johnson/939813/;owen-johnson;939813;fortuna-sittard;O. Johnson
-31.0;D. Ghafour;M;/players/dielan-ghafour/939816/;dielan-ghafour;939816;stichting-go-ahead-eagles;D. Ghafour
+;D. Ghafour;M;/players/dielan-ghafour/939816/;dielan-ghafour;939816;stichting-go-ahead-eagles;D. Ghafour
 57.0;N. Eggens;A;/players/nils-eggens/946067/;nils-eggens;946067;stichting-fc-groningen;N. Eggens
 70.0;R. Leicester;V;/players/roy-leicester/946352/;roy-leicester;946352;stichting-fc-groningen;R. Leicester
 25.0;C. Valerius;V;/players/cherrion-valerius/947863/;cherrion-valerius;947863;nac-bv;C. Valerius
@@ -634,13 +634,13 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 38.0;T. Schenkhuizen;M;/players/tristan-schenkhuizen/970333/;tristan-schenkhuizen;970333;fortuna-sittard;T. Schenkhuizen
 46.0;D. van der Werff;M;/players/david-van-der-werff/973034/;david-van-der-werff;973034;stichting-fc-groningen;D. van der Werff
 32.0;G. Reiziger;M;/players/gabriel-reiziger/974417/;gabriel-reiziger;974417;bvo-fc-zwolle;G. Reiziger
-;O. Mohamedhoesein;M;/players/omar-mohamedhoesein/976032/;omar-mohamedhoesein;976032;nijmegen-eendracht-combinatie;O. Mohamedhoesein
+27.0;O. Mohamedhoesein;M;/players/omar-mohamedhoesein/976032/;omar-mohamedhoesein;976032;nijmegen-eendracht-combinatie;O. Mohamedhoesein
 32.0;D. Apinsa;V;/players/donte-apinsa/977225/;donte-apinsa;977225;stichting-go-ahead-eagles;D. Apinsa
 18.0;D. van Reeuwijk;V;/players/daan-van-reeuwijk/980107/;daan-van-reeuwijk;980107;nac-bv;D. van Reeuwijk
 56.0;M. Speelman;V;/players/marco-speelman/981985/;marco-speelman;981985;stichting-fc-groningen;M. Speelman
 50.0;P. van Loon;O;/players/per-van-loon/982232/;per-van-loon;982232;sbv-willem-ii-tilburg;P. van Loon
 48.0;J. Mathijsen;V;/players/jens-mathijsen/982233/;jens-mathijsen;982233;sbv-willem-ii-tilburg;J. Mathijsen
-39.0;T. Codinha;M;/players/tiago-codinha/982441/;tiago-codinha;982441;stichting-heracles-almelo;T. Codinha
+;T. Codinha;M;/players/tiago-codinha/982441/;tiago-codinha;982441;stichting-heracles-almelo;T. Codinha
 26.0;D. Rallis;O;/players/dimitris-rallis/982464/;dimitris-rallis;982464;sportclub-heerenveen;D. Rallis
 35.0;T. Oostra;O;/players/ties-oostra/982465/;ties-oostra;982465;sportclub-heerenveen;T. Oostra
 39.0;I. Ahmed;M;/players/isaiah-ahmed/982466/;isaiah-ahmed;982466;sportclub-heerenveen;I. Ahmed
@@ -651,5 +651,6 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 32.0;R. Bouw;V;/players/robin-bouw/1015973/;robin-bouw;1015973;sportclub-heerenveen;R. Bouw
 ;K. de Leeuw;K;/players/karst-de-leeuw/1016116/;karst-de-leeuw;1016116;sbv-willem-ii-tilburg;K. de Leeuw
 42.0;N. Dobben;K;/players/nick-dobben/1018212/;nick-dobben;1018212;bvo-fc-zwolle;N. Dobben
-27.0;Y. Sbai;M;/players/yousri-sbai/1021885/;yousri-sbai;1021885;nijmegen-eendracht-combinatie;Y. Sbai
-;O. Boakye;A;/players/ofosu-boakye/1026816/;ofosu-boakye;1026816;stichting-go-ahead-eagles;O. Boakye
+33.0;Y. Sbai;M;/players/yousri-sbai/1021885/;yousri-sbai;1021885;nijmegen-eendracht-combinatie;Y. Sbai
+31.0;O. Boakye;A;/players/ofosu-boakye/1026816/;ofosu-boakye;1026816;stichting-go-ahead-eagles;O. Boakye
+31.0;K. Jansen;M;/players/kai-jansen/1028660/;kai-jansen;1028660;sportclub-heerenveen;K. Jansen
