@@ -542,6 +542,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 25.0;S. 't Zand;M;/players/shiloh-t-zand/824640/;shiloh-t-zand;824640;feyenoord-rotterdam-nv;S. 't Zand
 9.0;M. Smit;A;/players/milan-smit/828395/;milan-smit;828395;stichting-go-ahead-eagles;M. Smit
 43.0;E. Dijkstra;V;/players/elijah-dijkstra/830535/;elijah-dijkstra;830535;stichting-az;E. Dijkstra
+;J. Oerip;M;/players/julian-oerip/830537/;julian-oerip;830537;stichting-az;J. Oerip
 57.0;A. Sliti;A;/players/aymen-sliti/830541/;aymen-sliti;830541;feyenoord-rotterdam-nv;A. Sliti
 49.0;Z. Redmond;A;/players/zepiqueno-redmond/830547/;zepiqueno-redmond;830547;feyenoord-rotterdam-nv;Z. Redmond
 28.0;T. Land;M;/players/tygo-land/830551/;tygo-land;830551;psv-nv;T. Land
@@ -591,9 +592,10 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 9.0;K. Shiogai;A;/players/kento-shiogai/910330/;kento-shiogai;910330;nijmegen-eendracht-combinatie;K. Shiogai
 ;A. Bouwman;V;/players/aaron-bouwman/913693/;aaron-bouwman;913693;afc-ajax;A. Bouwman
 ;J. van den Berg;M;/players/joel-van-den-berg/913724/;joel-van-den-berg;913724;psv-nv;J. van den Berg
+46.0;L. Jetten;V;/players/lucas-jetten/913745/;lucas-jetten;913745;afc-ajax;L. Jetten
 17.0;O. Demir;A;/players/onur-demir/914020/;onur-demir;914020;fortuna-sittard;O. Demir
 34.0;N. Fichtinger;M;/players/nick-fichtinger/914267/;nick-fichtinger;914267;bvo-fc-zwolle;N. Fichtinger
-40.0;N. Martens;K;/players/niels-martens/915583/;niels-martens;915583;fortuna-sittard;N. Martens
+25.0;N. Martens;K;/players/niels-martens/915583/;niels-martens;915583;fortuna-sittard;N. Martens
 ;M. Witteveen;M;/players/melle-joop-witteveen/915624/;melle-joop-witteveen;915624;sportclub-heerenveen;M. Witteveen
 29.0;H. Kuster;M;/players/harrie-kuster/916880/;harrie-kuster;916880;stichting-fc-twente-65;H. Kuster
 ;M. Veldman;V;/players/myles-veldman/921618/;myles-veldman;921618;sbv-willem-ii-tilburg;M. Veldman
@@ -612,6 +614,7 @@ Rugnummer;Naam;Positie;Link;SW_Naam;SW_ID;Team;Naam_fix
 63.0;S. Steur;M;/players/sean-steur/934016/;sean-steur;934016;afc-ajax;S. Steur
 ;R. Nijstad;V;/players/ruud-nijstad/934048/;ruud-nijstad;934048;stichting-fc-twente-65;R. Nijstad
 31.0;J. Mokio;V;/players/jorthy-mokio/934125/;jorthy-mokio;934125;afc-ajax;J. Mokio
+;W. Bouziane;A;/players/wassim-bouziane/934241/;wassim-bouziane;934241;stichting-az;W. Bouziane
 ;A. Oufkir;A;/players/ayoub-oufkir/935867/;ayoub-oufkir;935867;sparta-rotterdam-bv;A. Oufkir
 39.0;E. Poku;A;/players/emanuel-poku/935872/;emanuel-poku;935872;fc-omniworld;E. Poku
 50.0;E. Gürbüz;A;/players/eser-gurbuz/937259/;eser-gurbuz;937259;sportclub-heerenveen;E. Gurbuz
