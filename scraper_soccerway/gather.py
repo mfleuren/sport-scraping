@@ -26,7 +26,7 @@ START WEBCLIENT
 def start_webclient() -> Session:
 
     client = requests.session()
-    client.headers.update({"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0"})
+    client.headers.update({"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0"})
 
     return client
 
