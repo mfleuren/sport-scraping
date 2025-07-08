@@ -22,7 +22,7 @@ print(f"Value for MAKE_POST: {str(MAKE_POST)} (Upload: {os.getenv('IMGUR_UPLOAD'
 
 def find_matches_to_scrape(results_data: result_objects.StageResults) -> pd.DataFrame:
 
-    match_date_is_in_past = (results_data.matches['MATCH_DATE'] <= datetime.now())
+    match_date_is_in_past = (results_data.matches['MATCH_DATE'].apply(lambda x: x.replace(hour=18, minute=0)) <= datetime.now())
     match_not_processed_yet = ~results_data.matches['MATCH'].isin(results_data.all_results['MATCH'].unique())
     matches_to_scrape = results_data.matches[match_date_is_in_past & match_not_processed_yet].reset_index(drop=True)
 
@@ -75,6 +75,7 @@ def grand_tour():
         message_data = process_results.create_swarm_plot(results_data, message_data, gc_check=False)
 
         if matches_to_scrape.shape[0] > 3:
+            print("... Sleeping ...")
             time.sleep(3)
     
     if len(matches_to_scrape) > 0:
@@ -84,11 +85,11 @@ def grand_tour():
     message_data.coach_mentions.append(process_results.list_best_coaches(results_data.all_points[results_data.all_points['POSITION'] == 'In']))
     message_data = process_results.create_swarm_plot(results_data, message_data, gc_check=True)
     message_data = create_teams_plot(results_data, message_data)
-    print(message_data)
+    # print(message_data)
 
     single_message = process_results.create_forum_message(results_data, message_data)
-    print(single_message)
-    with open("output.txt", "w") as f:
+    # print(single_message)
+    with open("output.txt", "w", encoding="utf-8") as f:
         f.write(single_message)
     # if MAKE_POST:
     #     forum_robot.post_results_to_forum(single_message)

@@ -108,11 +108,11 @@ def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFra
 
     # Split ridername in surname and firstname
     results_table['SURNAME'] = (results_table['RIDER']
-                                .str.extract('([A-Z ]*)')[0]
-                                .replace('[A-Z]$', '', regex=True)
-                                .str.strip()
+                                .str.split(pat=" ", n=1).str[0]
+                                .str.upper()
                                 )
-    results_table['FIRSTNAME'] = results_table.apply(lambda x: x['RIDER'].replace(x['SURNAME'], '').strip(), axis=1)
+    results_table['FIRSTNAME'] = results_table.apply(lambda x: x['RIDER'].replace(x['SURNAME'].capitalize(), '').strip(), axis=1)
+    results_table['RIDER'] = results_table[["SURNAME", "FIRSTNAME"]].astype(str).agg(" ".join, axis=1)
 
     # Rename essential columns to ALLCAPS
     results_table.rename({'Team':'TEAM', 'Age':'AGE', 'Rnk':'RNK'}, axis=1, inplace=True)
