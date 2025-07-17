@@ -102,6 +102,9 @@ def clean_results_table(raw_table: pd.DataFrame, match: pd.Series) -> pd.DataFra
     # Remove trailing spaces
     results_table['RIDER'] = results_table['RIDER'].str.strip()
 
+    # Remove PCS added crap
+    results_table['RIDER'] = results_table['RIDER'].str.replace('fav_gc', '')
+
     # Remove rows without rider name 
     # NOTE: this can happen when PCS adds messages into the result table
     results_table = results_table[results_table["RIDER"] != ""]
