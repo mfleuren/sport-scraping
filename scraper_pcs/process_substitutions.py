@@ -60,6 +60,9 @@ def determine_stage_dropouts(results_data: StageResults) -> StageResults:
     results_data.teams['ROUND_OUT'] = results_data.teams['ROUND_OUT'].where(
         ~results_data.teams['RIDER'].isin(riders_to_drop_next_stage['RIDER']), 
         current_stage+1)
+    
+    print(f"{riders_to_drop_this_stage=}")
+    print(f"{riders_to_drop_next_stage=}")
 
     return results_data
 
@@ -77,13 +80,15 @@ def make_substitutions(results_data: StageResults, message: Message) -> Tuple[St
     coaches = results_data.teams['COACH'].unique()
     stage = results_data.stage_results[-1]['MATCH'][0]
 
+
     total_n_substitutions = []
 
     for coach in coaches:
-        n_substitutions = results_data.teams[
+        riders_to_sub = results_data.teams[
             (results_data.teams['COACH'] == coach) & \
             (results_data.teams['ROUND_OUT'] == stage)
-            ].shape[0]
+            ]
+        n_substitutions = riders_to_sub.shape[0]
 
         total_n_substitutions.append(n_substitutions)
 

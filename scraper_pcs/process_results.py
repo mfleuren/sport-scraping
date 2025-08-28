@@ -28,7 +28,6 @@ def calculate_stage_winners(df: pd.DataFrame) -> pd.Series:
     stage_results = df[df['POSITION']=='In'].groupby(['MATCH', 'COACH'])['POINTS'].sum()
     stage_results_rank = stage_results.groupby('MATCH').rank(method='min', ascending=False).reset_index()
     wins_by_coach = stage_results_rank[(stage_results_rank['POINTS'] == 1)].groupby('COACH')['MATCH'].count()
-    print(wins_by_coach)
 
     return wins_by_coach
 
@@ -57,7 +56,6 @@ def create_swarm_plot(
     gc['RELATIVE_POSITION'] = (gc['POINTS'] - gc['POINTS'].min())/(gc['POINTS'].max() - gc['POINTS'].min())
     gc['YPOSITION_TEXT'] = gc['POINTS'].max() - (-gc['POINTS']).argsort()*((gc['POINTS'].max() - gc['POINTS'].min())/(gc['COACH'].nunique()-1))
 
-    print(gc[["COACH", "POINTS"]].head())
     coach_hue_order = gc.loc[gc['COACH'].str.lower().argsort(), 'COACH'].values
     mks = itertools.cycle(['o', '^', 'p', 's', 'D', 'P'])
     markers = [next(mks) for _ in gc["COACH"].unique()]

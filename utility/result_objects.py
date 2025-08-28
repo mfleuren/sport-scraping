@@ -9,7 +9,11 @@ from distutils.util import strtobool
 SET CONSTANTS
 """
 from dotenv import load_dotenv
-load_dotenv()
+
+try:
+    load_dotenv()
+except:
+    print("Failed to load .env")
 
 # Cycling input
 PATH_INPUT = os.path.join(
@@ -21,7 +25,7 @@ PATH_RESULTS = os.path.join(
     os.getcwd(), 'results', 
     f"{os.getenv('COMPETITION_YEAR')}_{os.getenv('COMPETITION_NAME')}"
     )
-EXPORT_DATA = strtobool(os.getenv('EXPORT_DATA'))
+EXPORT_DATA = strtobool(os.getenv('EXPORT_DATA', "False"))
 
 """
 DATACLASSES FOR CYCLING SCRAPERS

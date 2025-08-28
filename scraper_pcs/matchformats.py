@@ -66,6 +66,7 @@ def grand_tour():
     print(matches_to_scrape)
 
     for idx, match in matches_to_scrape.iterrows():
+    
         print(f"Processing stage {idx+1} of {matches_to_scrape.shape[0]}.")
     
         results_data = scrape_website(results_data, match, stage_race=True)
@@ -76,7 +77,7 @@ def grand_tour():
 
         if matches_to_scrape.shape[0] > 3:
             print("... Sleeping ...")
-            time.sleep(3)
+            time.sleep(10)
     
     if len(matches_to_scrape) > 0:
         print("Processing general classification.")
